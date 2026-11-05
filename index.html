@@ -877,6 +877,52 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .biz small{display:block;font-size:11px;color:var(--ink-2)}
 .bizl{margin:12px 0 0;padding-left:18px;font-size:12px;color:var(--ink-2);line-height:1.6}
 @media (max-width: 760px){ .payopts{grid-template-columns:1fr} }
+
+/* ===== v12: kalkulátor PDF ===== */
+.crep .rep-head{margin-bottom:18px}
+.cr-hero{display:flex;gap:16px;align-items:stretch;background:linear-gradient(135deg,#E9F7F8,#FFFFFF 70%);border:1px solid #DCEFF0;border-radius:16px;padding:18px 20px}
+.cr-big{flex:1.2}
+.cr-big span{display:block;font-size:11px;color:#7D8A8D}
+.cr-big b{display:block;font-size:32px;font-weight:700;letter-spacing:-.5px;color:#373435;margin:3px 0}
+.cr-big em{font-style:normal;font-size:10.5px;color:#7D8A8D}
+.cr-mini{flex:1;display:flex;flex-direction:column;gap:6px;justify-content:center}
+.cr-mini div{background:#fff;border:1px solid #EDF1F2;border-radius:10px;padding:6px 10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cr-mini span{font-size:10px;color:#7D8A8D}
+.cr-mini b{font-size:12.5px;color:#373435}
+.cr-mini b.g{color:#2E9B6C}
+.cr-params{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.cr-params div{border:1px solid #EDF1F2;border-radius:10px;padding:7px 10px}
+.cr-params span{display:block;font-size:9.5px;color:#949C9F}
+.cr-params b{font-size:11.5px;color:#373435}
+.cr-sec{margin-top:15px}
+.cr-sec h2{font-size:13px;font-weight:700;color:#24878C;margin:0 0 10px}
+.cr-p{font-size:11.5px;color:#5E6668;margin:0 0 10px}
+.cr-kids{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cr-kid{display:flex;gap:12px;align-items:center;border:1px solid #F4E3D6;background:#FFF9F4;border-radius:14px;padding:12px}
+.cr-kid .kidav{width:46px;height:46px}
+.cr-kid .h{font-size:10.5px;color:#5E6668;font-weight:600}
+.cr-kid .v{font-size:19px;font-weight:700;color:#373435;margin:1px 0 2px}
+.cr-kid .s{font-size:9.5px;color:#5E6668;line-height:1.45}
+.cr-kid .s span{display:inline-block;background:#E7F6F7;color:#24878C;font-weight:600;border-radius:10px;padding:0 6px;margin-right:2px}
+.cr-opts{display:grid;grid-template-columns:1fr 1.25fr;gap:10px}
+.cr-opts.three{grid-template-columns:repeat(3,1fr)}
+.cr-opts > div{border:1px solid #EDF1F2;border-radius:14px;padding:12px 14px}
+.cr-opts > div.hi{border-color:#A9DDE0;background:#F3FBFB}
+.cr-opts span{display:block;font-size:10.5px;color:#7D8A8D}
+.cr-opts b{display:block;font-size:19px;font-weight:700;color:#373435;margin:3px 0}
+.cr-opts small{display:block;font-size:9.5px;color:#5E6668;line-height:1.45}
+.cr-ul{margin:10px 0 0;padding-left:16px;font-size:10.5px;color:#5E6668;line-height:1.6}
+.cr-chart{border:1px solid #EDF1F2;border-radius:14px;padding:10px 6px 4px}
+.cr-leg{display:flex;gap:16px;font-size:10px;color:#7D8A8D;margin-top:6px}
+.cr-leg i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.cr-t{width:100%;border-collapse:collapse;font-size:11px}
+.cr-t th{background:#EAF7F8;color:#24878C;text-align:left;font-weight:600;padding:6px 10px}
+.cr-t th:not(:first-child),.cr-t td:not(:first-child){text-align:right}
+.cr-t td{padding:5px 10px;border-bottom:1px solid #EDF1F2;color:#5E6668}
+.cr-t td b{color:#373435}
+.cr-disc{font-size:9px;color:#949C9F;line-height:1.5;margin:12px 0 0}
+.crep .rep-sig{margin-top:14px}
+.crep{padding:38px 46px 30px}
 </style>
 </head>
 <body>
@@ -1699,7 +1745,7 @@ function calcPersonHTML(){
           <button type="button" class="${k.born?'':'on'}" data-kidborn>👶 Még úton van</button>${ks.length>1?`<button type="button" class="ghostx" data-kiddel title="Eltávolítás">${svg('x')}</button>`:''}</div>
         <div class="cl" style="margin-top:12px"><span>Mire gyűjtünk?</span></div>
         <div class="goalchips">${KID_GOALS.map(([g,e,n])=>`<button type="button" class="${k.goal===g?'on':''}" data-cgoal="${g}"><i>${e}</i>${n}</button>`).join('')}</div>
-        <div class="cl" style="margin-top:12px"><span>Hány éves korára?</span><div class="segline mini">${[18,20,22,25].map(a=>`<button type="button" class="${(k.age||18)===a?'on':''}" data-ctage="${a}">${a} év</button>`).join('')}</div></div>
+        <div class="cl" style="margin-top:12px"><span>Mikor adjuk át a támogatást?</span></div><div class="segline mini">${[18,20,22,25].map(a=>`<button type="button" class="${(k.age||18)===a?'on':''}" data-ctage="${a}">${a} évesen</button>`).join('')}</div>
       </div></div>`;
   }
   if(CALC.mode==='pension'){
@@ -1716,7 +1762,7 @@ function calcStoryHTML(){
   if(CALC.mode==='child'){
     const ks=calcKids();
     const rows=ks.map((k,j)=>{ const y=(j===(CALC.kidSel||0))?CALC.years:(kidYears(k)||CALC.years); const r=ulSim(prodFor(y,cur),monthly*12,12,y,sc.r/100,false); const t=kidTarget(k); const gl=KID_GOALS.find(g=>g[0]===k.goal)||KID_GOALS[2];
-      return {k,y,v:r.v,html:`<div class="story">${kidFace(k,48)}<div class="st-txt"><div class="st-h">${esc(kidLabel(k))} ${k.age||18} éves korára${t?` <span class="muted">(${t.getFullYear()}. ${HU_M[t.getMonth()]})</span>`:''}</div>
+      return {k,y,v:r.v,html:`<div class="story">${kidFace(k,48)}<div class="st-txt"><div class="st-h">Átadás ${esc(kidLabel(k))} ${k.age||18}. születésnapján${t?` <span class="muted">(${t.getFullYear()}. ${HU_M[t.getMonth()]})</span>`:''}</div>
         <div class="st-v">${F(r.v)}</div><div class="st-s"><span class="gchip">${gl[1]} ${gl[2]}</span> ${KID_GOAL_TXT[k.goal]||''}</div></div></div>`}; });
     const total=rows.reduce((a,b)=>a+b.v,0);
     return `<div class="st-head"><span>🎈 Ennyivel tudod támogatni őket</span><em>havi ${F(monthly)} kezdő díjjal${ks.length>1?' gyermekenként':''}, ${esc(sc.n.toLowerCase())} szcenárióval</em></div>
@@ -1817,7 +1863,7 @@ function pageCalc(){
   if(CALC.monthly==null) CALC.monthly=Lm.def; if(CALC.years==null) CALC.years=calcDefaultYears(CALC.mode);
   const isA=S.role==='advisor';
   const _k=CALC.mode==='child'?calcKids()[CALC.kidSel||0]:null;
-  const yHint = CALC.mode==='pension' ? '65 éves korig számolva' : CALC.mode==='child' ? `${_k&&_k.name?esc(_k.name)+' ':''}${(_k&&_k.age)||18}. születésnapjáig` : 'a cég céljához igazítva';
+  const yHint = CALC.mode==='pension' ? '65 éves korig számolva' : CALC.mode==='child' ? `átadás: ${_k&&_k.name?esc(_k.name)+' ':''}${(_k&&_k.age)||18}. születésnapján` : 'a cég céljához igazítva';
   return `<div class="page-head"><div><h1>Megtakarítási kalkulátor</h1><p class="sub">Játssz a számokkal, és nézd meg, mire számíthatsz.</p></div></div>
     <div class="ctabs">${Object.entries(CALC_MODES).map(([k,m])=>`<button class="${CALC.mode===k?'on':''}" data-cmode="${k}"><i>${m.e}</i>${m.n}</button>`).join('')}</div>
     <div class="cgrid">
@@ -1839,7 +1885,7 @@ function pageCalc(){
       <div class="ccard cres" id="c-res">${calcResultHTML()}</div>
     </div>
     <div class="ccard cstory" id="c-story">${calcStoryHTML()}</div>
-    <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak, és kiegészítő kockázati fedezetek nélkül készült (ezek csökkentik a megtakarítás értékét). A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
+    <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><button class="btn" data-act="calc-pdf">${svg('download')}PDF letöltése</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak, és kiegészítő kockázati fedezetek nélkül készült (ezek csökkentik a megtakarítás értékét). A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
 }
 function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); const st=document.getElementById('c-story'); if(st) st.innerHTML=calcStoryHTML(); }
 document.addEventListener('focusout',e=>{ if(e.target.id==='c-monthly'){ const L=calcLim(); if(CALC.monthly<L.min){ CALC.monthly=L.min; e.target.value=grp(L.min); const r=document.getElementById('c-monthly-r'); if(r) r.value=L.min; calcUpdate(); toast('ℹ️',`A minimális havi díj ${fmtC(L.min,CALC.cur)}.`); } } });
@@ -2170,6 +2216,84 @@ function reportHTML(list){
         <div class="ct"><span>${svg('phone')}${esc(fmtPhone(a.phone))}</span><span>${svg('mail')}${esc(a.email)}</span><span>${svg('globe')}${esc(a.web)}</span>${a.office?`<span>${svg('pin')}${esc(a.office)}</span>`:''}</div></div>
       <div class="qr"><img src="${QR_IMG}" alt="QR"><span>Szkenneld be</span></div></div></div>`;
 }
+async function renderPDF(html, fname){
+  if(!window.html2canvas||!window.jspdf){ toast('⏳','A PDF-készítő még töltődik, próbáld újra.'); return; }
+  toast('🖨️','Készül a PDF…');
+  const host=document.getElementById('report-host'); host.innerHTML=html;
+  try{
+    await document.fonts.ready;
+    const root=host.firstElementChild, scale=2;
+    // oldaltörés: a .pb-avoid blokkok ne vágódjanak ketté
+    const pageHpx=Math.floor(root.offsetWidth*297/210);
+    let shift=0; root.querySelectorAll('.pb-avoid').forEach(el=>{ const top=el.offsetTop+shift, bot=top+el.offsetHeight, pStart=Math.floor(top/pageHpx), pEnd=Math.floor((bot-1)/pageHpx);
+      if(pStart!==pEnd && el.offsetHeight<pageHpx){ const pad=(pStart+1)*pageHpx-top+44; el.style.marginTop=(parseFloat(getComputedStyle(el).marginTop)||0)+pad+'px'; shift+=pad; } });
+    const canvas=await html2canvas(root,{scale,backgroundColor:'#ffffff'});
+    const pdf=new jspdf.jsPDF({unit:'mm',format:'a4'}); const W=210,H=297,pageH=Math.floor(canvas.width*H/W); let y=0;
+    while(y<canvas.height){ const sl=document.createElement('canvas'); sl.width=canvas.width; sl.height=Math.min(pageH,canvas.height-y);
+      const ctx=sl.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,sl.width,sl.height); ctx.drawImage(canvas,0,y,canvas.width,sl.height,0,0,canvas.width,sl.height);
+      if(y>0) pdf.addPage(); pdf.addImage(sl.toDataURL('image/jpeg',.93),'JPEG',0,0,W,sl.height*W/canvas.width); y+=pageH; }
+    const name=fname.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9._-]+/g,'-');
+    if(dl) await dl.save({filename:name,data:pdf.output('blob')}); else pdf.save(name);
+    toast('✅','PDF letöltve.');
+  }catch(e){ toast(e&&e.code==='declined'?'👌':'⚠️', e&&e.code==='declined'?'Rendben, most nem töltjük le.':'A PDF most nem készült el. Próbáld újra.'); }
+  finally{ host.innerHTML=''; }
+}
+function pdfChart(pts){
+  const W=690,H=165,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
+  const X=i=>P+(W-2*P)*i/n, Y=v=>H-24-(H-36)*v/maxV;
+  const line=k=>pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p[k]).toFixed(1)}`).join('');
+  const area=k=>`${line(k)}L${X(n).toFixed(1)},${Y(0)}L${X(0)},${Y(0)}Z`;
+  const ticks=[0,Math.round(n/4),Math.round(n/2),Math.round(3*n/4),n].filter((v,i,a)=>a.indexOf(v)===i);
+  const grid=[.25,.5,.75,1].map(f=>`<line x1="${P}" x2="${W-P}" y1="${Y(maxV*f)}" y2="${Y(maxV*f)}" stroke="#EDF1F2" stroke-width="1"/>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C3C8" stop-opacity=".5"/><stop offset="1" stop-color="#50C3C8" stop-opacity=".05"/></linearGradient></defs>${grid}
+    <path d="${area('v')}" fill="url(#pg)"/><path d="${line('v')}" fill="none" stroke="#2E9EA3" stroke-width="2.6"/>
+    <path d="${area('p')}" fill="#EEF2F3"/><path d="${line('p')}" fill="none" stroke="#949C9F" stroke-width="1.6" stroke-dasharray="5 4"/>
+    ${ticks.map(i=>`<text x="${X(i)}" y="${H-6}" font-size="11" fill="#949C9F" font-family="Montserrat,Arial" text-anchor="${i===0?'start':i===n?'end':'middle'}">${pts[i].y}. év</text>`).join('')}</svg>`;
+}
+function calcReportHTML(){
+  const cfg=calcCfg(), sc=cfg.scen[CALC.scen]||cfg.scen[0], cur=CALC.cur, F=x=>fmtC(x,cur), prod=prodFor(CALC.years,cur), P=ULPROD[prod], a=S.advisor, hh=curHH();
+  const pension=CALC.mode==='pension', r=ulSim(prod,CALC.monthly*12,12,CALC.years,sc.r/100,pension), net=r.v-r.paid-r.credit, M=CALC_MODES[CALC.mode];
+  const title={child:'Megtakarítási terv a gyermek jövőjéért',pension:'Nyugdíjcélú megtakarítási terv',corp:'Céges tőkeépítési terv'}[CALC.mode];
+  const forWho = CALC.mode==='corp' ? (calcCompany()||{}).name||hh.name : CALC.mode==='pension' ? (calcHolder()||{}).name||hh.name : hh.name;
+  // életút-táblázat: mérföldkövek
+  const ys=[...new Set([1,2,3,5,...Array.from({length:9},(_,i)=>(i+2)*5),CALC.years])].filter(y=>y<=CALC.years).sort((x,y)=>x-y);
+  const rows=ys.map(y=>{const pt=r.pts[y]; return `<tr><td>${y}. év</td><td>${F(pt.p)}</td><td><b>${F(pt.v)}</b></td></tr>`;}).join('');
+  // történet blokk
+  let story='';
+  if(CALC.mode==='child'){
+    const ks=calcKids();
+    story=`<div class="cr-sec pb-avoid"><h2>🎈 Ennyivel tudod támogatni őket</h2><div class="cr-kids">${ks.map((k,j)=>{ const y=(j===(CALC.kidSel||0))?CALC.years:(kidYears(k)||CALC.years); const rv=ulSim(prodFor(y,cur),CALC.monthly*12,12,y,sc.r/100,false).v; const t=kidTarget(k); const gl=KID_GOALS.find(g=>g[0]===k.goal)||KID_GOALS[2];
+      return `<div class="cr-kid">${kidFace(k,46)}<div><div class="h">Átadás ${esc(kidLabel(k))} ${k.age||18}. születésnapján${t?` (${t.getFullYear()}. ${HU_M[t.getMonth()]})`:''}</div><div class="v">${F(rv)}</div><div class="s"><span>${gl[1]} ${gl[2]}</span> ${KID_GOAL_TXT[k.goal]||''}</div></div></div>`;}).join('')}</div></div>`;
+  } else if(pension){
+    const h=calcHolder(), py=CALC.payYears||20, ar=cfg.annRate??3, pm=annuity(r.v,py,ar);
+    let who=''; if(h&&h.birthDate){ const r65=D_(h.birthDate); r65.setFullYear(r65.getFullYear()+65); const left=ymLeft(today(),r65); who=`<p class="cr-p">${esc(h.name)} 65. születésnapja: <b>${huDate(r65)}</b>. Addig még ${left.y} év ${left.m} hónap van hátra.</p>`; }
+    const endAge=h&&h.birthDate?ageAt(h.birthDate)+CALC.years+py:null;
+    story=`<div class="cr-sec pb-avoid"><h2>🌿 Mit jelent ez nyugdíjasként?</h2>${who}<div class="cr-opts"><div><span>💼 Egy összegben</span><b>${F(r.v)}</b><small>A teljes összeg egyszerre felvehető.</small></div>
+      <div class="hi"><span>🌿 Havi járadékként</span><b>${F(pm)} / hó</b><small>${py} éven át${endAge?`, ${endAge} éves korig`:''}, évi ${fmtNum(ar,1)}% hozammal számolva, a ${py}. évfordulón fogy el.</small></div></div></div>`;
+  } else {
+    const c=calcCompany(), gain=r.v-r.paid;
+    story=`<div class="cr-sec pb-avoid"><h2>📈 Üzleti szemmel${c?`: ${esc(c.name)}`:''}</h2><div class="cr-opts three"><div><span>Éves tőkeképzés (1. év)</span><b>${F(CALC.monthly*12)}</b><small>havi ${F(CALC.monthly)} tervezhető cash-flow terhelés</small></div><div><span>Céltartalék ${CALC.years} év múlva</span><b>${F(r.v)}</b><small>a cég saját, felhasználható vagyona</small></div>${gain>0?`<div class="hi"><span>Tőkenövekmény</span><b>+${F(gain)}</b><small>1 befizetett egységből ${fmtNum(r.v/r.paid,2)} lesz</small></div>`:''}</div>
+      <ul class="cr-ul"><li>A szabad pénzeszköz nem a bankszámlán áll, hanem dolgozik, miközben a likviditás tervezhető marad.</li><li>Céltartalék beruházásra, fejlesztésre, ingatlanra vagy kulcsember-megtartásra.</li><li>A díj számviteli és adózási kezelését a könyvelővel érdemes egyeztetni.</li></ul></div>`;
+  }
+  return `<div class="rep crep">
+    <div class="rep-head"><div><h1>${title}</h1><p>${esc(forWho)} részére, készült: ${huDate(today())}</p></div>${LOGO}</div>
+    <div class="cr-hero pb-avoid"><div class="cr-big"><span>${CALC.mode==='child'?`${esc(kidLabel(calcKids()[CALC.kidSel||0]))}: `:''}Várható egységszámla-érték ${CALC.years} év múlva</span><b>${F(r.v)}</b><em>${esc(sc.n)} szcenárió, ${fmtNum(sc.r,1)}% éves nettó hozammal</em></div>
+      <div class="cr-mini"><div><span>Befizetés összesen</span><b>${F(r.paid)}</b></div>${r.credit>0?`<div><span>Adó-visszatérítés</span><b class="g">+${F(r.credit)}</b></div>`:''}${net>0?`<div><span>Hozam (hűségbónusszal)</span><b class="g">+${F(net)}</b></div>`:''}</div></div>
+    <div class="cr-params pb-avoid"><div><span>Kezdő havi díj</span><b>${F(CALC.monthly)}</b></div><div><span>Időtáv</span><b>${CALC.years} év</b></div><div><span>Termék</span><b>${esc(P.n)}</b></div><div><span>Indexálás</span><b>${P.index?`évi ${fmtNum(P.index*100)}%`:'nincs'}</b></div></div>
+    ${story}
+    <div class="cr-sec pb-avoid"><h2>Így nő a megtakarítás</h2><div class="cr-chart">${pdfChart(r.pts)}</div><div class="cr-leg"><span><i style="background:#2E9EA3"></i>Várható érték</span><span><i style="background:#949C9F"></i>Befizetések</span></div></div>
+    <div class="cr-sec pb-avoid"><h2>Mérföldkövek</h2><table class="cr-t"><thead><tr><th>Év</th><th>Befizetés összesen</th><th>Várható érték</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="cr-disc pb-avoid">A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak. A számítás kiegészítő kockázati fedezetek nélkül készült; ezek csökkentik a megtakarítás értékét. A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.${P.index?` A díj évente ${fmtNum(P.index*100)}%-kal indexálódik.`:''}</p>
+    <div class="rep-sig pb-avoid"><div class="ph">${a.photo?`<img src="${a.photo}" alt="">`:''}</div>
+      <div class="sg"><div class="nm">${esc(a.name)}</div><div class="tt">${esc(a.title)}</div>${a.tagline?`<div class="sl">„${esc(a.tagline)}”</div>`:''}
+        <div class="ct"><span>${svg('phone')}${esc(fmtPhone(a.phone))}</span><span>${svg('mail')}${esc(a.email)}</span><span>${svg('globe')}${esc(a.web)}</span>${a.office?`<span>${svg('pin')}${esc(a.office)}</span>`:''}</div></div>
+      <div class="qr"><img src="${QR_IMG}" alt="QR"><span>Szkenneld be</span></div></div>
+  </div>`;
+}
+function makeCalcPDF(){
+  const tag={child:'Gyermek-megtakaritas',pension:'Nyugdij-terv',corp:'Ceges-tokeepites'}[CALC.mode];
+  renderPDF(calcReportHTML(), `${tag}_${curHH().name}_${iso(today())}.pdf`);
+}
 async function makePDF(){
   const hh=curHH(), scope=S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder);
   const sel=scope.filter(c=>selected.has(c.id)), list=sel.length?sel:scope;
@@ -2258,6 +2382,7 @@ document.addEventListener('click',e=>{
   else if(a==='sel-all'){ const hh=curHH(); (S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder)).forEach(c=>selected.add(c.id)); render(); }
   else if(a==='sel-clear'){ selected.clear(); render(); }
   else if(a==='toggle-all'){ const hh=curHH(), l=S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder), all=l.every(c=>expanded.has(c.id)); l.forEach(c=>all?expanded.delete(c.id):expanded.add(c.id)); render(); }
+  else if(a==='calc-pdf') makeCalcPDF();
   else if(a==='calc-talk'){ const M=CALC_MODES[CALC.mode], sc=calcCfg().scen[CALC.scen]; S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value=`Szia Bence! Kipróbáltam a kalkulátort (${M.n}): havi ${fmtC(CALC.monthly,CALC.cur)}, ${CALC.years} év, ${sc.n.toLowerCase()} szcenárió. Átbeszélnénk?`; ta.focus(); } }
   else if(a==='export') exportData();
   else if(a==='import') importData();
