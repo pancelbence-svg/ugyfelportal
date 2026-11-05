@@ -819,6 +819,8 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .addr{display:inline-flex;align-items:center;gap:4px;min-width:0;max-width:100%;overflow:hidden}
 .addr svg{width:12px;height:12px;flex:none}
 .addr span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cres-rows b.neg{color:var(--ink-2)}
+.cmini{margin:0;font-size:11px;color:var(--ink-3);line-height:1.5}
 </style>
 </head>
 <body>
@@ -1591,9 +1593,9 @@ function pageInsurers(){
 
 const CALC={mode:'pension',monthly:null,years:null,scen:1,holder:null};
 const CALC_MODES={
-  child:{n:'Gyermek jövője',e:'🎈',min:5000,max:150000,step:1000,def:20000,ymin:3,ymax:25},
-  pension:{n:'Nyugdíj',e:'🌱',min:10000,max:250000,step:1000,def:30000,ymin:5,ymax:45},
-  corp:{n:'Céges tőkeépítés',e:'📈',min:20000,max:2000000,step:10000,def:150000,ymin:3,ymax:30}
+  child:{n:'Gyermek jövője',e:'🎈',min:12000,max:150000,step:1000,def:20000,ymin:5,ymax:25},
+  pension:{n:'Nyugdíj',e:'🌱',min:12000,max:250000,step:1000,def:30000,ymin:5,ymax:45},
+  corp:{n:'Céges tőkeépítés',e:'📈',min:12000,max:1000000,step:5000,def:150000,ymin:5,ymax:30}
 };
 function calcCfg(){ return S.calcCfg ||= {scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:20,taxMax:130000}; }
 function calcDefaultYears(mode){
@@ -1602,10 +1604,33 @@ function calcDefaultYears(mode){
   if(mode==='child'){ const k=cs.find(c=>T(c.type).kind==='child'&&(c.details||{}).childBirth); if(k){ const a=ageAt(k.details.childBirth)||0; return Math.max(3,(k.details.targetAge||18)-a); } return 18; }
   return 10;
 }
-function simulate(monthly,years,r,tax){
-  const cfg=calcCfg(), rm=Math.pow(1+r/100,1/12)-1; let v=0,paid=0,credit=0; const pts=[{y:0,v:0,p:0}];
-  for(let m=1;m<=years*12;m++){ v=v*(1+rm)+monthly; paid+=monthly; if(m%12===0){ if(tax){ const c=Math.min(monthly*12*cfg.taxPct/100,cfg.taxMax); v+=c; credit+=c; } pts.push({y:m/12,v,p:paid}); } }
-  return {v,paid,credit,gain:v-paid-credit,pts};
+/* Unit-linked modell – a Megtakarítás-számoló.xlsm (unit_account munkalap) képleteinek pontos átirata.
+   Ellenőrizve: Bónusz Életprogram, 55 000 Ft/hó, 6%, 20 év → 31 311 998 Ft (Excel: 31 311 998,52 Ft). */
+const ULPROD={
+  bonusz:{n:'Allianz Bónusz Életprogram',init:0,loy:0.79,initMonths:{12:[1,2,3,4,5,6,7,8,9,10,11,12],4:[1,4,7,10],2:[1,7],1:[1]},admin:990,index:0.03,maintFrom:13,bonus:true},
+  elet:{n:'Allianz Életprogram',init:0.33,loy:0,initMonths:{12:[1,2,3,4,5],4:[1,4],2:[1],1:[1]},admin:990,index:0.03,maintFrom:13,bonus:false}
+};
+function ulSim(prodKey,annual,freq,years,r,pension){
+  const P=ULPROD[prodKey]||ULPROD.bonusz, step=12/freq, im=P.initMonths[freq], n=im.length, g=Math.pow(1+r,1/12), cfg=calcCfg();
+  let V=0,H=0,Vf=Math.round(annual/freq),paid=0,bonus=0,cost=0,credit=0,gain=0,active=true; const last=[]; const pts=[{y:0,v:0,p:0}];
+  for(let c=1;c<=years*12;c++){
+    const A=Math.floor((c-1)/12)+1, B=(c-1)%12+1;
+    if(B===1&&A>1) Vf=Math.floor(Vf*(1+P.index)+0.5);
+    const D=((B-1)%step===0)?Vf:0;
+    const inInit=im.includes(c);
+    const E=inInit?Math.floor(P.init*annual/n):0, G=(inInit&&P.loy)?Math.floor(P.loy*annual/n):0;
+    const F=c>=P.maintFrom?Math.min(V,P.admin):0;
+    H+=G;
+    const I=(P.bonus&&B===1&&A>1&&active)?(A-1)/100*H:0;
+    const costs=Math.min(V+D,E+F+G), base=V+D-costs;
+    gain+=base*(g-1);
+    last.push(D);
+    let Z=0; if(pension&&B===12){ Z=Math.min(cfg.taxMax,last.slice(-12).reduce((a,b)=>a+b,0)*cfg.taxPct/100); }
+    V=base*g+I+Z; if(V<=0) active=false;
+    paid+=D; bonus+=I; cost+=costs; credit+=Z;
+    if(B===12) pts.push({y:A,v:V,p:paid});
+  }
+  return {v:V,paid,bonus,cost,credit,gain,pts,lastFee:Vf};
 }
 function calcChart(pts){
   const W=600,H=200,P=6,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
@@ -1619,11 +1644,19 @@ function calcChart(pts){
     ${ticks.map(i=>`<text x="${X(i)}" y="${H-5}" text-anchor="${i===0?'start':i===n?'end':'middle'}" class="ctick">${pts[i].y}. év</text>`).join('')}</svg>`;
 }
 function calcResultHTML(){
-  const M=CALC_MODES[CALC.mode], cfg=calcCfg(), sc=cfg.scen[CALC.scen]||cfg.scen[0], r=simulate(CALC.monthly,CALC.years,sc.r,CALC.mode==='pension');
-  return `<div class="cres-top"><span>Várható összeg ${CALC.years} év múlva</span><b>${fmt(r.v)}</b><em>${sc.n} szcenárió, ${fmtNum(sc.r,1)}% éves hozammal</em></div>
-    <div class="cres-rows"><div><span>Befizetés összesen</span><b>${fmt(r.paid)}</b></div><div><span>Hozam</span><b class="pos">+${fmt(r.gain)}</b></div>${CALC.mode==='pension'?`<div><span>Adó-visszatérítés</span><b class="pos">+${fmt(r.credit)}</b></div>`:''}</div>
+  const cfg=calcCfg(), sc=cfg.scen[CALC.scen]||cfg.scen[0], prod=cfg.prod||'bonusz';
+  const r=ulSim(prod,CALC.monthly*12,12,CALC.years,sc.r/100,CALC.mode==='pension');
+  return `<div class="cres-top"><span>Várható egységszámla-érték ${CALC.years} év múlva</span><b>${fmt(r.v)}</b><em>${esc(sc.n)} szcenárió, ${fmtNum(sc.r,1)}% éves nettó hozammal</em></div>
+    <div class="cres-rows">
+      <div><span>Befizetés összesen</span><b>${fmt(r.paid)}</b></div>
+      <div><span>Hozam</span><b class="pos">+${fmt(r.gain)}</b></div>
+      ${r.bonus?`<div><span>Hűségbónusz</span><b class="pos">+${fmt(r.bonus)}</b></div>`:''}
+      ${CALC.mode==='pension'?`<div><span>Adó-visszatérítés</span><b class="pos">+${fmt(r.credit)}</b></div>`:''}
+      <div><span>Költségek</span><b class="neg">−${fmt(r.cost)}</b></div>
+    </div>
     ${calcChart(r.pts)}
-    <div class="clegend"><span><i class="lv"></i>Várható érték</span><span><i class="lp"></i>Befizetések</span></div>`;
+    <div class="clegend"><span><i class="lv"></i>Várható érték</span><span><i class="lp"></i>Befizetések</span></div>
+    <p class="cmini">${esc((ULPROD[prod]||ULPROD.bonusz).n)}, havi díjfizetés. A díj évente ${fmtNum(((ULPROD[prod]||ULPROD.bonusz).index)*100)}%-kal indexálódik, az utolsó évben havi ${fmt(r.lastFee)}.</p>`;
 }
 function pageCalc(){
   const M=CALC_MODES[CALC.mode], cfg=calcCfg();
@@ -1641,14 +1674,16 @@ function pageCalc(){
         <div class="cfield"><div class="cl"><span>Hozamszcenárió</span></div><div class="segline cscen">${cfg.scen.map((s,i)=>`<button type="button" class="${CALC.scen===i?'on':''}" data-cscen="${i}">${esc(s.n)} <small>${fmtNum(s.r,1)}%</small></button>`).join('')}</div></div>
         ${CALC.mode==='pension'?`<p class="cnote">🎁 Nyugdíjbiztosításnál az állam a befizetések ${cfg.taxPct}%-át visszatéríti, évente legfeljebb ${fmt(cfg.taxMax)}-ig. Ezt is beleszámoltuk.</p>`:''}
         ${isA?`<details class="cadv"><summary>Paraméterek (csak te látod)</summary>
+          <div class="field"><label>Termék a számításhoz</label><select data-cfgsel="prod">${Object.entries(ULPROD).map(([k,v])=>`<option value="${k}" ${(cfg.prod||'bonusz')===k?'selected':''}>${v.n}</option>`).join('')}</select></div>
           ${cfg.scen.map((s,i)=>`<div class="row2"><div class="field"><label>Szcenárió neve</label><input data-cfg="n:${i}" value="${esc(s.n)}"></div><div class="field"><label>Éves hozam (%)</label><input data-cfg="r:${i}" inputmode="decimal" value="${s.r}"></div></div>`).join('')}
           <div class="row2"><div class="field"><label>Adó-visszatérítés (%)</label><input data-cfg="taxPct" inputmode="decimal" value="${cfg.taxPct}"></div><div class="field"><label>Évente legfeljebb (Ft)</label><input data-cfg="taxMax" inputmode="numeric" value="${grp(cfg.taxMax)}"></div></div></details>`:''}
       </div>
       <div class="ccard cres" id="c-res">${calcResultHTML()}</div>
     </div>
-    <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak. A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
+    <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak, és kiegészítő kockázati fedezetek nélkül készült (ezek csökkentik a megtakarítás értékét). A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
 }
 function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); }
+document.addEventListener('change',e=>{ const t=e.target; if(t.dataset&&t.dataset.cfgsel){ calcCfg()[t.dataset.cfgsel]=t.value; save(); calcUpdate(); } });
 document.addEventListener('input',e=>{
   const t=e.target; if(!t.id&&!t.dataset.cfg) return; const M=CALC_MODES[CALC.mode];
   if(t.id==='c-monthly-r'){ CALC.monthly=+t.value; const i=document.getElementById('c-monthly'); if(i) i.value=grp(CALC.monthly); calcUpdate(); }
