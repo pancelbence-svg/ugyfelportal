@@ -347,8 +347,8 @@ h1{font-size:20px;line-height:1.25;font-weight:700;margin:0;letter-spacing:-.2px
 @keyframes burst{0%{transform:translate(-50%,-50%) scale(.4);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1) rotate(var(--r));opacity:0}}
 
 /* ---------- PDF ---------- */
-#report-host{position:fixed;left:-12000px;top:0;width:794px;pointer-events:none}
-.rep{width:794px;background:#fff;color:#373435;font-family:var(--font);padding:46px 50px 40px;box-sizing:border-box}
+#report-host{position:fixed;left:-12000px;top:0;width:960px;pointer-events:none}
+.rep{width:960px;background:#fff;color:#373435;font-family:var(--font);padding:46px 50px 40px;box-sizing:border-box}
 .rep .logo-svg{color:#373435;height:26px}
 .rep-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #E9406D;padding-bottom:16px}
 .rep-head h1{font-size:21px;margin:0 0 3px;color:#373435}
@@ -938,6 +938,51 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .jr-ms span{display:block;font-size:8.5px;color:#A08A4A}
 .jr-t{margin-top:4px}
 .jr-t td:last-child{color:#373435}
+
+/* ===== v14 ===== */
+.plate{height:17px;border-width:1.3px;border-radius:3px}
+.plate .eu{width:10px}
+.plate .eu svg{width:7px;height:7px}
+.plate .eu b{font-size:5.5px}
+.plate .pt{font-size:10.5px;padding:0 5px;letter-spacing:.4px}
+.dinp.bad{border-color:#E9406D !important;background:var(--pink-soft) !important}
+.hpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.hpick button{display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:7px 10px;text-align:left}
+.hpick button span b{display:block;font-size:12.5px;font-weight:600}
+.hpick button span em{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3)}
+.hpick button.on{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 0 0 3px var(--teal-soft)}
+.hpick .av{width:30px;height:30px}
+.nickedit{display:inline-grid;vertical-align:middle;margin-left:2px;opacity:.55}
+.nickedit:hover{opacity:1}
+.histrow{display:flex;gap:4px}
+.histrow button{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:6px 4px;font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.histrow button:hover:not([disabled]){border-color:var(--teal);color:var(--teal-ink)}
+.histrow button[disabled]{opacity:.4;cursor:default}
+.histrow .sv{color:var(--teal-ink)}
+.autosave{font-size:10.5px;color:var(--ok);text-align:center}
+.mhist{display:flex;gap:4px;margin-left:auto;margin-right:6px}
+.mhist button{border:1px solid var(--line);background:var(--surface);border-radius:9px;width:32px;height:30px;font-size:13px;padding:0;color:var(--ink-2)}
+.mhist button[disabled]{opacity:.35}
+.risks{display:flex;flex-direction:column}
+.rk{display:flex;flex-direction:column;gap:1px;padding:7px 0;border-top:1px solid var(--line-2)}
+.rk:first-child{border-top:0;padding-top:0}
+.rk span{font-size:12px;color:var(--ink-2)}
+.rk b{font-size:13.5px;font-weight:700;color:var(--ink)}
+.rk em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--teal-ink)}
+.flag.mid{background:#FFF6DC;color:#8A6A10}
+.cv.ghost{background:var(--surface-2);color:var(--ink-3);padding:5px 10px;opacity:.75;filter:grayscale(1)}
+.cvhint.soft{background:var(--teal-soft);color:var(--teal-ink)}
+.cover.welcome{text-align:center;padding:26px 20px}
+.cover.welcome h3{margin:10px 0 6px;font-size:16px}
+.cover.welcome p{margin:0 auto 14px;max-width:52ch;font-size:13px;color:var(--ink-2);line-height:1.6}
+.wl-ic{display:flex;justify-content:center;gap:8px}
+.wl-ic span{width:40px;height:40px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;font-size:19px;filter:grayscale(.6);opacity:.85}
+@media (max-width:560px){
+  .rowlist .r{grid-template-columns:1fr 28px;row-gap:4px}
+  .rowlist .r input[data-ra],.rowlist .r input[data-fp]{grid-column:1;grid-row:2}
+  .rowlist .r .icon-btn{grid-column:2;grid-row:1}
+  .hpick{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -1079,7 +1124,7 @@ const DEFAULT_TYPES = [
   {k:'tokeepito',  n:'Céges tőkeépítő program', i:'building', c:'#2E7D6B', kind:'savings'}
 ];
 const LIAB_SUGGEST = ['Orvos szakmai felelősségbiztosítás','Kivitelezői felelősségbiztosítás','Tanácsadói szakmai felelősségbiztosítás','Könyvelői felelősségbiztosítás','Ügyvédi felelősségbiztosítás','Általános felelősségbiztosítás','Munkáltatói felelősségbiztosítás','Termékfelelősség-biztosítás'];
-const RISKS = ['Haláleset','Baleseti haláleset','Közlekedési baleseti haláleset','Baleseti maradandó egészségkárosodás','Rokkantság','Kritikus betegség','Daganatos megbetegedés','Kórházi napi térítés','Műtéti térítés','Keresőképtelenség','Csonttörés'];
+const RISKS = ['Rákdiagnosztika (szolgáltatás)','Orvosi ellátásszervezés (szolgáltatás)','Második orvosi vélemény (szolgáltatás)','Haláleset','Baleseti haláleset','Közlekedési baleseti haláleset','Baleseti maradandó egészségkárosodás','Rokkantság','Kritikus betegség','Daganatos megbetegedés','Kórházi napi térítés','Műtéti térítés','Keresőképtelenség','Csonttörés'];
 const FUNDS=[
  {c:'ÁGA',n:'Allianz Állampapír Alap',b:'70% MAX Index + 30% ZMAX Index',d:'Elsősorban magyar állampapírokba és állam által garantált értékpapírokba fektet, kiegészítve bankbetétekkel, vállalati kötvényekkel és jelzáloglevelekkel.'},
  {c:'DMA',n:'Allianz Demográfia Részvény Alap',b:'55% MSCI AC World Hedged to EUR + 20% Euro Stoxx 50 + 20% S&P 500 + 5% ZMAX',d:'Olyan cégek részvényeibe fektet, amelyek a fejlett világ idősödéséből és a fejlődő országok népességnövekedéséből profitálhatnak, főként az egészségügy, a pénzügyi szolgáltatások és a nyersanyagok területén.'},
@@ -1178,6 +1223,7 @@ function migrate(){
   const g=S.types.find(t=>t.k==='gyermek'); if(g&&g.kind==='savings') g.kind='child';
   if(!S.types.some(t=>t.k==='megtakaritas')){ const at=S.types.findIndex(t=>t.k==='gyermek'); S.types.splice(at<0?S.types.length:at+1,0,{k:'megtakaritas',n:'Egyéb megtakarítás',i:'coins',c:'#B98A1E',kind:'savings'}); }
   S.contracts.forEach(c=>{ c.cur=c.cur||'HUF'; c.details=c.details||{}; });
+  if(!S.demo10){ S.demo10=1; S.households.forEach(h=>h.holders.forEach(x=>{ if(x.phone) x.phone=fmtPhone(x.phone); })); if(S.advisor.phone) S.advisor.phone=fmtPhone(S.advisor.phone); S.contracts.forEach(c=>{ const i=c.info||{}; if(i.assistPhone) i.assistPhone=fmtPhone(i.assistPhone); if(i.claimPhone) i.claimPhone=fmtPhone(i.claimPhone); }); }
   if(!S.demo9){ S.demo9=1; S.calcCfg={scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:(S.calcCfg||{}).taxPct||20,taxMax:(S.calcCfg||{}).taxMax||130000}; }
   if(!S.demo8){ S.demo8=1; S.contracts.forEach(c=>{ if(c.own==null) c.own = c.insurer==='Allianz' ? 'me' : 'other'; }); }
   if(!S.demo7){ S.demo7=1; if(/^Abban segítek/.test(S.advisor.bio||'')) S.advisor.bio=NEW_BIO; if(!S.advisor.awards) S.advisor.awards=NEW_AWARDS; if(!S.advisor.highlights) S.advisor.highlights=['12+ év tapasztalat','MDRT','TOP 60 Magyarország'];
@@ -1199,7 +1245,12 @@ function migrate(){
     if(HH('h3')&&HH('h3').holders.some(x=>x.id==='p6')) S.contracts.push(mk('h3','p6','gyermek',{label:'Gyermekjövő program',insurer:'Allianz',policy:'AZ-GY-7781',fee:180000,freq:'havi',start:'2026-09-01',details:{childName:'Bori',childBorn:0,dueDate:'2027-02-20',nameAtSign:'Pocaklakó',targetAge:18,signDate:'2026-09-01',funds:[{code:'KLA',pct:50},{code:'VRA',pct:50}]}}));
   }
 }
-const save = () => { try{ localStorage.setItem(STORE_KEY, JSON.stringify(S)); }catch(e){ toast('⚠️','A kép túl nagy a mentéshez, próbálj kisebbet.'); } };
+let HIST=[], FUT=[], lastSnap=null;
+const snapOf = () => { const o={...S}; delete o.seen; return JSON.stringify(o); };
+const persist = () => { try{ localStorage.setItem(STORE_KEY, JSON.stringify(S)); }catch(e){ toast('⚠️','A kép túl nagy a mentéshez, próbálj kisebbet.'); } };
+const save = () => { const cur=snapOf(); if(lastSnap!==null && cur!==lastSnap){ HIST.push(lastSnap); if(HIST.length>40) HIST.shift(); FUT=[]; } lastSnap=cur; persist(); };
+function undo(){ if(!HIST.length){ toast('↶','Nincs mit visszavonni.'); return; } FUT.push(lastSnap); const prev=HIST.pop(), seen=S.seen; S=JSON.parse(prev); S.seen=seen; lastSnap=prev; persist(); closeModal(); render(); toast('↶','Visszavonva.'); }
+function redo(){ if(!FUT.length){ toast('↷','Nincs mit újra végrehajtani.'); return; } HIST.push(lastSnap); const nxt=FUT.pop(), seen=S.seen; S=JSON.parse(nxt); S.seen=seen; lastSnap=nxt; persist(); closeModal(); render(); toast('↷','Újra végrehajtva.'); }
 let selected = new Set(), expanded = new Set();
 
 // ---------- segédek ----------
@@ -1224,9 +1275,8 @@ function fmtPhone(v){
   if(d.startsWith('06')) d='36'+d.slice(2); else if(!d.startsWith('36') && (d.length===9||d.length===8)) d='36'+d;
   if(!d.startsWith('36')||d.length<10) return raw;
   const n=d.slice(2);
-  if(n[0]==='1') return `+36 1 ${n.slice(1,4)} ${n.slice(4)}`;
-  if(['20','30','31','50','70'].includes(n.slice(0,2))) return `+36 ${n.slice(0,2)} ${n.slice(2,5)} ${n.slice(5)}`;
-  return `+36 ${n.slice(0,2)} ${n.slice(2,5)} ${n.slice(5)}`;
+  if(n[0]==='1') return `+36 1 ${n.slice(1)}`;
+  return `+36 ${n.slice(0,2)} ${n.slice(2)}`;
 }
 const F_NAMES=new Set('anna annamária anikó adrienn ágnes ágota alexandra alíz amália andrea angéla anita barbara beáta bernadett bianka boglárka bori borbála csenge csilla dalma dóra dorina dorka dorottya edina edit emese emma enikő erika erzsébet eszter éva evelin fanni flóra gabriella gizella gréta hajnalka hanna henrietta ibolya ildikó ilona irén írisz ivett izabella jázmin judit júlia julianna kata katalin katica kinga kitti klára krisztina laura lili lilla linda luca magdolna margit mária marianna márta marta melinda mónika nikolett nikoletta noémi nóra orsolya panna petra piroska ramóna rebeka réka renáta rita rozália sára sarolta szabina szilvia tímea tünde valéria vanda veronika viktória vivien zita zoé zsófia zsófi zsuzsanna zsuzsa szandra kamilla léna olívia'.split(' '));
 const M_NAMES=new Set('ádám ákos albert alex alexander andrás antal áron árpád attila balázs bálint barna barnabás béla bence bendegúz benedek benjámin bernát botond csaba dániel dávid dénes dezső domonkos dominik endre ernő ervin ferenc gábor gergely gergő géza györgy gyula henrik imre istván jános józsef kálmán károly kornél kristóf krisztián lajos lászló levente lőrinc marcell márk márton máté mátyás miklós mihály milán nándor noel norbert olivér ottó pál patrik péter richárd róbert roland sándor soma szabolcs tamás tibor tivadar vilmos viktor zalán zoltán zsolt zsombor'.split(' '));
@@ -1246,6 +1296,19 @@ const huDate = d => { const x=new Date(d); return `${x.getFullYear()}. ${HU_M[x.
 const huShort = d => { const x=new Date(d); return `${HU_M[x.getMonth()]} ${x.getDate()}.`; };
 const timeHM = ts => { const x=new Date(ts); return String(x.getHours()).padStart(2,'0')+':'+String(x.getMinutes()).padStart(2,'0'); };
 const stampT = ts => `${iso(ts)===iso(today())?'ma':huShort(ts)} ${timeHM(ts)}`;
+const pad2=n=>String(n).padStart(2,'0');
+const givenName = n => { const t=String(n||'').replace(/^(dr\.?|ifj\.?|id\.?|özv\.?)\s+/i,'').trim().split(/\s+/); return t.length>1?t[1]:(t[0]||''); };
+function parseHuDate(v){ v=String(v||'').trim(); if(!v) return ''; let m;
+  const ok=(y,mo,d)=>{ mo=+mo; d=+d; if(mo<1||mo>12||d<1||d>31) return null; return `${y}-${pad2(mo)}-${pad2(d)}`; };
+  if((m=v.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})\D*$/))) return ok(m[1],m[2],m[3]);
+  if((m=v.match(/^(\d{1,2})\D+(\d{1,2})\D+(\d{4})\D*$/))) return ok(m[3],m[2],m[1]);
+  if((m=v.match(/^(\d{4})(\d{2})(\d{2})$/))) return ok(m[1],m[2],m[3]);
+  return null; }
+const huIso = iso => /^\d{4}-\d{2}-\d{2}$/.test(iso||'') ? iso.replace(/^(\d{4})-(\d{2})-(\d{2})$/,'$1.$2.$3.') : (iso||'');
+function parseMD(v){ v=String(v||'').trim(); if(!v) return ''; const full=parseHuDate(v); if(full) return full.slice(5); const m=v.match(/^(\d{1,2})\D+(\d{1,2})\D*$/); if(!m||+m[1]<1||+m[1]>12||+m[2]<1||+m[2]>31) return null; return `${pad2(m[1])}-${pad2(m[2])}`; }
+const annivOf = c => c.anniv || String(c.start||iso(today())).slice(5);
+const annivHu = c => { const a=annivOf(c); return a?a.replace('-','.')+'.':''; };
+const nextAnn = c => nextOcc('2000-'+annivOf(c));
 function nextOcc(dateStr){
   if(!dateStr) return null;
   const s=new Date(dateStr+'T12:00:00'), t=today(); t.setHours(12,0,0,0);
@@ -1329,6 +1392,8 @@ function renderSide(){
     <div class="side-foot">
       ${S.role==='client'?`<button class="advisor-mini" data-go="advisor">${advisorAv(34)}<div><b>${esc(S.advisor.name)}</b><span>a tanácsadód</span></div></button>`:''}
       <div class="role-box"><p>Prototípus: kinek a szemével nézed?</p><div class="seg"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>
+      <div class="histrow"><button data-act="undo" ${HIST.length?'':'disabled'} title="Vissza (Cmd+Z)">↶ Vissza</button><button data-act="redo" ${FUT.length?'':'disabled'} title="Előre">↷ Előre</button><button data-act="savenow" class="sv" title="Mentés">💾 Mentés</button></div>
+      <div class="autosave">✓ Minden változás automatikusan mentődik</div>
       <div style="display:flex;gap:2px;justify-content:center"><button class="linkish" data-act="export">${svg('download')}Mentés</button><button class="linkish" data-act="import">${svg('reset')}Visszatöltés</button></div>
       <button class="linkish" data-act="reset">${svg('reset')}Mintaadatok visszaállítása</button></div>`;
   const mob=navItems().filter(x=>x.p!=='insurers').concat([{p:'tools',n:'Eszközök',i:'wallet'}]);
@@ -1337,7 +1402,7 @@ function renderSide(){
 function render(){
   renderSide();
   const v=document.getElementById('view'), p=S.page;
-  let html=`<div class="mobile-top">${brandHTML()}<div class="seg" style="width:160px"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>`;
+  let html=`<div class="mobile-top">${brandHTML()}<div class="mhist"><button data-act="undo" ${HIST.length?'':'disabled'} aria-label="Vissza">↶</button><button data-act="redo" ${FUT.length?'':'disabled'} aria-label="Előre">↷</button><button data-act="savenow" aria-label="Mentés">💾</button></div><div class="seg" style="width:160px"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>`;
   if(S.role==='advisor' && ['contracts','chat'].includes(p)) html+=`<div class="advisor-banner">${svg('eye')}<div>Most <b>${esc(curHH().name)}</b> portálját látod, ugyanúgy, ahogy ő. A módosításaid nála is azonnal megjelennek.</div><button class="btn" data-go="clients">Ügyfeleim</button></div>`;
   html += p==='contracts'?pageContracts() : p==='chat'?pageChat() : p==='advisor'?pageAdvisor() : p==='clients'?pageClients() : p==='calc'?pageCalc() : pageTool(p);
   v.innerHTML=html;
@@ -1372,11 +1437,11 @@ function detTeaser(c){
     const bits=[];
     if(t.kind==='child'&&d.childName) bits.push(d.childBorn===0?`${d.childName} érkezik`:d.childName);
     if(t.kind==='savings'&&d.goal) bits.push(d.goal);
-    if(t.kind==='pension'&&d.clause) bits.push('nyugdíjzáradékkal'); if(t.kind==='pension'&&d.tax) bits.push('adó-visszatérítés');
+    if(t.kind==='pension'&&d.clause) bits.push('nyugdíjzáradékkal'); 
     if((d.funds||[]).length) bits.push(`${d.funds.length} eszközalap`); if(d.annualPct) bits.push(`${pctF(d.annualPct)}/év`);
     return [t.kind==='pension'?'Nyugdíj részletei':t.kind==='child'?'A gyermek és a program':'Megtakarítás részletei', bits.join(', ')];
   }
-  if(t.kind==='life'){ const r=d.risks||[]; return [`Kockázatok${r.length?` (${r.length})`:''}`, r.slice(0,2).map(x=>`${x.n} ${fmtMC(x.a,cur)}`).join(', ')]; }
+  if(t.kind==='life'){ const r=d.risks||[]; return [`Kockázatok${r.length?` (${r.length})`:''}`, r.slice(0,2).map(x=>x.a?`${x.n} ${fmtMC(x.a,cur)}`:x.n).join(', ')]; }
   if(t.kind==='property'){ const b=[]; if(d.area) b.push(`${d.area} m²`); if(d.sum) b.push(fmtMC(d.sum,cur)); if(d.mortgage) b.push('jelzálog'); return ['Ingatlan adatai', b.join(', ')]; }
   return null;
 }
@@ -1408,7 +1473,7 @@ function detBody(c){
       if(d.targetDate&&sd) out+=tlHTML('Út a célig', D_(sd), D_(d.targetDate), '', `Kötés<br><b>${huDate(sd)}</b>`, `Céldátum<br><b>${huDate(d.targetDate)}</b>`);
     }
     if(t.kind==='pension'){
-      out+=`<div class="flags"><span class="flag ${d.clause?'':'off'}">${d.clause?svg('check','stroke-width="3"'):''}Nyugdíjzáradékkal ellátva</span><span class="flag ${d.tax?'':'off'}">${d.tax?svg('check','stroke-width="3"'):''}Adó-visszatérítésre jogosult</span></div>`;
+      out+=`<div class="flags"><span class="flag ${d.clause?'':'off'}">${d.clause?svg('check','stroke-width="3"'):''}${d.clause?'Nyugdíjzáradékkal ellátva, adó-visszatérítésre jogosult':'Nyugdíjzáradék nélkül'}</span></div>`;
       if(holder.birthDate&&sd){ const r65=D_(holder.birthDate); r65.setFullYear(r65.getFullYear()+65);
         out+=tlHTML('Út a nyugdíjig', D_(sd), r65, `most ${ageAt(holder.birthDate)} éves`, `Kötéskor (${huDate(sd)})<br><b>${ageAt(holder.birthDate,sd)} éves</b>, ${ymLeft(D_(sd),r65).y} év a 65-ig`, `65. születésnap<br><b>${huDate(r65)}</b>`); }
     }
@@ -1423,13 +1488,13 @@ function detBody(c){
   }
   if(t.kind==='life'){
     const r=d.risks||[]; if(!r.length) return empty;
-    return `<div><h4>Biztosított kockázatok</h4><dl class="kv">${r.map(x=>`<dt>${esc(x.n)}</dt><dd>${fmtC(x.a,cur)}</dd>`).join('')}</dl></div>`;
+    return `<div class="risks">${r.map(x=>`<div class="rk"><span>${esc(x.n.replace(/\s*\(szolgáltatás\)$/,''))}</span>${x.a?`<b>${fmtC(x.a,cur)}</b>`:`<em>✓ szolgáltatás</em>`}</div>`).join('')}</div>`;
   }
   if(t.kind==='property'){
     if(!d.area&&!d.sum&&!d.mortgage) return empty;
     const sqm = d.area&&d.sum ? d.sum/d.area : 0;
     return `<dl class="kv">${d.area?`<dt>Alapterület</dt><dd>${d.area} m²</dd>`:''}${d.sum?`<dt>Biztosítási összeg</dt><dd>${fmtC(d.sum,cur)}${sqm?`<small>${fmtC(sqm,cur)} / m²</small>`:''}</dd>`:''}</dl>
-    <div class="flags">${cur!=='EUR'&&sqm&&sqm<LOW_SQM?`<span class="flag warn">Az m²-re jutó összeg alacsony, érdemes átnézni</span>`:''}${d.mortgage?`<span class="flag">${svg('bank')}Jelzálog${d.bank?': '+esc(d.bank):''}</span>`:''}</div>`;
+    <div class="flags">${cur!=='EUR'&&sqm?(sqm<700000?`<span class="flag warn">Alacsony m²-ár, érdemes átnézni</span>`:sqm<750000?`<span class="flag mid">Elfogadható, de az alsó határon</span>`:`<span class="flag">${svg('check','stroke-width="3"')}Ideális m²-ár</span>`):''}${d.mortgage?`<span class="flag">${svg('bank')}Jelzálog${d.bank?': '+esc(d.bank):''}</span>`:''}</div>`;
   }
   return '';
 }
@@ -1486,6 +1551,7 @@ function coverPanel(hh,all){
     const defs=COVER[h.kind==='company'?'company':'person'], hide=h.hideGaps||[];
     const have=defs.filter(d=>kinds.has(d.k)), miss=defs.filter(d=>!kinds.has(d.k)&&!d.only&&!hide.includes(d.k));
     if(!have.length&&!miss.length) return '';
+    if(!cs.length) return `<div class="cvrow"><div class="cvwho">${miniAv(h,26)}<b>${esc(h.name)}</b></div><div class="cvitems">${defs.filter(d=>!d.only).map(d=>`<span class="cv ghost"><i>${d.e}</i>${d.n}</span>`).join('')}</div><p class="cvhint soft">🌱 Itt fog kirajzolódni a védőhálód. Vidd fel bátran a szerződéseidet, és meglátod, mi mindenre figyelsz már most.</p></div>`;
     const hint=coverHint(h,miss);
     return `<div class="cvrow"><div class="cvwho">${miniAv(h,26)}<b>${esc(h.name)}</b></div>
       <div class="cvitems">${have.map(d=>`<span class="cv ok"><i>${d.e}</i>${d.n}<em>${svg('check','stroke-width="3"')}</em></span>`).join('')}
@@ -1493,13 +1559,14 @@ function coverPanel(hh,all){
       ${hint?`<p class="cvhint">${esc(hint)}</p>`:''}</div>`;
   }).join('');
   if(!rows.trim()) return '';
+  if(!all.length) return `<div class="sec-title"><h2>Védőhálód</h2></div><div class="cover welcome"><div class="wl-ic">${['🚗','🏡','❤️','🌱','🎈','💼'].map(e=>`<span>${e}</span>`).join('')}</div><h3>Üdv a portálodon! 🎉</h3><p>Vidd fel egyesével a szerződéseidet: autó, otthon, élet, megtakarítás. Ahogy haladsz, itt szépen összeáll a teljes kép, és mindig tudni fogod, mi hol van.</p><button class="btn primary" data-act="add-contract">${svg('plus')}Első szerződés felvitele</button></div>`;
   return `<div class="sec-title"><h2>Védőhálód</h2><span class="hint">Ami már megvan, és ami még hiányozhat</span></div><div class="cover">${rows}</div>`;
 }
 function pageContracts(){
   const hh=curHH(), all=hhContracts(hh);
   if(S.holder!=='all' && !holderOf(hh,S.holder)) S.holder='all';
   const list=S.holder==='all'?all:all.filter(c=>c.holder===S.holder);
-  const first=hh.holders[0].name.replace(/^dr\.?\s*/i,'').split(' ').slice(-1)[0];
+  const first=hh.nick||givenName(hh.holders[0].name);
   const profiles=hh.holders.map(h=>profileCard(h,all.filter(c=>c.holder===h.id))).join('')+`<button class="prof add" data-act="add-holder">${svg('plus')}Új ügyfélkártya</button>`;
   const selCount=[...selected].filter(id=>list.some(c=>c.id===id)).length;
   const groups = hh.holders.map(h=>[h,list.filter(c=>c.holder===h.id)]).filter(g=>g[1].length);
@@ -1508,7 +1575,7 @@ function pageContracts(){
     : groups.map(([h,cs])=>{ const ids=cs.map(c=>c.id), all=ids.every(id=>selected.has(id)); return `<div class="group-title">${miniAv(h,22)}${esc(h.name)}<span>${cs.length} szerződés</span>${S.view!=='list'?`<label class="gsel">Mind kijelölése<button class="chk ${all?'on':''}" data-selall="${ids.join(',')}" aria-label="Mind kijelölése">${svg('check','stroke-width="3"')}</button></label>`:''}</div>`+renderGroup(cs); }).join('');
   const totals=sumByCur(list);
   return `
-    <div class="page-head"><div><h1>${S.role==='client'?`Szia, ${esc(first)}! <span class="wave">👋</span>`:esc(hh.name)}</h1><p class="sub">Minden biztosításod egy helyen.</p></div></div>
+    <div class="page-head"><div><h1>${S.role==='client'?`Szia, ${esc(first)}! <span class="wave">👋</span> <button class="icon-btn nickedit" data-act="edit-nick" title="Hogyan szólítsunk?" aria-label="Megszólítás szerkesztése">${svg('pen')}</button>`:esc(hh.name)}</h1><p class="sub">Minden biztosításod egy helyen.</p></div></div>
     <div class="profiles">${profiles}</div>
     ${S.holder!=='all'?`<div class="filter-note">Csak <b style="color:var(--ink)">${esc(holderOf(hh,S.holder).name)}</b> szerződései látszanak.<button data-holder="all">Összes mutatása</button></div>`:''}
     ${coverPanel(hh,all)}
@@ -1539,17 +1606,17 @@ function statusIcons(c){
   return [c.feeOk?`<i class="ok" title="Díjat rendeztem">${svg('check','stroke-width="3"')}</i>`:'',(!isLife(c)&&(c.notify||[]).length)?`<i class="bl" title="Évfordulós értesítés">${svg('bell')}</i>`:'',c.reviewAtAnniv?`<i class="bl" title="Évfordulókor felülvizsgálná">${svg('calendar')}</i>`:'',c.review?`<i class="pk" title="Felülvizsgálatot kért">${svg('search')}</i>`:''].join('');
 }
 function sumRows(c){
-  const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextOcc(c.start), d=c.details||{}, info=c.info||{}, h=holderOf(curHH(),c.holder)||{}, life=isLife(c);
+  const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextAnn(c), d=c.details||{}, info=c.info||{}, h=holderOf(curHH(),c.holder)||{}, life=isLife(c);
   const r=[['Termék',esc(t.n)]];
-  if(t.kind==='vehicle'){ if(c.vehicle) r.push(['Gépjármű',esc(c.vehicle)]); if(c.plate) r.push(['Rendszám',plateHTML(c.plate)]); }
+  if(t.kind==='vehicle'){ if(c.vehicle) r.push(['Gépjármű',esc(c.vehicle)]); if(c.plate) r.push(['Rendszám',plateHTML(c.plate)]); if(c.bm) r.push(['Bonus-malus',esc(c.bm)]); }
   else if(t.kind==='property'){ r.push(['Megnevezés',esc(c.label||'–')]); if(c.address) r.push(['Cím',esc(c.address)]); }
   else if(t.kind==='child'&&d.childName){ r.push(['Gyermek',esc(d.childName)]); }
   else if(c.label&&c.label!==t.n) r.push(['Megnevezés',esc(c.label)]);
   r.push(['Szerződő',esc(h.name||'–')]);
   r.push(['Biztosító',esc(c.insurer||'–')]);
   r.push(['Kötvényszám',esc(c.policy||'–')]);
-  if(life) r.push(['Kezdete',huDate(d.signDate||c.start)]);
-  else r.push(['Évforduló',`${huShort(a.date)} <span class="muted">(${a.days===0?'ma':a.days+' nap múlva'})</span>`]);
+  r.push(['Kötés dátuma',huDate(c.start)]);
+  if(!life) r.push(['Évforduló',`${huShort(a.date)} <span class="muted">(${a.days===0?'ma':a.days+' nap múlva'})</span>`]);
   r.push(['Díjfizetési ütem',capF(f.adv)]);
   r.push(['Gyakoriság szerinti díj',fmtC(c.fee/f.p,c.cur)]);
   if(f.p>1) r.push(['Éves díj',fmtC(c.fee,c.cur)]);
@@ -1562,7 +1629,7 @@ const telA = n => `<a class="telpill" href="tel:${esc(String(n).replace(/[^+\d]/
 function helpBlock(c){
   const t=T(c.type), i=c.info||{}; const rows=[];
   if(t.kind==='vehicle'&&(i.assist===1||i.assist===0)) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>${i.assist?'Jár ehhez a szerződéshez':'Nem tartozik hozzá'}</span></div>${i.assist&&i.assistPhone?telA(i.assistPhone):''}</div>`);
-  if(i.claimPhone) rows.push(`<div class="hrow"><span class="hic">📞</span><div><b>Kárbejelentés</b><span>A biztosító ügyfélszolgálata</span></div>${telA(i.claimPhone)}</div>`);
+  if(i.claimPhone) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>Segítség baj esetén</span></div>${telA(i.claimPhone)}</div>`);
   if(i.todo) rows.push(`<div class="hrow todo"><span class="hic">🧭</span><div><b>Teendő baj esetén</b><p>${esc(i.todo).replace(/\n/g,'<br>')}</p></div></div>`);
   if(!rows.length) return S.role==='advisor' ? `<div class="xsec"><h5>Hasznos tudnivalók</h5><div class="xempty">Még nincs megadva. <button class="addnote" data-edit="${c.id}">Kitöltöm</button></div></div>` : '';
   return `<div class="xsec"><h5>Hasznos tudnivalók</h5><div class="help">${rows.join('')}</div></div>`;
@@ -1600,7 +1667,7 @@ function expandedBody(c){
   </div>`;
 }
 function metaRight(c){
-  const a=nextOcc(c.start), d=c.details||{};
+  const a=nextAnn(c), d=c.details||{};
   if(isLife(c)){ const sd=D_(d.signDate||c.start); return `<span>Indult <b>${sd.getFullYear()}. ${HU_M[sd.getMonth()]}</b></span>`; }
   return `<span class="${a.days<=60?'near':''}">Évforduló <b>${huShort(a.date)}</b></span>`;
 }
@@ -1621,7 +1688,7 @@ function listTable(cs){
   const ids=cs.map(c=>c.id), allSel=ids.length&&ids.every(id=>selected.has(id));
   return `<div class="ltable"><div class="lrow h"><div></div><div>Szerződés</div><div class="hide-s2">Biztosító, kötvényszám</div><div class="hide-l">Évforduló</div><div>Díj</div><div class="hide-l">Állapot</div><button class="chk ${allSel?'on':''}" data-selall="${ids.join(',')}" title="Összes kijelölése" aria-label="Összes kijelölése">${svg('check','stroke-width="3"')}</button></div>
   ${cs.map(c=>{
-    const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextOcc(c.start), open=expanded.has(c.id), sel=selected.has(c.id), life=isLife(c);
+    const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextAnn(c), open=expanded.has(c.id), sel=selected.has(c.id), life=isLife(c);
     const sub = subLine(c,t);
     return `<div class="lrow ${open?'open':''}" data-exp="${c.id}" role="button" tabindex="0" aria-expanded="${open}">
       ${picto(t,30)}
@@ -1677,7 +1744,7 @@ function pageAdvisor(){
   const a=S.advisor, paras=esc(a.bio).split(/\n\s*\n/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
   return `<div class="page-head"><div><h1>${S.role==='advisor'?'Profilom':'Tanácsadóm'}</h1><p class="sub">${S.role==='advisor'?'Ezt látják rólad az ügyfeleid.':'Akihez bármikor fordulhatsz.'}</p></div>${S.role==='advisor'?`<button class="btn primary" data-act="edit-advisor">${svg('pen')}Profil szerkesztése</button>`:''}</div>
     <div class="profile"><div class="pcard"><div class="photo">${a.photo?`<img src="${a.photo}" alt="${esc(a.name)}">`:esc(initials(a.name))}</div><h2>${esc(a.name)}</h2><div class="ttl">${esc(a.title)}</div>${a.tagline?`<div class="tag">„${esc(a.tagline)}”</div>`:''}
-      <div class="contact-list"><a href="tel:${esc(a.phone.replace(/\s/g,''))}">${svg('phone')}${esc(a.phone)}</a><a href="mailto:${esc(a.email)}">${svg('mail')}${esc(a.email)}</a><a href="https://${esc(a.web)}" target="_blank" rel="noopener">${svg('globe')}${esc(a.web)}</a>${a.office?`<div>${svg('pin')}${esc(a.office)}</div>`:''}</div>
+      <div class="contact-list"><a href="tel:${esc(a.phone.replace(/\s/g,''))}">${svg('phone')}${esc(fmtPhone(a.phone))}</a><a href="mailto:${esc(a.email)}">${svg('mail')}${esc(a.email)}</a><a href="https://${esc(a.web)}" target="_blank" rel="noopener">${svg('globe')}${esc(a.web)}</a>${a.office?`<div>${svg('pin')}${esc(a.office)}</div>`:''}</div>
       ${S.role==='client'?`<button class="btn primary" style="margin-top:14px;width:100%;justify-content:center" data-act="ask-meeting">${svg('chat')}Írok neki</button>`:''}</div>
     <div class="pbody"><h3>Bemutatkozás</h3>${paras}<h3 style="margin-top:18px">Miben segítek</h3><div class="pillrow">${a.areas.map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div>${awardsHTML(a)}<div class="legal">${esc(a.legal)}</div></div></div>`;
 }
@@ -1691,7 +1758,7 @@ function pageClients(){
       <div class="num hide-s">${cs.length}<small>szerződés</small></div><div class="num hide-s">${fmtSums(sum)}<small>éves díj</small></div>
       <div class="stbadges hide-m">${badges}</div><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div>`;
   }).join('');
-  const now=today(), opp=S.contracts.filter(c=>!isLife(c)&&c.own!=='me').map(c=>({c,a:nextOcc(c.start),h:HH(c.hh)})).filter(x=>x.h&&x.a.days<=120).sort((x,y)=>x.a.days-y.a.days);
+  const now=today(), opp=S.contracts.filter(c=>!isLife(c)&&c.own!=='me').map(c=>({c,a:nextAnn(c),h:HH(c.hh)})).filter(x=>x.h&&x.a.days<=120).sort((x,y)=>x.a.days-y.a.days);
   const oppHTML = `<div class="sec-title"><h2>Évfordulós lehetőségek <span class="muted" style="font-weight:500">a következő 120 napban, nem nálad lévő szerződések</span></h2></div>
     ${opp.length?`<div class="ctable opp">${opp.map(({c,a,h})=>{const t=T(c.type),f=FREQ[c.freq]||FREQ.eves; return `<div class="orow">${picto(t,30)}<div class="t"><b>${esc(cTitle(c))}</b><span>${esc(h.name)}, ${esc(t.n)}, ${esc(c.insurer||'')}</span></div><div class="od ${a.days<=45?'hot':''}"><b>${huShort(a.date)}</b><span>${a.days} nap múlva</span></div><div class="of hide-s"><b>${fmtC(c.fee,c.cur)}</b><span>évente</span></div><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div>`;}).join('')}</div>`:`<div class="empty" style="padding:22px">Most nincs közelgő évforduló a nem nálad lévő szerződések között.</div>`}`;
   return `<div class="page-head"><div><h1>Ügyfeleim</h1><p class="sub">${S.households.length} ügyfél, ${S.contracts.length} szerződés</p></div><button class="btn primary" data-act="add-client">${svg('plus')}Új ügyfél meghívása</button></div>
@@ -1755,7 +1822,7 @@ function calcPersonHTML(){
       <div class="kidtabs">${ks.map((x,j)=>`<button type="button" class="${j===i?'on':''}" data-kid="${j}">${kidFace(x,26)}<span>${esc(kidLabel(x))}</span></button>`).join('')}<button type="button" class="kidadd" data-kidadd>+ Gyermek</button></div>
       <div class="kided">
         <div class="row2"><div class="field"><label>Név</label><input id="k-name" value="${esc(k.name)}" placeholder="${k.born?'pl. Anna':'pl. Pocaklakó'}"></div>
-          <div class="field"><label>${k.born?'Születési idő':'Várható születés'}</label><input id="k-date" type="date" value="${esc(k.date)}"></div></div>
+          <div class="field"><label>${k.born?'Születési idő':'Várható születés'}</label><input id="k-date" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(k.date))}"></div></div>
         <div class="segline mini">${[['f','👧 Kislány'],['m','👦 Kisfiú'],['','Még nem tudjuk']].map(([g,n])=>`<button type="button" class="${(k.gender||'')===g?'on':''}" data-kidg="${g||'x'}">${n}</button>`).join('')}
           <button type="button" class="${k.born?'':'on'}" data-kidborn>👶 Még úton van</button>${ks.length>1?`<button type="button" class="ghostx" data-kiddel title="Eltávolítás">${svg('x')}</button>`:''}</div>
         <div class="cl" style="margin-top:12px"><span>Mire gyűjtünk?</span></div>
@@ -1765,7 +1832,7 @@ function calcPersonHTML(){
   }
   if(CALC.mode==='pension'){
     const ps=calcPersons(), h=calcHolder(); if(!ps.length) return '';
-    return `<div class="cfield"><div class="cl"><span>Kinek a nyugdíja?</span></div><div class="kidtabs">${ps.map(x=>`<button type="button" class="${h&&h.id===x.id?'on':''}" data-chold="${x.id}">${miniAv(x,26)}<span>${esc(x.name.replace(/^dr\.?\s*/i,'').split(' ').slice(-1)[0])}</span></button>`).join('')}</div>
+    return `<div class="cfield"><div class="cl"><span>Kinek a nyugdíja?</span></div><div class="kidtabs">${ps.map(x=>`<button type="button" class="${h&&h.id===x.id?'on':''}" data-chold="${x.id}">${miniAv(x,26)}<span>${esc(givenName(x.name))}</span></button>`).join('')}</div>
       ${h&&h.birthDate?`<p class="hint" style="margin:6px 0 0">${ageAt(h.birthDate)} éves, a születési dátuma alapján számolunk.</p>`:`<p class="hint" style="margin:6px 0 0">Ha a profilkártyán megadod a születési dátumot, magától kiszámoljuk a nyugdíjig hátralévő időt.</p>`}</div>`;
   }
   const c=calcCompany();
@@ -1789,7 +1856,7 @@ function calcStoryHTML(){
     const py=CALC.payYears||20, ar=cfg.annRate??3, pm=annuity(r.v,py,ar);
     let who='';
     if(h&&h.birthDate){ const r65=D_(h.birthDate); r65.setFullYear(r65.getFullYear()+65); const left=ymLeft(today(),r65); const ageEnd=ageAt(h.birthDate)+CALC.years;
-      who=`<div class="st-who">${miniAv(h,40)}<div><b>${esc(h.name.replace(/^dr\.?\s*/i,'').split(' ').slice(-1)[0])}, a 65. születésnapod: ${huDate(r65)}</b><span>Addig még ${left.y} év ${left.m} hónap van hátra. A számítás ${CALC.years} évre szól, ${ageEnd} éves korodig.</span></div></div>`; }
+      who=`<div class="st-who">${miniAv(h,40)}<div><b>${esc(givenName(h.name))}, a 65. születésnapod: ${huDate(r65)}</b><span>Addig még ${left.y} év ${left.m} hónap van hátra. A számítás ${CALC.years} évre szól, ${ageEnd} éves korodig.</span></div></div>`; }
     const endAge = h&&h.birthDate ? ageAt(h.birthDate)+CALC.years+py : null;
     return `<div class="st-head"><span>🌿 Mit jelent ez nyugdíjasként?</span><em>${esc(sc.n.toLowerCase())} szcenárió alapján</em></div>${who}
       <div class="payopts">
@@ -1903,11 +1970,12 @@ function pageCalc(){
     <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><button class="btn" data-act="calc-pdf">${svg('download')}PDF letöltése</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak, és kiegészítő kockázati fedezetek nélkül készült (ezek csökkentik a megtakarítás értékét). A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
 }
 function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); const st=document.getElementById('c-story'); if(st) st.innerHTML=calcStoryHTML(); }
+document.addEventListener('focusout',e=>{ const t=e.target; if(t.classList&&t.classList.contains('dinp')){ const v=t.value.trim(), d=parseHuDate(v); if(!v){ t.classList.remove('bad'); } else if(d){ t.value=huIso(d); t.classList.remove('bad'); } else { t.classList.add('bad'); toast('📅','A dátumot így add meg: 2021.05.27.'); } } });
 document.addEventListener('focusout',e=>{ if(e.target.id==='c-monthly'){ const L=calcLim(); if(CALC.monthly<L.min){ CALC.monthly=L.min; e.target.value=grp(L.min); const r=document.getElementById('c-monthly-r'); if(r) r.value=L.min; calcUpdate(); toast('ℹ️',`A minimális havi díj ${fmtC(L.min,CALC.cur)}.`); } } });
 document.addEventListener('change',e=>{ const t=e.target; if(t.dataset&&t.dataset.cfgsel){ calcCfg()[t.dataset.cfgsel]=t.value; save(); calcUpdate(); } });
 document.addEventListener('input',e=>{
   const t=e.target;
-  if(t.id==='k-name'||t.id==='k-date'){ const k=calcKids()[CALC.kidSel||0]; if(t.id==='k-name'){ k.name=t.value; if(!k.gender){} } else { k.date=t.value; const y=kidYears(k); if(y){ CALC.years=y; const a=document.getElementById('c-years'), b=document.getElementById('c-years-r'); if(a) a.value=y; if(b) b.value=y; } } save(); calcUpdate(); const tab=document.querySelector(`[data-kid="${CALC.kidSel||0}"] > span:last-child`); if(tab) tab.textContent=kidLabel(k); return; }
+  if(t.id==='k-name'||t.id==='k-date'){ const k=calcKids()[CALC.kidSel||0]; if(t.id==='k-name'){ k.name=t.value; if(!k.gManual){ k.gender=genderOf(k.name)||''; const tb=document.querySelector(`[data-kid="${CALC.kidSel||0}"] .kidav`); if(tb) tb.outerHTML=kidFace(k,26); document.querySelectorAll('[data-kidg]').forEach(b=>b.classList.toggle('on',(b.dataset.kidg==='x'?'':b.dataset.kidg)===(k.gender||''))); } } else { const pd=parseHuDate(t.value); if(!pd){ return; } k.date=pd; const y=kidYears(k); if(y){ CALC.years=y; const a=document.getElementById('c-years'), b=document.getElementById('c-years-r'); if(a) a.value=y; if(b) b.value=y; } } save(); calcUpdate(); const tab=document.querySelector(`[data-kid="${CALC.kidSel||0}"] > span:last-child`); if(tab) tab.textContent=kidLabel(k); return; }
   if(!t.id&&!t.dataset.cfg) return; const M=CALC_MODES[CALC.mode];
   if(t.id==='c-monthly-r'){ CALC.monthly=+t.value; const i=document.getElementById('c-monthly'); if(i) i.value=grp(CALC.monthly); calcUpdate(); }
   else if(t.id==='c-monthly'){ CALC.monthly=num(t.value)||0; const r=document.getElementById('c-monthly-r'); if(r) r.value=Math.min(calcLim().max,CALC.monthly); calcUpdate(); }
@@ -1963,12 +2031,14 @@ function insPicker(host, value, onChange){
 function typeGrid(sel){
   return S.types.map(t=>`<button type="button" data-t="${t.k}" class="${t.k===sel?'on':''}">${picto(t,30)}${esc(t.n)}</button>`).join('')+`<button type="button" class="new" data-newtype><span class="pic" style="background:var(--surface-2);color:var(--ink-3);width:30px;height:30px;border-radius:9px">${svg('plus')}</span>Új típus</button>`;
 }
+const BM=['M04','M03','M02','M01','A00','B01','B02','B03','B04','B05','B06','B07','B08','B09','B10'];
 function identFields(kind,d){
-  if(kind==='vehicle') return `<div class="row2"><div class="field"><label>Gépjármű</label><input id="f-vehicle" value="${esc(d.vehicle)}" placeholder="pl. Skoda Octavia"></div><div class="field"><label>Rendszám</label><input id="f-plate" value="${esc(d.plate)}" placeholder="AA BC-123 vagy ABC-123" autocapitalize="characters"><div class="plate-prev" id="f-plate-prev">${plateHTML(d.plate,'lg')}</div></div></div>`;
-  if(kind==='property') return `<div class="field"><label>Megnevezés</label><input id="f-label" value="${esc(d.label)}" placeholder="pl. Nyaraló, Rókusaljai ház"></div><div class="field"><label>Cím</label><input id="f-address" value="${esc(d.address)}" placeholder="Irányítószám, település, utca, házszám"></div>`;
+  if(kind==='vehicle') return `<div class="row2"><div class="field"><label>Gépjármű <span class="muted">(ahogy te hívod)</span></label><input id="f-vehicle" value="${esc(d.vehicle)}" placeholder="pl. Skoda Octavia, céges kisbusz"></div><div class="field"><label>Rendszám</label><input id="f-plate" value="${esc(d.plate)}" placeholder="AA BC-123 vagy ABC-123" autocapitalize="characters"><div class="plate-prev" id="f-plate-prev">${plateHTML(d.plate,'lg')}</div></div></div>
+    <div class="field"><label>Jelenlegi bonus-malus fokozat</label><select id="f-bm"><option value="">Nem tudom / nem releváns</option>${BM.map(b=>`<option ${d.bm===b?'selected':''}>${b}</option>`).join('')}</select></div>`;
+  if(kind==='property') return `<div class="field"><label>Hogyan hívod? <span class="muted">(ahogy te azonosítod)</span></label><input id="f-label" value="${esc(d.label)}" placeholder="pl. Balatoni nyaraló, Anyáék háza"></div><div class="field"><label>Cím</label><input id="f-address" value="${esc(d.address)}" placeholder="Irányítószám, település, utca, házszám"></div>`;
   if(kind==='liability'){ const used=[...new Set(S.contracts.filter(c=>T(c.type).kind==='liability').map(c=>c.label).filter(Boolean))];
     return `<div class="field"><label>Fajtája</label><input id="f-label" list="liab-list" value="${esc(d.label)}" placeholder="pl. Orvos szakmai felelősségbiztosítás"><datalist id="liab-list">${[...new Set([...LIAB_SUGGEST,...used])].map(x=>`<option value="${esc(x)}">`).join('')}</datalist><div class="hint">Válassz a listából, vagy írj be újat.</div></div>`; }
-  return `<div class="field"><label>Megnevezés</label><input id="f-label" value="${esc(d.label)}" placeholder="pl. ${kind==='life'?'Kockázati életbiztosítás':kind==='pension'?'Nyugdíjbiztosítás':'Megnevezés'}"></div>`;
+  return `<div class="field"><label>Hogyan hívod? <span class="muted">(ahogy te azonosítod)</span></label><input id="f-label" value="${esc(d.label)}" placeholder="pl. ${kind==='life'?'Kockázati életbiztosítás':kind==='pension'?'Nyugdíjbiztosítás':'Megnevezés'}"></div>`;
 }
 function detailFields(kind,dt){
   if(kind==='property'){
@@ -1988,31 +2058,31 @@ function detailFields(kind,dt){
     const kidSec = kind!=='child' ? '' : `<div class="fsec kidsec"><b>🎈 A gyermek</b>
       <div class="radios" id="d-born"><button type="button" data-born="1" class="${born?'on':''}">🧒 Már megszületett</button><button type="button" data-born="0" class="${born?'':'on'}">👶 Még úton van</button></div>
       <div class="row2"><div class="field"><label>A gyermek neve</label><input id="d-cname" value="${esc(dt.childName||'')}" placeholder="pl. Lili"></div>
-        <div class="field" id="d-cbirth-w" ${born?'':'hidden'}><label>Születési ideje</label><input id="d-cbirth" type="date" value="${esc(dt.childBirth||'')}"></div>
-        <div class="field" id="d-due-w" ${born?'hidden':''}><label>Várható születés</label><input id="d-due" type="date" value="${esc(dt.dueDate||'')}"></div></div>
+        <div class="field" id="d-cbirth-w" ${born?'':'hidden'}><label>Születési ideje</label><input id="d-cbirth" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(dt.childBirth||''))}"></div>
+        <div class="field" id="d-due-w" ${born?'hidden':''}><label>Várható születés</label><input id="d-due" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(dt.dueDate||''))}"></div></div>
       <div class="row2"><div class="field"><label>Név a kötéskor</label><input id="d-nas" value="${esc(dt.nameAtSign||'')}" placeholder="pl. Pocaklakó"><div class="hint">Ha akkor még más néven szerepelt.</div></div>
         <div class="field"><label>Cél életkor</label><input id="d-tage" inputmode="numeric" value="${dt.targetAge||18}"></div></div></div>`;
     return kidSec + `<div class="fsec"><b>${kind==='pension'?'Nyugdíj részletei':kind==='child'?'A program részletei':'Megtakarítás részletei'}</b>
-      ${kind==='pension'?`<div class="chkline"><label><input type="checkbox" id="d-clause" ${dt.clause?'checked':''}>Nyugdíjzáradékkal ellátva</label><label><input type="checkbox" id="d-tax" ${dt.tax?'checked':''}>Adó-visszatérítésre jogosult</label></div>`:''}
-      ${kind==='savings'?`<div class="row2"><div class="field"><label>Megtakarítási cél</label><input id="d-goal" list="goal-list" value="${esc(dt.goal||'')}" placeholder="pl. Lakásvásárlás"><datalist id="goal-list">${GOALS.map(g=>`<option value="${g}">`).join('')}</datalist></div><div class="field"><label>Céldátum (nem kötelező)</label><input id="d-target" type="date" value="${esc(dt.targetDate||'')}"></div></div>`:''}
-      <div class="field"><label>Mikor kötötték a szerződést?</label><input id="d-sign" type="date" value="${esc(dt.signDate||'')}"><div class="hint" id="d-sign-h"></div></div>
+      ${kind==='pension'?`<div class="chkline"><label><input type="checkbox" id="d-clause" ${dt.clause?'checked':''}>Nyugdíjzáradékkal ellátva <span class="muted">(adó-visszatérítésre jogosult)</span></label></div>`:''}
+      ${kind==='savings'?`<div class="row2"><div class="field"><label>Megtakarítási cél</label><input id="d-goal" list="goal-list" value="${esc(dt.goal||'')}" placeholder="pl. Lakásvásárlás"><datalist id="goal-list">${GOALS.map(g=>`<option value="${g}">`).join('')}</datalist></div><div class="field"><label>Céldátum (nem kötelező)</label><input id="d-target" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(dt.targetDate||''))}"></div></div>`:''}
       <div class="field"><label>Eszközalapok és arányuk (%)</label><div class="rowlist funds-ed" id="d-funds">${f.map(x=>fundRow(x)).join('')}</div><button type="button" class="addrow" data-addfund>+ Eszközalap</button><datalist id="fund-list">${FUNDS.map(x=>`<option value="${x.c}">${esc(x.n)}</option>`).join('')}</datalist></div>
-      <div class="row2"><div class="field"><label>Eddigi hozam (összeg)</label><input id="d-yft" inputmode="numeric" value="${dt.yieldFt||''}"></div><div class="field"><label>Eddigi hozam (%)</label><input id="d-ypct" inputmode="decimal" value="${dt.yieldPct||''}"></div></div>
-      <div class="field"><label>Éves átlagos hozam (% / év)</label><input id="d-apct" inputmode="decimal" value="${dt.annualPct||''}"><div class="hint">10% fölött „Kiváló hozam” jelzést kap.</div></div></div>`;
+      ${S.role==='advisor'?`<div class="row2"><div class="field"><label>Eddigi hozam (összeg) <span class="advtag">te töltöd ki</span></label><input id="d-yft" inputmode="numeric" value="${dt.yieldFt||''}"></div><div class="field"><label>Eddigi hozam (%)</label><input id="d-ypct" inputmode="decimal" value="${dt.yieldPct||''}"></div></div>
+      <div class="field"><label>Éves átlagos hozam (% / év)</label><input id="d-apct" inputmode="decimal" value="${dt.annualPct||''}"><div class="hint">10% fölött „Kiváló hozam” jelzést kap.</div></div>`:''}</div>`;
   }
   return '';
 }
-const riskRow=x=>`<div class="r"><input list="risk-list" placeholder="Kockázat" value="${esc(x.n||'')}" data-rn><input inputmode="numeric" placeholder="Összeg" value="${x.a||''}" data-ra><button type="button" class="icon-btn" data-delrow aria-label="Törlés">${svg('x')}</button></div>`;
+const riskRow=x=>`<div class="r"><input list="risk-list" placeholder="Kockázat" value="${esc(x.n||'')}" data-rn><input inputmode="numeric" placeholder="Összeg, szolgáltatásnál üres" value="${x.a||''}" data-ra><button type="button" class="icon-btn" data-delrow aria-label="Törlés">${svg('x')}</button></div>`;
 const fundRow=x=>`<div class="r"><input list="fund-list" placeholder="Alap (pl. VRA)" value="${esc(x.code||'')}" data-fc><input inputmode="decimal" placeholder="%" value="${x.pct||''}" data-fp><button type="button" class="icon-btn" data-delrow aria-label="Törlés">${svg('x')}</button></div>`;
 
 function infoFields(kind,i){
-  const named=i.benefType==='named';
-  return `<div class="fsec"><b>Hasznos tudnivalók</b>
+  const named=i.benefType==='named', isA=S.role==='advisor';
+  const ben = kind==='life' ? `<div class="fsec"><b>Kedvezményezett</b><div class="radios" id="i-benef"><button type="button" data-b="heirs" class="${named?'':'on'}">Törvényes örökös</button><button type="button" data-b="named" class="${named?'on':''}">Megnevezett személy(ek)</button></div>
+      <div class="field" id="i-bn-w" ${named?'':'hidden'}><textarea id="i-bn" placeholder="pl. Minta Anna (élettárs) 100%">${esc(i.benefNames||'')}</textarea></div></div>` : '';
+  if(!isA) return ben;
+  return ben+`<div class="fsec"><b>Hasznos tudnivalók <span class="advtag">te töltöd ki</span></b>
     ${kind==='vehicle'?`<div class="chkline"><label><input type="checkbox" id="i-assist" ${i.assist?'checked':''}>Asszisztenciára jogosult</label></div>
-      <div class="field" id="i-aph-w" ${i.assist?'':'hidden'}><label>Asszisztencia telefonszáma</label><input id="i-aph" inputmode="tel" value="${esc(i.assistPhone||'')}"></div>`:''}
-    ${kind==='life'?`<div class="field"><label>Kedvezményezett</label><div class="radios" id="i-benef"><button type="button" data-b="heirs" class="${named?'':'on'}">Törvényes örökös</button><button type="button" data-b="named" class="${named?'on':''}">Megnevezett személy(ek)</button></div>
-      <div class="field" id="i-bn-w" ${named?'':'hidden'}><textarea id="i-bn" placeholder="pl. Minta Anna (élettárs) 100%">${esc(i.benefNames||'')}</textarea></div></div>`:''}
-    <div class="field"><label>Kárbejelentés / segélyvonal telefonszáma</label><input id="i-cph" inputmode="tel" value="${esc(i.claimPhone||'')}"></div>
+      <div class="field" id="i-aph-w" ${i.assist?'':'hidden'}><label>Asszisztencia telefonszáma</label><input id="i-aph" inputmode="tel" value="${esc(i.assistPhone||'')}"></div>`
+      :`<div class="field"><label>Asszisztencia telefonszáma <span class="muted">(ha van)</span></label><input id="i-cph" inputmode="tel" value="${esc(i.claimPhone||'')}"></div>`}
     <div class="field"><label>Teendő baj esetén</label><textarea id="i-todo" placeholder="pl. Először hívd az asszisztenciát, majd fotózd le a helyszínt…">${esc(i.todo||'')}</textarea></div></div>`;
 }
 function contractForm(id){
@@ -2020,14 +2090,15 @@ function contractForm(id){
   const d=orig?JSON.parse(JSON.stringify(orig)):{cur:'HUF',type:S.types[0].k,holder:S.holder!=='all'?S.holder:hh.holders[0].id,label:'',vehicle:'',plate:'',address:'',insurer:'',policy:'',fee:'',freq:'havi',pay:PAY[0],start:iso(today()),note:'',details:{}};
   d.details=d.details||{}; d.cur=d.cur||'HUF';
   const body=`
-    <div class="field"><label>Kinek a nevén van?</label><select id="f-holder">${hh.holders.map(h=>`<option value="${h.id}" ${h.id===d.holder?'selected':''}>${esc(h.name)}</option>`).join('')}</select></div>
+    <div class="field"><label>Melyik profilodhoz rögzíted?</label><input type="hidden" id="f-holder" value="${d.holder}"><div class="hpick" id="f-hpick">${hh.holders.map(h=>`<button type="button" class="${h.id===d.holder?'on':''}" data-hp="${h.id}">${miniAv(h,30)}<span><b>${esc(h.name)}</b><em>${h.kind==='company'?'Cég':'Magánszemély'}</em></span></button>`).join('')}</div></div>
     <div class="field"><label>Milyen szerződés?</label><div class="types" id="f-types">${typeGrid(d.type)}</div><div id="f-newtype"></div></div>
     <div id="f-ident">${identFields(T(d.type).kind,d)}</div>
     <div class="row2"><div class="field"><label>Biztosító</label><div id="f-ins"></div></div><div class="field"><label>Kötvényszám</label><input id="f-pol" value="${esc(d.policy)}"></div></div>
-    <div class="row2"><div class="field"><label>Évforduló (kockázatviselés kezdete)</label><input id="f-start" type="date" value="${d.start}"></div><div class="field"><label>Fizetés módja</label><select id="f-pay">${PAY.map(p=>`<option ${p===d.pay?'selected':''}>${p}</option>`).join('')}</select></div></div>
+    <div class="row2"><div class="field"><label>Kötés dátuma</label><input id="f-sign" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(d.start)}"><div class="hint" id="d-sign-h"></div></div><div class="field"><label>Évforduló <span class="muted">(hónap.nap)</span></label><input id="f-anniv" autocomplete="off" placeholder="pl. 12.01." value="${orig?annivHu(d):''}"><div class="hint">Ha üresen hagyod, a kötést követő hónap 1. napja lesz.</div></div></div><div class="row2"><div class="field"><label>Fizetés módja</label><select id="f-pay">${PAY.map(p=>`<option ${p===d.pay?'selected':''}>${p}</option>`).join('')}</select></div></div>
     <div class="field"><label>Pénznem</label><div class="segline" id="f-cur"><button type="button" data-cur="HUF" class="${d.cur!=='EUR'?'on':''}">HUF (Ft)</button><button type="button" data-cur="EUR" class="${d.cur==='EUR'?'on':''}">EUR (€)</button></div><div class="hint">Bármelyik szerződés lehet euróban is: nyugdíj, megtakarítás vagy más.</div></div>
     <div class="field"><label>Díjfizetési ütem</label><div class="segline" id="f-freq">${Object.entries(FREQ).map(([k,v])=>`<button type="button" data-f="${k}" class="${k===d.freq?'on':''}">${v.n}</button>`).join('')}</div></div>
     <div class="row2"><div class="field"><label id="f-pfee-l">${FREQ[d.freq].n} díj (${CURSYM(d.cur)})</label><input id="f-pfee" inputmode="numeric" value="${d.fee?Math.round(d.fee/FREQ[d.freq].p):''}"></div><div class="field"><label id="f-fee-l">Éves díj (${CURSYM(d.cur)})</label><input id="f-fee" inputmode="numeric" value="${d.fee||''}"><div class="hint">Bármelyiket írod, a másik kiszámolódik.</div></div></div>
+    <div class="fsec"><div class="chkline" style="margin:0"><label><input type="checkbox" id="f-feeok" ${d.feeOk?'checked':''}>A díjat rendeztem</label></div><div class="field" style="margin:8px 0 0"><input id="f-feenote" value="${esc(d.feeNote||'')}" placeholder="Saját megjegyzés a díjhoz (nem kötelező)"></div></div>
     <div id="f-det">${detailFields(T(d.type).kind,d.details)}</div>
     <div id="f-info">${infoFields(T(d.type).kind,d.info||{})}</div>
     ${S.role==='advisor'?`<div class="field adv-only"><label>Kinél van a szerződés? <span class="advtag">csak te látod</span></label><div class="segline" id="f-own">${[['me','Nálam'],['other','Más tanácsadónál'],['direct','Közvetlenül a biztosítónál']].map(([k,n])=>`<button type="button" data-own="${k}" class="${(d.own||'')===k?'on':''}">${n}</button>`).join('')}</div><div class="hint">A nem nálad lévő vagyonbiztosítások évfordulóit az Ügyfeleim oldalon ajánlatlehetőségként látod.</div></div>`:''}
@@ -2042,27 +2113,27 @@ function contractForm(id){
       if(kind==='property'){ dt.area=num(v('#d-area')); dt.sum=num(v('#d-sum')); dt.mortgage=$('#d-mortgage').checked?1:0; dt.bank=v('#d-bank').trim(); }
       if(kind==='life'){ dt.risks=[...m.querySelectorAll('#d-risks .r')].map(r=>({n:r.querySelector('[data-rn]').value.trim(),a:num(r.querySelector('[data-ra]').value)})).filter(x=>x.n); }
       if(kind==='pension'||kind==='savings'||kind==='child'){
-        if(kind==='pension'){ dt.clause=$('#d-clause').checked?1:0; dt.tax=$('#d-tax').checked?1:0; }
-        if(kind==='savings'){ dt.goal=v('#d-goal').trim(); dt.targetDate=v('#d-target'); }
-        if(kind==='child'){ const on=m.querySelector('#d-born .on'); dt.childBorn=on?+on.dataset.born:1; dt.childName=v('#d-cname').trim(); dt.childBirth=v('#d-cbirth'); dt.dueDate=v('#d-due'); dt.nameAtSign=v('#d-nas').trim(); dt.targetAge=num(v('#d-tage'))||18; }
-        dt.signDate=v('#d-sign'); dt.funds=[...m.querySelectorAll('#d-funds .r')].map(r=>({code:r.querySelector('[data-fc]').value.trim(),pct:num(r.querySelector('[data-fp]').value)})).filter(x=>x.code);
-        dt.yieldFt=num(v('#d-yft')); dt.yieldPct=num(v('#d-ypct')); dt.annualPct=num(v('#d-apct'));
+        if(kind==='pension'){ dt.clause=$('#d-clause').checked?1:0; dt.tax=dt.clause; }
+        if(kind==='savings'){ dt.goal=v('#d-goal').trim(); dt.targetDate=parseHuDate(v('#d-target'))||''; }
+        if(kind==='child'){ const on=m.querySelector('#d-born .on'); dt.childBorn=on?+on.dataset.born:1; dt.childName=v('#d-cname').trim(); dt.childBirth=parseHuDate(v('#d-cbirth'))||''; dt.dueDate=parseHuDate(v('#d-due'))||''; dt.nameAtSign=v('#d-nas').trim(); dt.targetAge=num(v('#d-tage'))||18; }
+        dt.signDate=parseHuDate(v('#f-sign'))||dt.signDate||''; dt.funds=[...m.querySelectorAll('#d-funds .r')].map(r=>({code:r.querySelector('[data-fc]').value.trim(),pct:num(r.querySelector('[data-fp]').value)})).filter(x=>x.code);
+        if($('#d-yft')){ dt.yieldFt=num(v('#d-yft')); dt.yieldPct=num(v('#d-ypct')); dt.annualPct=num(v('#d-apct')); }
       }
       d.details=dt;
     };
     const bindDet=()=>{
       const kind=T(d.type).kind;
-      if(kind==='property'){ const upd=()=>{const a=num($('#d-area').value), s=num($('#d-sum').value), q=a&&s?s/a:0, el=$('#d-sqm'), low=d.cur!=='EUR'&&q&&q<LOW_SQM; el.textContent=q?`${fmtC(q,d.cur)} / m²${low?', alacsony, érdemes átnézni':''}`:''; el.classList.toggle('warn',!!low);};
+      if(kind==='property'){ const upd=()=>{const a=num($('#d-area').value), s=num($('#d-sum').value), q=a&&s?s/a:0, el=$('#d-sqm'), huf=d.cur!=='EUR', low=huf&&q&&q<700000, mid=huf&&q>=700000&&q<750000; el.textContent=q?`${fmtC(q,d.cur)} / m²${huf?(low?', alacsony, érdemes átnézni':mid?', elfogadható, de az alsó határon':', ideális'):''}`:''; el.classList.toggle('warn',!!(low||mid));};
         $('#d-area').oninput=upd; $('#d-sum').oninput=upd; upd(); $('#d-mortgage').onchange=e=>{$('#d-bank-w').hidden=!e.target.checked;}; }
       if(kind==='child'){ $('#d-born').onclick=e=>{const b=e.target.closest('[data-born]'); if(!b) return; m.querySelectorAll('#d-born button').forEach(x=>x.classList.toggle('on',x===b)); const born=b.dataset.born==='1'; $('#d-cbirth-w').hidden=!born; $('#d-due-w').hidden=born; if(!born) toast('💕','Gratulálunk! Ez nagyon szép döntés.');};
         const cn=$('#d-cname'), nas=$('#d-nas'); cn.addEventListener('change',()=>{ if(!nas.value) nas.placeholder=cn.value||'pl. Pocaklakó'; }); }
-      if(kind==='pension'||kind==='savings'||kind==='child'){ const h=()=>{const out=$('#d-sign-h'); const sd=$('#d-sign').value;
+      if(kind==='pension'||kind==='savings'||kind==='child'){ const h=()=>{const out=$('#d-sign-h'); if(!out) return; const sd=parseHuDate($('#f-sign').value)||'';
           if(kind==='pension'){ const holder=holderOf(hh,$('#f-holder').value);
             if(sd&&holder&&holder.birthDate){const a=ageAt(holder.birthDate,sd); const r=D_(holder.birthDate); r.setFullYear(r.getFullYear()+65); out.textContent=`Kötéskor ${a} éves volt, a 65. születésnapjáig ${ymLeft(D_(sd),r).y} év volt hátra.`;}
             else out.textContent=holder&&holder.kind==='person'&&!holder.birthDate?'Az ügyfél születési idejét a profilkártyán add meg, és kiszámoljuk az életkort.':''; }
-          else if(kind==='child'){ const cb=$('#d-cbirth').value; out.textContent = sd&&cb ? (D_(cb)>D_(sd)?'Kötéskor a gyermek még nem született meg.':`Kötéskor a gyermek ${kidAge(cb)==='még nem született'?'':''}${(()=>{const x=D_(cb),y=D_(sd); const mm=(y.getFullYear()-x.getFullYear())*12+y.getMonth()-x.getMonth(); return mm<12?mm+' hónapos':Math.floor(mm/12)+' éves';})()} volt.`) : ''; }
+          else if(kind==='child'){ const cb=parseHuDate($('#d-cbirth').value)||''; out.textContent = sd&&cb ? (D_(cb)>D_(sd)?'Kötéskor a gyermek még nem született meg.':`Kötéskor a gyermek ${kidAge(cb)==='még nem született'?'':''}${(()=>{const x=D_(cb),y=D_(sd); const mm=(y.getFullYear()-x.getFullYear())*12+y.getMonth()-x.getMonth(); return mm<12?mm+' hónapos':Math.floor(mm/12)+' éves';})()} volt.`) : ''; }
           else out.textContent=''; };
-        $('#d-sign').oninput=h; $('#f-holder').addEventListener('change',h); const cb=$('#d-cbirth'); if(cb) cb.addEventListener('input',h); h(); }
+        $('#f-sign').addEventListener('input',h); $('#f-holder').addEventListener('change',h); const cb=$('#d-cbirth'); if(cb) cb.addEventListener('input',h); h(); }
     };
     m.addEventListener('click',e=>{
       if(e.target.closest('[data-addrisk]')) $('#d-risks').insertAdjacentHTML('beforeend',riskRow({}));
@@ -2070,7 +2141,7 @@ function contractForm(id){
       const del=e.target.closest('[data-delrow]'); if(del){ const list=del.closest('.rowlist'); del.closest('.r').remove(); if(!list.children.length) list.insertAdjacentHTML('beforeend', list.id==='d-risks'?riskRow({}):fundRow({})); }
     });
     const bindIdent=()=>{ const p=$('#f-plate'); if(p) p.oninput=()=>{$('#f-plate-prev').innerHTML=plateHTML(p.value,'lg');}; };
-    const grabInfo=()=>{ const i={...(d.info||{})}, g=x=>{const el=$(x); return el?el.value.trim():undefined;}; const as=$('#i-assist'); if(as){ i.assist=as.checked?1:0; i.assistPhone=g('#i-aph'); } const bo=m.querySelector('#i-benef .on'); if(bo){ i.benefType=bo.dataset.b; i.benefNames=g('#i-bn'); } i.claimPhone=fmtPhone(g('#i-cph')||''); if(i.assistPhone) i.assistPhone=fmtPhone(i.assistPhone); i.todo=g('#i-todo')||''; d.info=i; };
+    const grabInfo=()=>{ const i={...(d.info||{})}, g=x=>{const el=$(x); return el?el.value.trim():undefined;}; const as=$('#i-assist'); if(as){ i.assist=as.checked?1:0; i.assistPhone=g('#i-aph'); } const bo=m.querySelector('#i-benef .on'); if(bo){ i.benefType=bo.dataset.b; i.benefNames=g('#i-bn'); } if($('#i-cph')) i.claimPhone=fmtPhone(g('#i-cph')||''); if(i.assistPhone) i.assistPhone=fmtPhone(i.assistPhone); if($('#i-todo')) i.todo=g('#i-todo')||''; d.info=i; };
     const bindInfo=()=>{ const as=$('#i-assist'); if(as) as.onchange=()=>{$('#i-aph-w').hidden=!as.checked;}; const be=$('#i-benef'); if(be) be.onclick=e=>{const b=e.target.closest('[data-b]'); if(!b) return; be.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); $('#i-bn-w').hidden=b.dataset.b!=='named';}; };
     const setType=k=>{ grabIdent(); grabDet(); grabInfo(); $('#f-info').innerHTML=infoFields(T(k).kind,d.info||{}); d.type=k; $('#f-types').innerHTML=typeGrid(k); $('#f-ident').innerHTML=identFields(T(k).kind,d); $('#f-det').innerHTML=detailFields(T(k).kind,d.details); $('#f-info').innerHTML=infoFields(T(k).kind,d.info||{}); bindIdent(); bindDet(); bindInfo(); };
     $('#f-types').onclick=e=>{const b=e.target.closest('button'); if(!b) return; if(b.hasAttribute('data-newtype')) return openNewType(m,setType); setType(b.dataset.t);};
@@ -2080,12 +2151,15 @@ function contractForm(id){
     $('#f-freq').onclick=e=>{const b=e.target.closest('[data-f]'); if(!b) return; d.freq=b.dataset.f; m.querySelectorAll('#f-freq button').forEach(x=>x.classList.toggle('on',x===b)); $('#f-pfee-l').textContent=`${FREQ[d.freq].n} díj (${CURSYM(d.cur)})`; const v=num(af.value); pf.value=v?grp(Math.round(v/FREQ[d.freq].p)):'';};
     $('#f-cur').onclick=e=>{const b=e.target.closest('[data-cur]'); if(!b) return; d.cur=b.dataset.cur; m.querySelectorAll('#f-cur button').forEach(x=>x.classList.toggle('on',x===b)); $('#f-pfee-l').textContent=`${FREQ[d.freq].n} díj (${CURSYM(d.cur)})`; $('#f-fee-l').textContent=`Éves díj (${CURSYM(d.cur)})`; const s=$('#d-sum'); if(s) s.dispatchEvent(new Event('input'));};
     bindIdent(); bindDet(); bindInfo();
+    $('#f-hpick').onclick=e=>{ const b=e.target.closest('[data-hp]'); if(!b) return; m.querySelectorAll('#f-hpick button').forEach(x=>x.classList.toggle('on',x===b)); const hi=$('#f-holder'); hi.value=b.dataset.hp; hi.dispatchEvent(new Event('change')); };
+    $('#f-sign').addEventListener('blur',()=>{ const sd=parseHuDate($('#f-sign').value); const an=$('#f-anniv'); if(sd&&!an.value){ const x=D_(sd); x.setMonth(x.getMonth()+1); an.value=`${pad2(x.getMonth()+1)}.01.`; } });
+    $('#f-anniv').addEventListener('blur',e=>{ const a=parseMD(e.target.value); if(a) e.target.value=a.replace('-','.')+'.'; });
     const fo=$('#f-own'); if(fo) fo.onclick=e=>{const b=e.target.closest('[data-own]'); if(!b) return; d.own=b.dataset.own; fo.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));};
     $('#f-save').onclick=()=>{
       grabIdent(); grabDet(); grabInfo(); const t=T(d.type);
       if(t.kind==='vehicle'&&!d.vehicle.trim()&&!d.plate.trim()){ $('#f-vehicle').focus(); toast('🚗','Add meg az autót vagy a rendszámot.'); return; }
       if(t.kind!=='vehicle'&&!d.label.trim()){ $('#f-label').focus(); toast('✍️','Adj nevet, hogy könnyen megtaláld.'); return; }
-      const data={holder:$('#f-holder').value,type:d.type,label:d.label.trim(),vehicle:d.vehicle.trim(),plate:fmtPlate(d.plate),address:d.address.trim(),insurer:d.insurer,policy:$('#f-pol').value.trim(),fee:num(af.value),cur:d.cur,freq:d.freq,pay:$('#f-pay').value,start:$('#f-start').value||iso(today()),note:$('#f-note').value.trim(),details:d.details,info:d.info||{},own:d.own||(S.role==='advisor'?'me':'')};
+      const data={holder:$('#f-holder').value,type:d.type,label:d.label.trim(),vehicle:d.vehicle.trim(),plate:fmtPlate(d.plate),address:d.address.trim(),insurer:d.insurer,policy:$('#f-pol').value.trim(),fee:num(af.value),cur:d.cur,freq:d.freq,pay:$('#f-pay').value,start:parseHuDate($('#f-sign').value)||d.start||iso(today()),anniv:(()=>{ const a=parseMD($('#f-anniv').value); if(a) return a; const sd=parseHuDate($('#f-sign').value)||d.start||iso(today()); const x=D_(sd); x.setMonth(x.getMonth()+1); return `${pad2(x.getMonth()+1)}-01`; })(),feeOk:$('#f-feeok')&&$('#f-feeok').checked?1:0,feeNote:$('#f-feenote')?$('#f-feenote').value.trim():'',bm:$('#f-bm')?$('#f-bm').value:(d.bm||''),note:$('#f-note').value.trim(),details:d.details,info:d.info||{},own:d.own||(S.role==='advisor'?'me':'')};
       let c; if(id){ c=orig; Object.assign(c,data); } else { c={id:uid('c'),hh:hh.id,feeOk:0,feeNote:'',reviewAtAnniv:0,notify:[],review:0,advisorSeenAt:0,...data}; S.contracts.push(c); }
       touch(c); save(); closeModal(); render(); toast(id?'💾':'📄', id?'Mentve.':'Hozzáadva. Ez is egy helyen van már!');
     };
@@ -2121,7 +2195,7 @@ function holderForm(id){
       <div class="field"><label>Kapcsolattartó</label><input id="h-contact" value="${esc(d.contact||'')}"></div>
       <div class="row2"><div class="field"><label>Telefon</label><input id="h-phone" value="${esc(d.phone||'')}"></div><div class="field"><label>E-mail</label><input id="h-email" type="email" value="${esc(d.email||'')}"></div></div>`
     :`<div class="field"><label>Név</label><input id="h-name" value="${esc(d.name)}"></div>
-      <div class="row2"><div class="field"><label>Születési hely</label><input id="h-birthPlace" value="${esc(d.birthPlace||'')}"></div><div class="field"><label>Születési idő</label><input id="h-birthDate" type="date" value="${esc(d.birthDate||'')}"><div class="hint" id="h-age"></div></div></div>
+      <div class="row2"><div class="field"><label>Születési hely</label><input id="h-birthPlace" value="${esc(d.birthPlace||'')}"></div><div class="field"><label>Születési idő</label><input id="h-birthDate" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(d.birthDate||''))}"><div class="hint" id="h-age"></div></div></div>
       <div class="field"><label>Anyja neve</label><input id="h-mother" value="${esc(d.mother||'')}"></div><div class="field"><label>Lakcím</label><input id="h-address" value="${esc(d.address||'')}"></div>
       <div class="row2"><div class="field"><label>Telefon</label><input id="h-phone" value="${esc(d.phone||'')}"></div><div class="field"><label>E-mail</label><input id="h-email" type="email" value="${esc(d.email||'')}"></div></div>`;
   const body=`${!id?`<div class="field"><label>Típus</label><div class="segline" id="h-kind"><button type="button" data-k="person" class="on">Magánszemély</button><button type="button" data-k="company">Cég</button></div></div>`:''}
@@ -2129,12 +2203,12 @@ function holderForm(id){
   const keys=['name','seat','taxNo','regNo','contact','birthPlace','birthDate','mother','address','phone','email'];
   modal(id?'Adatok szerkesztése':'Új ügyfélkártya',body,`${id&&hh.holders.length>1?`<button class="btn ghost danger" id="h-del" style="margin-right:auto">${svg('trash')}Kártya törlése</button>`:''}<button class="btn" data-close>Mégse</button><button class="btn primary" id="h-save">${svg('check')}Mentés</button>`,m=>{
     const $=s=>m.querySelector(s), grab=()=>keys.forEach(k=>{const el=$('#h-'+k); if(el) d[k]=el.value;});
-    const bind=()=>{const b=$('#h-birthDate'); if(b){const a=()=>{const x=ageAt(b.value); $('#h-age').textContent=x!=null?`${x} éves`:'';}; b.oninput=a; a();} const n=$('#h-name'); n.oninput=()=>{d.name=n.value; if(!d.photo) $('#h-face').innerHTML=faceHTML(d,64,false);};};
+    const bind=()=>{const b=$('#h-birthDate'); if(b){const a=()=>{const x=ageAt(parseHuDate(b.value)||''); $('#h-age').textContent=x!=null?`${x} éves`:'';}; b.oninput=a; a();} const n=$('#h-name'); n.oninput=()=>{d.name=n.value; if(!d.photo) $('#h-face').innerHTML=faceHTML(d,64,false);};};
     bind();
     const kb=$('#h-kind'); if(kb) kb.onclick=e=>{const b=e.target.closest('[data-k]'); if(!b) return; grab(); d.kind=b.dataset.k; kb.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); $('#h-fields').innerHTML=fields(d.kind); $('#h-face').innerHTML=faceHTML(d,64,false); bind();};
     $('#h-photo').onclick=()=>pickImage(360,true,u=>{d.photo=u; $('#h-face').innerHTML=faceHTML(d,64,false); toast('📸','Szuper kép!');});
     const px=$('#h-photo-x'); if(px) px.onclick=()=>{d.photo=''; $('#h-face').innerHTML=faceHTML(d,64,false); px.remove();};
-    $('#h-save').onclick=()=>{grab(); if(!d.name.trim()){$('#h-name').focus();return;} d.name=d.name.trim(); d.phone=fmtPhone(d.phone); if(id) Object.assign(h,d); else {const nh={...d,id:uid('p')}; hh.holders.push(nh); S.holder=nh.id;} save(); closeModal(); render(); toast(id?'💾':'🪪',id?'Adatok mentve.':'Új kártya kész.');};
+    $('#h-save').onclick=()=>{grab(); if(!d.name.trim()){$('#h-name').focus();return;} d.name=d.name.trim(); d.phone=fmtPhone(d.phone); if(d.kind==='person'){ const bd=parseHuDate(d.birthDate); if(d.birthDate&&!bd){ $('#h-birthDate').focus(); toast('📅','A születési időt így add meg: 1993.03.29.'); return; } d.birthDate=bd||''; } if(id) Object.assign(h,d); else {const nh={...d,id:uid('p')}; hh.holders.push(nh); S.holder=nh.id;} save(); closeModal(); render(); toast(id?'💾':'🪪',id?'Adatok mentve.':'Új kártya kész.');};
     const del=$('#h-del'); if(del) del.onclick=()=>{const n=S.contracts.filter(c=>c.holder===id).length; confirmBox(`„${esc(h.name)}” kártyája${n?` és a hozzá tartozó ${n} szerződés`:''} törlődik.`,'Törlés',()=>{hh.holders=hh.holders.filter(x=>x.id!==id); S.contracts=S.contracts.filter(c=>c.holder!==id); S.holder='all'; save(); render(); toast('🗑️','Törölve.');});};
   });
 }
@@ -2207,7 +2281,7 @@ let dl=null;
 (async()=>{ try{ if(window.claude&&claude.use) dl=await claude.use('downloads'); }catch(e){} })();
 function pdfLines(c){
   const t=T(c.type), d=c.details||{}, f=FREQ[c.freq]||FREQ.eves, h=holderOf(curHH(),c.holder)||{}, L=[];
-  if(t.kind==='life'&&(d.risks||[]).length) L.push(d.risks.map(r=>`${r.n}: ${fmtC(r.a,c.cur)}`).join(' | '));
+  if(t.kind==='life'&&(d.risks||[]).length) L.push(d.risks.map(r=>r.a?`${r.n}: ${fmtC(r.a,c.cur)}`:`${r.n.replace(/\s*\(szolgáltatás\)$/,'')} (szolgáltatás)`).join(' | '));
   if(t.kind==='property'){ const b=[]; if(d.area) b.push(d.area+' m²'); if(d.sum) b.push('biztosítási összeg '+fmtC(d.sum,c.cur)); if(d.mortgage) b.push('jelzálog'+(d.bank?': '+d.bank:'')); if(b.length) L.push(b.join(', ')); }
   if(t.kind==='pension'){ let g='Cél: nyugdíj'; if(h.birthDate){ const r=D_(h.birthDate); r.setFullYear(r.getFullYear()+65); g+=`, 65 éves korra (${r.getFullYear()})`; } L.push(g); }
   if(t.kind==='child'){ L.push(`Cél: ${d.childName?d.childName+' jövője':'a gyermek jövője'}, ${d.targetAge||18} éves korára`); }
@@ -2221,12 +2295,12 @@ function reportHTML(list){
     const cs=list.filter(c=>c.holder===h.id), sub=sumByCur(cs);
     return `<h2>${esc(h.name)}</h2><table><thead><tr><th>Szerződés</th><th>Biztosító, kötvényszám</th><th>Évforduló</th><th>Díjfizetés</th><th>Éves díj</th></tr></thead><tbody>
       ${cs.map(c=>{const t=T(c.type),f=FREQ[c.freq]||FREQ.eves; const dd=c.details||{}; const extra=t.kind==='vehicle'?plateRep(c.plate):t.kind==='property'?esc(c.address):(t.kind==='child'&&dd.childName)?`${dd.childBorn===0?'👶':'🎈'} ${esc(dd.childName)}`:(t.kind==='savings'&&dd.goal)?`🎯 ${esc(dd.goal)}`:esc(t.n);
-        return `<tr><td><div class="ti">${picto(t,26)}<div><b>${esc(cTitle(c))}</b><div style="margin-top:2px;font-size:9.5px;color:#949C9F">${extra}</div>${pdfLines(c).map(l=>`<div class="rinfo">${esc(l)}</div>`).join('')}</div></div></td>
-        <td>${hasLogo(c.insurer)?`<img class="rlogo" src="${insOf(c.insurer).logo}" alt="">`:esc(c.insurer)}<br><span style="color:#949C9F">${esc(c.policy||'–')}</span></td><td>${isLife(c)?'<span style="color:#949C9F">–</span>':huShort(nextOcc(c.start).date)}</td><td>${f.n}<br><b>${fmtC(c.fee/f.p,c.cur)}</b></td><td>${fmtC(c.fee,c.cur)}</td></tr>`;}).join('')}
+        return `<tr class="pb-avoid"><td><div class="ti">${picto(t,26)}<div><b>${esc(cTitle(c))}</b><div style="margin-top:2px;font-size:9.5px;color:#949C9F">${extra}</div>${pdfLines(c).map(l=>`<div class="rinfo">${esc(l)}</div>`).join('')}</div></div></td>
+        <td>${hasLogo(c.insurer)?`<img class="rlogo" src="${insOf(c.insurer).logo}" alt="">`:esc(c.insurer)}<br><span style="color:#949C9F">${esc(c.policy||'–')}</span></td><td>${isLife(c)?'<span style="color:#949C9F">–</span>':huShort(nextAnn(c).date)}</td><td>${f.n}<br><b>${fmtC(c.fee/f.p,c.cur)}</b></td><td>${fmtC(c.fee,c.cur)}</td></tr>`;}).join('')}
       <tr class="tot"><td colspan="4">Összesen</td><td>${fmtSums(sub)}</td></tr></tbody></table>`;}).join('');
   return `<div class="rep"><div class="rep-head"><div><h1>Biztosítási áttekintés</h1><p>${esc(hh.name)} részére, készült: ${huDate(today())}</p></div>${LOGO}</div>
     ${tables}<div class="rep-total">${list.length} szerződés, éves díj összesen ${fmtSums(total)}</div>
-    <div class="rep-sig"><div class="ph">${a.photo?`<img src="${a.photo}" alt="">`:''}</div>
+    <div class="rep-sig pb-avoid"><div class="ph">${a.photo?`<img src="${a.photo}" alt="">`:''}</div>
       <div class="sg"><div class="nm">${esc(a.name)}</div><div class="tt">${esc(a.title)}</div>${a.tagline?`<div class="sl">„${esc(a.tagline)}”</div>`:''}
         <div class="ct"><span>${svg('phone')}${esc(fmtPhone(a.phone))}</span><span>${svg('mail')}${esc(a.email)}</span><span>${svg('globe')}${esc(a.web)}</span>${a.office?`<span>${svg('pin')}${esc(a.office)}</span>`:''}</div></div>
       <div class="qr"><img src="${QR_IMG}" alt="QR"><span>Szkenneld be</span></div></div></div>`;
@@ -2237,16 +2311,25 @@ async function renderPDF(html, fname){
   const host=document.getElementById('report-host'); host.innerHTML=html;
   try{
     await document.fonts.ready;
-    const root=host.firstElementChild, scale=2;
-    // oldaltörés: a .pb-avoid blokkok ne vágódjanak ketté
-    const pageHpx=Math.floor(root.offsetWidth*297/210);
-    let shift=0; root.querySelectorAll('.pb-avoid').forEach(el=>{ const top=el.offsetTop+shift, bot=top+el.offsetHeight, pStart=Math.floor(top/pageHpx), pEnd=Math.floor((bot-1)/pageHpx);
-      if(pStart!==pEnd && el.offsetHeight<pageHpx){ const pad=(pStart+1)*pageHpx-top+44; el.style.marginTop=(parseFloat(getComputedStyle(el).marginTop)||0)+pad+'px'; shift+=pad; } });
-    const canvas=await html2canvas(root,{scale,backgroundColor:'#ffffff'});
-    const pdf=new jspdf.jsPDF({unit:'mm',format:'a4'}); const W=210,H=297,pageH=Math.floor(canvas.width*H/W); let y=0;
-    while(y<canvas.height){ const sl=document.createElement('canvas'); sl.width=canvas.width; sl.height=Math.min(pageH,canvas.height-y);
+    const root=host.firstElementChild; root.style.position='relative';
+    const W=210, MT=13, MB=13, CH=297-MT-MB, pageHpx=Math.floor(root.offsetWidth*CH/W);
+    root.querySelectorAll('.pb-avoid').forEach(el=>{
+      const rt=root.getBoundingClientRect().top, r=el.getBoundingClientRect(), top=r.top-rt, bot=top+r.height;
+      const pS=Math.floor(top/pageHpx), pE=Math.floor((bot-1)/pageHpx);
+      if(pS!==pE && r.height<pageHpx*.9){ const pad=(pS+1)*pageHpx-top+8;
+        if(el.tagName==='TR'){ const sp=document.createElement('tr'); sp.className='pb-sp'; sp.innerHTML=`<td colspan="9" style="height:${pad}px;padding:0;border:0;background:#fff"></td>`; el.parentNode.insertBefore(sp,el); }
+        else el.style.marginTop=((parseFloat(getComputedStyle(el).marginTop)||0)+pad)+'px'; }
+    });
+    const canvas=await html2canvas(root,{scale:2,backgroundColor:'#ffffff'});
+    const pdf=new jspdf.jsPDF({unit:'mm',format:'a4'}); const pageH=Math.floor(canvas.width*CH/W), n=Math.max(1,Math.ceil((canvas.height-4)/pageH));
+    for(let i=0;i<n;i++){ const y=i*pageH, sl=document.createElement('canvas'); sl.width=canvas.width; sl.height=Math.min(pageH,canvas.height-y);
       const ctx=sl.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,sl.width,sl.height); ctx.drawImage(canvas,0,y,canvas.width,sl.height,0,0,canvas.width,sl.height);
-      if(y>0) pdf.addPage(); pdf.addImage(sl.toDataURL('image/jpeg',.93),'JPEG',0,0,W,sl.height*W/canvas.width); y+=pageH; }
+      if(i>0) pdf.addPage(); pdf.addImage(sl.toDataURL('image/jpeg',.93),'JPEG',0,MT,W,sl.height*W/canvas.width);
+      pdf.setFontSize(7.5); pdf.setTextColor(150,156,159);
+      pdf.text(`${i+1} / ${n}`, W/2, 297-6, {align:'center'});
+      if(i===0&&n>1) pdf.text(`A dokumentum ${n} oldalból áll`, W-13, 8, {align:'right'});
+      if(i>0) pdf.text('pancelbence.hu', 13, 8);
+    }
     const name=fname.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9._-]+/g,'-');
     if(dl) await dl.save({filename:name,data:pdf.output('blob')}); else pdf.save(name);
     toast('✅','PDF letöltve.');
@@ -2254,7 +2337,7 @@ async function renderPDF(html, fname){
   finally{ host.innerHTML=''; }
 }
 function pdfChart(pts){
-  const W=690,H=165,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
+  const W=860,H=170,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
   const X=i=>P+(W-2*P)*i/n, Y=v=>H-24-(H-36)*v/maxV;
   const line=k=>pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p[k]).toFixed(1)}`).join('');
   const area=k=>`${line(k)}L${X(n).toFixed(1)},${Y(0)}L${X(0)},${Y(0)}Z`;
@@ -2345,21 +2428,7 @@ async function makePDF(){
   const hh=curHH(), scope=S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder);
   const sel=scope.filter(c=>selected.has(c.id)), list=sel.length?sel:scope;
   if(!list.length){ toast('🤔','Nincs mit letölteni.'); return; }
-  if(!window.html2canvas||!window.jspdf){ toast('⏳','A PDF-készítő még töltődik, próbáld újra.'); return; }
-  toast('🖨️','Készül a PDF…');
-  const host=document.getElementById('report-host'); host.innerHTML=reportHTML(list);
-  try{
-    await document.fonts.ready;
-    const canvas=await html2canvas(host.firstElementChild,{scale:2,backgroundColor:'#ffffff'});
-    const pdf=new jspdf.jsPDF({unit:'mm',format:'a4'}); const W=210,H=297,pageH=Math.floor(canvas.width*H/W); let y=0;
-    while(y<canvas.height){ const sl=document.createElement('canvas'); sl.width=canvas.width; sl.height=Math.min(pageH,canvas.height-y);
-      sl.getContext('2d').drawImage(canvas,0,y,canvas.width,sl.height,0,0,canvas.width,sl.height);
-      if(y>0) pdf.addPage(); pdf.addImage(sl.toDataURL('image/jpeg',.92),'JPEG',0,0,W,sl.height*W/canvas.width); y+=pageH; }
-    const name=`Biztositasi-attekintes_${hh.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9]+/g,'-')}_${iso(today())}.pdf`;
-    if(dl) await dl.save({filename:name,data:pdf.output('blob')}); else pdf.save(name);
-    toast('✅','PDF letöltve.');
-  }catch(e){ toast(e&&e.code==='declined'?'👌':'⚠️', e&&e.code==='declined'?'Rendben, most nem töltjük le.':'A PDF most nem készült el. Próbáld újra.'); }
-  finally{ host.innerHTML=''; }
+  renderPDF(reportHTML(list), `Biztositasi-attekintes_${hh.name}_${iso(today())}.pdf`);
 }
 
 // ---------- események ----------
@@ -2378,7 +2447,7 @@ document.addEventListener('click',e=>{
   if(ds.kid!=null&&ds.kid!==''){ CALC.kidSel=+ds.kid; CALC.years=null; render(); return; }
   if(t.hasAttribute('data-kidadd')){ const ks=calcKids(); ks.push({name:'',gender:'',born:true,date:'',goal:'eletkezdes',age:18}); CALC.kidSel=ks.length-1; CALC.years=null; save(); render(); setTimeout(()=>{const n=document.getElementById('k-name'); if(n) n.focus();},50); return; }
   if(t.hasAttribute('data-kiddel')){ const ks=calcKids(); ks.splice(CALC.kidSel||0,1); CALC.kidSel=0; CALC.years=null; save(); render(); return; }
-  if(ds.kidg){ const k=calcKids()[CALC.kidSel||0]; k.gender=ds.kidg==='x'?'':ds.kidg; save(); render(); return; }
+  if(ds.kidg){ const k=calcKids()[CALC.kidSel||0]; k.gender=ds.kidg==='x'?'':ds.kidg; k.gManual=true; save(); render(); return; }
   if(t.hasAttribute('data-kidborn')){ const k=calcKids()[CALC.kidSel||0]; k.born=!k.born; if(!k.born) toast('💕','Gratulálunk! Már most gondolsz a jövőjére.'); save(); render(); return; }
   if(ds.cgoal){ calcKids()[CALC.kidSel||0].goal=ds.cgoal; save(); render(); return; }
   if(ds.ctage){ const k=calcKids()[CALC.kidSel||0]; k.age=+ds.ctage; const y=kidYears(k); if(y) CALC.years=y; save(); render(); return; }
@@ -2430,12 +2499,17 @@ document.addEventListener('click',e=>{
   else if(a==='sel-clear'){ selected.clear(); render(); }
   else if(a==='toggle-all'){ const hh=curHH(), l=S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder), all=l.every(c=>expanded.has(c.id)); l.forEach(c=>all?expanded.delete(c.id):expanded.add(c.id)); render(); }
   else if(a==='calc-pdf') makeCalcPDF();
+  else if(a==='edit-nick'){ const hh=curHH(); modal('Hogyan szólítsunk?',`<div class="field"><label>Megszólítás</label><input id="nk" value="${esc(hh.nick||givenName(hh.holders[0].name))}" placeholder="pl. Bence"></div><div class="hint">Így köszönünk neked a portálon.</div>`,`<button class="btn" data-close>Mégse</button><button class="btn primary" id="nk-ok">${svg('check')}Mentés</button>`,m=>{const i=m.querySelector('#nk'); i.focus(); i.select(); m.querySelector('#nk-ok').onclick=()=>{ hh.nick=i.value.trim(); save(); closeModal(); render(); toast('👋',`Szia, ${hh.nick||givenName(hh.holders[0].name)}!`); };}); }
+  else if(a==='undo') undo();
+  else if(a==='redo') redo();
+  else if(a==='savenow'){ save(); toast('💾',`Minden elmentve, ${timeHM(Date.now())}`); }
   else if(a==='calc-talk'){ const M=CALC_MODES[CALC.mode], sc=calcCfg().scen[CALC.scen]; S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value=`Szia Bence! Kipróbáltam a kalkulátort (${M.n}): havi ${fmtC(CALC.monthly,CALC.cur)}, ${CALC.years} év, ${sc.n.toLowerCase()} szcenárió. Átbeszélnénk?`; ta.focus(); } }
   else if(a==='export') exportData();
   else if(a==='import') importData();
   else if(a==='reset') confirmBox('Minden módosításod elvész, és visszaállnak a mintaadatok.','Visszaállítás',()=>{S=seed(); migrate(); selected.clear(); expanded.clear(); save(); render(); toast('🔄','Mintaadatok visszaállítva.');});
 });
 document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='z'&&!/INPUT|TEXTAREA|SELECT/.test((e.target.tagName||''))){ e.preventDefault(); e.shiftKey?redo():undo(); return; }
   if(e.key==='Escape') closeModal();
   if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='msg'){ e.preventDefault(); sendMsg(e.target.value); }
   if((e.key==='Enter'||e.key===' ')&&e.target.classList&&(e.target.classList.contains('prof')||e.target.classList.contains('lrow'))){ e.preventDefault(); e.target.click(); }
