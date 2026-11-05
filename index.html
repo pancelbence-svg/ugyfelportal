@@ -825,6 +825,58 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .cres-rows .advrow{border-style:dashed}
 .csub{display:block;font-size:10px;color:var(--ink-3);margin-top:1px}
 .cres-rows .advrow span i{font-style:normal;color:var(--pink);font-weight:600;margin-left:4px}
+
+/* ===== v11: személyre szabott kalkulátor ===== */
+.kidtabs{display:flex;gap:6px;flex-wrap:wrap}
+.kidtabs button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:3px 12px 3px 3px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.kidtabs button.on{border-color:#EB7A52;background:#FFF1E6;color:#C2552E}
+.kidtabs .kidadd{padding:5px 12px;border-style:dashed;color:var(--ink-3)}
+.kidtabs .av{width:26px;height:26px}
+.kidav{display:inline-grid;place-items:center;border-radius:50%;overflow:hidden;flex:none;background:var(--surface-2)}
+.kidav svg{width:100%;height:100%}
+.kided{margin-top:10px;border:1px solid var(--line-2);border-radius:12px;padding:12px;background:var(--surface-3)}
+.kided .field{margin-bottom:8px}
+.kided .field input{background:var(--surface)}
+.segline.mini button{padding:4px 9px;font-size:11.5px}
+.segline .ghostx{border:0;background:transparent;color:var(--ink-3);padding:4px}
+.segline .ghostx svg{width:13px;height:13px}
+.goalchips{display:flex;gap:6px;flex-wrap:wrap}
+.goalchips button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 11px;font-size:12px;font-weight:600;color:var(--ink-2)}
+.goalchips button i{font-style:normal}
+.goalchips button.on{border-color:var(--teal);background:var(--teal-soft);color:var(--teal-ink)}
+.cstory{margin-top:14px;background:linear-gradient(135deg,#FFF8F1,var(--surface) 55%)}
+:root[data-theme="dark"] .cstory{background:var(--surface)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cstory{background:var(--surface)} :root:not([data-theme="light"]) .kidtabs button.on{background:#3A2A20;color:#F0A27E} }
+.st-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.st-head span{font-size:15px;font-weight:700}
+.st-head em{font-style:normal;font-size:11.5px;color:var(--ink-3)}
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.story{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line-2);border-radius:14px;padding:12px 14px}
+.st-h{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.st-v{font-size:22px;font-weight:700;letter-spacing:-.3px;margin:1px 0 3px}
+.st-s{font-size:11.5px;color:var(--ink-2);line-height:1.45}
+.gchip{display:inline-block;font-size:10.5px;font-weight:600;padding:1px 8px;border-radius:20px;background:var(--teal-soft);color:var(--teal-ink);margin-right:3px}
+.st-total{margin-top:10px;text-align:right;font-size:12.5px;color:var(--ink-2)}
+.st-total b{font-size:15px;color:var(--ink)}
+.st-who{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.st-who b{display:block;font-size:13.5px}
+.st-who span{display:block;font-size:12px;color:var(--ink-2)}
+.payopts{display:grid;grid-template-columns:1fr 1.3fr;gap:10px}
+.po{background:var(--surface);border:1px solid var(--line-2);border-radius:14px;padding:14px}
+.po.hi{border-color:#A9DDE0;box-shadow:0 0 0 3px var(--teal-soft)}
+.po i{font-style:normal;font-size:20px}
+.po span{display:block;font-size:12px;color:var(--ink-3);margin-top:4px}
+.po b{display:block;font-size:22px;font-weight:700;letter-spacing:-.3px;margin:2px 0 4px}
+.po b em{font-style:normal;font-size:13px;color:var(--ink-3);font-weight:600}
+.po small{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.5}
+.biz{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.biz > div{background:var(--surface);border:1px solid var(--line-2);border-radius:14px;padding:12px 14px}
+.biz span{display:block;font-size:11.5px;color:var(--ink-3)}
+.biz b{display:block;font-size:19px;font-weight:700;margin:2px 0}
+.biz b.pos{color:var(--ok)}
+.biz small{display:block;font-size:11px;color:var(--ink-2)}
+.bizl{margin:12px 0 0;padding-left:18px;font-size:12px;color:var(--ink-2);line-height:1.6}
+@media (max-width: 760px){ .payopts{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -1595,7 +1647,7 @@ function pageInsurers(){
     <p class="hint" style="margin-top:14px">A logókat a biztosítók hivatalos arculati anyagaiból érdemes feltölteni. Négyzetes vagy fekvő kép is jó, a rendszer kicsinyíti.</p>`;
 }
 
-const CALC={mode:'pension',monthly:null,years:null,scen:0,cur:'HUF',holder:null};
+const CALC={mode:'pension',monthly:null,years:null,scen:0,cur:'HUF',holderId:null,kidSel:0,payYears:20};
 const CALC_MODES={
   child:{n:'Gyermek jövője',e:'🎈',min:12000,max:150000,step:1000,def:20000,ymin:5,ymax:25},
   pension:{n:'Nyugdíj',e:'🌱',min:12000,max:250000,step:1000,def:30000,ymin:5,ymax:45},
@@ -1608,11 +1660,91 @@ function calcLim(){
   return {min:T[0],max:T[1],step:T[2],def:T[3],sym:eur?'€':'Ft'};
 }
 function calcCfg(){ return S.calcCfg ||= {scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:20,taxMax:130000}; }
+/* ---- személyre szabás: gyerekek, nyugdíjas, cég ---- */
+const KID_GOALS=[['lakas','🏠','Lakás, önerő'],['tanitas','🎓','Taníttatás'],['eletkezdes','🚀','Életkezdési támogatás'],['ingatlan','🏡','Ingatlan önereje']];
+const KID_GOAL_TXT={lakas:'Ez szép alap az első otthonához.',tanitas:'Ez komoly segítség a továbbtanuláshoz.',eletkezdes:'Ezzel magabiztosan indulhat neki a felnőtt életnek.',ingatlan:'Ez jó alapja egy saját ingatlan önerejének.'};
+function calcKids(){
+  const hh=curHH(); S.calcKids ||= {};
+  if(!S.calcKids[hh.id]){
+    const ks=hhContracts(hh).filter(c=>T(c.type).kind==='child').map(c=>{const d=c.details||{}; return {name:d.childName||'',gender:genderOf(d.childName||'')||'',born:d.childBorn!==0,date:d.childBorn===0?(d.dueDate||''):(d.childBirth||''),goal:'eletkezdes',age:d.targetAge||18};});
+    S.calcKids[hh.id]=ks.length?ks:[{name:'',gender:'',born:true,date:'',goal:'eletkezdes',age:18}];
+  }
+  return S.calcKids[hh.id];
+}
+function kidTarget(k){ if(!k.date) return null; const t=D_(k.date); t.setFullYear(t.getFullYear()+(k.age||18)); return t; }
+function kidYears(k){ const t=kidTarget(k); if(!t) return null; return Math.max(1,Math.min(45,Math.round((t-today())/(365.25*864e5)))); }
+function kidLabel(k){ return k.name || (k.born?'A gyermek':'A kisbaba'); }
+function kidFace(k,size){
+  if(!k.born) return `<span class="kidav" style="width:${size}px;height:${size}px;font-size:${Math.round(size*.55)}px;background:#FFF1E6">👶</span>`;
+  const g=k.gender||genderOf(k.name)||''; const fake={name:(k.name||'x')+(g==='f'?' Anna':g==='m'?' Péter':''),kind:'person'};
+  return `<span class="kidav" style="width:${size}px;height:${size}px">${cuteFace(fake)}</span>`;
+}
+function calcPersons(){ return curHH().holders.filter(h=>h.kind==='person'); }
+function calcHolder(){ const ps=calcPersons(); return ps.find(h=>h.id===CALC.holderId) || ps.find(h=>h.birthDate) || ps[0] || null; }
+function calcCompany(){ return curHH().holders.find(h=>h.kind==='company') || null; }
 function calcDefaultYears(mode){
-  const hh=curHH(), cs=hhContracts(hh);
-  if(mode==='pension'){ const p=hh.holders.find(h=>h.kind==='person'&&h.birthDate); const a=p?ageAt(p.birthDate):null; return a!=null?Math.min(45,Math.max(5,65-a)):25; }
-  if(mode==='child'){ const k=cs.find(c=>T(c.type).kind==='child'&&(c.details||{}).childBirth); if(k){ const a=ageAt(k.details.childBirth)||0; return Math.max(3,(k.details.targetAge||18)-a); } return 18; }
+  if(mode==='pension'){ const p=calcHolder(); if(p&&p.birthDate){ const r65=D_(p.birthDate); r65.setFullYear(r65.getFullYear()+65); const l=ymLeft(today(),r65); return Math.min(45,Math.max(5,l.y+(l.m>0?1:0))); } return 25; }
+  if(mode==='child'){ const ks=calcKids(), k=ks[CALC.kidSel||0]||ks[0]; return (k&&kidYears(k))||18; }
   return 10;
+}
+function calcPersonHTML(){
+  if(CALC.mode==='child'){
+    const ks=calcKids(), i=Math.min(CALC.kidSel||0,ks.length-1), k=ks[i];
+    return `<div class="cfield kidbox"><div class="cl"><span>Kinek takarékoskodunk?</span></div>
+      <div class="kidtabs">${ks.map((x,j)=>`<button type="button" class="${j===i?'on':''}" data-kid="${j}">${kidFace(x,26)}<span>${esc(kidLabel(x))}</span></button>`).join('')}<button type="button" class="kidadd" data-kidadd>+ Gyermek</button></div>
+      <div class="kided">
+        <div class="row2"><div class="field"><label>Név</label><input id="k-name" value="${esc(k.name)}" placeholder="${k.born?'pl. Anna':'pl. Pocaklakó'}"></div>
+          <div class="field"><label>${k.born?'Születési idő':'Várható születés'}</label><input id="k-date" type="date" value="${esc(k.date)}"></div></div>
+        <div class="segline mini">${[['f','👧 Kislány'],['m','👦 Kisfiú'],['','Még nem tudjuk']].map(([g,n])=>`<button type="button" class="${(k.gender||'')===g?'on':''}" data-kidg="${g||'x'}">${n}</button>`).join('')}
+          <button type="button" class="${k.born?'':'on'}" data-kidborn>👶 Még úton van</button>${ks.length>1?`<button type="button" class="ghostx" data-kiddel title="Eltávolítás">${svg('x')}</button>`:''}</div>
+        <div class="cl" style="margin-top:12px"><span>Mire gyűjtünk?</span></div>
+        <div class="goalchips">${KID_GOALS.map(([g,e,n])=>`<button type="button" class="${k.goal===g?'on':''}" data-cgoal="${g}"><i>${e}</i>${n}</button>`).join('')}</div>
+        <div class="cl" style="margin-top:12px"><span>Hány éves korára?</span><div class="segline mini">${[18,20,22,25].map(a=>`<button type="button" class="${(k.age||18)===a?'on':''}" data-ctage="${a}">${a} év</button>`).join('')}</div></div>
+      </div></div>`;
+  }
+  if(CALC.mode==='pension'){
+    const ps=calcPersons(), h=calcHolder(); if(!ps.length) return '';
+    return `<div class="cfield"><div class="cl"><span>Kinek a nyugdíja?</span></div><div class="kidtabs">${ps.map(x=>`<button type="button" class="${h&&h.id===x.id?'on':''}" data-chold="${x.id}">${miniAv(x,26)}<span>${esc(x.name.replace(/^dr\.?\s*/i,'').split(' ').slice(-1)[0])}</span></button>`).join('')}</div>
+      ${h&&h.birthDate?`<p class="hint" style="margin:6px 0 0">${ageAt(h.birthDate)} éves, a születési dátuma alapján számolunk.</p>`:`<p class="hint" style="margin:6px 0 0">Ha a profilkártyán megadod a születési dátumot, magától kiszámoljuk a nyugdíjig hátralévő időt.</p>`}</div>`;
+  }
+  const c=calcCompany();
+  return c?`<div class="cfield"><div class="cl"><span>Vállalkozás</span></div><div class="kidtabs"><button type="button" class="on">${miniAv(c,26)}<span>${esc(c.name)}</span></button></div></div>`:'';
+}
+function annuity(V,years,ratePct){ const rm=Math.pow(1+ratePct/100,1/12)-1, n=years*12; return rm>0 ? V*rm/(1-Math.pow(1+rm,-n)) : V/n; }
+function calcStoryHTML(){
+  const cfg=calcCfg(), sc=cfg.scen[CALC.scen]||cfg.scen[0], cur=CALC.cur, F=x=>fmtC(x,cur), monthly=CALC.monthly;
+  if(CALC.mode==='child'){
+    const ks=calcKids();
+    const rows=ks.map((k,j)=>{ const y=(j===(CALC.kidSel||0))?CALC.years:(kidYears(k)||CALC.years); const r=ulSim(prodFor(y,cur),monthly*12,12,y,sc.r/100,false); const t=kidTarget(k); const gl=KID_GOALS.find(g=>g[0]===k.goal)||KID_GOALS[2];
+      return {k,y,v:r.v,html:`<div class="story">${kidFace(k,48)}<div class="st-txt"><div class="st-h">${esc(kidLabel(k))} ${k.age||18} éves korára${t?` <span class="muted">(${t.getFullYear()}. ${HU_M[t.getMonth()]})</span>`:''}</div>
+        <div class="st-v">${F(r.v)}</div><div class="st-s"><span class="gchip">${gl[1]} ${gl[2]}</span> ${KID_GOAL_TXT[k.goal]||''}</div></div></div>`}; });
+    const total=rows.reduce((a,b)=>a+b.v,0);
+    return `<div class="st-head"><span>🎈 Ennyivel tudod támogatni őket</span><em>havi ${F(monthly)} kezdő díjjal${ks.length>1?' gyermekenként':''}, ${esc(sc.n.toLowerCase())} szcenárióval</em></div>
+      <div class="stories">${rows.map(r=>r.html).join('')}</div>
+      ${ks.length>1?`<div class="st-total">Összesen <b>${F(total)}</b> jut a gyerekeknek.</div>`:''}`;
+  }
+  if(CALC.mode==='pension'){
+    const h=calcHolder(), prod=prodFor(CALC.years,cur), r=ulSim(prod,monthly*12,12,CALC.years,sc.r/100,true);
+    const py=CALC.payYears||20, ar=cfg.annRate??3, pm=annuity(r.v,py,ar);
+    let who='';
+    if(h&&h.birthDate){ const r65=D_(h.birthDate); r65.setFullYear(r65.getFullYear()+65); const left=ymLeft(today(),r65); const ageEnd=ageAt(h.birthDate)+CALC.years;
+      who=`<div class="st-who">${miniAv(h,40)}<div><b>${esc(h.name.replace(/^dr\.?\s*/i,'').split(' ').slice(-1)[0])}, a 65. születésnapod: ${huDate(r65)}</b><span>Addig még ${left.y} év ${left.m} hónap van hátra. A számítás ${CALC.years} évre szól, ${ageEnd} éves korodig.</span></div></div>`; }
+    const endAge = h&&h.birthDate ? ageAt(h.birthDate)+CALC.years+py : null;
+    return `<div class="st-head"><span>🌿 Mit jelent ez nyugdíjasként?</span><em>${esc(sc.n.toLowerCase())} szcenárió alapján</em></div>${who}
+      <div class="payopts">
+        <div class="po"><i>💼</i><span>Egy összegben</span><b>${F(r.v)}</b><small>Egyszerre kiveszed a teljes összeget.</small></div>
+        <div class="po hi"><i>🌿</i><span>Havi járadékként</span><b>${F(pm)}<em> / hó</em></b><small>${py} éven át${endAge?`, ${endAge} éves korodig`:''}. A bent maradó pénz évi ${fmtNum(ar,1)}% hozammal tovább dolgozik, és a ${py}. évfordulón fogy el.</small>
+          <div class="segline mini" style="margin-top:8px">${[10,15,20,25].map(y=>`<button type="button" class="${py===y?'on':''}" data-cpay="${y}">${y} év</button>`).join('')}</div></div>
+      </div>`;
+  }
+  const c=calcCompany(), prod=prodFor(CALC.years,cur), r=ulSim(prod,monthly*12,12,CALC.years,sc.r/100,false), gain=r.v-r.paid, mult=r.paid?r.v/r.paid:0;
+  return `<div class="st-head"><span>📈 Üzleti szemmel${c?`: ${esc(c.name)}`:''}</span><em>${esc(sc.n.toLowerCase())} szcenárió alapján</em></div>
+    <div class="biz">
+      <div><span>Éves tőkeképzés (1. év)</span><b>${F(monthly*12)}</b><small>tervezhető, havi ${F(monthly)} cash-flow terhelés</small></div>
+      <div><span>Céltartalék ${CALC.years} év múlva</span><b>${F(r.v)}</b><small>a cég saját, felhasználható vagyona</small></div>
+      ${gain>0?`<div><span>Tőkenövekmény (nyereség)</span><b class="pos">+${F(gain)}</b><small>minden befizetett 1 ${cur==='EUR'?'€':'Ft'}-ból ${fmtNum(mult,2)} ${cur==='EUR'?'€':'Ft'} lesz</small></div>`:''}
+    </div>
+    <ul class="bizl"><li>A szabad pénzeszköz nem a bankszámlán áll, hanem dolgozik, miközben a cég likviditása tervezhető marad.</li><li>Céltartalék későbbi beruházásra, fejlesztésre, ingatlanra vagy kulcsember-megtartásra.</li><li>A díj számviteli és adózási kezelését (költségként vagy juttatásként) a könyvelővel érdemes egyeztetni.</li></ul>`;
 }
 /* Unit-linked modell – a Megtakarítás-számoló.xlsm (unit_account munkalap) képleteinek pontos átirata.
    Ellenőrizve: Bónusz Életprogram, 55 000 Ft/hó, 6%, 20 év → 31 311 998 Ft (Excel: 31 311 998,52 Ft). */
@@ -1684,11 +1816,13 @@ function pageCalc(){
   const M=CALC_MODES[CALC.mode], cfg=calcCfg(), Lm=calcLim();
   if(CALC.monthly==null) CALC.monthly=Lm.def; if(CALC.years==null) CALC.years=calcDefaultYears(CALC.mode);
   const isA=S.role==='advisor';
-  const yHint = CALC.mode==='pension' ? '65 éves korig számolva' : CALC.mode==='child' ? 'a gyermek 18. születésnapjáig' : 'a cég céljához igazítva';
+  const _k=CALC.mode==='child'?calcKids()[CALC.kidSel||0]:null;
+  const yHint = CALC.mode==='pension' ? '65 éves korig számolva' : CALC.mode==='child' ? `${_k&&_k.name?esc(_k.name)+' ':''}${(_k&&_k.age)||18}. születésnapjáig` : 'a cég céljához igazítva';
   return `<div class="page-head"><div><h1>Megtakarítási kalkulátor</h1><p class="sub">Játssz a számokkal, és nézd meg, mire számíthatsz.</p></div></div>
     <div class="ctabs">${Object.entries(CALC_MODES).map(([k,m])=>`<button class="${CALC.mode===k?'on':''}" data-cmode="${k}"><i>${m.e}</i>${m.n}</button>`).join('')}</div>
     <div class="cgrid">
       <div class="ccard">
+        ${calcPersonHTML()}
         <div class="cfield"><div class="cl"><span>Pénznem</span><div class="segline">${['HUF','EUR'].map(c=>`<button type="button" class="${CALC.cur===c?'on':''}" data-ccur="${c}">${c==='HUF'?'Forint':'Euró'}</button>`).join('')}</div></div></div>
         <div class="cfield"><div class="cl"><span>Kezdő havi díj</span><div class="cinp"><input inputmode="numeric" id="c-monthly" value="${grp(CALC.monthly)}"><em>${Lm.sym}</em></div></div>
           <input type="range" id="c-monthly-r" min="${Lm.min}" max="${Lm.max}" step="${Lm.step}" value="${Math.min(Lm.max,CALC.monthly)}"><div class="crange"><span>${fmtC(Lm.min,CALC.cur)}</span><span class="muted">minimum ${fmtC(Lm.min,CALC.cur)}</span><span>${fmtC(Lm.max,CALC.cur)}</span></div></div>
@@ -1699,17 +1833,21 @@ function pageCalc(){
         ${isA?`<details class="cadv"><summary>Paraméterek (csak te látod)</summary>
           <p class="hint" style="margin:0 0 8px">Termék: 10 évig Életprogram, 10 év fölött Bónusz Életprogram (automatikus).</p>
           ${cfg.scen.map((s,i)=>`<div class="row2"><div class="field"><label>Szcenárió neve</label><input data-cfg="n:${i}" value="${esc(s.n)}"></div><div class="field"><label>Éves hozam (%)</label><input data-cfg="r:${i}" inputmode="decimal" value="${s.r}"></div></div>`).join('')}
+          <div class="field"><label>Járadékszámítás hozama (% / év)</label><input data-cfg="annRate" inputmode="decimal" value="${cfg.annRate??3}"></div>
           <div class="row2"><div class="field"><label>Adó-visszatérítés (%)</label><input data-cfg="taxPct" inputmode="decimal" value="${cfg.taxPct}"></div><div class="field"><label>Évente legfeljebb (Ft)</label><input data-cfg="taxMax" inputmode="numeric" value="${grp(cfg.taxMax)}"></div></div></details>`:''}
       </div>
       <div class="ccard cres" id="c-res">${calcResultHTML()}</div>
     </div>
+    <div class="ccard cstory" id="c-story">${calcStoryHTML()}</div>
     <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak, és kiegészítő kockázati fedezetek nélkül készült (ezek csökkentik a megtakarítás értékét). A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
 }
-function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); }
+function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); const st=document.getElementById('c-story'); if(st) st.innerHTML=calcStoryHTML(); }
 document.addEventListener('focusout',e=>{ if(e.target.id==='c-monthly'){ const L=calcLim(); if(CALC.monthly<L.min){ CALC.monthly=L.min; e.target.value=grp(L.min); const r=document.getElementById('c-monthly-r'); if(r) r.value=L.min; calcUpdate(); toast('ℹ️',`A minimális havi díj ${fmtC(L.min,CALC.cur)}.`); } } });
 document.addEventListener('change',e=>{ const t=e.target; if(t.dataset&&t.dataset.cfgsel){ calcCfg()[t.dataset.cfgsel]=t.value; save(); calcUpdate(); } });
 document.addEventListener('input',e=>{
-  const t=e.target; if(!t.id&&!t.dataset.cfg) return; const M=CALC_MODES[CALC.mode];
+  const t=e.target;
+  if(t.id==='k-name'||t.id==='k-date'){ const k=calcKids()[CALC.kidSel||0]; if(t.id==='k-name'){ k.name=t.value; if(!k.gender){} } else { k.date=t.value; const y=kidYears(k); if(y){ CALC.years=y; const a=document.getElementById('c-years'), b=document.getElementById('c-years-r'); if(a) a.value=y; if(b) b.value=y; } } save(); calcUpdate(); const tab=document.querySelector(`[data-kid="${CALC.kidSel||0}"] > span:last-child`); if(tab) tab.textContent=kidLabel(k); return; }
+  if(!t.id&&!t.dataset.cfg) return; const M=CALC_MODES[CALC.mode];
   if(t.id==='c-monthly-r'){ CALC.monthly=+t.value; const i=document.getElementById('c-monthly'); if(i) i.value=grp(CALC.monthly); calcUpdate(); }
   else if(t.id==='c-monthly'){ CALC.monthly=num(t.value)||0; const r=document.getElementById('c-monthly-r'); if(r) r.value=Math.min(calcLim().max,CALC.monthly); calcUpdate(); }
   else if(t.id==='c-years-r'){ CALC.years=+t.value; const i=document.getElementById('c-years'); if(i) i.value=CALC.years; calcUpdate(); }
@@ -2056,7 +2194,7 @@ async function makePDF(){
 // ---------- események ----------
 const C_ = id => S.contracts.find(c=>c.id===id);
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-cmode],[data-ccur],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
+  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
   if(!t) return;
   if(t.hasAttribute('data-scrim')){ if(e.target===t) closeModal(); return; }
   if(t.hasAttribute('data-close')){ closeModal(); return; }
@@ -2066,6 +2204,15 @@ document.addEventListener('click',e=>{
   if(ds.role){ S.role=ds.role; if(S.role==='client'){S.hh='h1'; if(['clients','insurers'].includes(S.page))S.page='contracts';} else S.page='clients'; S.holder='all'; selected.clear(); save(); render(); return; }
   if(ds.view){ S.view=ds.view; save(); render(); return; }
   if(ds.cmode){ CALC.mode=ds.cmode; CALC.monthly=null; CALC.years=null; render(); return; }
+  if(ds.kid!=null&&ds.kid!==''){ CALC.kidSel=+ds.kid; CALC.years=null; render(); return; }
+  if(t.hasAttribute('data-kidadd')){ const ks=calcKids(); ks.push({name:'',gender:'',born:true,date:'',goal:'eletkezdes',age:18}); CALC.kidSel=ks.length-1; CALC.years=null; save(); render(); setTimeout(()=>{const n=document.getElementById('k-name'); if(n) n.focus();},50); return; }
+  if(t.hasAttribute('data-kiddel')){ const ks=calcKids(); ks.splice(CALC.kidSel||0,1); CALC.kidSel=0; CALC.years=null; save(); render(); return; }
+  if(ds.kidg){ const k=calcKids()[CALC.kidSel||0]; k.gender=ds.kidg==='x'?'':ds.kidg; save(); render(); return; }
+  if(t.hasAttribute('data-kidborn')){ const k=calcKids()[CALC.kidSel||0]; k.born=!k.born; if(!k.born) toast('💕','Gratulálunk! Már most gondolsz a jövőjére.'); save(); render(); return; }
+  if(ds.cgoal){ calcKids()[CALC.kidSel||0].goal=ds.cgoal; save(); render(); return; }
+  if(ds.ctage){ const k=calcKids()[CALC.kidSel||0]; k.age=+ds.ctage; const y=kidYears(k); if(y) CALC.years=y; save(); render(); return; }
+  if(ds.cpay){ CALC.payYears=+ds.cpay; calcUpdate(); return; }
+  if(ds.chold){ CALC.holderId=ds.chold; CALC.years=null; render(); return; }
   if(ds.ccur){ CALC.cur=ds.ccur; CALC.monthly=null; render(); return; }
   if(ds.cscen){ CALC.scen=+ds.cscen; document.querySelectorAll('[data-cscen]').forEach(b=>b.classList.toggle('on',b===t)); calcUpdate(); return; }
   if(ds.gap){ const [hid,k,calc]=ds.gap.split(':'), h=holderOf(curHH(),hid), d=[...COVER.person,...COVER.company].find(x=>x.k===k);
