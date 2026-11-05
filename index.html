@@ -823,6 +823,7 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .cmini{margin:0;font-size:11px;color:var(--ink-3);line-height:1.5}
 .cinfo{font-size:12px;line-height:1.5;color:var(--ink-2);background:var(--surface);border:1px solid var(--line-2);border-radius:11px;padding:9px 12px}
 .cres-rows .advrow{border-style:dashed}
+.csub{display:block;font-size:10px;color:var(--ink-3);margin-top:1px}
 .cres-rows .advrow span i{font-style:normal;color:var(--pink);font-weight:600;margin-left:4px}
 </style>
 </head>
@@ -1670,11 +1671,10 @@ function calcResultHTML(){
   return `<div class="cres-top"><span>Várható egységszámla-érték ${CALC.years} év múlva</span><b>${F(r.v)}</b><em>${esc(sc.n)} szcenárió, ${fmtNum(sc.r,1)}% éves nettó hozammal</em></div>
     <div class="cres-rows">
       <div><span>Befizetés összesen</span><b>${F(r.paid)}</b></div>
-      ${r.gain>0?`<div><span>Hozam</span><b class="pos">+${F(r.gain)}</b></div>`:''}
-      ${r.bonus>0?`<div><span>Hűségbónusz</span><b class="pos">+${F(r.bonus)}</b></div>`:''}
       ${r.credit>0?`<div><span>Adó-visszatérítés</span><b class="pos">+${F(r.credit)}</b></div>`:''}
-      ${isA?`<div class="advrow"><span>Költségek <i>csak te látod</i></span><b>${F(r.cost)}</b></div>`:''}
+      ${(r.v-r.paid-r.credit)>0?`<div><span>Hozam</span><b class="pos">+${F(r.v-r.paid-r.credit)}</b><small class="csub">${r.bonus>0?'hűségbónusszal együtt':'nettó hozam'}</small></div>`:''}
     </div>
+    ${isA?`<div class="cres-rows advset"><div class="advrow"><span>Hozam (bruttó) <i>csak te látod</i></span><b>${F(r.gain)}</b></div>${r.bonus>0?`<div class="advrow"><span>Hűségbónusz <i>csak te látod</i></span><b>${F(r.bonus)}</b></div>`:''}<div class="advrow"><span>Költségek <i>csak te látod</i></span><b>${F(r.cost)}</b></div></div>`:''}
     ${note}
     ${calcChart(r.pts)}
     <div class="clegend"><span><i class="lv"></i>Várható érték</span><span><i class="lp"></i>Befizetések</span></div>
