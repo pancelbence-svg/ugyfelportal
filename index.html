@@ -1059,6 +1059,7 @@ function migrate(){
   const g=S.types.find(t=>t.k==='gyermek'); if(g&&g.kind==='savings') g.kind='child';
   if(!S.types.some(t=>t.k==='megtakaritas')){ const at=S.types.findIndex(t=>t.k==='gyermek'); S.types.splice(at<0?S.types.length:at+1,0,{k:'megtakaritas',n:'Egyéb megtakarítás',i:'coins',c:'#B98A1E',kind:'savings'}); }
   S.contracts.forEach(c=>{ c.cur=c.cur||'HUF'; c.details=c.details||{}; });
+  if(!S.demo9){ S.demo9=1; S.calcCfg={scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:(S.calcCfg||{}).taxPct||20,taxMax:(S.calcCfg||{}).taxMax||130000}; }
   if(!S.demo8){ S.demo8=1; S.contracts.forEach(c=>{ if(c.own==null) c.own = c.insurer==='Allianz' ? 'me' : 'other'; }); }
   if(!S.demo7){ S.demo7=1; if(/^Abban segítek/.test(S.advisor.bio||'')) S.advisor.bio=NEW_BIO; if(!S.advisor.awards) S.advisor.awards=NEW_AWARDS; if(!S.advisor.highlights) S.advisor.highlights=['12+ év tapasztalat','MDRT','TOP 60 Magyarország'];
     if(!S.types.some(t=>t.k==='tokeepito')){ const at=S.types.findIndex(t=>t.k==='felelosseg'); S.types.splice(at<0?S.types.length:at+1,0,{k:'tokeepito',n:'Céges tőkeépítő program',i:'building',c:'#2E7D6B',kind:'savings'}); }
@@ -1594,7 +1595,7 @@ const CALC_MODES={
   pension:{n:'Nyugdíj',e:'🌱',min:10000,max:250000,step:1000,def:30000,ymin:5,ymax:45},
   corp:{n:'Céges tőkeépítés',e:'📈',min:20000,max:2000000,step:10000,def:150000,ymin:3,ymax:30}
 };
-function calcCfg(){ return S.calcCfg ||= {scen:[{n:'Óvatos',r:3},{n:'Kiegyensúlyozott',r:5},{n:'Dinamikus',r:7}],taxPct:20,taxMax:130000}; }
+function calcCfg(){ return S.calcCfg ||= {scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:20,taxMax:130000}; }
 function calcDefaultYears(mode){
   const hh=curHH(), cs=hhContracts(hh);
   if(mode==='pension'){ const p=hh.holders.find(h=>h.kind==='person'&&h.birthDate); const a=p?ageAt(p.birthDate):null; return a!=null?Math.min(45,Math.max(5,65-a)):25; }
