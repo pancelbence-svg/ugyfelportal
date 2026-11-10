@@ -1057,6 +1057,8 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
   .tabbar .badge{right:18%}
   .toasts{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 }
+.flash{animation:flash .7s ease}
+@keyframes flash{0%{background:var(--teal-soft);border-color:var(--teal)}}
 </style>
 </head>
 <body>
@@ -1436,7 +1438,7 @@ function cuteFace(holder){
   const bg=bgs[h%bgs.length], hair=hairs[(h>>3)%hairs.length];
   if (holder.kind==='company') return `<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="${bg}"/><rect x="18" y="16" width="28" height="36" rx="4" fill="#fff" stroke="#61768A" stroke-width="2"/><rect x="24" y="22" width="5" height="5" rx="1.2" fill="#50C3C8"/><rect x="35" y="22" width="5" height="5" rx="1.2" fill="#50C3C8"/>${face(32,34,.85)}<rect x="29" y="44" width="6" height="8" rx="1.5" fill="#E39B2D"/></svg>`;
   const g=genderOf(holder.name);
-  const st= g==='f' ? 1 : g==='m' ? (h%2?0:2) : h%3;
+  const st= g==='f' ? 1 : (h%2?0:2);
   const bow = g==='f' ? `<path d="M42 17.5l5.5-3v6.4zM42 17.5l-5.5-3v6.4z" fill="#E9406D"/><circle cx="42" cy="17.5" r="1.8" fill="#C92E58"/>` : '';
   const hp = st===0 ? `<path d="M18 30c0-10 6-16 14-16s14 6 14 16c-3-5-8-8-14-8s-11 3-14 8z" fill="${hair}"/>`
     : st===1 ? `<path d="M17 33c-1-12 6-19 15-19s16 7 15 19c-2-3-3-8-5-10-5 3-14 3-20 0-2 2-3 7-5 10z" fill="${hair}"/><path d="M17 33c-1 8 0 14 2 18M47 33c1 8 0 14-2 18" stroke="${hair}" stroke-width="5" stroke-linecap="round"/>`
@@ -1539,7 +1541,7 @@ function detBody(c){
     const sd=d.signDate||c.start;
     if(t.kind==='child'){
       const born=d.childBorn!==0, bd=born?d.childBirth:d.dueDate;
-      out+=`<div class="kid"><span class="kid-face">${born?'🧒':'👶'}</span><div><b>${esc(d.childName||'A gyermek')}${born&&d.childBirth?`, ${kidAge(d.childBirth)}`:''}</b>
+      out+=`<div class="kid"><span class="kid-face">${!born?'👶':((d.childGender||genderOf(d.childName||''))==='f'?'👧':(d.childGender||genderOf(d.childName||''))==='m'?'👦':'🧒')}</span><div><b>${esc(d.childName||'A gyermek')}${born&&d.childBirth?`, ${kidAge(d.childBirth)}`:''}</b>
         <span>${born?(d.childBirth?`Született: ${huDate(d.childBirth)}`:''):(d.dueDate?`Várhatóan érkezik: ${huDate(d.dueDate)} 💕`:'Még úton van 💕')}</span>
         ${d.nameAtSign&&d.nameAtSign!==d.childName?`<span>Kötéskor még: „${esc(d.nameAtSign)}”</span>`:''}</div></div>`;
       if(bd&&sd){ const ta=d.targetAge||18, tgt=D_(bd); tgt.setFullYear(tgt.getFullYear()+ta);
@@ -1697,7 +1699,7 @@ function sumRows(c){
   r.push(['Biztosító',esc(c.insurer||'–')]);
   r.push(['Kötvényszám',esc(c.policy||'–')]);
   r.push(['Kötés dátuma',huDate(c.start)]);
-  if(!life) r.push(['Évforduló',`${huShort(a.date)} <span class="muted">(${a.days===0?'ma':a.days+' nap múlva'})</span>`]);
+  r.push(['Évforduló',`${huShort(a.date)} <span class="muted">(${a.days===0?'ma':a.days+' nap múlva'})</span>`]);
   r.push(['Díjfizetési ütem',capF(f.adv)]);
   r.push(['Gyakoriság szerinti díj',fmtC(c.fee/f.p,c.cur)]);
   if(f.p>1) r.push(['Éves díj',fmtC(c.fee,c.cur)]);
@@ -1874,11 +1876,15 @@ const KID_GOALS=[['lakas','🏠','Lakás, önerő'],['tanitas','🎓','Taníttat
 const KID_GOAL_TXT={lakas:'Ez szép alap az első otthonához.',tanitas:'Ez komoly segítség a továbbtanuláshoz.',eletkezdes:'Ezzel magabiztosan indulhat neki a felnőtt életnek.',ingatlan:'Ez jó alapja egy saját ingatlan önerejének.'};
 function calcKids(){
   const hh=curHH(); S.calcKids ||= {};
-  if(!S.calcKids[hh.id]){
-    const ks=hhContracts(hh).filter(c=>T(c.type).kind==='child').map(c=>{const d=c.details||{}; return {name:d.childName||'',gender:genderOf(d.childName||'')||'',born:d.childBorn!==0,date:d.childBorn===0?(d.dueDate||''):(d.childBirth||''),goal:'eletkezdes',age:d.targetAge||18};});
-    S.calcKids[hh.id]=ks.length?ks:[{name:'',gender:'',born:true,date:'',goal:'eletkezdes',age:18}];
-  }
-  return S.calcKids[hh.id];
+  let ks=S.calcKids[hh.id]||[];
+  const cc=hhContracts(hh).filter(c=>T(c.type).kind==='child');
+  cc.forEach(c=>{ const d=c.details||{}; const base={name:d.childName||'',born:d.childBorn!==0,date:d.childBorn===0?(d.dueDate||''):(d.childBirth||'')};
+    let k=ks.find(x=>x.src===c.id);
+    if(!k){ const blank=ks.findIndex(x=>!x.src&&!x.name&&!x.date); k={goal:'eletkezdes',age:d.targetAge||18,src:c.id}; if(blank>=0) ks.splice(blank,1,k); else ks.push(k); }
+    Object.assign(k,base); if(!k.gManual) k.gender=d.childGender||genderOf(base.name)||''; });
+  ks=ks.filter(x=>!x.src||cc.some(c=>c.id===x.src));
+  if(!ks.length) ks=[{name:'',gender:'',born:true,date:'',goal:'eletkezdes',age:18}];
+  S.calcKids[hh.id]=ks; return ks;
 }
 function kidTarget(k){ if(!k.date) return null; const t=D_(k.date); t.setFullYear(t.getFullYear()+(k.age||18)); return t; }
 function kidYears(k){ const t=kidTarget(k); if(!t) return null; return Math.max(1,Math.min(45,Math.round((t-today())/(365.25*864e5)))); }
@@ -2138,7 +2144,7 @@ function detailFields(kind,dt){
     const born=dt.childBorn!==0;
     const kidSec = kind!=='child' ? '' : `<div class="fsec kidsec"><b>🎈 A gyermek</b>
       <div class="radios" id="d-born"><button type="button" data-born="1" class="${born?'on':''}">🧒 Már megszületett</button><button type="button" data-born="0" class="${born?'':'on'}">👶 Még úton van</button></div>
-      <div class="row2"><div class="field"><label>A gyermek neve</label><input id="d-cname" value="${esc(dt.childName||'')}" placeholder="pl. Lili"></div>
+      <div class="row2"><div class="field"><label>A gyermek neve</label><input id="d-cname" value="${esc(dt.childName||'')}" placeholder="pl. Lili"><div class="segline mini" id="d-cg" style="margin-top:6px">${[['m','Kisfiú'],['f','Kislány']].map(([g,n])=>`<button type="button" data-cg="${g}" class="${(dt.childGender||genderOf(dt.childName||''))===g?'on':''}">${n}</button>`).join('')}</div></div>
         <div class="field" id="d-cbirth-w" ${born?'':'hidden'}><label>Születési ideje</label><input id="d-cbirth" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(dt.childBirth||''))}"></div>
         <div class="field" id="d-due-w" ${born?'hidden':''}><label>Várható születés</label><input id="d-due" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(esc(dt.dueDate||''))}"></div></div>
       <div class="row2"><div class="field"><label>Név a kötéskor</label><input id="d-nas" value="${esc(dt.nameAtSign||'')}" placeholder="pl. Pocaklakó"><div class="hint">Ha akkor még más néven szerepelt.</div></div>
@@ -2175,7 +2181,7 @@ function contractForm(id){
     <div class="field"><label>Milyen szerződés?</label><div class="types" id="f-types">${typeGrid(d.type)}</div><div id="f-newtype"></div></div>
     <div id="f-ident">${identFields(T(d.type).kind,d)}</div>
     <div class="row2"><div class="field"><label>Biztosító</label><div id="f-ins"></div></div><div class="field"><label>Kötvényszám</label><input id="f-pol" value="${esc(d.policy)}"></div></div>
-    <div class="row2"><div class="field"><label>Kötés dátuma</label><input id="f-sign" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${huIso(d.start)}"><div class="hint" id="d-sign-h"></div></div><div class="field"><label>Évforduló <span class="muted">(hónap.nap)</span></label><input id="f-anniv" autocomplete="off" placeholder="pl. 12.01." value="${orig?annivHu(d):''}"><div class="hint">Ha üresen hagyod, a kötést követő hónap 1. napja lesz.</div></div></div><div class="row2"><div class="field"><label>Fizetés módja</label><select id="f-pay">${PAY.map(p=>`<option ${p===d.pay?'selected':''}>${p}</option>`).join('')}</select></div></div>
+    <div class="row2"><div class="field"><label>Kötés dátuma</label><input id="f-sign" class="dinp" autocomplete="off" placeholder="pl. 2021.05.27." value="${orig?huIso(d.start):''}"><div class="hint" id="d-sign-h"></div></div><div class="field"><label>Évforduló <span class="muted">(hónap.nap)</span></label><input id="f-anniv" autocomplete="off" placeholder="pl. 12.01." value="${orig?annivHu(d):''}"><div class="hint">A kötés dátumából magától kitöltjük (a következő hónap 1. napja), de átírhatod.</div></div></div><div class="row2"><div class="field"><label>Fizetés módja</label><select id="f-pay">${PAY.map(p=>`<option ${p===d.pay?'selected':''}>${p}</option>`).join('')}</select></div></div>
     <div class="field"><label>Pénznem</label><div class="segline" id="f-cur"><button type="button" data-cur="HUF" class="${d.cur!=='EUR'?'on':''}">HUF (Ft)</button><button type="button" data-cur="EUR" class="${d.cur==='EUR'?'on':''}">EUR (€)</button></div><div class="hint">Bármelyik szerződés lehet euróban is: nyugdíj, megtakarítás vagy más.</div></div>
     <div class="field"><label>Díjfizetési ütem</label><div class="segline" id="f-freq">${Object.entries(FREQ).map(([k,v])=>`<button type="button" data-f="${k}" class="${k===d.freq?'on':''}">${v.n}</button>`).join('')}</div></div>
     <div class="row2"><div class="field"><label id="f-pfee-l">${FREQ[d.freq].n} díj (${CURSYM(d.cur)})</label><input id="f-pfee" inputmode="numeric" value="${d.fee?Math.round(d.fee/FREQ[d.freq].p):''}"></div><div class="field"><label id="f-fee-l">Éves díj (${CURSYM(d.cur)})</label><input id="f-fee" inputmode="numeric" value="${d.fee||''}"><div class="hint">Bármelyiket írod, a másik kiszámolódik.</div></div></div>
@@ -2196,7 +2202,7 @@ function contractForm(id){
       if(kind==='pension'||kind==='savings'||kind==='child'){
         if(kind==='pension'){ dt.clause=$('#d-clause').checked?1:0; dt.tax=dt.clause; }
         if(kind==='savings'){ dt.goal=v('#d-goal').trim(); dt.targetDate=parseHuDate(v('#d-target'))||''; }
-        if(kind==='child'){ const on=m.querySelector('#d-born .on'); dt.childBorn=on?+on.dataset.born:1; dt.childName=v('#d-cname').trim(); dt.childBirth=parseHuDate(v('#d-cbirth'))||''; dt.dueDate=parseHuDate(v('#d-due'))||''; dt.nameAtSign=v('#d-nas').trim(); dt.targetAge=num(v('#d-tage'))||18; }
+        if(kind==='child'){ const on=m.querySelector('#d-born .on'); dt.childBorn=on?+on.dataset.born:1; dt.childName=v('#d-cname').trim(); { const on=m.querySelector('#d-cg .on'); dt.childGender=on?on.dataset.cg:(genderOf(dt.childName)||''); } dt.childBirth=parseHuDate(v('#d-cbirth'))||''; dt.dueDate=parseHuDate(v('#d-due'))||''; dt.nameAtSign=v('#d-nas').trim(); dt.targetAge=num(v('#d-tage'))||18; }
         dt.signDate=parseHuDate(v('#f-sign'))||dt.signDate||''; dt.funds=[...m.querySelectorAll('#d-funds .r')].map(r=>({code:r.querySelector('[data-fc]').value.trim(),pct:num(r.querySelector('[data-fp]').value)})).filter(x=>x.code);
         if($('#d-yft')){ dt.yieldFt=num(v('#d-yft')); dt.yieldPct=num(v('#d-ypct')); dt.annualPct=num(v('#d-apct')); }
       }
@@ -2207,7 +2213,10 @@ function contractForm(id){
       if(kind==='property'){ const upd=()=>{const a=num($('#d-area').value), s=num($('#d-sum').value), q=a&&s?s/a:0, el=$('#d-sqm'), huf=d.cur!=='EUR', low=huf&&q&&q<700000, mid=huf&&q>=700000&&q<750000; el.textContent=q?`${fmtC(q,d.cur)} / m²${huf?(low?', alacsony, érdemes átnézni':mid?', elfogadható, de az alsó határon':', ideális'):''}`:''; el.classList.toggle('warn',!!(low||mid));};
         $('#d-area').oninput=upd; $('#d-sum').oninput=upd; upd(); $('#d-mortgage').onchange=e=>{$('#d-bank-w').hidden=!e.target.checked;}; }
       if(kind==='child'){ $('#d-born').onclick=e=>{const b=e.target.closest('[data-born]'); if(!b) return; m.querySelectorAll('#d-born button').forEach(x=>x.classList.toggle('on',x===b)); const born=b.dataset.born==='1'; $('#d-cbirth-w').hidden=!born; $('#d-due-w').hidden=born; if(!born) toast('💕','Gratulálunk! Ez nagyon szép döntés.');};
-        const cn=$('#d-cname'), nas=$('#d-nas'); cn.addEventListener('change',()=>{ if(!nas.value) nas.placeholder=cn.value||'pl. Pocaklakó'; }); }
+        const cn=$('#d-cname'), nas=$('#d-nas'), cg=$('#d-cg'); let cgMan=!!(d.details&&d.details.childGender);
+        cn.addEventListener('change',()=>{ if(!nas.value) nas.placeholder=cn.value||'pl. Pocaklakó'; });
+        cn.addEventListener('input',()=>{ if(cgMan) return; const g=genderOf(cn.value); cg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.cg===g)); });
+        cg.onclick=e=>{ const b=e.target.closest('[data-cg]'); if(!b) return; cgMan=true; cg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); }; }
       if(kind==='pension'||kind==='savings'||kind==='child'){ const h=()=>{const out=$('#d-sign-h'); if(!out) return; const sd=parseHuDate($('#f-sign').value)||'';
           if(kind==='pension'){ const holder=holderOf(hh,$('#f-holder').value);
             if(sd&&holder&&holder.birthDate){const a=ageAt(holder.birthDate,sd); const r=D_(holder.birthDate); r.setFullYear(r.getFullYear()+65); out.textContent=`Kötéskor ${a} éves volt, a 65. születésnapjáig ${ymLeft(D_(sd),r).y} év volt hátra.`;}
@@ -2233,7 +2242,11 @@ function contractForm(id){
     $('#f-cur').onclick=e=>{const b=e.target.closest('[data-cur]'); if(!b) return; d.cur=b.dataset.cur; m.querySelectorAll('#f-cur button').forEach(x=>x.classList.toggle('on',x===b)); $('#f-pfee-l').textContent=`${FREQ[d.freq].n} díj (${CURSYM(d.cur)})`; $('#f-fee-l').textContent=`Éves díj (${CURSYM(d.cur)})`; const s=$('#d-sum'); if(s) s.dispatchEvent(new Event('input'));};
     bindIdent(); bindDet(); bindInfo();
     $('#f-hpick').onclick=e=>{ const b=e.target.closest('[data-hp]'); if(!b) return; m.querySelectorAll('#f-hpick button').forEach(x=>x.classList.toggle('on',x===b)); const hi=$('#f-holder'); hi.value=b.dataset.hp; hi.dispatchEvent(new Event('change')); };
-    $('#f-sign').addEventListener('blur',()=>{ const sd=parseHuDate($('#f-sign').value); const an=$('#f-anniv'); if(sd&&!an.value){ const x=D_(sd); x.setMonth(x.getMonth()+1); an.value=`${pad2(x.getMonth()+1)}.01.`; } });
+    const an=$('#f-anniv'), autoAnn=sd=>{ const x=D_(sd); x.setMonth(x.getMonth()+1); return `${pad2(x.getMonth()+1)}.01.`; };
+    let annAuto = !an.value || (orig && parseHuDate(huIso(orig.start)) && an.value===autoAnn(orig.start));
+    an.addEventListener('input',()=>{ annAuto=!an.value; });
+    const syncAnn=()=>{ const sd=parseHuDate($('#f-sign').value); if(sd&&annAuto){ an.value=autoAnn(sd); an.classList.add('flash'); setTimeout(()=>an.classList.remove('flash'),700); } };
+    $('#f-sign').addEventListener('input',syncAnn); $('#f-sign').addEventListener('blur',syncAnn); $('#f-sign').addEventListener('paste',()=>setTimeout(syncAnn,30));
     $('#f-anniv').addEventListener('blur',e=>{ const a=parseMD(e.target.value); if(a) e.target.value=a.replace('-','.')+'.'; });
     const fo=$('#f-own'); if(fo) fo.onclick=e=>{const b=e.target.closest('[data-own]'); if(!b) return; d.own=b.dataset.own; fo.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));};
     $('#f-save').onclick=()=>{
