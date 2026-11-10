@@ -1064,13 +1064,13 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .selall{gap:8px}
 .selall .chk{width:16px;height:16px;border-radius:5px}
 .selall .chk svg{width:10px;height:10px}
-.plate2{display:inline-block;vertical-align:middle;margin-left:7px;font:700 10px/15px "Arial Narrow","Roboto Condensed",Arial,sans-serif;letter-spacing:.6px;color:#151515;background:#fff;border:1px solid #2A2A2A;border-left:3px solid #1F4FB5;border-radius:3px;padding:0 5px;white-space:nowrap}
-.plate2.lg{font-size:15px;line-height:24px;padding:0 9px;border-left-width:5px;margin-left:0}
+.plate2{display:inline-block;vertical-align:middle;margin-left:7px;font:700 10px/15px "Arial Narrow","Roboto Condensed",Arial,sans-serif;letter-spacing:.6px;color:#151515;background:#fff;border:1px solid #2A2A2A;border-left:9px solid #1F4FB5;border-radius:3px;padding:0 6px 0 5px;white-space:nowrap}
+.plate2.lg{font-size:15px;line-height:24px;padding:0 10px 0 9px;border-left-width:14px;margin-left:0}
 .cc-name{display:flex;align-items:center;min-width:0}
 .cc-name .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cc-name .plate2{flex:none}
 .bmtag{font-size:10.5px;color:var(--ink-3);font-weight:600}
-.rep .rplate2{display:inline-block;font:700 9px/13px Arial,sans-serif;letter-spacing:.5px;color:#151515;border:1px solid #2A2A2A;border-left:3px solid #1F4FB5;border-radius:2px;padding:0 4px;background:#fff}
+.rep .rplate2{display:inline-block;font:700 9px/13px Arial,sans-serif;letter-spacing:.5px;color:#151515;border:1px solid #2A2A2A;border-left:7px solid #1F4FB5;border-radius:2px;padding:0 4px;background:#fff}
 .cover2{background:linear-gradient(135deg,var(--teal-soft),var(--surface) 70%);border:1px solid #CDEDEF;border-left:4px solid var(--teal);border-radius:14px;padding:10px 14px 4px;margin:18px 0 4px}
 .cv2-head{display:flex;align-items:center;gap:9px;margin-bottom:4px}
 .cv2-head > svg{width:18px;height:18px;color:var(--teal-ink);flex:none}
@@ -1146,6 +1146,40 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .crep .cr-big b{font-size:28px}
 .crep .cr-params{margin-top:9px}
 .crep .cr-disc{margin-top:8px}
+
+/* ===== v18 ===== */
+.csens{margin-top:2px}
+.csens-h{font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.stbl{width:100%;border-collapse:collapse;font-size:11.5px;background:var(--surface);border-radius:10px;overflow:hidden}
+.stbl th{font-size:10px;font-weight:600;color:var(--ink-3);text-align:right;padding:6px 8px;border-bottom:1px solid var(--line-2)}
+.stbl th:first-child,.stbl td:first-child{text-align:left}
+.stbl th.cur{color:var(--teal-ink)}
+.stbl td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line-2);white-space:nowrap}
+.stbl td small{display:block;font-size:9.5px;color:var(--ink-3)}
+.stbl tr.cur td{background:var(--surface-3);font-weight:600}
+.stbl td.hit{color:var(--teal-ink);font-weight:800}
+.rep .sens th{text-align:right}
+.rep .sens th:first-child,.rep .sens td:first-child{text-align:left}
+.rep .sens td small{display:block;font-size:8.5px;color:#949C9F}
+.rep .sens tr.cur td{background:#F3FAFA;color:#373435;font-weight:600}
+.rep .sens td.hit{color:#24878C;font-weight:800}
+.atl{padding:2px 2px 0}
+.atl-ends{display:flex;justify-content:space-between;font-size:10px;color:#7D8A8D}
+.atl-ends .r{text-align:right}
+.atl-ends b{display:block;font-size:12px;color:#373435}
+.atl-track{position:relative;height:8px;border-radius:8px;background:linear-gradient(90deg,#D4EFF0,#2E9EA3);margin:8px 6px 0}
+.atl-dot{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);background:#fff;border:3px solid #2E9EA3}
+.atl-dot.s{left:0}.atl-dot.e{left:100%;background:#2E9EA3}
+.atl-ms{position:absolute;top:50%;width:8px;height:8px;transform:translate(-50%,-50%) rotate(45deg);background:#E39B2D;border:1.5px solid #fff}
+.atl-lbl{position:relative;height:40px;margin:0 6px}
+.atl-lbl span{position:absolute;top:5px;transform:translateX(-50%);font-size:8.5px;color:#A08A4A;text-align:center;white-space:nowrap;line-height:1.3}
+.atl-lbl span.lo{top:22px}
+.atl-lbl b{display:block;font-size:9.5px;color:#8A6A10}
+.atl-left{font-size:10px;color:#5E6668}
+.atl-left b{color:#373435}
+.rep .sens td{padding:3px 10px}
+.rep .sens td small{display:inline;margin-left:6px}
+.crep .atl-lbl{height:36px}
 </style>
 </head>
 <body>
@@ -1838,7 +1872,7 @@ function expandedBody(c){
 }
 function metaRight(c){
   const a=nextAnn(c), d=c.details||{};
-  if(isLife(c)){ const sd=D_(d.signDate||c.start); return `<span>Indult <b>${sd.getFullYear()}. ${HU_M[sd.getMonth()]}</b></span>`; }
+  if(isLife(c)&&T(c.type).kind!=='life'){ const sd=D_(d.signDate||c.start); return `<span>Indult <b>${sd.getFullYear()}. ${HU_M[sd.getMonth()]}</b></span>`; }
   return `<span class="${a.days<=60?'near':''}">Évforduló <b>${huShort(a.date)}</b></span>`;
 }
 function card(c){
@@ -1864,7 +1898,7 @@ function listTable(cs){
       ${picto(t,30)}
       <div class="t"><b>${esc(cTitle(c))}${t.kind==='vehicle'&&c.plate?' '+plateHTML(c.plate):''}</b><span class="sub"><span class="kind sm" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${sub}</span></div>
       <div class="ins hide-s2">${insBadge(c.insurer,22)}<div><b>${esc(c.insurer)}</b><span>${esc(c.policy||'–')}</span></div></div>
-      <div class="an hide-l ${!life&&a.days<=60?'near':''}">${life?'<span class="muted">–</span>':huShort(a.date)}</div>
+      <div class="an hide-l ${(!life||t.kind==='life')&&a.days<=60?'near':''}">${life&&t.kind!=='life'?'<span class="muted">–</span>':huShort(a.date)}</div>
       <div class="fee"><b>${fmtC(c.fee/f.p,c.cur)}</b><span>${f.adv}</span></div>
       <div class="st hide-l">${statusIcons(c)}</div>
       <button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez">${svg('check','stroke-width="3"')}</button>
@@ -2109,6 +2143,18 @@ function calcChart(pts){
     <path d="${area('p')}" fill="var(--surface-2)" opacity=".9"/><path d="${line('p')}" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="4 4"/>
     ${ticks.map(i=>`<text x="${X(i)}" y="${H-5}" text-anchor="${i===0?'start':i===n?'end':'middle'}" class="ctick">${pts[i].y}. év</text>`).join('')}</svg>`;
 }
+function sensData(){
+  const cfg=calcCfg(), cur=CALC.cur, pension=CALC.mode==='pension', Y=CALC.years, max=CALC.mode==='pension'?45:45;
+  let ys=[Y-5,Y,Y+5,Y+10].filter(y=>y>=3&&y<=max); ys=[...new Set(ys)];
+  const h=CALC.mode==='pension'?calcHolder():null, a0=h&&h.birthDate?ageAt(h.birthDate):null;
+  const k=CALC.mode==='child'?calcKids()[CALC.kidSel||0]:null, ka=k&&k.born&&k.date?ageAt(k.date):null;
+  return {cur,ys,scen:cfg.scen,rows:ys.map(y=>({y,age:a0!=null?a0+y:ka!=null?ka+y:null,v:cfg.scen.map(sc=>ulSim(prodFor(y,cur),CALC.monthly*12,12,y,sc.r/100,pension).v)}))};
+}
+function sensTable(cls){
+  const d=sensData(), F=x=>moneyShort(x,d.cur);
+  return `<table class="${cls}"><thead><tr><th>Időtáv</th>${d.scen.map((s,i)=>`<th class="${i===CALC.scen?'cur':''}">${esc(s.n)} ${fmtNum(s.r,1)}%</th>`).join('')}</tr></thead>
+    <tbody>${d.rows.map(r=>`<tr class="${r.y===CALC.years?'cur':''}"><td>${r.y} év${r.age!=null?`<small>${r.age} éves korig</small>`:''}</td>${r.v.map((v,i)=>`<td class="${i===CALC.scen&&r.y===CALC.years?'hit':''}">${F(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
 function calcResultHTML(){
   const cfg=calcCfg(), sc=cfg.scen[CALC.scen]||cfg.scen[0], cur=CALC.cur, prod=prodFor(CALC.years,cur), P=ULPROD[prod], isA=S.role==='advisor';
   const pension=CALC.mode==='pension';
@@ -2129,6 +2175,7 @@ function calcResultHTML(){
     ${note}
     ${calcChart(r.pts)}
     <div class="clegend"><span><i class="lv"></i>Várható érték</span><span><i class="lp"></i>Befizetések</span></div>
+    <div class="csens"><div class="csens-h">Más időtávval és hozammal</div>${sensTable('stbl')}</div>
     <p class="cmini">${esc(P.n)}${CALC.years<=10?' (10 éves vagy rövidebb tartamra)':' (10 évnél hosszabb tartamra)'}, havi díjfizetés. ${P.index?`A díj évente ${fmtNum(P.index*100)}%-kal indexálódik: az 1. évben havi ${F(CALC.monthly)}, a ${CALC.years}. évben havi ${F(r.lastFee)}.`:'Az euróalapú díj nem indexálódik.'}${pension&&cur==='EUR'?' Az euróalapú számítás adó-visszatérítés nélkül készült.':''}</p>`;
 }
 function pageCalc(){
@@ -2495,7 +2542,7 @@ function reportHTML0(list){
     return `<h2>${esc(h.name)}</h2><table><thead><tr><th>Szerződés</th><th>Biztosító, kötvényszám</th><th>Évforduló</th><th>Díjfizetés</th><th>Éves díj</th></tr></thead><tbody>
       ${cs.map(c=>{const t=T(c.type),f=FREQ[c.freq]||FREQ.eves; const dd=c.details||{}; const extra=t.kind==='vehicle'?plateRep(c.plate):t.kind==='property'?esc(c.address):(t.kind==='child'&&dd.childName)?`${esc(dd.childName)}${dd.childBorn===0?' (várható születés)':''}`:(t.kind==='savings'&&dd.goal)?`Cél: ${esc(dd.goal)}`:esc(t.n);
         return `<tr class="pb-avoid"><td><div class="ti"><i class="lic" style="background:${t.c}14;color:${t.c}">${svg(t.i)}</i><div><b>${esc(cTitle(c))}</b><div style="margin-top:2px;font-size:9.5px;color:#949C9F">${extra}</div>${pdfLines(c).map(l=>`<div class="rinfo">${esc(l)}</div>`).join('')}</div></div></td>
-        <td>${hasLogo(c.insurer)?`<img class="rlogo" src="${insOf(c.insurer).logo}" alt="">`:esc(c.insurer)}<br><span style="color:#949C9F">${esc(c.policy||'–')}</span></td><td>${isLife(c)?'<span style="color:#949C9F">–</span>':huShort(nextAnn(c).date)}</td><td>${f.n}<br><b>${fmtC(c.fee/f.p,c.cur)}</b></td><td>${fmtC(c.fee,c.cur)}</td></tr>`;}).join('')}
+        <td>${hasLogo(c.insurer)?`<img class="rlogo" src="${insOf(c.insurer).logo}" alt="">`:esc(c.insurer)}<br><span style="color:#949C9F">${esc(c.policy||'–')}</span></td><td>${isLife(c)&&t.kind!=='life'?'<span style="color:#949C9F">–</span>':huShort(nextAnn(c).date)}</td><td>${f.n}<br><b>${fmtC(c.fee/f.p,c.cur)}</b></td><td>${fmtC(c.fee,c.cur)}</td></tr>`;}).join('')}
       <tr class="tot"><td colspan="4">Összesen</td><td>${fmtSums(sub)}</td></tr></tbody></table>`;}).join('');
   return `<div class="rep"><div class="rep-head"><div><h1>Biztosítási áttekintés</h1><p>${esc(hh.name)} részére, készült: ${huDate(today())}</p></div>${LOGO}</div>
     ${tables}<div class="rep-total">${list.length} szerződés, éves díj összesen ${fmtSums(total)}</div>
@@ -2535,7 +2582,7 @@ async function renderPDF(html, fname){
   finally{ host.innerHTML=''; }
 }
 function pdfChart(pts){
-  const W=860,H=112,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
+  const W=860,H=100,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
   const X=i=>P+(W-2*P)*i/n, Y=v=>H-24-(H-36)*v/maxV;
   const line=k=>pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p[k]).toFixed(1)}`).join('');
   const area=k=>`${line(k)}L${X(n).toFixed(1)},${Y(0)}L${X(0)},${Y(0)}Z`;
@@ -2580,7 +2627,8 @@ function calcReportHTML0(){
     <div class="cr-params pb-avoid"><div><span>Kezdő havi díj</span><b>${F(CALC.monthly)}</b></div><div><span>Időtáv</span><b>${CALC.years} év</b></div><div><span>Termék</span><b>${esc(P.n)}</b></div><div><span>Indexálás</span><b>${P.index?`évi ${fmtNum(P.index*100)}%`:'nincs'}</b></div></div>
     ${story}
     <div class="cr-sec pb-avoid"><h2>Így nő a megtakarítás</h2><div class="cr-chart">${pdfChart(r.pts)}</div><div class="cr-leg"><span><i style="background:#2E9EA3"></i>Várható érték</span><span><i style="background:#949C9F"></i>Befizetések</span></div></div>
-    ${journeyHTML(r)}
+    ${ageTimelineHTML(r)}
+    <div class="cr-sec pb-avoid"><h2>Más időtávval és hozammal</h2>${sensTable('cr-t sens')}</div>
     ${motivationHTML(r)}
     <p class="cr-disc pb-avoid">A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak. A számítás kiegészítő kockázati fedezetek nélkül készült; ezek csökkentik a megtakarítás értékét. A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.${P.index?` A díj évente ${fmtNum(P.index*100)}%-kal indexálódik.`:''}</p>
     <div class="rep-sig pb-avoid"><div class="ph">${a.photo?`<img src="${a.photo}" alt="">`:''}</div>
@@ -2633,6 +2681,19 @@ function journeyHTML(r){
   return `<div class="cr-sec pb-avoid"><h2>Az út a célig</h2><div class="jr3">${svgS}</div>
     ${ms.length?`<table class="cr-t jr-t"><thead><tr><th>Mérföldkő</th><th>Elérés várható ideje</th></tr></thead><tbody>${ms.map(m=>`<tr><td>A megtakarítás értéke eléri a <b>${moneyShort(m.amt,cur)}</b> összeget</td><td>${yr0+m.y}, a ${m.y}. évben</td></tr>`).join('')}</tbody></table>`:''}
   </div>`;
+}
+function ageTimelineHTML(r){
+  const Y=CALC.years||1, cur=CALC.cur, ms=milestonesOf(r,cur), yr0=today().getFullYear(), end=new Date(); end.setFullYear(end.getFullYear()+Y);
+  let lA='Ma', lB='', rA=`${Y}. év vége`, rB=huDate(end);
+  if(CALC.mode==='pension'){ const h=calcHolder(); if(h&&h.birthDate){ const a0=ageAt(h.birthDate); lB=`${a0} éves`; rA=`${a0+Y} éves korban`; const bd=D_(h.birthDate); bd.setFullYear(bd.getFullYear()+a0+Y); rB=huDate(bd); } }
+  else if(CALC.mode==='child'){ const k=calcKids()[CALC.kidSel||0]||{}; const t=kidTarget(k); lB=k.born&&k.date?`${kidLabel(k)} ${ageAt(k.date)} éves`:`${kidLabel(k)} még úton van`; rA=`Átadás ${k.age||18} évesen`; if(t) rB=huDate(t); }
+  else { const c=calcCompany(); lB=c?c.name:''; rA='Céltartalék'; }
+  const pos=y=>Math.max(1,Math.min(99,100*y/Y));
+  return `<div class="cr-sec pb-avoid"><h2>Az út a célig</h2>
+    <div class="atl"><div class="atl-ends"><div><span>${esc(lA)}</span><b>${esc(lB)}</b></div><div class="r"><span>${esc(rA)}</span><b>${esc(rB)}</b></div></div>
+      <div class="atl-track"><i class="atl-dot s"></i><i class="atl-dot e"></i>${ms.map(m=>`<i class="atl-ms" style="left:${pos(m.y)}%"></i>`).join('')}</div>
+      <div class="atl-lbl">${ms.map((m,i)=>`<span style="left:${pos(m.y)}%" class="${i%2?'lo':''}"><b>${moneyShort(m.amt,cur)}</b>${yr0+m.y}</span>`).join('')}</div>
+      <div class="atl-left">Összesen <b>${Y} év</b>, ${ms.length?`${ms.length} mérföldkővel útközben`:'tervezhető, havi befizetéssel'}.</div></div></div>`;
 }
 function motivationHTML(r){
   const cfg=calcCfg(), cur=CALC.cur, F=x=>fmtC(x,cur);
