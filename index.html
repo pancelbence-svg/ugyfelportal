@@ -894,7 +894,7 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .cr-params div{border:1px solid #EDF1F2;border-radius:10px;padding:7px 10px}
 .cr-params span{display:block;font-size:9.5px;color:#949C9F}
 .cr-params b{font-size:11.5px;color:#373435}
-.cr-sec{margin-top:15px}
+.cr-sec{margin-top:12px}
 .cr-sec h2{font-size:13px;font-weight:700;color:#24878C;margin:0 0 10px}
 .cr-p{font-size:11.5px;color:#5E6668;margin:0 0 10px}
 .cr-kids{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -918,7 +918,7 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .cr-t{width:100%;border-collapse:collapse;font-size:11px}
 .cr-t th{background:#EAF7F8;color:#24878C;text-align:left;font-weight:600;padding:6px 10px}
 .cr-t th:not(:first-child),.cr-t td:not(:first-child){text-align:right}
-.cr-t td{padding:5px 10px;border-bottom:1px solid #EDF1F2;color:#5E6668}
+.cr-t td{padding:4px 10px;border-bottom:1px solid #EDF1F2;color:#5E6668}
 .cr-t td b{color:#373435}
 .cr-disc{font-size:9px;color:#949C9F;line-height:1.5;margin:12px 0 0}
 .crep .rep-sig{margin-top:14px}
@@ -1059,6 +1059,93 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 }
 .flash{animation:flash .7s ease}
 @keyframes flash{0%{background:var(--teal-soft);border-color:var(--teal)}}
+
+/* ===== v17 ===== */
+.selall{gap:8px}
+.selall .chk{width:16px;height:16px;border-radius:5px}
+.selall .chk svg{width:10px;height:10px}
+.plate2{display:inline-block;vertical-align:middle;margin-left:7px;font:700 10px/15px "Arial Narrow","Roboto Condensed",Arial,sans-serif;letter-spacing:.6px;color:#151515;background:#fff;border:1px solid #2A2A2A;border-left:3px solid #1F4FB5;border-radius:3px;padding:0 5px;white-space:nowrap}
+.plate2.lg{font-size:15px;line-height:24px;padding:0 9px;border-left-width:5px;margin-left:0}
+.cc-name{display:flex;align-items:center;min-width:0}
+.cc-name .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cc-name .plate2{flex:none}
+.bmtag{font-size:10.5px;color:var(--ink-3);font-weight:600}
+.rep .rplate2{display:inline-block;font:700 9px/13px Arial,sans-serif;letter-spacing:.5px;color:#151515;border:1px solid #2A2A2A;border-left:3px solid #1F4FB5;border-radius:2px;padding:0 4px;background:#fff}
+.cover2{background:linear-gradient(135deg,var(--teal-soft),var(--surface) 70%);border:1px solid #CDEDEF;border-left:4px solid var(--teal);border-radius:14px;padding:10px 14px 4px;margin:18px 0 4px}
+.cv2-head{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.cv2-head > svg{width:18px;height:18px;color:var(--teal-ink);flex:none}
+.cv2-head b{display:block;font-size:12.5px;font-weight:700;letter-spacing:.2px}
+.cv2-head span{display:block;font-size:10.5px;color:var(--ink-3)}
+.cover2 .cvrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:7px 0;border-top:1px solid #DCEFF0}
+.cover2 .cvrow:first-of-type{border-top:0}
+.cover2 .cvwho{margin:0;min-width:150px;font-size:12px}
+.cover2 .cvwho .av{width:22px !important;height:22px !important}
+.cover2 .cvitems{gap:4px;flex:1}
+.cover2 .cv{font-size:11px}
+.cover2 .cv.ok{padding:2px 7px 2px 8px}
+.cover2 .cv.ok em{width:13px;height:13px}
+.cover2 .cv.ok em svg{width:8px;height:8px}
+.cover2 .cvb{padding:2px 8px}
+.cover2 .cvb small{font-size:9.5px}
+.cover2 .cvhint{flex-basis:100%;margin:2px 0 0;padding:5px 9px;font-size:11px;background:rgba(255,255,255,.6)}
+:root[data-theme="dark"] .cover2{background:var(--surface);border-color:var(--line)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cover2{background:var(--surface);border-color:var(--line)} :root:not([data-theme="light"]) .cover2 .cvhint{background:var(--surface-2)} }
+/* PDF */
+.rep{padding:20px 44px 18px !important}
+.crep .rep-head{margin-bottom:14px}
+.rep .rep-sig{margin-top:12px;padding:11px 14px}
+.rep-sig .ph{width:50px !important;height:50px !important}
+.jr3 svg{display:block;width:100%;height:auto}
+.cr-quote{position:relative;margin-top:14px;background:#F3FAFA;border:1px solid #DCEFF0;border-radius:12px;padding:12px 16px 10px 40px}
+.cr-quote .q{position:absolute;left:12px;top:2px;font-size:34px;font-family:Georgia,serif;color:#9FD6D9;line-height:1}
+.cr-quote p{margin:0;font-size:11px;line-height:1.6;color:#373435;font-style:italic}
+.cr-quote b{display:block;margin-top:5px;font-size:10px;color:#24878C}
+/* chat */
+.inbox{display:grid;grid-template-columns:290px 1fr;gap:14px;align-items:start}
+.inbox-list{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;max-height:calc(100vh - 210px);overflow:auto}
+.ibh{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-3);padding:6px 8px 8px}
+.ib{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;border-radius:12px;padding:9px 8px;text-align:left}
+.ib:hover{background:var(--surface-2)}
+.ib.on{background:var(--teal-soft)}
+.ib .av{width:38px;height:38px}
+.ibt{flex:1;min-width:0}
+.ibt b{display:block;font-size:13px;font-weight:600}
+.ibt span{display:block;font-size:11.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ib.unread .ibt b{font-weight:800}
+.ib.unread .ibt span{color:var(--ink);font-weight:600}
+.ibm{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.ibm em{font-style:normal;font-size:10.5px;color:var(--ink-3)}
+.ibm i{font-style:normal;background:var(--pink);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
+.inbox-thread .chat{height:calc(100vh - 210px);min-height:420px}
+.chat-head span .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:5px;vertical-align:middle}
+.mrow{display:flex;gap:8px;align-items:flex-end;max-width:78%}
+.mrow.me{align-self:flex-end;justify-content:flex-end}
+.mrow.them{align-self:flex-start}
+.mrow.first{margin-top:6px}
+.mav{width:30px;flex:none}
+.mav .av{width:30px;height:30px}
+.mcol{display:flex;flex-direction:column;min-width:0}
+.mrow.me .mcol{align-items:flex-end}
+.mwho{font-size:10.5px;font-weight:700;color:var(--ink-3);margin:0 4px 3px}
+.mrow .msg{max-width:100%}
+.mtime{font-size:10px;color:var(--ink-3);margin:3px 6px 0}
+.mtime .seenok{color:var(--teal-ink);font-weight:700}
+.crow-acts{display:flex;gap:6px;align-items:center}
+.chatbtn{position:relative;padding:7px 9px}
+.chatbtn i{position:absolute;top:-4px;right:-4px;font-style:normal;background:var(--pink);color:#fff;font-size:9.5px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px}
+@media (max-width:760px){
+  .inbox{grid-template-columns:1fr}
+  .inbox.show-list .inbox-thread{display:none}
+  .inbox.show-thread .inbox-list{display:none}
+  .inbox-list{max-height:none}
+  .inbox-thread .chat{height:calc(100vh - 250px)}
+  .mrow{max-width:90%}
+  .cover2 .cvwho{min-width:0;flex-basis:100%}
+}
+.crep .cr-hero{padding:14px 18px}
+.crep .cr-big b{font-size:28px}
+.crep .cr-params{margin-top:9px}
+.crep .cr-disc{margin-top:8px}
 </style>
 </head>
 <body>
@@ -1405,8 +1492,8 @@ function fmtPlate(v){
   return (v||'').toUpperCase().trim();
 }
 const EU_STARS = '<svg viewBox="0 0 10 10">'+Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<circle cx="${(5+3.6*Math.cos(a)).toFixed(2)}" cy="${(5+3.6*Math.sin(a)).toFixed(2)}" r=".75" fill="#FFD617"/>`;}).join('')+'</svg>';
-const plateHTML = (p,cls='') => p ? `<span class="plate ${cls}"><span class="eu">${EU_STARS}<b>H</b></span><span class="pt">${esc(fmtPlate(p))}</span></span>` : '';
-const plateRep = p => p ? `<span class="rplate"><span class="e">${EU_STARS}<b>H</b></span><span class="p">${esc(fmtPlate(p))}</span></span>` : '';
+const plateHTML = (p,cls='') => p ? `<span class="plate2 ${cls}">${esc(fmtPlate(p))}</span>` : '';
+const plateRep = p => p ? `<span class="rplate2">${esc(fmtPlate(p))}</span>` : '';
 function hash(s){ let h=0; for(const ch of s) h=(h*31+ch.charCodeAt(0))|0; return Math.abs(h); }
 
 const HH = id => S.households.find(h=>h.id===id);
@@ -1482,10 +1569,11 @@ function render(){
   const v=document.getElementById('view'), p=S.page;
   let html=`<div class="mobile-top">${brandHTML()}<div class="seg" style="width:160px"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>`;
   html+=`<div class="topbar"><div class="hist"><button data-act="undo" ${HIST.length?'':'disabled'} title="Vissza (Cmd+Z)">${svg('arrL')}<span>Vissza</span>${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'} title="Előre (Cmd+Shift+Z)"><span>Előre</span>${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div><div class="savewrap"><span class="saved">${svg('check','stroke-width="3"')}Automatikusan mentve</span><button class="savebtn" data-act="savenow">Mentés</button></div></div>`;
-  if(S.role==='advisor' && ['contracts','chat'].includes(p)) html+=`<div class="advisor-banner">${svg('eye')}<div>Most <b>${esc(curHH().name)}</b> portálját látod, ugyanúgy, ahogy ő. A módosításaid nála is azonnal megjelennek.</div><button class="btn" data-go="clients">Ügyfeleim</button></div>`;
+  if(p==='chat' && !(S.role==='advisor'&&innerWidth<=760&&CHATLIST)) markSeen();
+  if(S.role==='advisor' && p==='contracts') html+=`<div class="advisor-banner">${svg('eye')}<div>Most <b>${esc(curHH().name)}</b> portálját látod, ugyanúgy, ahogy ő. A módosításaid nála is azonnal megjelennek.</div><button class="btn" data-go="clients">Ügyfeleim</button></div>`;
   html += p==='contracts'?pageContracts() : p==='chat'?pageChat() : p==='advisor'?pageAdvisor() : p==='clients'?pageClients() : p==='calc'?pageCalc() : pageTool(p);
   v.innerHTML=html;
-  if(p==='chat'){ markSeen(); const b=v.querySelector('.chat-body'); if(b) b.scrollTop=b.scrollHeight; renderSide(); }
+  if(p==='chat'){ const b=v.querySelector('.chat-body'); if(b) b.scrollTop=b.scrollHeight; renderSide(); }
 }
 
 // ---------- profilkártya ----------
@@ -1639,7 +1727,7 @@ function coverPanel(hh,all){
   }).join('');
   if(!rows.trim()) return '';
   if(!all.length) return `<div class="sec-title"><h2>Védőhálód</h2></div><div class="cover welcome"><div class="wl-ic">${['🚗','🏡','❤️','🌱','🎈','💼'].map(e=>`<span>${e}</span>`).join('')}</div><h3>Üdv a portálodon! 🎉</h3><p>Vidd fel egyesével a szerződéseidet: autó, otthon, élet, megtakarítás. Ahogy haladsz, itt szépen összeáll a teljes kép, és mindig tudni fogod, mi hol van.</p><button class="btn primary" data-act="add-contract">${svg('plus')}Első szerződés felvitele</button></div>`;
-  return `<div class="sec-title"><h2>Védőhálód</h2><span class="hint">Ami már megvan, és ami még hiányozhat</span></div><div class="cover">${rows}</div>`;
+  return `<div class="cover2"><div class="cv2-head">${svg('shield')}<div><b>Védőhálód</b><span>Ami már megvan, és ami még hiányozhat</span></div></div>${rows}</div>`;
 }
 function pageContracts(){
   const hh=curHH(), all=hhContracts(hh);
@@ -1665,9 +1753,8 @@ function pageContracts(){
       <button class="btn ghost" data-act="toggle-all">${svg('chev',list.length&&list.every(c=>expanded.has(c.id))?'style="transform:rotate(180deg)"':'')}${list.length&&list.every(c=>expanded.has(c.id))?'Mind becsukása':'Mind kinyitása'}</button>
       <div class="sp"></div>
       <span class="sel-info">${selCount?`${selCount} kijelölve`:''}</span>
-      ${selCount?`<button class="btn ghost" data-act="sel-clear">Kijelölés törlése</button>`:`<button class="btn ghost" data-act="sel-all">Mind kijelölése</button>`}
       <button class="btn" data-act="pdf">${svg('download')}${selCount?'Kijelöltek PDF-ben':'PDF letöltése'}</button>
-      <button class="btn" data-act="share">${svg('link')}Link</button>
+      ${(()=>{ const all=list.length&&list.every(c=>selected.has(c.id)); return `<button class="btn selall ${all?'on':''}" data-act="${all?'sel-clear':'sel-all'}"><span class="chk ${all?'on':''}">${svg('check','stroke-width="3"')}</span>${all?'Kijelölés törlése':'Összes kijelölése'}</button>`; })()}
     </div>
     ${body}
     ${list.length?`<div class="totals"><span>Szerződések<b>${list.length} db</b></span><span>Éves díj összesen<b>${fmtSums(totals)}</b></span><span>Havi átlag<b>${fmtSums(totals,12)}</b></span></div>`:''}`;
@@ -1675,7 +1762,7 @@ function pageContracts(){
 
 function subLine(c,t){
   const d=c.details||{};
-  if(t.kind==='vehicle') return plateHTML(c.plate);
+  if(t.kind==='vehicle') return c.bm?`<span class="bmtag">Bonus-malus: ${esc(c.bm)}</span>`:'';
   if(t.kind==='property'&&c.address) return `<span class="addr">${svg('pin')}<span>${esc(c.address)}</span></span>`;
   if(t.kind==='child'&&d.childName) return `<span class="kidpill">${d.childBorn===0?'👶':'🎈'} ${esc(d.childName)}${d.childBorn===0?', hamarosan érkezik':d.childBirth?', '+kidAge(d.childBirth):''}</span>`;
   if(t.kind==='savings'&&d.goal) return `<span class="goalpill">🎯 ${esc(d.goal)}</span>`;
@@ -1759,7 +1846,7 @@ function card(c){
   const sub = subLine(c,t);
   return `<article class="cc ${sel?'sel':''} ${open?'is-open':''}">
     <div class="cc-top">${picto(t,44)}
-      <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&c.own!=='me'?`<span class="kind notmine">${c.own==='direct'?'Közvetlen':c.own==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div><div class="cc-name" title="${esc(cTitle(c))}">${esc(cTitle(c))}</div><div class="cc-sub">${sub||'&nbsp;'}</div></div>
+      <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&c.own!=='me'?`<span class="kind notmine">${c.own==='direct'?'Közvetlen':c.own==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div><div class="cc-name" title="${esc(cTitle(c))}"><span class="nm">${esc(cTitle(c))}</span>${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</div><div class="cc-sub">${sub||'&nbsp;'}</div></div>
       <div class="cc-tools">${open?`<button class="xclose" data-exp="${c.id}" aria-label="Becsukás" title="Becsukás">${svg('chev')}</button>`:''}<button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez" aria-pressed="${sel}">${svg('check','stroke-width="3"')}</button></div></div>
     <div class="insrow">${insBadge(c.insurer,22)}<b>${esc(c.insurer||'Biztosító nincs megadva')}</b><span class="pol">${esc(c.policy||'')}</span></div>
     <div class="meta-line"><span>${f.n} díj <b>${fmtC(c.fee/f.p,c.cur)}</b></span>${metaRight(c)}</div>
@@ -1775,7 +1862,7 @@ function listTable(cs){
     const sub = subLine(c,t);
     return `<div class="lrow ${open?'open':''}" data-exp="${c.id}" role="button" tabindex="0" aria-expanded="${open}">
       ${picto(t,30)}
-      <div class="t"><b>${esc(cTitle(c))}</b><span class="sub"><span class="kind sm" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${sub}</span></div>
+      <div class="t"><b>${esc(cTitle(c))}${t.kind==='vehicle'&&c.plate?' '+plateHTML(c.plate):''}</b><span class="sub"><span class="kind sm" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${sub}</span></div>
       <div class="ins hide-s2">${insBadge(c.insurer,22)}<div><b>${esc(c.insurer)}</b><span>${esc(c.policy||'–')}</span></div></div>
       <div class="an hide-l ${!life&&a.days<=60?'near':''}">${life?'<span class="muted">–</span>':huShort(a.date)}</div>
       <div class="fee"><b>${fmtC(c.fee/f.p,c.cur)}</b><span>${f.adv}</span></div>
@@ -1801,15 +1888,32 @@ function setNotifyAll(cs){
 }
 
 // ---------- Üzenetek ----------
-function pageChat(){
-  const hh=curHH(), msgs=S.messages[hh.id]||[], me=S.role; let lastDay='';
-  const body=msgs.map(m=>{const d=huDate(m.ts); let sep=''; if(d!==lastDay){lastDay=d; sep=`<div class="day">${iso(m.ts)===iso(today())?'Ma':d}</div>`;} return sep+`<div class="msg ${m.from===me?'me':'them'}">${esc(m.text)}<small>${timeHM(m.ts)}</small></div>`;}).join('')
-    || `<div class="empty" style="margin:auto;border:0"><b>Még nincs üzenet</b>${me==='client'?'Írj bátran, bármilyen kérdésben.':'Írj elsőként az ügyfélnek.'}</div>`;
-  const head=me==='client'?`${advisorAv(38)}<div><b>${esc(S.advisor.name)}</b><span>Általában pár órán belül válaszol</span></div>`:`${miniAv(hh.holders[0],38)}<div><b>${esc(hh.name)}</b><span style="color:var(--ink-3)">${esc(hh.email)}</span></div>`;
-  const quick=me==='client'?['Időpontot szeretnék','Változtak az adataim','Kérdésem van egy szerződésről','Károm van, mit tegyek?']:['Frissítettem a szerződéseidet.','Közeleg egy évforduló, nézzük át együtt?','Megkaptam, köszönöm!'];
-  return `<div class="page-head"><div><h1>Üzenetek</h1><p class="sub">${me==='client'?'Közvetlen vonal a tanácsadódhoz.':'Beszélgetés az ügyféllel.'}</p></div></div>
-    <div class="chat"><div class="chat-head">${head}</div><div class="chat-body">${body}</div><div class="quick">${quick.map(q=>`<button data-quick="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+let CHATLIST=true;
+function bubblesHTML(hh,me){
+  const msgs=S.messages[hh.id]||[], other=me==='client'?'advisor':'client', otherSeen=((S.seen||{})[other]||{})[hh.id]||0;
+  let lastDay='', prev=null; const myLast=msgs.map(m=>m.from).lastIndexOf(me);
+  if(!msgs.length) return `<div class="empty" style="margin:auto;border:0"><b>Még nincs üzenet</b>${me==='client'?'Írj bátran, bármilyen kérdésben.':'Írj elsőként az ügyfélnek.'}</div>`;
+  return msgs.map((m,i)=>{ let o=''; const d=huDate(m.ts); if(d!==lastDay){ lastDay=d; prev=null; o+=`<div class="day">${iso(m.ts)===iso(today())?'Ma':d}</div>`; }
+    const mine=m.from===me, first=prev!==m.from; prev=m.from;
+    const av=m.from==='advisor'?advisorAv(30):miniAv(hh.holders[0],30), who=m.from==='advisor'?S.advisor.name:hh.name;
+    o+=`<div class="mrow ${mine?'me':'them'} ${first?'first':''}">${mine?'':`<div class="mav">${first?av:''}</div>`}<div class="mcol">${first?`<span class="mwho">${mine?'Te':esc(who)}</span>`:''}<div class="msg ${mine?'me':'them'}">${esc(m.text)}</div><span class="mtime">${timeHM(m.ts)}${mine&&i===myLast?(otherSeen>=m.ts?' <b class="seenok">✓✓ Látta</b>':' ✓ Elküldve'):''}</span></div></div>`;
+    return o; }).join('');
+}
+function chatPanel(hh,me){
+  const head=me==='client'?`${advisorAv(40)}<div><b>${esc(S.advisor.name)}</b><span><i class="dot"></i>Általában pár órán belül válaszol</span></div>`
+    :`${innerWidth<=760?`<button class="icon-btn" data-act="chat-back" aria-label="Vissza">${svg('arrL')}</button>`:''}${miniAv(hh.holders[0],40)}<div><b>${esc(hh.name)}</b><span style="color:var(--ink-3)">${esc(hh.email||'')}</span></div><button class="btn ghost" style="margin-left:auto" data-open="${hh.id}">${svg('eye')}Portál megnyitása</button>`;
+  const quick=me==='client'?['Időpontot szeretnék','Változtak az adataim','Kérdésem van egy szerződésről','Baj történt, segítenél?']:['Frissítettem a szerződéseidet.','Közeleg egy évforduló, nézzük át együtt?','Megkaptam, köszönöm!'];
+  return `<div class="chat"><div class="chat-head">${head}</div><div class="chat-body">${bubblesHTML(hh,me)}</div><div class="quick">${quick.map(q=>`<button data-quick="${esc(q)}">${esc(q)}</button>`).join('')}</div>
     <div class="chat-input"><textarea id="msg" rows="1" placeholder="Írj üzenetet…"></textarea><button class="btn primary" data-act="send">${svg('send')}Küldés</button></div></div>`;
+}
+function pageChat(){
+  const me=S.role, hh=curHH();
+  if(me==='client') return `<div class="page-head"><div><h1>Üzenetek</h1><p class="sub">Közvetlen vonal a tanácsadódhoz.</p></div></div>${chatPanel(hh,me)}`;
+  const items=S.households.map(h=>{ const ms=S.messages[h.id]||[]; return {h,last:ms[ms.length-1],un:unread('advisor',h.id)}; }).sort((a,b)=>(b.un-a.un)||((b.last?b.last.ts:0)-(a.last?a.last.ts:0)));
+  const mob=innerWidth<=760;
+  const list=`<div class="inbox-list"><div class="ibh">Beszélgetések</div>${items.map(({h,last,un})=>`<button class="ib ${h.id===hh.id&&!(mob&&CHATLIST)?'on':''} ${un?'unread':''}" data-chatwith="${h.id}">${miniAv(h.holders[0],38)}<div class="ibt"><b>${esc(h.name)}</b><span>${last?(last.from==='advisor'?'Te: ':'')+esc(last.text):'Még nincs üzenet'}</span></div><div class="ibm"><em>${last?(iso(last.ts)===iso(today())?timeHM(last.ts):huShort(last.ts)):''}</em>${un?`<i>${un}</i>`:''}</div></button>`).join('')}</div>`;
+  return `<div class="page-head"><div><h1>Üzenetek</h1><p class="sub">Minden ügyfeled beszélgetése egy helyen.</p></div></div>
+    <div class="inbox ${mob?(CHATLIST?'show-list':'show-thread'):''}">${list}<div class="inbox-thread">${chatPanel(hh,me)}</div></div>`;
 }
 function markSeen(){ (S.seen[S.role] ||= {})[curHH().id]=Date.now(); save(); }
 function sendMsg(text){ text=(text||'').trim(); if(!text) return; postMsg(text); save(); render(); const ta=document.getElementById('msg'); if(ta) ta.focus(); }
@@ -1839,7 +1943,7 @@ function pageClients(){
     const badges=[un?`<span class="mbadge">${svg('chat')}${un} új üzenet</span>`:'',rv?`<span class="mbadge t">${svg('search')}${rv} felülvizsgálat</span>`:'',ch?`<span class="mbadge t">${svg('pen')}${ch} módosítás</span>`:''].join('')||`<span style="font-size:11.5px;color:var(--ok);font-weight:600">Nincs teendő</span>`;
     return `<div class="crow"><div class="who">${miniAv(h.holders[0],34)}<div style="min-width:0"><b>${esc(h.name)}</b><span>${h.holders.map(x=>esc(x.name)).join(', ')}</span></div></div>
       <div class="num hide-s">${cs.length}<small>szerződés</small></div><div class="num hide-s">${fmtSums(sum)}<small>éves díj</small></div>
-      <div class="stbadges hide-m">${badges}</div><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div>`;
+      <div class="stbadges hide-m">${badges}</div><div class="crow-acts"><button class="btn ghost chatbtn" data-chatwith="${h.id}" title="Üzenetek">${svg('chat')}${un?`<i>${un}</i>`:''}</button><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div></div>`;
   }).join('');
   const now=today(), opp=S.contracts.filter(c=>!isLife(c)&&c.own!=='me').map(c=>({c,a:nextAnn(c),h:HH(c.hh)})).filter(x=>x.h&&x.a.days<=120).sort((x,y)=>x.a.days-y.a.days);
   const oppHTML = `<div class="sec-title"><h2>Évfordulós lehetőségek <span class="muted" style="font-weight:500">a következő 120 napban, nem nálad lévő szerződések</span></h2></div>
@@ -2407,7 +2511,7 @@ async function renderPDF(html, fname){
   try{
     await document.fonts.ready;
     const root=host.firstElementChild; root.style.position='relative';
-    const W=210, MT=13, MB=13, CH=297-MT-MB, pageHpx=Math.floor(root.offsetWidth*CH/W);
+    const W=210, MT=7, MB=11, CH=297-MT-MB, pageHpx=Math.floor(root.offsetWidth*CH/W);
     root.querySelectorAll('.pb-avoid').forEach(el=>{
       const rt=root.getBoundingClientRect().top, r=el.getBoundingClientRect(), top=r.top-rt, bot=top+r.height;
       const pS=Math.floor(top/pageHpx), pE=Math.floor((bot-1)/pageHpx);
@@ -2422,8 +2526,7 @@ async function renderPDF(html, fname){
       if(i>0) pdf.addPage(); pdf.addImage(sl.toDataURL('image/png'),'PNG',0,MT,W,sl.height*W/canvas.width,undefined,'FAST');
       pdf.setFontSize(7.5); pdf.setTextColor(150,156,159);
       pdf.text(`${i+1} / ${n}`, W/2, 297-6, {align:'center'});
-      if(i===0&&n>1) pdf.text(`A dokumentum ${n} oldalból áll`, W-13, 8, {align:'right'});
-      if(i>0) pdf.text('pancelbence.hu', 13, 8);
+      if(i===0&&n>1) pdf.text(`A dokumentum ${n} oldalból áll`, 12, 297-6);
     }
     const name=fname.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9._-]+/g,'-');
     if(dl) await dl.save({filename:name,data:pdf.output('blob')}); else pdf.save(name);
@@ -2432,7 +2535,7 @@ async function renderPDF(html, fname){
   finally{ host.innerHTML=''; }
 }
 function pdfChart(pts){
-  const W=860,H=170,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
+  const W=860,H=112,P=8,maxV=Math.max(...pts.map(p=>p.v),1), n=pts.length-1||1;
   const X=i=>P+(W-2*P)*i/n, Y=v=>H-24-(H-36)*v/maxV;
   const line=k=>pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p[k]).toFixed(1)}`).join('');
   const area=k=>`${line(k)}L${X(n).toFixed(1)},${Y(0)}L${X(0)},${Y(0)}Z`;
@@ -2478,6 +2581,7 @@ function calcReportHTML0(){
     ${story}
     <div class="cr-sec pb-avoid"><h2>Így nő a megtakarítás</h2><div class="cr-chart">${pdfChart(r.pts)}</div><div class="cr-leg"><span><i style="background:#2E9EA3"></i>Várható érték</span><span><i style="background:#949C9F"></i>Befizetések</span></div></div>
     ${journeyHTML(r)}
+    ${motivationHTML(r)}
     <p class="cr-disc pb-avoid">A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak. A számítás kiegészítő kockázati fedezetek nélkül készült; ezek csökkentik a megtakarítás értékét. A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.${P.index?` A díj évente ${fmtNum(P.index*100)}%-kal indexálódik.`:''}</p>
     <div class="rep-sig pb-avoid"><div class="ph">${a.photo?`<img src="${a.photo}" alt="">`:''}</div>
       <div class="sg"><div class="nm">${esc(a.name)}</div><div class="tt">${esc(a.title)}</div>${a.tagline?`<div class="sl">„${esc(a.tagline)}”</div>`:''}
@@ -2508,16 +2612,37 @@ function journeyStages(){
 }
 function journeyHTML(r){
   const Y=CALC.years||1, cur=CALC.cur, ms=milestonesOf(r,cur), st=journeyStages(), yr0=today().getFullYear();
-  const pos=y=>Math.min(95,Math.max(5,5+90*y/Y));
-  const lab=s=>{ const c=String(s.c).replace(EMOJI_RE,'').trim(); const parts=c.split(','); return {top:parts[0].trim().replace(/^most$/,'Ma'), sub:parts.slice(1).join(',').trim()}; };
-  return `<div class="cr-sec pb-avoid"><h2>Az út a célig</h2>
-    <div class="jr2">
-      <div class="jr2-line"></div>
-      ${st.map((s,i)=>{const L=lab(s); return `<div class="jr2-node ${i===st.length-1?'end':''}" style="left:${pos(s.y)}%"><b>${esc(L.top==='most'?'Ma':L.top)}</b><span>${esc(L.sub)}</span><i></i></div>`;}).join('')}
-      ${ms.map((m,i)=>`<div class="jr2-ms ${i%2?'lo':''}" style="left:${pos(m.y)}%"><i></i><b>${moneyShort(m.amt,cur)}</b><span>${yr0+m.y}</span></div>`).join('')}
-    </div>
+  const W=860,H=118,x0=46,x1=814,ly=52, X=y=>x0+(x1-x0)*y/Y;
+  const lab=s=>{ const c=String(s.c).replace(EMOJI_RE,'').trim(); const p=c.split(','); return {top:p[0].trim()==='most'?'Ma':p[0].trim(), sub:p.slice(1).join(',').trim()}; };
+  const anc=x=>x<x0+40?'start':x>x1-40?'end':'middle';
+  const person=(x)=>`<g transform="translate(${x-9} ${ly-10}) scale(.78)" fill="none" stroke="#24878C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.6"/><path d="M5 22c.8-4.4 3.6-7 7-7s6.2 2.6 7 7"/></g>`;
+  const flag=(x)=>`<g transform="translate(${x-8} ${ly-9}) scale(.72)" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v19M6 4h12l-3 4.5 3 4.5H6"/></g>`;
+  const T=(x,y,t,o='')=>`<text x="${x}" y="${y}" text-anchor="${anc(x)}" font-family="Montserrat,Arial" ${o}>${esc(t)}</text>`;
+  let svgS=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">`;
+  svgS+=`<line x1="${x0}" y1="${ly}" x2="${x1}" y2="${ly}" stroke="#9FD6D9" stroke-width="2" stroke-dasharray="5 6"/>`;
+  st.forEach((s,i)=>{ const x=X(s.y), L=lab(s);
+    if(i===0) svgS+=`<circle cx="${x}" cy="${ly}" r="17" fill="#E7F6F7" stroke="#2E9EA3" stroke-width="1.5"/>${person(x)}`;
+    else if(i===st.length-1) svgS+=`<circle cx="${x}" cy="${ly}" r="17" fill="#2E9EA3"/>${flag(x)}`;
+    else svgS+=`<circle cx="${x}" cy="${ly}" r="5" fill="#fff" stroke="#2E9EA3" stroke-width="2"/>`;
+    svgS+=T(x,14,L.top,'font-size="12" font-weight="700" fill="#373435"')+T(x,28,L.sub,'font-size="10" fill="#7D8A8D"'); });
+  ms.forEach((m,i)=>{ const x=X(m.y), off=i%2?24:0;
+    svgS+=`<rect x="${x-4}" y="${ly-4}" width="8" height="8" transform="rotate(45 ${x} ${ly})" fill="#E39B2D"/>`;
+    if(off) svgS+=`<line x1="${x}" y1="${ly+8}" x2="${x}" y2="${ly+22+off-12}" stroke="#E8D3A6" stroke-width="1"/>`;
+    svgS+=T(x,ly+28+off,moneyShort(m.amt,cur),'font-size="10.5" font-weight="700" fill="#8A6A10"')+T(x,ly+41+off,String(yr0+m.y),'font-size="9" fill="#A08A4A"'); });
+  svgS+='</svg>';
+  return `<div class="cr-sec pb-avoid"><h2>Az út a célig</h2><div class="jr3">${svgS}</div>
     ${ms.length?`<table class="cr-t jr-t"><thead><tr><th>Mérföldkő</th><th>Elérés várható ideje</th></tr></thead><tbody>${ms.map(m=>`<tr><td>A megtakarítás értéke eléri a <b>${moneyShort(m.amt,cur)}</b> összeget</td><td>${yr0+m.y}, a ${m.y}. évben</td></tr>`).join('')}</tbody></table>`:''}
   </div>`;
+}
+function motivationHTML(r){
+  const cfg=calcCfg(), cur=CALC.cur, F=x=>fmtC(x,cur);
+  let txt='';
+  if(CALC.mode==='pension'){ const h=calcHolder()||{}, nm=givenName(h.name||''), py=CALC.payYears||20, pm=annuity(r.v,py,cfg.annRate??3), endAge=h.birthDate?ageAt(h.birthDate)+CALC.years:null;
+    txt=`${nm?nm+', j':'J'}ó úton jársz. Havi ${F(CALC.monthly)} rendszeres félretételével ${endAge?endAge+' éves korodra ':''}${moneyShort(r.v,cur)} gyűlhet össze, ami ${py} éven át havi ${F(pm)} kiegészítést jelenthet a nyugdíjad mellé. Az idő a legnagyobb szövetségesed: minden év, amit most hozzáadsz, később sokszorosan visszatér.`; }
+  else if(CALC.mode==='child'){ const k=calcKids()[CALC.kidSel||0]||{}; const nm=kidLabel(k);
+    txt=`Szép döntés. ${nm} ${k.age||18} évesen ${moneyShort(r.v,cur)} összeggel indulhat neki az életnek, és mindez havi ${F(CALC.monthly)} félretételéből születik. A legértékesebb ajándék a biztos alap.`; }
+  else { txt=`A rendszeres tőkeképzés a vállalkozás stabilitásának alapja: havi ${F(CALC.monthly)} tervezhető félretételével ${CALC.years} év alatt ${moneyShort(r.v,cur)} céltartalék épülhet fel.`; }
+  return `<div class="cr-quote pb-avoid"><span class="q">„</span><p>${esc(txt)}</p><b>${esc(S.advisor.name)}</b></div>`;
 }
 function makeCalcPDF(){
   const tag={child:'Gyermek-megtakaritas',pension:'Nyugdij-terv',corp:'Ceges-tokeepites'}[CALC.mode];
@@ -2533,7 +2658,7 @@ async function makePDF(){
 // ---------- események ----------
 const C_ = id => S.contracts.find(c=>c.id===id);
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
+  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
   if(!t) return;
   if(t.hasAttribute('data-scrim')){ if(e.target===t) closeModal(); return; }
   if(t.hasAttribute('data-close')){ closeModal(); return; }
@@ -2558,6 +2683,7 @@ document.addEventListener('click',e=>{
     if(calc){ CALC.mode=calc; CALC.monthly=null; CALC.years=null; S.page='calc'; save(); render(); scrollTo(0,0); return; }
     S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value=`Szia Bence! Szívesen átbeszélném a ${d?d.n.toLowerCase():'témát'} kérdését${h&&h.kind==='company'?` a ${h.name} számára`:''}.`; ta.focus(); } return; }
   if(ds.hidegap){ const [hid,k]=ds.hidegap.split(':'), h=holderOf(curHH(),hid); h.hideGaps=[...(h.hideGaps||[]),k]; save(); render(); toast('👌','Elrejtve ennél az ügyfélnél.'); return; }
+  if(ds.chatwith){ S.hh=ds.chatwith; S.page='chat'; CHATLIST=false; save(); render(); scrollTo(0,0); return; }
   if(ds.selall){ const ids=ds.selall.split(',').filter(Boolean), all=ids.every(id=>selected.has(id)); ids.forEach(id=>all?selected.delete(id):selected.add(id)); render(); return; }
   if(ds.sel){ selected.has(ds.sel)?selected.delete(ds.sel):selected.add(ds.sel); render(); return; }
   if(ds.tg){ const [k,id]=ds.tg.split(':'), c=C_(id), on=!c[k]; c[k]=on?1:0; if(k==='feeOk'&&!on) c.feeNote=''; touch(c); save(); render();
@@ -2598,6 +2724,7 @@ document.addEventListener('click',e=>{
   else if(a==='sel-clear'){ selected.clear(); render(); }
   else if(a==='toggle-all'){ const hh=curHH(), l=S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder), all=l.every(c=>expanded.has(c.id)); l.forEach(c=>all?expanded.delete(c.id):expanded.add(c.id)); render(); }
   else if(a==='calc-pdf') makeCalcPDF();
+  else if(a==='chat-back'){ CHATLIST=true; render(); }
   else if(a==='edit-nick'){ const hh=curHH(); modal('Hogyan szólítsunk?',`<div class="field"><label>Megszólítás</label><input id="nk" value="${esc(hh.nick||givenName(hh.holders[0].name))}" placeholder="pl. Bence"></div><div class="hint">Így köszönünk neked a portálon.</div>`,`<button class="btn" data-close>Mégse</button><button class="btn primary" id="nk-ok">${svg('check')}Mentés</button>`,m=>{const i=m.querySelector('#nk'); i.focus(); i.select(); m.querySelector('#nk-ok').onclick=()=>{ hh.nick=i.value.trim(); save(); closeModal(); render(); toast('👋',`Szia, ${hh.nick||givenName(hh.holders[0].name)}!`); };}); }
   else if(a==='undo') undo();
   else if(a==='redo') redo();
