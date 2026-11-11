@@ -1198,6 +1198,28 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .rep .sens tr.lump td{border-bottom:1.5px solid #CDEDEF}
 .rep .sens td.hitc{color:#24878C;font-weight:700}
 .rep .sens td em{color:#949C9F}
+
+/* ===== v20 ===== */
+.cbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:linear-gradient(120deg,var(--teal-soft),var(--surface) 65%);border:1px solid #CDEDEF;border-radius:18px;padding:14px 16px;margin:-4px 0 16px;box-shadow:var(--shadow)}
+.cbar-who{display:flex;align-items:center;gap:12px;flex:1;min-width:240px}
+.cbar-who .av{width:46px;height:46px;box-shadow:0 0 0 3px var(--surface),0 0 0 4.5px var(--teal)}
+.cbar-who b{display:block;font-size:14.5px;font-weight:700}
+.cbar-who span{display:block;font-size:12px;color:var(--ink-2)}
+.cbar-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cbar-acts .btn{position:relative}
+.cbar-hi{border-color:var(--pink) !important;color:var(--pink) !important;background:var(--pink-soft) !important}
+.cbadge{position:absolute;top:-6px;right:-6px;font-style:normal;background:var(--pink);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
+.tipbtn{font-size:17px;padding:6px 10px;animation:wob 3s ease-in-out infinite}
+@keyframes wob{0%,85%,100%{transform:rotate(0)}90%{transform:rotate(-12deg)}95%{transform:rotate(12deg)}}
+.tiptext{font-size:16px;line-height:1.55;margin:4px 0 10px;color:var(--ink)}
+.cvpraise{flex-basis:100%;border:0;background:linear-gradient(90deg,#FFF6DC,#FDEBF0);color:#8A6A10;font-weight:700;font-size:11.5px;border-radius:9px;padding:6px 10px;text-align:left;margin-top:2px}
+.cvpraise:hover{filter:brightness(.98)}
+.lfilters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.nm2{font-style:normal;font-size:10px;font-weight:600;color:var(--ink-3);background:var(--surface-2);padding:1px 6px;border-radius:8px;margin-left:4px}
+.opp .orow{grid-template-columns:30px 1fr 110px 120px auto}
+.pkgh{margin:6px 0 2px !important;font-weight:600;color:var(--ink) !important}
+.pkg{margin:0;padding-left:16px;font-size:11.5px;color:var(--ink-2);line-height:1.6}
+@media (max-width:760px){ .cbar{padding:12px} .cbar-acts .btn{flex:1 1 auto;justify-content:center} .cbar-acts .tipbtn{flex:0 0 auto} }
 </style>
 </head>
 <body>
@@ -1440,6 +1462,7 @@ function migrate(){
   const g=S.types.find(t=>t.k==='gyermek'); if(g&&g.kind==='savings') g.kind='child';
   if(!S.types.some(t=>t.k==='megtakaritas')){ const at=S.types.findIndex(t=>t.k==='gyermek'); S.types.splice(at<0?S.types.length:at+1,0,{k:'megtakaritas',n:'Egyéb megtakarítás',i:'coins',c:'#B98A1E',kind:'savings'}); }
   S.contracts.forEach(c=>{ c.cur=c.cur||'HUF'; c.details=c.details||{}; });
+  if(!S.demo11){ S.demo11=1; S.contracts.forEach(c=>{ const i=c.info||{}; ['assistPhone','claimPhone'].forEach(k=>{ if(/^\+36 1 0+\d?$/.test(i[k]||'')||/^\+36 1 000 000\d$/.test(i[k]||'')) delete i[k]; }); }); }
   if(!S.demo10){ S.demo10=1; S.households.forEach(h=>h.holders.forEach(x=>{ if(x.phone) x.phone=fmtPhone(x.phone); })); if(S.advisor.phone) S.advisor.phone=fmtPhone(S.advisor.phone); S.contracts.forEach(c=>{ const i=c.info||{}; if(i.assistPhone) i.assistPhone=fmtPhone(i.assistPhone); if(i.claimPhone) i.claimPhone=fmtPhone(i.claimPhone); }); }
   if(!S.demo9){ S.demo9=1; S.calcCfg={scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:(S.calcCfg||{}).taxPct||20,taxMax:(S.calcCfg||{}).taxMax||130000}; }
   if(!S.demo8){ S.demo8=1; S.contracts.forEach(c=>{ if(c.own==null) c.own = c.insurer==='Allianz' ? 'me' : 'other'; }); }
@@ -1449,9 +1472,9 @@ function migrate(){
     S.households.forEach(h=>h.holders.forEach(x=>{ if(x.phone) x.phone=fmtPhone(x.phone); }));
   }
   if(!S.demo5){ S.demo5=1;
-    const sk=S.contracts.find(c=>c.policy==='AZ-77310288'); if(sk) sk.info={assist:1,assistPhone:'+36 1 000 0000',claimPhone:'+36 1 000 0001',todo:'Baleset esetén először hívd az asszisztenciát. Töltsd ki a kék-sárga baleseti bejelentőt a másik féllel, és fotózd le a helyszínt és a sérüléseket.'};
-    const el=S.contracts.find(c=>c.policy==='AZ-50117742'); if(el){ el.info={benefType:'named',benefNames:'Minta Anna (élettárs) 100%',claimPhone:'+36 1 000 0002',todo:'Biztosítási esemény esetén hívd Bencét, ő segít összeállítani a szükséges iratokat.'}; el.details.risks=[{n:'Haláleset',a:100000000},{n:'Kritikus betegség',a:50000000},{n:'Baleseti haláleset',a:20000000},{n:'Baleseti maradandó egészségkárosodás',a:10000000}]; }
-    const rk=S.contracts.find(c=>c.policy==='GR-2091733'); if(rk) rk.info={claimPhone:'+36 1 000 0003',todo:'Beázás vagy betörés esetén előbb hárítsd el a további kárt, fotózz, majd 2 munkanapon belül jelentsd a kárt.'};
+    const sk=S.contracts.find(c=>c.policy==='AZ-77310288'); if(sk) sk.info={assist:1,todo:'Baleset esetén először hívd az asszisztenciát. Töltsd ki a kék-sárga baleseti bejelentőt a másik féllel, és fotózd le a helyszínt és a sérüléseket.'};
+    const el=S.contracts.find(c=>c.policy==='AZ-50117742'); if(el){ el.info={benefType:'named',benefNames:'Minta Anna (élettárs) 100%',todo:'Biztosítási esemény esetén hívd Bencét, ő segít összeállítani a szükséges iratokat.'}; el.details.risks=[{n:'Haláleset',a:100000000},{n:'Kritikus betegség',a:50000000},{n:'Baleseti haláleset',a:20000000},{n:'Baleseti maradandó egészségkárosodás',a:10000000}]; }
+    const rk=S.contracts.find(c=>c.policy==='GR-2091733'); if(rk) rk.info={todo:'Beázás vagy betörés esetén előbb hárítsd el a további kárt, fotózz, majd 2 munkanapon belül jelentsd a kárt.'};
   }
   if(!S.demo4){
     S.demo4=1; const now=Date.now();
@@ -1525,6 +1548,7 @@ function parseHuDate(v){ v=String(v||'').trim(); if(!v) return ''; let m;
   return null; }
 const huIso = iso => /^\d{4}-\d{2}-\d{2}$/.test(iso||'') ? iso.replace(/^(\d{4})-(\d{2})-(\d{2})$/,'$1.$2.$3.') : (iso||'');
 function parseMD(v){ v=String(v||'').trim(); if(!v) return ''; const full=parseHuDate(v); if(full) return full.slice(5); const m=v.match(/^(\d{1,2})\D+(\d{1,2})\D*$/); if(!m||+m[1]<1||+m[1]>12||+m[2]<1||+m[2]>31) return null; return `${pad2(m[1])}-${pad2(m[2])}`; }
+const ownOf = c => c.own || (c.insurer==='Allianz'?'me':'other');
 const annivOf = c => c.anniv || String(c.start||iso(today())).slice(5);
 const annivHu = c => { const a=annivOf(c); return a?a.replace('-','.')+'.':''; };
 const nextAnn = c => nextOcc('2000-'+annivOf(c));
@@ -1772,6 +1796,7 @@ function coverPanel(hh,all){
     if(!have.length&&!miss.length) return '';
     if(!cs.length) return `<div class="cvrow"><div class="cvwho">${miniAv(h,26)}<b>${esc(h.name)}</b></div><div class="cvitems">${defs.filter(d=>!d.only).map(d=>`<span class="cv ghost"><i>${d.e}</i>${d.n}</span>`).join('')}</div><p class="cvhint soft">🌱 Itt fog kirajzolódni a védőhálód. Vidd fel bátran a szerződéseidet, és meglátod, mi mindenre figyelsz már most.</p></div>`;
     const hint=coverHint(h,miss);
+    if(!miss.length && have.length>=3) return `<div class="cvrow"><div class="cvwho">${miniAv(h,26)}<b>${esc(h.name)}</b></div><div class="cvitems">${have.map(d=>`<span class="cv ok"><i>${d.e}</i>${d.n}<em>${svg('check','stroke-width="3"')}</em></span>`).join('')}</div><button class="cvpraise" data-act="praise">🏆 Teljes védőháló! Minden fontos területre figyelsz. Kattints rám!</button></div>`;
     return `<div class="cvrow"><div class="cvwho">${miniAv(h,26)}<b>${esc(h.name)}</b></div>
       <div class="cvitems">${have.map(d=>`<span class="cv ok"><i>${d.e}</i>${d.n}<em>${svg('check','stroke-width="3"')}</em></span>`).join('')}
       ${miss.map(d=>`<span class="cv gap"><button class="cvb" data-gap="${h.id}:${d.k}${d.calc?':'+d.calc:''}"><i>${d.e}</i>${d.n}<small>${d.calc?'számold ki':'beszéljünk róla'}</small></button>${isA?`<button class="cvx" data-hidegap="${h.id}:${d.k}" title="Nem releváns ennél az ügyfélnél" aria-label="Elrejtés">${svg('x')}</button>`:''}</span>`).join('')}</div>
@@ -1780,6 +1805,15 @@ function coverPanel(hh,all){
   if(!rows.trim()) return '';
   if(!all.length) return `<div class="sec-title"><h2>Védőhálód</h2></div><div class="cover welcome"><div class="wl-ic">${['🚗','🏡','❤️','🌱','🎈','💼'].map(e=>`<span>${e}</span>`).join('')}</div><h3>Üdv a portálodon! 🎉</h3><p>Vidd fel egyesével a szerződéseidet: autó, otthon, élet, megtakarítás. Ahogy haladsz, itt szépen összeáll a teljes kép, és mindig tudni fogod, mi hol van.</p><button class="btn primary" data-act="add-contract">${svg('plus')}Első szerződés felvitele</button></div>`;
   return `<div class="cover2"><div class="cv2-head">${svg('shield')}<div><b>Védőhálód</b><span>Ami már megvan, és ami még hiányozhat</span></div></div>${rows}</div>`;
+}
+const TIPS=['A legjobb időpont a félretételre tegnap volt. A második legjobb ma. 🌱','Minden szerződés, amit itt rendben tartasz, egy gonddal kevesebb a jövőben. ✨','Egy jó biztosítás olyan, mint az esernyő: akkor értékeled igazán, amikor esik. ☂️','A pénzügyi nyugalom nem szerencse, hanem jó döntések sorozata. És te jó úton jársz. 💚','Tudtad? A nyugdíjbiztosításnál az állam minden évben visszaad a befizetésed 20%-ából. 🎁','Kis lépések, nagy eredmények: már az is számít, hogy rendszerezed a szerződéseidet. 🙌','A családod biztonsága a legjobb befektetés. 🏡','Ma is tettél valamit a jövődért. Ez megérdemel egy mosolyt. 😊'];
+function contactBar(hh,all){
+  const a=S.advisor, unr=unread('client',hh.id), anyRev=all.some(c=>c.review);
+  return `<div class="cbar"><div class="cbar-who">${advisorAv(46)}<div><b>Kérdésed van? Írj nekem!</b><span>${esc(a.name)}, a tanácsadód. Általában pár órán belül válaszolok.</span></div></div>
+    <div class="cbar-acts"><button class="btn primary" data-go="chat">${svg('chat')}Üzenet Bencének${unr?`<i class="cbadge">${unr}</i>`:''}</button>
+      <button class="btn cbar-hi" data-act="req-review">${svg('search')}${anyRev?'Felülvizsgálat kérve ✓':'Kérem Bence felülvizsgálatát'}</button>
+      <button class="btn" data-act="req-talk">${svg('calendar')}Évfordulós átbeszélést kérek</button>
+      <button class="btn ghost tipbtn" data-act="tip" title="Napi gondolat">🍀</button></div></div>`;
 }
 function pageContracts(){
   const hh=curHH(), all=hhContracts(hh);
@@ -1795,6 +1829,7 @@ function pageContracts(){
   const totals=sumByCur(list);
   return `
     <div class="page-head"><div><h1>${S.role==='client'?`Szia, ${esc(first)}! <span class="wave">👋</span> <button class="icon-btn nickedit" data-act="edit-nick" title="Hogyan szólítsunk?" aria-label="Megszólítás szerkesztése">${svg('pen')}</button>`:esc(hh.name)}</h1><p class="sub">Minden biztosításod egy helyen.</p></div></div>
+    ${S.role==='client'?contactBar(hh,all):''}
     <div class="profiles">${profiles}</div>
     ${S.holder!=='all'?`<div class="filter-note">Csak <b style="color:var(--ink)">${esc(holderOf(hh,S.holder).name)}</b> szerződései látszanak.<button data-holder="all">Összes mutatása</button></div>`:''}
     ${coverPanel(hh,all)}
@@ -1847,11 +1882,21 @@ function sumRows(c){
   if(t.kind==='life') r.push(['Kedvezményezett', info.benefType==='named' ? esc(info.benefNames||'megnevezett személy') : 'Törvényes örökös']);
   return `<dl class="sumdl">${r.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 }
+const ASSIST_DB={
+  Allianz:{
+    vehicle:{name:'Allianz Autós Segélyszolgálat',phone:'+36 (80) 104 122',tel:'+3680104122',
+      pkg:['Autómentés és cseregépjármű','Utasszállítás, hazautaztatás, elszállásolás','Abroncscsere és üzemanyagfutár','Utaztatás a megkerült gépjárműhöz','Szervezési szolgáltatás: jegy-, hotel- és taxifoglalás']},
+    property:{name:'Allianz Otthon Assistance',phone:'+36 (1/20/30/70) 421-1-421',tel:'+3614211421',sub:'A nap 24 órájában hívható',desc:'Mindhárom Allianz Otthonom csomag része. Váratlan otthoni vészhelyzetben segít, például kizáródásnál, csőtörésnél vagy dugulásnál: a biztosító akár azonnal szakembert küld a helyszínre. Évente legfeljebb négy alkalommal, eseményenként 150 000 Ft keretösszegig vehető igénybe.'}
+  }
+};
 const telA = n => `<a class="telpill" href="tel:${esc(String(n).replace(/[^+\d]/g,''))}">${svg('phone')}${esc(fmtPhone(n))}</a>`;
 function helpBlock(c){
   const t=T(c.type), i=c.info||{}; const rows=[];
-  if(t.kind==='vehicle'&&(i.assist===1||i.assist===0)) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>${i.assist?'Jár ehhez a szerződéshez':'Nem tartozik hozzá'}</span></div>${i.assist&&i.assistPhone?telA(i.assistPhone):''}</div>`);
+  const db0=(ASSIST_DB[c.insurer]||{})[t.kind];
+  if(t.kind==='vehicle'&&(i.assist===1||i.assist===0)&&!(db0&&!i.assistPhone)) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>${i.assist?'Jár ehhez a szerződéshez':'Nem tartozik hozzá'}</span></div>${i.assist&&i.assistPhone?telA(i.assistPhone):''}</div>`);
   if(i.claimPhone) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>Segítség baj esetén</span></div>${telA(i.claimPhone)}</div>`);
+  const db=(ASSIST_DB[c.insurer]||{})[t.kind];
+  if(db && !i.claimPhone && !(t.kind==='vehicle'&&i.assistPhone)) rows.unshift(`<div class="hrow ${db.pkg||db.desc?'todo':''}"><span class="hic">🛟</span><div><b>${esc(db.name)}</b>${db.sub?`<span>${esc(db.sub)}</span>`:''}${db.desc?`<p>${esc(db.desc)}</p>`:(db.sub?'':'<span>Segítség baj esetén</span>')}${db.pkg&&i.assist?`<p class="pkgh">A bővített csomag tartalma:</p><ul class="pkg">${db.pkg.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>${db.phone?`<a class="telpill" href="tel:${db.tel}">${svg('phone')}${esc(db.phone)}</a>`:''}</div>`);
   if(i.todo) rows.push(`<div class="hrow todo"><span class="hic">🧭</span><div><b>Teendő baj esetén</b><p>${esc(i.todo).replace(/\n/g,'<br>')}</p></div></div>`);
   if(!rows.length) return S.role==='advisor' ? `<div class="xsec"><h5>Hasznos tudnivalók</h5><div class="xempty">Még nincs megadva. <button class="addnote" data-edit="${c.id}">Kitöltöm</button></div></div>` : '';
   return `<div class="xsec"><h5>Hasznos tudnivalók</h5><div class="help">${rows.join('')}</div></div>`;
@@ -1890,7 +1935,6 @@ function expandedBody(c){
 }
 function metaRight(c){
   const a=nextAnn(c), d=c.details||{};
-  if(isLife(c)&&T(c.type).kind!=='life'){ const sd=D_(d.signDate||c.start); return `<span>Indult <b>${sd.getFullYear()}. ${HU_M[sd.getMonth()]}</b></span>`; }
   return `<span class="${a.days<=60?'near':''}">Évforduló <b>${huShort(a.date)}</b></span>`;
 }
 function card(c){
@@ -1898,7 +1942,7 @@ function card(c){
   const sub = subLine(c,t);
   return `<article class="cc ${sel?'sel':''} ${open?'is-open':''}">
     <div class="cc-top">${picto(t,44)}
-      <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&c.own!=='me'?`<span class="kind notmine">${c.own==='direct'?'Közvetlen':c.own==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div><div class="cc-name" title="${esc(cTitle(c))}"><span class="nm">${esc(cTitle(c))}</span>${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</div><div class="cc-sub">${sub||'&nbsp;'}</div></div>
+      <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&ownOf(c)!=='me'?`<span class="kind notmine">${ownOf(c)==='direct'?'Közvetlen':ownOf(c)==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div><div class="cc-name" title="${esc(cTitle(c))}"><span class="nm">${esc(cTitle(c))}</span>${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</div><div class="cc-sub">${sub||'&nbsp;'}</div></div>
       <div class="cc-tools">${open?`<button class="xclose" data-exp="${c.id}" aria-label="Becsukás" title="Becsukás">${svg('chev')}</button>`:''}<button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez" aria-pressed="${sel}">${svg('check','stroke-width="3"')}</button></div></div>
     <div class="insrow">${insBadge(c.insurer,22)}<b>${esc(c.insurer||'Biztosító nincs megadva')}</b><span class="pol">${esc(c.policy||'')}</span></div>
     <div class="meta-line"><span>${f.n} díj <b>${fmtC(c.fee/f.p,c.cur)}</b></span>${metaRight(c)}</div>
@@ -1916,7 +1960,7 @@ function listTable(cs){
       ${picto(t,30)}
       <div class="t"><b>${esc(cTitle(c))}${t.kind==='vehicle'&&c.plate?' '+plateHTML(c.plate):''}</b><span class="sub"><span class="kind sm" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${sub}</span></div>
       <div class="ins hide-s2">${insBadge(c.insurer,22)}<div><b>${esc(c.insurer)}</b><span>${esc(c.policy||'–')}</span></div></div>
-      <div class="an hide-l ${(!life||t.kind==='life')&&a.days<=60?'near':''}">${life&&t.kind!=='life'?'<span class="muted">–</span>':huShort(a.date)}</div>
+      <div class="an hide-l ${a.days<=60?'near':''}">${huShort(a.date)}</div>
       <div class="fee"><b>${fmtC(c.fee/f.p,c.cur)}</b><span>${f.adv}</span></div>
       <div class="st hide-l">${statusIcons(c)}</div>
       <button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez">${svg('check','stroke-width="3"')}</button>
@@ -1997,11 +2041,16 @@ function pageClients(){
       <div class="num hide-s">${cs.length}<small>szerződés</small></div><div class="num hide-s">${fmtSums(sum)}<small>éves díj</small></div>
       <div class="stbadges hide-m">${badges}</div><div class="crow-acts"><button class="btn ghost chatbtn" data-chatwith="${h.id}" title="Üzenetek">${svg('chat')}${un?`<i>${un}</i>`:''}</button><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div></div>`;
   }).join('');
-  const now=today(), opp=S.contracts.filter(c=>!isLife(c)&&c.own!=='me').map(c=>({c,a:nextAnn(c),h:HH(c.hh)})).filter(x=>x.h&&x.a.days<=120).sort((x,y)=>x.a.days-y.a.days);
+  const now=today(), opp=S.contracts.filter(c=>!isLife(c)&&ownOf(c)!=='me').map(c=>({c,a:nextAnn(c),h:HH(c.hh)})).filter(x=>x.h&&x.a.days<=120).sort((x,y)=>x.a.days-y.a.days);
+  const LF=window.LISTF||(window.LISTF={days:60,own:'all'});
+  const ann=S.contracts.map(c=>({c,a:nextAnn(c),h:HH(c.hh)})).filter(x=>x.h&&x.a.days<=LF.days&&(LF.own==='all'||(LF.own==='me'?ownOf(x.c)==='me':x.ownOf(c)!=='me'))).sort((x,y)=>x.a.days-y.a.days);
+  const annHTML = `<div class="sec-title"><h2>Évforduló-lista</h2></div>
+    <div class="lfilters"><div class="segline mini">${[30,60,90].map(d=>`<button class="${LF.days===d?'on':''}" data-lf="days:${d}">${d} napon belül</button>`).join('')}</div><div class="segline mini">${[['all','Mind'],['me','Nálam'],['other','Nem nálam']].map(([k,n])=>`<button class="${LF.own===k?'on':''}" data-lf="own:${k}">${n}</button>`).join('')}</div><span class="muted" style="font-size:12px">${ann.length} szerződés</span></div>
+    ${ann.length?`<div class="ctable opp">${ann.map(({c,a,h})=>{const t=T(c.type); return `<div class="orow">${picto(t,30)}<div class="t"><b>${esc(h.name)}</b><span>${esc(cTitle(c))}, ${esc(t.n)}, ${esc(c.insurer||'')}${ownOf(c)!=='me'?' <em class="nm2">nem nálam</em>':''}</span></div><div class="od ${a.days<=30?'hot':''}"><b>${huShort(a.date)}</b><span>${a.days===0?'ma':a.days+' nap múlva'}</span></div><div class="of hide-s"><b>${fmtC(c.fee,c.cur)}</b><span>évente</span></div><div class="crow-acts"><button class="btn ghost chatbtn" data-chatwith="${h.id}" title="Üzenet">${svg('chat')}</button><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div></div>`;}).join('')}</div>`:`<div class="empty" style="padding:22px">Ebben az időszakban nincs évforduló.</div>`}`;
   const oppHTML = `<div class="sec-title"><h2>Évfordulós lehetőségek <span class="muted" style="font-weight:500">a következő 120 napban, nem nálad lévő szerződések</span></h2></div>
     ${opp.length?`<div class="ctable opp">${opp.map(({c,a,h})=>{const t=T(c.type),f=FREQ[c.freq]||FREQ.eves; return `<div class="orow">${picto(t,30)}<div class="t"><b>${esc(cTitle(c))}</b><span>${esc(h.name)}, ${esc(t.n)}, ${esc(c.insurer||'')}</span></div><div class="od ${a.days<=45?'hot':''}"><b>${huShort(a.date)}</b><span>${a.days} nap múlva</span></div><div class="of hide-s"><b>${fmtC(c.fee,c.cur)}</b><span>évente</span></div><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div>`;}).join('')}</div>`:`<div class="empty" style="padding:22px">Most nincs közelgő évforduló a nem nálad lévő szerződések között.</div>`}`;
   return `<div class="page-head"><div><h1>Ügyfeleim</h1><p class="sub">${S.households.length} ügyfél, ${S.contracts.length} szerződés</p></div><button class="btn primary" data-act="add-client">${svg('plus')}Új ügyfél meghívása</button></div>
-    <div class="ctable"><div class="crow h"><div>Ügyfél</div><div class="hide-s">Szerződések</div><div class="hide-s">Éves díj</div><div class="hide-m">Teendő</div><div></div></div>${rows}</div>${oppHTML}`;
+    <div class="ctable"><div class="crow h"><div>Ügyfél</div><div class="hide-s">Szerződések</div><div class="hide-s">Éves díj</div><div class="hide-m">Teendő</div><div></div></div>${rows}</div>${annHTML}${oppHTML}`;
 }
 
 // ---------- Biztosítók (tanácsadó) ----------
@@ -2570,7 +2619,7 @@ function reportHTML0(list){
     return `<h2>${esc(h.name)}</h2><table><thead><tr><th>Szerződés</th><th>Biztosító, kötvényszám</th><th>Évforduló</th><th>Díjfizetés</th><th>Éves díj</th></tr></thead><tbody>
       ${cs.map(c=>{const t=T(c.type),f=FREQ[c.freq]||FREQ.eves; const dd=c.details||{}; const extra=t.kind==='vehicle'?plateRep(c.plate):t.kind==='property'?esc(c.address):(t.kind==='child'&&dd.childName)?`${esc(dd.childName)}${dd.childBorn===0?' (várható születés)':''}`:(t.kind==='savings'&&dd.goal)?`Cél: ${esc(dd.goal)}`:esc(t.n);
         return `<tr class="pb-avoid"><td><div class="ti"><i class="lic" style="background:${t.c}14;color:${t.c}">${svg(t.i)}</i><div><b>${esc(cTitle(c))}</b><div style="margin-top:2px;font-size:9.5px;color:#949C9F">${extra}</div>${pdfLines(c).map(l=>`<div class="rinfo">${esc(l)}</div>`).join('')}</div></div></td>
-        <td>${hasLogo(c.insurer)?`<img class="rlogo" src="${insOf(c.insurer).logo}" alt="">`:esc(c.insurer)}<br><span style="color:#949C9F">${esc(c.policy||'–')}</span></td><td>${isLife(c)&&t.kind!=='life'?'<span style="color:#949C9F">–</span>':huShort(nextAnn(c).date)}</td><td>${f.n}<br><b>${fmtC(c.fee/f.p,c.cur)}</b></td><td>${fmtC(c.fee,c.cur)}</td></tr>`;}).join('')}
+        <td>${hasLogo(c.insurer)?`<img class="rlogo" src="${insOf(c.insurer).logo}" alt="">`:esc(c.insurer)}<br><span style="color:#949C9F">${esc(c.policy||'–')}</span></td><td>${huShort(nextAnn(c).date)}</td><td>${f.n}<br><b>${fmtC(c.fee/f.p,c.cur)}</b></td><td>${fmtC(c.fee,c.cur)}</td></tr>`;}).join('')}
       <tr class="tot"><td colspan="4">Összesen</td><td>${fmtSums(sub)}</td></tr></tbody></table>`;}).join('');
   return `<div class="rep"><div class="rep-head"><div><h1>Biztosítási áttekintés</h1><p>${esc(hh.name)} részére, készült: ${huDate(today())}</p></div>${LOGO}</div>
     ${tables}<div class="rep-total">${list.length} szerződés, éves díj összesen ${fmtSums(total)}</div>
@@ -2745,11 +2794,11 @@ async function makePDF(){
 // ---------- események ----------
 const C_ = id => S.contracts.find(c=>c.id===id);
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
+  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-lf],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
   if(!t) return;
   if(t.hasAttribute('data-scrim')){ if(e.target===t) closeModal(); return; }
   if(t.hasAttribute('data-close')){ closeModal(); return; }
-  if(t.closest('.modal')) return;
+  if(t.closest('.modal') && t.dataset.act!=='tip') return;
   const ds=t.dataset;
   if(ds.go){ S.page=ds.go; save(); render(); scrollTo(0,0); return; }
   if(ds.role){ S.role=ds.role; if(S.role==='client'){S.hh='h1'; if(['clients','insurers'].includes(S.page))S.page='contracts';} else S.page='clients'; S.holder='all'; selected.clear(); save(); render(); return; }
@@ -2770,6 +2819,7 @@ document.addEventListener('click',e=>{
     if(calc){ CALC.mode=calc; CALC.monthly=null; CALC.years=null; S.page='calc'; save(); render(); scrollTo(0,0); return; }
     S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value=`Szia Bence! Szívesen átbeszélném a ${d?d.n.toLowerCase():'témát'} kérdését${h&&h.kind==='company'?` a ${h.name} számára`:''}.`; ta.focus(); } return; }
   if(ds.hidegap){ const [hid,k]=ds.hidegap.split(':'), h=holderOf(curHH(),hid); h.hideGaps=[...(h.hideGaps||[]),k]; save(); render(); toast('👌','Elrejtve ennél az ügyfélnél.'); return; }
+  if(ds.lf){ const [k,v]=ds.lf.split(':'); window.LISTF[k]=k==='days'?+v:v; render(); return; }
   if(ds.chatwith){ S.hh=ds.chatwith; S.page='chat'; CHATLIST=false; save(); render(); scrollTo(0,0); return; }
   if(ds.selall){ const ids=ds.selall.split(',').filter(Boolean), all=ids.every(id=>selected.has(id)); ids.forEach(id=>all?selected.delete(id):selected.add(id)); render(); return; }
   if(ds.sel){ selected.has(ds.sel)?selected.delete(ds.sel):selected.add(ds.sel); render(); return; }
@@ -2811,6 +2861,10 @@ document.addEventListener('click',e=>{
   else if(a==='sel-clear'){ selected.clear(); render(); }
   else if(a==='toggle-all'){ const hh=curHH(), l=S.holder==='all'?hhContracts(hh):hhContracts(hh).filter(c=>c.holder===S.holder), all=l.every(c=>expanded.has(c.id)); l.forEach(c=>all?expanded.delete(c.id):expanded.add(c.id)); render(); }
   else if(a==='calc-pdf') makeCalcPDF();
+  else if(a==='req-review'){ const hh=curHH(), cs=hhContracts(hh); if(!cs.length){ S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value='Szia Bence! Szeretném, ha átnéznéd a biztosításaimat.'; ta.focus(); } return; } requestReview(cs,'az összes'); const b=document.querySelector('[data-act=req-review]'); if(b){ const r=b.getBoundingClientRect(); burst(r.left+r.width/2,r.top+10); } }
+  else if(a==='praise'){ for(let i=0;i<5;i++) setTimeout(()=>burst(innerWidth*(.15+.17*i),innerHeight*.3+Math.random()*80),i*120); toast('🏆','Le a kalappal! Ilyen rendezett pénzügyekkel kevesen büszkélkedhetnek.'); }
+  else if(a==='req-talk'){ S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value='Szia Bence! Szeretnék egy évfordulós átbeszélést a szerződéseimről. Mikor lenne alkalmas?'; ta.focus(); } }
+  else if(a==='tip'){ const tip=TIPS[Math.floor(Math.random()*TIPS.length)]; const b=document.querySelector('[data-act=tip]'); if(b){ const r=b.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2); } modal('Napi gondolat',`<p class="tiptext">${esc(tip)}</p><div class="hint" style="text-align:right">${esc(S.advisor.name)}</div>`,`<button class="btn" data-act="tip">Még egyet</button><button class="btn primary" data-close>Köszönöm</button>`); }
   else if(a==='chat-back'){ CHATLIST=true; render(); }
   else if(a==='edit-nick'){ const hh=curHH(); modal('Hogyan szólítsunk?',`<div class="field"><label>Megszólítás</label><input id="nk" value="${esc(hh.nick||givenName(hh.holders[0].name))}" placeholder="pl. Bence"></div><div class="hint">Így köszönünk neked a portálon.</div>`,`<button class="btn" data-close>Mégse</button><button class="btn primary" id="nk-ok">${svg('check')}Mentés</button>`,m=>{const i=m.querySelector('#nk'); i.focus(); i.select(); m.querySelector('#nk-ok').onclick=()=>{ hh.nick=i.value.trim(); save(); closeModal(); render(); toast('👋',`Szia, ${hh.nick||givenName(hh.holders[0].name)}!`); };}); }
   else if(a==='undo') undo();
