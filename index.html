@@ -1180,6 +1180,24 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .rep .sens td{padding:3px 10px}
 .rep .sens td small{display:inline;margin-left:6px}
 .crep .atl-lbl{height:36px}
+
+/* ===== v19 ===== */
+.csens2{margin-top:14px}
+.stwrap{overflow-x:auto}
+.stbl{font-size:12.5px;min-width:560px}
+.stbl th{font-size:11px;padding:8px 10px}
+.stbl td{padding:8px 10px;font-variant-numeric:tabular-nums}
+.stbl td small{display:block;font-size:10.5px}
+.stbl td em,.rep .sens td em{font-style:normal;font-size:.85em;color:var(--ink-3);font-weight:500}
+.stbl tr.lump td{border-bottom:2px solid var(--line)}
+.stbl td.hitc{color:var(--teal-ink);font-weight:700}
+.snote{margin:8px 0 0;font-size:11px;color:var(--ink-3)}
+.rep .snote{font-size:9px;color:#949C9F;margin:5px 0 0}
+.rep .sens td{font-variant-numeric:tabular-nums;white-space:nowrap}
+.rep .sens td small{display:block !important;margin-left:0 !important}
+.rep .sens tr.lump td{border-bottom:1.5px solid #CDEDEF}
+.rep .sens td.hitc{color:#24878C;font-weight:700}
+.rep .sens td em{color:#949C9F}
 </style>
 </head>
 <body>
@@ -2143,17 +2161,25 @@ function calcChart(pts){
     <path d="${area('p')}" fill="var(--surface-2)" opacity=".9"/><path d="${line('p')}" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="4 4"/>
     ${ticks.map(i=>`<text x="${X(i)}" y="${H-5}" text-anchor="${i===0?'start':i===n?'end':'middle'}" class="ctick">${pts[i].y}. év</text>`).join('')}</svg>`;
 }
-function sensData(){
-  const cfg=calcCfg(), cur=CALC.cur, pension=CALC.mode==='pension', Y=CALC.years, max=CALC.mode==='pension'?45:45;
-  let ys=[Y-5,Y,Y+5,Y+10].filter(y=>y>=3&&y<=max); ys=[...new Set(ys)];
-  const h=CALC.mode==='pension'?calcHolder():null, a0=h&&h.birthDate?ageAt(h.birthDate):null;
-  const k=CALC.mode==='child'?calcKids()[CALC.kidSel||0]:null, ka=k&&k.born&&k.date?ageAt(k.date):null;
-  return {cur,ys,scen:cfg.scen,rows:ys.map(y=>({y,age:a0!=null?a0+y:ka!=null?ka+y:null,v:cfg.scen.map(sc=>ulSim(prodFor(y,cur),CALC.monthly*12,12,y,sc.r/100,pension).v)}))};
-}
+function sensTitle(){ return CALC.mode==='pension'?'Kifizetés nyugdíjas korban':CALC.mode==='child'?'Más átadási életkorral':'Más időtávval'; }
 function sensTable(cls){
-  const d=sensData(), F=x=>moneyShort(x,d.cur);
-  return `<table class="${cls}"><thead><tr><th>Időtáv</th>${d.scen.map((s,i)=>`<th class="${i===CALC.scen?'cur':''}">${esc(s.n)} ${fmtNum(s.r,1)}%</th>`).join('')}</tr></thead>
-    <tbody>${d.rows.map(r=>`<tr class="${r.y===CALC.years?'cur':''}"><td>${r.y} év${r.age!=null?`<small>${r.age} éves korig</small>`:''}</td>${r.v.map((v,i)=>`<td class="${i===CALC.scen&&r.y===CALC.years?'hit':''}">${F(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  const cfg=calcCfg(), cur=CALC.cur, F=x=>fmtC(x,cur), sc=cfg.scen, Y=CALC.years;
+  const head=first=>`<thead><tr><th>${first}</th>${sc.map((s,i)=>`<th class="${i===CALC.scen?'cur':''}">${esc(s.n)} ${fmtNum(s.r,1)}%</th>`).join('')}</tr></thead>`;
+  if(CALC.mode==='pension'){
+    const h=calcHolder(), endAge=h&&h.birthDate?ageAt(h.birthDate)+Y:null, ar=cfg.annRate??3, py=CALC.payYears||20;
+    const V=sc.map(s=>ulSim(prodFor(Y,cur),CALC.monthly*12,12,Y,s.r/100,true).v);
+    const rows=[`<tr class="lump"><td>Egy összegben${endAge?`<small>${endAge} évesen</small>`:''}</td>${V.map((v,i)=>`<td class="${i===CALC.scen?'hitc':''}">${F(v)}</td>`).join('')}</tr>`]
+      .concat([10,15,20,25].map(n=>`<tr class="${n===py?'cur':''}"><td>Havi járadék ${n} évig${endAge?`<small>${endAge}–${endAge+n} éves korig</small>`:''}</td>${V.map((v,i)=>`<td class="${i===CALC.scen&&n===py?'hit':''}">${F(annuity(v,n,ar))}<em> / hó</em></td>`).join('')}</tr>`));
+    return `<table class="${cls}">${head('Kifizetés módja')}<tbody>${rows.join('')}</tbody></table><p class="snote">A járadék számítása: a felhalmozott összeg a kifizetés alatt évi ${fmtNum(ar,1)}% hozammal tovább dolgozik, és a választott időtartam végére fogy el.</p>`;
+  }
+  if(CALC.mode==='child'){
+    const k=calcKids()[CALC.kidSel||0]||{}, base=k.age||18, t=kidTarget(k);
+    const rows=[18,20,22,25].map(a=>{ const y=Math.max(1,Y+(a-base)); const yr=t?t.getFullYear()+(a-base):null;
+      return `<tr class="${a===base?'cur':''}"><td>Átadás ${a} évesen${yr?`<small>${yr}, ${y} év félretétel</small>`:`<small>${y} év félretétel</small>`}</td>${sc.map((s,i)=>`<td class="${i===CALC.scen&&a===base?'hit':''}">${F(ulSim(prodFor(y,cur),CALC.monthly*12,12,y,s.r/100,false).v)}</td>`).join('')}</tr>`; });
+    return `<table class="${cls}">${head('Átadás')}<tbody>${rows.join('')}</tbody></table>`;
+  }
+  const ys=[...new Set([Y-5,Y,Y+5,Y+10].filter(y=>y>=3&&y<=45))];
+  return `<table class="${cls}">${head('Időtáv')}<tbody>${ys.map(y=>`<tr class="${y===Y?'cur':''}"><td>${y} év<small>${today().getFullYear()+y}-ig</small></td>${sc.map((s,i)=>`<td class="${i===CALC.scen&&y===Y?'hit':''}">${F(ulSim(prodFor(y,cur),CALC.monthly*12,12,y,s.r/100,false).v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 }
 function calcResultHTML(){
   const cfg=calcCfg(), sc=cfg.scen[CALC.scen]||cfg.scen[0], cur=CALC.cur, prod=prodFor(CALC.years,cur), P=ULPROD[prod], isA=S.role==='advisor';
@@ -2175,7 +2201,7 @@ function calcResultHTML(){
     ${note}
     ${calcChart(r.pts)}
     <div class="clegend"><span><i class="lv"></i>Várható érték</span><span><i class="lp"></i>Befizetések</span></div>
-    <div class="csens"><div class="csens-h">Más időtávval és hozammal</div>${sensTable('stbl')}</div>
+
     <p class="cmini">${esc(P.n)}${CALC.years<=10?' (10 éves vagy rövidebb tartamra)':' (10 évnél hosszabb tartamra)'}, havi díjfizetés. ${P.index?`A díj évente ${fmtNum(P.index*100)}%-kal indexálódik: az 1. évben havi ${F(CALC.monthly)}, a ${CALC.years}. évben havi ${F(r.lastFee)}.`:'Az euróalapú díj nem indexálódik.'}${pension&&cur==='EUR'?' Az euróalapú számítás adó-visszatérítés nélkül készült.':''}</p>`;
 }
 function pageCalc(){
@@ -2205,9 +2231,11 @@ function pageCalc(){
       <div class="ccard cres" id="c-res">${calcResultHTML()}</div>
     </div>
     <div class="ccard cstory" id="c-story">${calcStoryHTML()}</div>
+    <div class="ccard csens2" id="c-sens">${sensCardHTML()}</div>
     <div class="cfoot"><button class="btn primary" data-act="calc-talk">${svg('chat')}Beszéljünk róla</button><button class="btn" data-act="calc-pdf">${svg('download')}PDF letöltése</button><p>A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak, és kiegészítő kockázati fedezetek nélkül készült (ezek csökkentik a megtakarítás értékét). A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.</p></div>`;
 }
-function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); const st=document.getElementById('c-story'); if(st) st.innerHTML=calcStoryHTML(); }
+function sensCardHTML(){ return `<div class="st-head"><span>${sensTitle()}</span><em>a három hozamszcenárió szerint</em></div><div class="stwrap">${sensTable('stbl')}</div>`; }
+function calcUpdate(){ const el=document.getElementById('c-res'); if(el) el.innerHTML=calcResultHTML(); const st=document.getElementById('c-story'); if(st) st.innerHTML=calcStoryHTML(); const sn=document.getElementById('c-sens'); if(sn) sn.innerHTML=sensCardHTML(); }
 document.addEventListener('focusout',e=>{ const t=e.target; if(t.classList&&t.classList.contains('dinp')){ const v=t.value.trim(), d=parseHuDate(v); if(!v){ t.classList.remove('bad'); } else if(d){ t.value=huIso(d); t.classList.remove('bad'); } else { t.classList.add('bad'); toast('📅','A dátumot így add meg: 2021.05.27.'); } } });
 document.addEventListener('focusout',e=>{ if(e.target.id==='c-monthly'){ const L=calcLim(); if(CALC.monthly<L.min){ CALC.monthly=L.min; e.target.value=grp(L.min); const r=document.getElementById('c-monthly-r'); if(r) r.value=L.min; calcUpdate(); toast('ℹ️',`A minimális havi díj ${fmtC(L.min,CALC.cur)}.`); } } });
 document.addEventListener('change',e=>{ const t=e.target; if(t.dataset&&t.dataset.cfgsel){ calcCfg()[t.dataset.cfgsel]=t.value; save(); calcUpdate(); } });
@@ -2613,12 +2641,10 @@ function calcReportHTML0(){
     const h=calcHolder(), py=CALC.payYears||20, ar=cfg.annRate??3, pm=annuity(r.v,py,ar);
     let who=''; if(h&&h.birthDate){ const r65=D_(h.birthDate); r65.setFullYear(r65.getFullYear()+65); const left=ymLeft(today(),r65); who=`<p class="cr-p">${esc(h.name)} 65. születésnapja: <b>${huDate(r65)}</b>. Addig még ${left.y} év ${left.m} hónap van hátra.</p>`; }
     const endAge=h&&h.birthDate?ageAt(h.birthDate)+CALC.years+py:null;
-    story=`<div class="cr-sec pb-avoid"><h2>🌿 Mit jelent ez nyugdíjasként?</h2>${who}<div class="cr-opts"><div><span>💼 Egy összegben</span><b>${F(r.v)}</b><small>A teljes összeg egyszerre felvehető.</small></div>
-      <div class="hi"><span>🌿 Havi járadékként</span><b>${F(pm)} / hó</b><small>${py} éven át${endAge?`, ${endAge} éves korig`:''}, évi ${fmtNum(ar,1)}% hozammal számolva, a ${py}. évfordulón fogy el.</small></div></div></div>`;
+    story='';
   } else {
     const c=calcCompany(), gain=r.v-r.paid;
-    story=`<div class="cr-sec pb-avoid"><h2>📈 Üzleti szemmel${c?`: ${esc(c.name)}`:''}</h2><div class="cr-opts three"><div><span>Éves tőkeképzés (1. év)</span><b>${F(CALC.monthly*12)}</b><small>havi ${F(CALC.monthly)} tervezhető cash-flow terhelés</small></div><div><span>Céltartalék ${CALC.years} év múlva</span><b>${F(r.v)}</b><small>a cég saját, felhasználható vagyona</small></div>${gain>0?`<div class="hi"><span>Tőkenövekmény</span><b>+${F(gain)}</b><small>1 befizetett egységből ${fmtNum(r.v/r.paid,2)} lesz</small></div>`:''}</div>
-      <ul class="cr-ul"><li>A szabad pénzeszköz nem a bankszámlán áll, hanem dolgozik, miközben a likviditás tervezhető marad.</li><li>Céltartalék beruházásra, fejlesztésre, ingatlanra vagy kulcsember-megtartásra.</li><li>A díj számviteli és adózási kezelését a könyvelővel érdemes egyeztetni.</li></ul></div>`;
+    story=`<div class="cr-sec pb-avoid"><h2>📈 Üzleti szemmel${c?`: ${esc(c.name)}`:''}</h2><div class="cr-opts three"><div><span>Éves tőkeképzés (1. év)</span><b>${F(CALC.monthly*12)}</b><small>havi ${F(CALC.monthly)} tervezhető cash-flow terhelés</small></div><div><span>Céltartalék ${CALC.years} év múlva</span><b>${F(r.v)}</b><small>a cég saját, felhasználható vagyona</small></div>${gain>0?`<div class="hi"><span>Tőkenövekmény</span><b>+${F(gain)}</b><small>1 befizetett egységből ${fmtNum(r.v/r.paid,2)} lesz</small></div>`:''}</div></div>`;
   }
   return `<div class="rep crep">
     <div class="rep-head"><div><h1>${title}</h1><p>${esc(forWho)} részére, készült: ${huDate(today())}</p></div>${LOGO}</div>
@@ -2628,7 +2654,7 @@ function calcReportHTML0(){
     ${story}
     <div class="cr-sec pb-avoid"><h2>Így nő a megtakarítás</h2><div class="cr-chart">${pdfChart(r.pts)}</div><div class="cr-leg"><span><i style="background:#2E9EA3"></i>Várható érték</span><span><i style="background:#949C9F"></i>Befizetések</span></div></div>
     ${ageTimelineHTML(r)}
-    <div class="cr-sec pb-avoid"><h2>Más időtávval és hozammal</h2>${sensTable('cr-t sens')}</div>
+    <div class="cr-sec pb-avoid"><h2>${sensTitle()}</h2>${sensTable('cr-t sens')}</div>
     ${motivationHTML(r)}
     <p class="cr-disc pb-avoid">A kalkuláció tájékoztató jellegű, nem minősül ajánlatnak. A számítás kiegészítő kockázati fedezetek nélkül készült; ezek csökkentik a megtakarítás értékét. A tényleges hozam a választott eszközalapok teljesítményétől függ, a múltbeli hozam nem garantálja a jövőbelit.${P.index?` A díj évente ${fmtNum(P.index*100)}%-kal indexálódik.`:''}</p>
     <div class="rep-sig pb-avoid"><div class="ph">${a.photo?`<img src="${a.photo}" alt="">`:''}</div>
@@ -2637,7 +2663,7 @@ function calcReportHTML0(){
       <div class="qr"><img src="${QR_IMG}" alt="QR"><span>Szkenneld be</span></div></div>
   </div>`;
 }
-function moneyShort(n,cur){ if(cur==='EUR') return fmtC(n,cur); return n>=1e6 ? `${fmtNum(n/1e6,1)} millió Ft` : fmt(n); }
+function moneyShort(n,cur){ return fmtC(n,cur); }
 function milestonesOf(r,cur){
   const TH=cur==='EUR'?[1000,5000,10000,25000,50000,100000,250000,500000,1000000]:[1e6,5e6,10e6,25e6,50e6,75e6,100e6,150e6,200e6,300e6,500e6];
   const out=[]; TH.forEach(t=>{ const p=r.pts.find(x=>x.y>0&&x.v>=t); if(p) out.push({amt:t,y:p.y}); });
@@ -2692,7 +2718,7 @@ function ageTimelineHTML(r){
   return `<div class="cr-sec pb-avoid"><h2>Az út a célig</h2>
     <div class="atl"><div class="atl-ends"><div><span>${esc(lA)}</span><b>${esc(lB)}</b></div><div class="r"><span>${esc(rA)}</span><b>${esc(rB)}</b></div></div>
       <div class="atl-track"><i class="atl-dot s"></i><i class="atl-dot e"></i>${ms.map(m=>`<i class="atl-ms" style="left:${pos(m.y)}%"></i>`).join('')}</div>
-      <div class="atl-lbl">${ms.map((m,i)=>`<span style="left:${pos(m.y)}%" class="${i%2?'lo':''}"><b>${moneyShort(m.amt,cur)}</b>${yr0+m.y}</span>`).join('')}</div>
+      <div class="atl-lbl">${ms.map((m,i)=>`<span style="left:${Math.min(93,Math.max(7,pos(m.y)))}%" class="${i%2?'lo':''}"><b>${moneyShort(m.amt,cur)}</b>${yr0+m.y}</span>`).join('')}</div>
       <div class="atl-left">Összesen <b>${Y} év</b>, ${ms.length?`${ms.length} mérföldkővel útközben`:'tervezhető, havi befizetéssel'}.</div></div></div>`;
 }
 function motivationHTML(r){
