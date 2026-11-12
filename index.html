@@ -1220,6 +1220,7 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .pkgh{margin:6px 0 2px !important;font-weight:600;color:var(--ink) !important}
 .pkg{margin:0;padding-left:16px;font-size:11.5px;color:var(--ink-2);line-height:1.6}
 @media (max-width:760px){ .cbar{padding:12px} .cbar-acts .btn{flex:1 1 auto;justify-content:center} .cbar-acts .tipbtn{flex:0 0 auto} }
+.pillrow2{margin:6px 0 2px}
 </style>
 </head>
 <body>
@@ -1883,6 +1884,9 @@ function sumRows(c){
   return `<dl class="sumdl">${r.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 }
 const ASSIST_DB={
+  Generali:{
+    vehicle:{name:'Generali Autós Assistance',phone:'+36 (1) 458-4451',tel:'+3614584451',sub:'A nap 24 órájában elérhető'}
+  },
   Allianz:{
     vehicle:{name:'Allianz Autós Segélyszolgálat',phone:'+36 (80) 104 122',tel:'+3680104122',
       pkg:['Autómentés és cseregépjármű','Utasszállítás, hazautaztatás, elszállásolás','Abroncscsere és üzemanyagfutár','Utaztatás a megkerült gépjárműhöz','Szervezési szolgáltatás: jegy-, hotel- és taxifoglalás']},
@@ -1896,7 +1900,7 @@ function helpBlock(c){
   if(t.kind==='vehicle'&&(i.assist===1||i.assist===0)&&!(db0&&!i.assistPhone)) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>${i.assist?'Jár ehhez a szerződéshez':'Nem tartozik hozzá'}</span></div>${i.assist&&i.assistPhone?telA(i.assistPhone):''}</div>`);
   if(i.claimPhone) rows.push(`<div class="hrow"><span class="hic">🛟</span><div><b>Asszisztencia</b><span>Segítség baj esetén</span></div>${telA(i.claimPhone)}</div>`);
   const db=(ASSIST_DB[c.insurer]||{})[t.kind];
-  if(db && !i.claimPhone && !(t.kind==='vehicle'&&i.assistPhone)) rows.unshift(`<div class="hrow ${db.pkg||db.desc?'todo':''}"><span class="hic">🛟</span><div><b>${esc(db.name)}</b>${db.sub?`<span>${esc(db.sub)}</span>`:''}${db.desc?`<p>${esc(db.desc)}</p>`:(db.sub?'':'<span>Segítség baj esetén</span>')}${db.pkg&&i.assist?`<p class="pkgh">A bővített csomag tartalma:</p><ul class="pkg">${db.pkg.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>${db.phone?`<a class="telpill" href="tel:${db.tel}">${svg('phone')}${esc(db.phone)}</a>`:''}</div>`);
+  if(db && !i.claimPhone && !(t.kind==='vehicle'&&i.assistPhone)){ const pill=db.phone?`<a class="telpill" href="tel:${db.tel}">${svg('phone')}${esc(db.phone)}</a>`:''; const rich=true; rows.unshift(`<div class="hrow ${rich?'todo':''}"><span class="hic">🛟</span><div><b>${esc(db.name)}</b>${db.sub?`<span>${esc(db.sub)}</span>`:(db.desc?'':'<span>Segítség baj esetén</span>')}${rich&&pill?`<div class="pillrow2">${pill}</div>`:''}${db.desc?`<p>${esc(db.desc)}</p>`:''}${db.pkg&&i.assist?`<p class="pkgh">A bővített csomag tartalma:</p><ul class="pkg">${db.pkg.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>${rich?'':pill}</div>`); }
   if(i.todo) rows.push(`<div class="hrow todo"><span class="hic">🧭</span><div><b>Teendő baj esetén</b><p>${esc(i.todo).replace(/\n/g,'<br>')}</p></div></div>`);
   if(!rows.length) return S.role==='advisor' ? `<div class="xsec"><h5>Hasznos tudnivalók</h5><div class="xempty">Még nincs megadva. <button class="addnote" data-edit="${c.id}">Kitöltöm</button></div></div>` : '';
   return `<div class="xsec"><h5>Hasznos tudnivalók</h5><div class="help">${rows.join('')}</div></div>`;
