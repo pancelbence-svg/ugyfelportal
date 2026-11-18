@@ -1297,14 +1297,213 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
   .opp .orow .crow-acts{grid-column:2/-1;justify-content:flex-end}
   .opp .orow .t b{white-space:normal}
 }
+/* ===== v22: tisztább mobil, oldalmenü, profil, részletek panel ===== */
+.hide-mob{}
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.side-head .brand{margin-bottom:18px}
+.side-x{display:none}
+.nav-first{display:none}
+.side-hist{display:none}
+.side-scrim{display:none}
+/* kereső a Szerződések fölött */
+.gsearch.gs-page{margin:22px 0 4px;max-width:none;flex:none}
+.gsearch.gs-page input{padding:12px 14px 12px 40px;font-size:14px;border-radius:14px}
+.gsearch.gs-page .gs-ic{left:14px}
+.topbar{justify-content:space-between}
+/* középméretű kártya */
+.grid{grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:12px;align-items:stretch}
+.grid > *{min-width:0}
+.cc2 .cc-main{overflow:hidden}
+.cc2 .cc-name .nm{min-width:0}
+.cc.cc2{padding:14px;gap:10px;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.cc.cc2:hover{border-color:var(--teal);box-shadow:0 6px 18px -10px rgba(30,60,64,.3)}
+.cc.cc2:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.cc2 .cc-top{gap:12px;align-items:center}
+.cc2 .cc-main{min-height:0;gap:2px}
+.cc2 .kinds{margin-bottom:1px}
+.cc2 .kind{font-size:10px;padding:2px 7px}
+.cc2 .cc-name{font-size:15px;font-weight:700;gap:8px;line-height:1.25}
+.cc2 .cc-sub{margin-top:1px;min-height:0;font-size:11.5px}
+.cc-ins2{display:flex;align-items:center;gap:7px;font-size:12.5px;min-width:0;white-space:nowrap}
+.cc-ins2 b{font-weight:600}
+.cc-ins2 .pol{font-style:normal;color:var(--ink-3);overflow:hidden;text-overflow:ellipsis;margin-left:auto;font-size:11.5px}
+.cc-strip{display:grid;grid-template-columns:1fr 1fr 22px;align-items:center;background:var(--surface-2);border-radius:12px;padding:8px 6px 8px 12px;gap:8px}
+.cc-strip span{display:block;font-size:10.5px;color:var(--ink-3)}
+.cc-strip b{font-size:13.5px;font-weight:700;white-space:nowrap}
+.cc-strip .near b{color:var(--warn)}
+.cc-go{display:grid;place-items:center;color:var(--ink-3)}
+.cc-go svg{width:16px;height:16px;transform:rotate(-90deg)}
+.cc2:hover .cc-go{color:var(--teal-ink)}
+.cc-st{display:flex;gap:5px;flex-wrap:wrap}
+.cc-st i{display:inline-flex;align-items:center;gap:4px;font-style:normal;font-size:11px;font-weight:600;border-radius:20px;padding:3px 9px 3px 6px;background:var(--surface-2)}
+.cc-st i svg{width:12px;height:12px}
+.cc-st i.ok{background:var(--ok-soft);color:var(--ok)}
+.cc-st i.bl{background:var(--teal-soft);color:var(--teal-ink)}
+/* "Bence átnézi": tömör türkiz, sötétben is jól látszik */
+.st i.rv,.lrow .st i.rv,.cc-toggle .st i.rv,.cc-st i.rv,.dh-st i.rv{background:var(--teal-ink) !important;color:#fff !important;padding:2px 10px 2px 2px !important}
+.st i.rv .av{box-shadow:0 0 0 1.5px #fff}
+.cbar-hi.done{background:var(--teal-ink) !important;border-color:var(--teal-ink) !important;color:#fff !important}
+.cbar-hi.done .av{box-shadow:0 0 0 2px #fff}
+.cbar-hi .okc{width:15px;height:15px}
+.cbar-acts .s{display:none}
+/* lista: kattintható sor */
+.lrow[data-cd]{cursor:pointer}
+.lrow[data-cd]:hover{background:var(--surface-3)}
+/* részletek panel */
+#detail-root{position:relative;z-index:45}
+.dscrim{position:fixed;inset:0;background:rgba(20,28,30,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:24px;z-index:45;animation:fade .15s}
+.dsheet{background:var(--bg);width:min(980px,100%);max-height:calc(100vh - 48px);overflow-y:auto;border-radius:22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.45);outline:none;display:flex;flex-direction:column}
+.dbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.dback{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;font-weight:600;font-size:13px;color:var(--teal-ink);padding:6px 4px}
+.dback svg{width:18px;height:18px}
+.dbar-t{flex:1;text-align:center;font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.4px}
+.dx svg{width:18px;height:18px}
+.dhero{padding:20px 22px 6px;display:flex;flex-direction:column;gap:16px}
+.dh-top{display:flex;gap:16px;align-items:center}
+.dh-id{min-width:0;display:flex;flex-direction:column;gap:4px}
+.dh-id h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-.4px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;line-height:1.2}
+.dh-holder{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-2);font-weight:500}
+.dh-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dh-nums > div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;min-width:0}
+.dh-nums span{display:block;font-size:11px;color:var(--ink-3);font-weight:500}
+.dh-nums b{display:flex;align-items:center;gap:7px;font-size:18px;font-weight:800;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dh-nums b.dins{font-size:15px;font-weight:700}
+.dh-nums small{display:block;font-size:11.5px;color:var(--ink-2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dh-nums .near b{color:var(--warn)}
+.dh-st{display:flex;gap:6px;flex-wrap:wrap}
+.dh-st i{display:inline-flex;align-items:center;gap:5px;font-style:normal;font-size:12px;font-weight:600;border-radius:20px;padding:4px 11px 4px 8px;background:var(--surface-2)}
+.dh-st i svg{width:13px;height:13px}
+.dh-st i.ok{background:var(--ok-soft);color:var(--ok)}
+.dh-st i.bl{background:var(--teal-soft);color:var(--teal-ink)}
+.dgrid{padding:12px 22px 8px;columns:2 360px;column-gap:14px}
+.dgrid > .xsec{break-inside:avoid;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px;margin:0 0 14px;display:block}
+.dgrid .xsec h5{font-size:11px;letter-spacing:.5px;margin:0 0 10px;color:var(--teal-ink)}
+.dgrid .sumdl{display:grid;grid-template-columns:minmax(0,42%) minmax(0,1fr);gap:0 12px;margin:0;font-size:13px;background:transparent;border:0;border-radius:0;padding:0}
+.dgrid .sumdl dt{white-space:normal}
+.gs-pop mark{color:#1E2526}
+.dgrid .sumdl dt,.dgrid .sumdl dd{padding:8px 0;border-top:1px solid var(--line-2);margin:0}
+.dgrid .sumdl dt:first-of-type,.dgrid .sumdl dd:first-of-type{border-top:0}
+.dgrid .sumdl dt{color:var(--ink-3)}
+.dgrid .sumdl dd{font-weight:600;color:var(--ink);text-align:left}
+.dgrid .det{background:transparent;border:0;padding:0;font-size:13px}
+.dgrid .setlist{border:0}
+.dgrid .setrow{padding:11px 0}
+.dgrid .setrow:first-child{border-top:0}
+.dfoot{position:sticky;bottom:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 22px;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);margin-top:auto}
+.dfoot .xfoot{flex:1;min-width:0;padding:0}
+.dsel{display:inline-flex;align-items:center;gap:8px}
+.dsel .chk{pointer-events:none}
+body.d-open{overflow:hidden}
+/* profil oldal */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;align-items:start}
+.pgrid .prof{width:auto;cursor:default}
+.pgrid .prof.add{min-height:140px;display:flex;align-items:center;justify-content:center;gap:12px;text-align:left;cursor:pointer}
+.pgrid .prof.add span{display:flex;flex-direction:column;gap:2px}
+.pgrid .prof.add em{font-style:normal;font-size:12px;color:var(--ink-3);font-weight:500}
+.prof-link{display:flex;align-items:center;gap:8px;width:100%;margin-top:12px;border:1px solid var(--line);background:var(--surface-3);border-radius:12px;padding:10px 12px;font-weight:600;font-size:13px;color:var(--teal-ink)}
+.prof-link span{flex:1;text-align:left}
+.prof-link svg{width:16px;height:16px}
+.prof-link:hover{border-color:var(--teal)}
+.pset{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin:0 0 14px}
+.pset span{display:block;font-size:11.5px;color:var(--ink-3)}
+.pset b{font-size:15px}
+/* kereső-fedőlap (mobil) */
+#search-root{position:relative;z-index:48}
+.sov{position:fixed;inset:0;background:var(--bg);z-index:48;display:flex;flex-direction:column;padding:calc(12px + env(safe-area-inset-top,0px)) 14px 14px;gap:14px;animation:fade .15s}
+.sov-head{display:flex;gap:8px;align-items:center}
+.sov .gsearch{flex:1;margin:0;max-width:none;position:static}
+.sov .gsearch input{font-size:16px;padding:12px 12px 12px 40px;border-radius:14px}
+.sov .gs-ic{left:14px}
+.sov .gs-pop{position:fixed;left:14px;right:14px;top:calc(70px + env(safe-area-inset-top,0px));bottom:14px;max-height:none;overflow-y:auto;box-shadow:none}
+.sov-hint{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;color:var(--ink-3);margin-top:36px;font-size:13px;padding:0 20px}
+.sov-hint svg{width:34px;height:34px;color:var(--teal)}
+.sov-hint b{color:var(--ink);font-size:15px}
+.mobile-top .mt-btn,.mobile-top .mt-av{border:0;background:transparent;padding:0;display:grid;place-items:center}
+.mobile-top .mt-btn{width:40px;height:40px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.mobile-top .mt-btn svg{width:20px;height:20px}
+@media (min-width:761px){ .app{display:block;padding-left:236px} .side{position:fixed;left:0;top:0;bottom:0;width:236px;height:100vh;z-index:20} }
+@media (max-width:760px){
+  input,textarea,select{font-size:16px !important}
+  .hide-mob{display:none !important}
+  main{padding:0 16px calc(84px + env(safe-area-inset-bottom,0px))}
+  .topbar{display:none}
+  .gsearch.gs-page{display:none}
+  .mobile-top{position:sticky;top:0;z-index:30;margin:0 -16px 14px;padding:calc(8px + env(safe-area-inset-top,0px)) 16px 8px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-2)}
+  .mobile-top .brand{margin:0;flex-direction:row;align-items:center}
+  .mobile-top .brand small{display:none}
+  .mobile-top .brand .logo-svg{height:28px;width:auto}
+  /* alsó sáv: a képernyő aljához rögzítve */
+  .tabbar{left:0;right:0;bottom:0;border:0;border-top:1px solid var(--line);border-radius:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:var(--surface);box-shadow:0 -6px 20px -14px rgba(0,0,0,.3);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .tabbar button{border-radius:14px;padding:7px 2px 6px;gap:3px;font-size:10.5px;color:var(--ink-3)}
+  .tabbar button.active{background:var(--teal-soft);color:var(--teal-ink)}
+  .tabbar button.active svg{color:var(--teal-ink)}
+  .tabbar .badge{right:20%}
+  .toasts{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  /* oldalmenü */
+  .side{display:flex !important;position:fixed;top:0;bottom:0;left:0;width:min(330px,86vw);height:100%;z-index:60;transform:translateX(-104%);transition:transform .25s cubic-bezier(.2,.8,.2,1);padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px));box-shadow:20px 0 50px -20px rgba(0,0,0,.4);border-right:0}
+  body.menu-open .side{transform:none}
+  .side-scrim{display:block;position:fixed;inset:0;background:rgba(15,22,24,.45);z-index:55;opacity:0;pointer-events:none;transition:opacity .2s}
+  body.menu-open .side-scrim{opacity:1;pointer-events:auto}
+  body.menu-open{overflow:hidden}
+  .side-x{display:grid}
+  .side-head .brand{margin-bottom:6px}
+  .nav-first{display:block}
+  .side .nav-btn{padding:11px 12px;font-size:14px}
+  .side-hist{display:flex;gap:6px}
+  .side-hist button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+  .side-hist button:disabled{opacity:.45}
+  .side-hist svg{width:15px;height:15px}
+  .side-hist em{font-style:normal;font-size:10px;background:var(--teal-soft);color:var(--teal-ink);border-radius:8px;padding:0 5px}
+  /* kevesebb zaj */
+  h1{font-size:25px}
+  .page-head{margin-bottom:14px}
+  .cbar{padding:14px;gap:12px}
+  .cbar-who span{font-size:12px}
+  .cbar-acts{display:grid !important;grid-template-columns:1fr 1fr;gap:8px}
+  .cbar-acts .btn{font-size:12.5px;padding:10px 8px;justify-content:center;min-width:0}
+  .cbar-acts .btn.primary{grid-column:1/-1;font-size:14px;padding:12px}
+  .cbar-acts .l{display:none}
+  .cbar-acts .s{display:inline}
+  .toolbar > .btn.primary{flex:1 1 100%}
+  .toolbar .selall,.toolbar .sel-info:empty{display:none}
+  .grid{grid-template-columns:minmax(0,1fr);gap:10px}
+  .cc.cc2{border-radius:18px;padding:13px 13px 12px;gap:9px;border-color:var(--line);box-shadow:none}
+  .cc2 .cc-name{font-size:15px}
+  .cc-st i:not(.rv) span{display:none}
+  .cc-st i:not(.rv){padding:4px}
+  /* részletek: teljes képernyő */
+  .dscrim{padding:0;align-items:stretch;background:var(--bg)}
+  .dsheet{width:100%;max-height:none;height:100%;border-radius:0;box-shadow:none}
+  .dbar{padding:calc(8px + env(safe-area-inset-top,0px)) 10px 8px}
+  .dx{display:none}
+  .dhero{padding:16px 16px 4px;gap:14px}
+  .dh-top{gap:12px}
+  .dh-id h2{font-size:19px}
+  .dh-nums{grid-template-columns:1fr 1fr}
+  .dh-nums > div:last-child{grid-column:1/-1}
+  .dh-nums b{font-size:16px}
+  .dgrid{padding:10px 16px 4px;columns:1}
+  .dgrid > .xsec{padding:14px;border-radius:16px;margin-bottom:12px}
+  .dfoot{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+  .dfoot .xft{display:none}
+  .dsel{flex:1;justify-content:center}
+  .pgrid{grid-template-columns:1fr}
+  .pset{border-radius:16px}
+  /* üzenetek: a beviteli sor az alsó sáv fölött */
+  .chat{height:calc(100dvh - 205px - env(safe-area-inset-bottom,0px));min-height:360px}
+  body[data-page="chat"] .page-head .sub{display:none}
+}
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="side" id="side"></aside>
+  <div class="side-scrim" data-act="menu-close"></div>
   <main><div class="wrap" id="view"></div></main>
 </div>
 <nav class="tabbar" id="tabbar"></nav>
+<div id="detail-root"></div>
+<div id="search-root"></div>
 <div id="modal-root"></div>
 <div class="toasts" id="toasts"></div>
 <div id="report-host"></div>
@@ -1397,6 +1596,8 @@ const I = {
   bank:'<path d="M3.5 9.5 12 4.5l8.5 5"/><path d="M5.5 10v7.5M9.5 10v7.5M14.5 10v7.5M18.5 10v7.5M3.5 20h17"/>',
   arrL:'<path d="M19 12H5"/><path d="m11 6-6 6 6 6"/>',
   arrR:'<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+  menu:'<path d="M4 7h16M4 12h16M4 17h11"/>',
+  idcard:'<rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h4M14.5 13.5h3"/>',
   reset:'<path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v3.8h3.8"/>'
 };
 const svg = (n, extra='') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" ${extra}>${I[n]||I.doc}</svg>`;
@@ -1571,6 +1772,7 @@ const save = () => { const cur=snapOf(); if(lastSnap!==null && cur!==lastSnap){ 
 function undo(){ if(!HIST.length){ toast('↶','Nincs mit visszavonni.'); return; } FUT.push(lastSnap); const prev=HIST.pop(); S=keepUI(JSON.parse(prev)); lastSnap=prev; persist(); closeModal(); render(); toast('↶',HIST.length?`Visszavonva. Még ${HIST.length} lépés vonható vissza.`:'Visszavonva.'); }
 function redo(){ if(!FUT.length){ toast('↷','Nincs mit újra végrehajtani.'); return; } HIST.push(lastSnap); const nxt=FUT.pop(); S=keepUI(JSON.parse(nxt)); lastSnap=nxt; persist(); closeModal(); render(); toast('↷','Újra végrehajtva.'); }
 let selected = new Set(), expanded = new Set();
+let MENU=false, DETAIL=null, SEARCH=false;
 const normS = v => String(v==null?'':v).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
 function searchIndex(){
   const hhs = S.role==='advisor' ? S.households : [curHH()];
@@ -1604,8 +1806,8 @@ function hlS(text,q){
   return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+tk.length))+'</mark>'+esc(t.slice(i+tk.length));
 }
 let GS_IDX=-1, GS_RES=[];
-function gsRender(q){
-  const pop=document.getElementById('gs-pop'); if(!pop) return;
+function gsRender(q,pop){
+  if(!pop) return;
   GS_RES=searchRun(q); GS_IDX=GS_RES.length?0:-1;
   if(normS(q).trim().length<2){ pop.hidden=true; return; }
   pop.hidden=false;
@@ -1615,19 +1817,20 @@ function gsRender(q){
 function gsOpen(id){
   const c=S.contracts.find(x=>x.id===id); if(!c) return;
   if(S.role==='advisor') S.hh=c.hh;
-  S.page='contracts'; S.holder='all'; expanded.add(c.id); save(); render();
-  setTimeout(()=>{ const el=document.getElementById('c-'+c.id); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('gs-flash'); setTimeout(()=>el.classList.remove('gs-flash'),1800); } },60);
+  S.page='contracts'; S.holder='all'; SEARCH=false; MENU=false; DETAIL=c.id; save(); render();
+  setTimeout(()=>{ const el=document.getElementById('c-'+c.id); if(el){ el.scrollIntoView({block:'center'}); el.classList.add('gs-flash'); setTimeout(()=>el.classList.remove('gs-flash'),1800); } },60);
 }
-document.addEventListener('input',e=>{ if(e.target.id==='gs') gsRender(e.target.value); });
+const popOf = el => el.closest('.gsearch').querySelector('.gs-pop');
+document.addEventListener('input',e=>{ if(e.target.classList&&e.target.classList.contains('gs-in')) gsRender(e.target.value,popOf(e.target)); });
 document.addEventListener('keydown',e=>{
-  if(e.target.id!=='gs') { if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName||'')){ const g=document.getElementById('gs'); if(g){ e.preventDefault(); g.focus(); } } return; }
-  const pop=document.getElementById('gs-pop');
-  if(e.key==='Escape'){ e.target.value=''; pop.hidden=true; e.target.blur(); return; }
+  if(!(e.target.classList&&e.target.classList.contains('gs-in'))) { if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName||'')){ const g=[...document.querySelectorAll('.gs-in')].find(x=>x.offsetParent); if(g){ e.preventDefault(); g.focus(); } } return; }
+  const pop=popOf(e.target);
+  if(e.key==='Escape'){ e.stopPropagation(); if(e.target.value){ e.target.value=''; pop.hidden=true; } else if(SEARCH){ SEARCH=false; render(); } else e.target.blur(); return; }
   if(!GS_RES.length) return;
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); GS_IDX=(GS_IDX+(e.key==='ArrowDown'?1:-1)+GS_RES.length)%GS_RES.length; pop.querySelectorAll('.gs-row').forEach((b,i)=>b.classList.toggle('on',i===GS_IDX)); }
   if(e.key==='Enter'){ e.preventDefault(); gsOpen(GS_RES[Math.max(0,GS_IDX)].c.id); }
-});
-document.addEventListener('mousedown',e=>{ const pop=document.getElementById('gs-pop'); if(pop&&!pop.hidden&&!e.target.closest('.gsearch')) pop.hidden=true; });
+},true);
+document.addEventListener('mousedown',e=>{ document.querySelectorAll('.gs-pop').forEach(pop=>{ if(!pop.hidden&&!pop.closest('.sov')&&!e.target.closest('.gsearch')) pop.hidden=true; }); });
 
 // ---------- segédek ----------
 const esc = s => String(s??'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -1757,6 +1960,7 @@ function navItems(){
   const it=[];
   if(S.role==='advisor') it.push({p:'clients',n:'Ügyfeleim',i:'users',badge:S.households.reduce((a,h)=>a+unread('advisor',h.id)+openReviews(h.id),0)});
   it.push({p:'contracts',n:S.role==='advisor'?'Szerződések':'Szerződéseim',i:'grid'});
+  it.push({p:'profile',n:S.role==='advisor'?'Ügyfél adatai':'Profilom',i:'idcard'});
   it.push({p:'chat',n:'Üzenetek',i:'chat',badge:unread(S.role,curHH().id)});
   it.push({p:'advisor',n:S.role==='advisor'?'Profilom':'Tanácsadóm',i:'user'});
   return it;
@@ -1766,32 +1970,93 @@ function renderSide(){
   const nav=navItems().map(it=>`<button class="nav-btn ${S.page===it.p?'active':''}" data-go="${it.p}">${svg(it.i)}${esc(it.n)}${it.badge?`<span class="badge">${it.badge}</span>`:''}</button>`).join('');
   const tools=TOOLS.map(it=>`<button class="nav-btn ${S.page===it.p?'active':''}" data-go="${it.p}">${svg(it.i)}${esc(it.n)}${it.live?'':'<span class="soon">hamarosan</span>'}</button>`).join('');
   const hhS=curHH(), allS=hhContracts(hhS), onC=S.page==='contracts';
-  const people=(S.role==='client'||onC)?`<div class="nav-group">${S.role==='client'?'Profiljaim':esc(hhS.name)}</div>
+  const people=((S.role==='client'||onC)&&hhS.holders.length>1)?`<div class="nav-group">Kinek a szerződései?</div>
     <button class="nav-btn hp ${onC&&S.holder==='all'?'active':''}" data-sideholder="all"><span class="hp-ic">${svg('grid')}</span>Összes együtt<span class="hp-n">${allS.length}</span></button>
     ${hhS.holders.map(h=>`<button class="nav-btn hp ${onC&&S.holder===h.id?'active':''}" data-sideholder="${h.id}">${miniAv(h,22)}<span class="hp-nm">${esc(h.name)}</span><span class="hp-n">${allS.filter(c=>c.holder===h.id).length}</span></button>`).join('')}`:'';
-  document.getElementById('side').innerHTML=`${brandHTML()}${nav}${people}<div class="nav-group">Eszközök</div>${tools}
+  document.getElementById('side').innerHTML=`<div class="side-head">${brandHTML()}<button class="icon-btn side-x" data-act="menu-close" aria-label="Menü bezárása">${svg('x')}</button></div>
+    <div class="nav-group nav-first">Menü</div>${nav}${people}<div class="nav-group">Eszközök</div>${tools}
     <div class="side-foot">
       ${S.role==='client'?`<button class="advisor-mini" data-go="advisor">${advisorAv(34)}<div><b>${esc(S.advisor.name)}</b><span>a tanácsadód</span></div></button>`:''}
+      <div class="side-hist"><button data-act="undo" ${HIST.length?'':'disabled'}>${svg('arrL')}Vissza${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'}>Előre${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div>
       <div class="role-box"><p>Prototípus: kinek a szemével nézed?</p><div class="seg"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>
-            <div style="display:flex;gap:2px;justify-content:center"><button class="linkish" data-act="export">${svg('download')}Mentés</button><button class="linkish" data-act="import">${svg('reset')}Visszatöltés</button></div>
+      <div style="display:flex;gap:2px;justify-content:center"><button class="linkish" data-act="export">${svg('download')}Mentés</button><button class="linkish" data-act="import">${svg('reset')}Visszatöltés</button></div>
       <button class="linkish" data-act="reset">${svg('reset')}Mintaadatok visszaállítása</button></div>`;
-  const mob=navItems().filter(x=>x.p!=='insurers').concat([{p:'tools',n:'Eszközök',i:'wallet'}]);
-  document.getElementById('tabbar').innerHTML=mob.map(it=>`<button class="${S.page===it.p||(it.p==='tools'&&TOOLS.some(t=>t.p===S.page))?'active':''}" data-go="${it.p==='tools'?'pay':it.p}">${svg(it.i)}<span>${esc(it.n)}</span>${it.badge?`<span class="badge">${it.badge}</span>`:''}</button>`).join('');
+  const NI=Object.fromEntries(navItems().map(x=>[x.p,x]));
+  const tb = S.role==='advisor'
+    ? [NI.clients,{p:'contracts',n:'Szerződések',i:'grid'},NI.chat,{act:'search-open',n:'Keresés',i:'search'},{act:'menu-open',n:'Menü',i:'menu'}]
+    : [{p:'contracts',n:'Szerződések',i:'grid'},NI.chat,{act:'search-open',n:'Keresés',i:'search'},{p:'profile',n:'Profil',i:'idcard'},{act:'menu-open',n:'Menü',i:'menu'}];
+  const inTabs=tb.some(x=>x.p===S.page);
+  document.getElementById('tabbar').innerHTML=tb.map(it=>{
+    const on = it.p ? (S.page===it.p&&!MENU&&!SEARCH) : it.act==='menu-open' ? (MENU||(!inTabs&&!SEARCH)) : SEARCH;
+    return `<button class="${on?'active':''}" ${it.p?`data-go="${it.p}"`:`data-act="${it.act}"`}>${svg(it.i)}<span>${esc(it.n)}</span>${it.badge?`<span class="badge">${it.badge}</span>`:''}</button>`; }).join('');
 }
+const searchPh = () => S.role==='advisor'?'Keresés: név, rendszám, cím, kötvényszám…':'Keresés: rendszám, cím, név, kötvényszám…';
+const searchBox = (cls='') => `<div class="gsearch ${cls}"><span class="gs-ic">${svg('search')}</span><input class="gs-in" type="search" autocomplete="off" enterkeyhint="search" placeholder="${searchPh()}" aria-label="Keresés"><div class="gs-pop" hidden></div></div>`;
 function render(){
   renderSide();
+  document.body.classList.toggle('menu-open',MENU);
   const v=document.getElementById('view'), p=S.page;
-  let html=`<div class="mobile-top">${brandHTML()}<div class="seg" style="width:160px"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>`;
-  html+=`<div class="topbar"><div class="hist"><button data-act="undo" ${HIST.length?'':'disabled'} title="Vissza (Cmd+Z)">${svg('arrL')}<span>Vissza</span>${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'} title="Előre (Cmd+Shift+Z)"><span>Előre</span>${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div><div class="gsearch"><span class="gs-ic">${svg('search')}</span><input id="gs" type="search" autocomplete="off" placeholder="${S.role==='advisor'?'Keresés: név, rendszám, cím, kötvényszám…':'Keresés: rendszám, cím, név…'}" aria-label="Keresés"><div class="gs-pop" id="gs-pop" hidden></div></div><div class="savewrap"><span class="saved">${svg('check','stroke-width="3"')}Automatikusan mentve</span><button class="savebtn" data-act="savenow">Mentés</button></div></div>`;
+  let html=`<div class="mobile-top"><button class="icon-btn mt-btn" data-act="menu-open" aria-label="Menü">${svg('menu')}</button>${brandHTML()}<button class="mt-av" data-go="advisor" aria-label="${S.role==='client'?'Tanácsadóm':'Profilom'}">${advisorAv(34)}</button></div>`;
+  html+=`<div class="topbar"><div class="hist"><button data-act="undo" ${HIST.length?'':'disabled'} title="Vissza (Cmd+Z)">${svg('arrL')}<span>Vissza</span>${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'} title="Előre (Cmd+Shift+Z)"><span>Előre</span>${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div><div class="savewrap"><span class="saved">${svg('check','stroke-width="3"')}Automatikusan mentve</span><button class="savebtn" data-act="savenow">Mentés</button></div></div>`;
   if(p==='chat' && !(S.role==='advisor'&&innerWidth<=760&&CHATLIST)) markSeen();
-  if(S.role==='advisor' && p==='contracts') html+=`<div class="advisor-banner">${svg('eye')}<div>Most <b>${esc(curHH().name)}</b> portálját látod, ugyanúgy, ahogy ő. A módosításaid nála is azonnal megjelennek.</div><button class="btn" data-go="clients">Ügyfeleim</button></div>`;
-  html += p==='contracts'?pageContracts() : p==='chat'?pageChat() : p==='advisor'?pageAdvisor() : p==='clients'?pageClients() : p==='calc'?pageCalc() : pageTool(p);
+  if(S.role==='advisor' && (p==='contracts'||p==='profile')) html+=`<div class="advisor-banner">${svg('eye')}<div>Most <b>${esc(curHH().name)}</b> portálját látod, ugyanúgy, ahogy ő. A módosításaid nála is azonnal megjelennek.</div><button class="btn" data-go="clients">Ügyfeleim</button></div>`;
+  html += p==='contracts'?pageContracts() : p==='profile'?pageProfile() : p==='chat'?pageChat() : p==='advisor'?pageAdvisor() : p==='clients'?pageClients() : p==='calc'?pageCalc() : pageTool(p);
   v.innerHTML=html;
+  document.body.dataset.page=p;
   if(p==='chat'){ const b=v.querySelector('.chat-body'); if(b) b.scrollTop=b.scrollHeight; renderSide(); }
+  renderDetail(); renderSearch();
+}
+function renderSearch(){
+  const root=document.getElementById('search-root'); if(!root) return;
+  if(!SEARCH){ root.innerHTML=''; return; }
+  if(root.querySelector('.sov')) return;
+  root.innerHTML=`<div class="sov" role="dialog" aria-label="Keresés"><div class="sov-head">${searchBox('sov-box')}<button class="btn ghost" data-act="search-close">Mégse</button></div>
+    <div class="sov-hint">${svg('search')}<b>Mit keresel?</b><span>${S.role==='advisor'?'Ügyfél nevét, e-mailt, telefont, rendszámot, címet, kötvényszámot vagy biztosítót.':'Rendszámot, címet, nevet, kötvényszámot, biztosítót vagy autótípust. Az ékezet nem számít.'}</span></div></div>`;
+  setTimeout(()=>{ const i=root.querySelector('.gs-in'); if(i) i.focus(); },30);
+}
+function renderDetail(){
+  const root=document.getElementById('detail-root'); if(!root) return;
+  const c=DETAIL&&S.contracts.find(x=>x.id===DETAIL);
+  if(!c||!['contracts','clients'].includes(S.page)){ DETAIL=null; root.innerHTML=''; document.body.classList.remove('d-open'); return; }
+  const old=root.querySelector('.dsheet'), st=old?old.scrollTop:0;
+  root.innerHTML=detailSheet(c); document.body.classList.add('d-open');
+  const s=root.querySelector('.dsheet'); if(s){ s.scrollTop=st; if(!old) s.focus({preventScroll:true}); }
+}
+function detailSheet(c){
+  const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextAnn(c), sel=selected.has(c.id), dt=detTeaser(c), sub=subLine(c,t), h=holderOf(HH(c.hh),c.holder)||{}, st=statusIcons(c);
+  return `<div class="dscrim" data-dscrim><div class="dsheet" role="dialog" aria-modal="true" tabindex="-1" aria-label="${esc(cTitle(c))}">
+    <div class="dbar"><button class="dback" data-act="detail-close">${svg('arrL')}<span>Vissza</span></button><span class="dbar-t">${esc(t.n)}</span><button class="icon-btn dx" data-act="detail-close" aria-label="Bezárás">${svg('x')}</button></div>
+    <div class="dhero">
+      <div class="dh-top">${picto(t,56)}<div class="dh-id"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&ownOf(c)!=='me'?`<span class="kind notmine">${ownOf(c)==='direct'?'Közvetlen':ownOf(c)==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div>
+        <h2>${esc(cTitle(c))}${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</h2>${sub?`<div class="cc-sub">${sub}</div>`:''}<div class="dh-holder">${miniAv(h,20)}<span>${esc(h.name||'')}</span></div></div></div>
+      <div class="dh-nums">
+        <div><span>${f.n} díj</span><b>${fmtC(c.fee/f.p,c.cur)}</b><small>${f.p>1?`évente ${fmtC(c.fee,c.cur)}`:'egy összegben'}</small></div>
+        <div class="${a.days<=60?'near':''}"><span>Évforduló</span><b>${huShort(a.date)}</b><small>${a.days===0?'ma':a.days+' nap múlva'}</small></div>
+        <div><span>Biztosító</span><b class="dins">${insBadge(c.insurer,20)}${esc(c.insurer||'–')}</b><small>${esc(c.policy||'nincs kötvényszám')}</small></div>
+      </div>
+      ${st?`<div class="dh-st st">${st}</div>`:''}
+    </div>
+    <div class="dgrid">
+      <div class="xsec"><h5>Összegzés</h5>${sumRows(c)}</div>
+      ${dt?`<div class="xsec"><h5>${dt[0]}</h5><div class="det">${detBody(c)}</div></div>`:''}
+      ${helpBlock(c)}
+      ${c.note?`<div class="xsec"><h5>Megjegyzés</h5><div class="note">${esc(c.note)}</div></div>`:''}
+      ${settingsBlock(c)}
+    </div>
+    <div class="dfoot">${footBlock(c)}<button class="btn dsel ${sel?'on':''}" data-sel="${c.id}"><span class="chk ${sel?'on':''}">${svg('check','stroke-width="3"')}</span>${sel?'Kijelölve PDF-hez':'Kijelölés PDF-hez'}</button></div>
+  </div></div>`;
+}
+function pageProfile(){
+  const hh=curHH(), all=hhContracts(hh), isC=S.role==='client';
+  const cards=hh.holders.map(h=>profileCard(h,all.filter(c=>c.holder===h.id),true)).join('');
+  const nick=hh.nick||givenName(hh.holders[0].name);
+  return `<div class="page-head"><div><h1>${isC?'Profilom':'Ügyfél adatai'}</h1><p class="sub">${isC?'A saját adataid, a társadé és a cégedé, egy helyen.':`${esc(hh.name)} és a hozzá tartozó személyek, cégek.`}</p></div><button class="btn primary hide-mob" data-act="add-holder">${svg('plus')}Új személy vagy cég</button></div>
+    ${isC?`<div class="pset"><div><span>Így szólítunk</span><b>${esc(nick)}</b></div><button class="btn ghost" data-act="edit-nick">${svg('pen')}Módosítás</button></div>`:''}
+    <div class="pgrid">${cards}<button class="prof add" data-act="add-holder">${svg('plus')}<span><b>Új személy vagy cég</b><em>Például a társad, a gyermeked vagy a vállalkozásod</em></span></button></div>`;
 }
 
 // ---------- profilkártya ----------
-function profileCard(h, cs){
+function profileCard(h, cs, onProfile){
   const on=S.holder===h.id, isClient=S.role==='client';
   let rows, idLine;
   if(h.kind==='company'){
@@ -1804,10 +2069,11 @@ function profileCard(h, cs){
   }
   const allNotify=cs.length&&cs.every(c=>(c.notify||[]).length);
   const anyReview=cs.some(c=>c.review);
-  return `<div class="prof ${on?'on':''}" data-holder="${h.id}" role="button" tabindex="0" aria-pressed="${on}">
+  return `<div class="prof ${on&&!onProfile?'on':''} ${onProfile?'pcard2':''}" ${onProfile?'':`data-holder="${h.id}" role="button" tabindex="0" aria-pressed="${on}"`}>
     <div class="prof-top">${faceHTML(h,52,true)}<div class="prof-id"><div class="nm">${esc(h.name)}</div><div class="ag">${idLine}</div></div>
       <button class="icon-btn" data-edit-holder="${h.id}" aria-label="Adatok szerkesztése">${svg('pen')}</button></div>
     <dl class="prof-data">${rows.map(([k,v])=>`<dt>${k}</dt><dd class="${v?'':'empty'}">${v?esc(v):'nincs megadva'}</dd>`).join('')}</dl>
+    ${onProfile?`<button class="prof-link" data-showholder="${h.id}">${svg('grid')}<span>${cs.length?`${cs.length} szerződés`:'Még nincs szerződése'}</span>${svg('arrR')}</button>`:''}
     </div>`;
 }
 
@@ -1949,8 +2215,8 @@ function contactBar(hh,all){
   const a=S.advisor, unr=unread('client',hh.id), anyRev=all.some(c=>c.review);
   return `<div class="cbar"><div class="cbar-who">${advisorAv(46)}<div><b>Kérdésed van? Írj nekem!</b><span>${esc(a.name)}, a tanácsadód. Általában pár órán belül válaszolok.</span></div></div>
     <div class="cbar-acts"><button class="btn primary" data-go="chat">${svg('chat')}Üzenet Bencének${unr?`<i class="cbadge">${unr}</i>`:''}</button>
-      <button class="btn cbar-hi ${anyRev?'done':''}" data-act="req-review">${anyRev?`${advisorAv(20)}Bence átnézi a szerződéseidet ✓`:`${svg('search')}Kérem Bence felülvizsgálatát`}</button>
-      <button class="btn" data-act="req-talk">${svg('calendar')}Évfordulós átbeszélést kérek</button></div></div>`;
+      <button class="btn cbar-hi ${anyRev?'done':''}" data-act="req-review">${anyRev?`${advisorAv(20)}<span class="l">Bence átnézi a szerződéseidet</span><span class="s">Bence átnézi</span>${svg('check','stroke-width="3" class="okc"')}`:`${svg('search')}<span class="l">Kérem Bence felülvizsgálatát</span><span class="s">Felülvizsgálatot kérek</span>`}</button>
+      <button class="btn" data-act="req-talk">${svg('calendar')}<span class="l">Évfordulós átbeszélést kérek</span><span class="s">Évfordulós átbeszélés</span></button></div></div>`;
 }
 function pageContracts(){
   const hh=curHH(), all=hhContracts(hh);
@@ -1967,15 +2233,14 @@ function pageContracts(){
   return `
     <div class="page-head"><div><h1>${S.role==='client'?`Szia, ${esc(first)}! <span class="wave">👋</span> <button class="icon-btn nickedit" data-act="edit-nick" title="Hogyan szólítsunk?" aria-label="Megszólítás szerkesztése">${svg('pen')}</button>`:esc(hh.name)}</h1><p class="sub">Minden biztosításod egy helyen.</p></div>${S.role==='client'?`<button class="capbtn" data-act="tip" aria-label="Napi üzeneted"><span class="cap"><span class="cap-in">🍀</span></span><span class="cap-t"><b>Napi üzeneted</b><em>Pattintsd fel!</em></span></button>`:''}</div>
     ${S.role==='client'?contactBar(hh,all):''}
-    <div class="profiles">${profiles}</div>
     ${S.holder!=='all'?`<div class="filter-note">Csak <b style="color:var(--ink)">${esc(holderOf(hh,S.holder).name)}</b> szerződései látszanak.<button data-holder="all">Összes mutatása</button></div>`:''}
     ${coverPanel(hh,all)}
+    ${searchBox('gs-page')}
     <div class="sec-title" id="c-list-top"><h2>Szerződések</h2></div>
     ${hh.holders.length>1?`<div class="hchips"><button class="${S.holder==='all'?'on':''}" data-hchip="all">${svg('grid')}Összes együtt <em>${all.length}</em></button>${hh.holders.map(h=>`<button class="${S.holder===h.id?'on':''}" data-hchip="${h.id}">${miniAv(h,20)}${esc(givenName(h.name)&&h.kind!=='company'?givenName(h.name):h.name)} <em>${all.filter(c=>c.holder===h.id).length}</em></button>`).join('')}</div>`:''}
     <div class="toolbar">
       <button class="btn primary" data-act="add-contract">${svg('plus')}Új szerződés</button>
       <div class="viewseg"><button class="${S.view!=='list'?'on':''}" data-view="cards">${svg('grid')}Kártyák</button><button class="${S.view==='list'?'on':''}" data-view="list">${svg('list')}Lista</button></div>
-      <button class="btn ghost" data-act="toggle-all">${svg('chev',list.length&&list.every(c=>expanded.has(c.id))?'style="transform:rotate(180deg)"':'')}${list.length&&list.every(c=>expanded.has(c.id))?'Mind becsukása':'Mind kinyitása'}</button>
       <div class="sp"></div>
       <span class="sel-info">${selCount?`${selCount} kijelölve`:''}</span>
       <button class="btn" data-act="pdf">${svg('download')}${selCount?'Kijelöltek PDF-ben':'PDF letöltése'}</button>
@@ -2079,16 +2344,15 @@ function metaRight(c){
   return `<span class="${a.days<=60?'near':''}">Évforduló <b>${huShort(a.date)}</b></span>`;
 }
 function card(c){
-  const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, sel=selected.has(c.id), open=expanded.has(c.id);
-  const sub = subLine(c,t);
-  return `<article class="cc ${sel?'sel':''} ${open?'is-open':''}" id="c-${c.id}">
-    <div class="cc-top">${picto(t,44)}
-      <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&ownOf(c)!=='me'?`<span class="kind notmine">${ownOf(c)==='direct'?'Közvetlen':ownOf(c)==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div><div class="cc-name" title="${esc(cTitle(c))}"><span class="nm">${esc(cTitle(c))}</span>${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</div><div class="cc-sub">${sub||'&nbsp;'}</div></div>
-      <div class="cc-tools">${open?`<button class="xclose" data-exp="${c.id}" aria-label="Becsukás" title="Becsukás">${svg('chev')}</button>`:''}<button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez" aria-pressed="${sel}">${svg('check','stroke-width="3"')}</button></div></div>
-    <div class="insrow">${insBadge(c.insurer,22)}<b>${esc(c.insurer||'Biztosító nincs megadva')}</b><span class="pol">${esc(c.policy||'')}</span></div>
-    <div class="meta-line"><span>${f.n} díj <b>${fmtC(c.fee/f.p,c.cur)}</b></span>${metaRight(c)}</div>
-    ${open?`${expandedBody(c)}<button class="cc-toggle open" data-exp="${c.id}" aria-expanded="true"><span>Becsukás</span>${svg('chev','class="chev"')}</button>`
-          :`<button class="cc-toggle" data-exp="${c.id}" aria-expanded="false"><span class="st">${statusIcons(c)}</span><span>Részletek</span>${svg('chev','class="chev"')}</button>`}
+  const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, sel=selected.has(c.id), a=nextAnn(c), sub=subLine(c,t), st=statusIcons(c);
+  return `<article class="cc cc2 ${sel?'sel':''}" id="c-${c.id}" data-cd="${c.id}" role="button" tabindex="0" aria-label="${esc(cTitle(c))}: részletek">
+    <div class="cc-top">${picto(t,40)}
+      <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&ownOf(c)!=='me'?`<span class="kind notmine">${ownOf(c)==='direct'?'Közvetlen':ownOf(c)==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div>
+        <div class="cc-name" title="${esc(cTitle(c))}"><span class="nm">${esc(cTitle(c))}</span>${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</div>${sub?`<div class="cc-sub">${sub}</div>`:''}</div>
+      <div class="cc-tools"><button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez" aria-pressed="${sel}">${svg('check','stroke-width="3"')}</button></div></div>
+    <div class="cc-ins2">${insBadge(c.insurer,18)}<b>${esc(c.insurer||'Biztosító nincs megadva')}</b><em class="pol">${esc(c.policy||'')}</em></div>
+    <div class="cc-strip"><div><span>${f.n} díj</span><b>${fmtC(c.fee/f.p,c.cur)}</b></div><div class="${a.days<=60?'near':''}"><span>Évforduló</span><b>${huShort(a.date)}</b></div><span class="cc-go" aria-hidden="true">${svg('chev')}</span></div>
+    ${st?`<div class="cc-st st">${st}</div>`:''}
   </article>`;
 }
 function listTable(cs){
@@ -2097,7 +2361,7 @@ function listTable(cs){
   ${cs.map(c=>{
     const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextAnn(c), open=expanded.has(c.id), sel=selected.has(c.id), life=isLife(c);
     const sub = subLine(c,t);
-    return `<div class="lrow ${open?'open':''}" id="c-${c.id}" data-exp="${c.id}" role="button" tabindex="0" aria-expanded="${open}">
+    return `<div class="lrow" id="c-${c.id}" data-cd="${c.id}" role="button" tabindex="0">
       ${picto(t,30)}
       <div class="t"><b>${esc(cTitle(c))}${t.kind==='vehicle'&&c.plate?' '+plateHTML(c.plate):''}</b><span class="sub"><span class="kind sm" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${sub}</span></div>
       <div class="ins hide-s2">${insBadge(c.insurer,22)}<div><b>${esc(c.insurer)}</b><span>${esc(c.policy||'–')}</span></div></div>
@@ -2105,8 +2369,7 @@ function listTable(cs){
       <div class="fee"><b>${fmtC(c.fee/f.p,c.cur)}</b><span>${f.adv}</span></div>
       <div class="st hide-l">${statusIcons(c)}</div>
       <button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez">${svg('check','stroke-width="3"')}</button>
-    </div>
-    ${open?`<div class="lexp"><button class="xclose" data-exp="${c.id}" aria-label="Becsukás" title="Becsukás">${svg('chev')}</button>${expandedBody(c)}</div>`:''}`;
+    </div>`;
   }).join('')}</div>`;
 }
 
@@ -2191,6 +2454,7 @@ function pageClients(){
   const oppHTML = `<div class="sec-title"><h2>Évfordulós lehetőségek <span class="muted" style="font-weight:500">a következő 120 napban, nem nálad lévő szerződések</span></h2></div>
     ${opp.length?`<div class="ctable opp">${opp.map(({c,a,h})=>{const t=T(c.type),f=FREQ[c.freq]||FREQ.eves; return `<div class="orow">${picto(t,30)}<div class="t"><b>${esc(cTitle(c))}</b><span>${esc(h.name)}, ${esc(t.n)}, ${esc(c.insurer||'')}</span></div><div class="od ${a.days<=45?'hot':''}"><b>${huShort(a.date)}</b><span>${a.days} nap múlva</span></div><div class="of hide-s"><b>${fmtC(c.fee,c.cur)}</b><span>évente</span></div><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div>`;}).join('')}</div>`:`<div class="empty" style="padding:22px">Most nincs közelgő évforduló a nem nálad lévő szerződések között.</div>`}`;
   return `<div class="page-head"><div><h1>Ügyfeleim</h1><p class="sub">${S.households.length} ügyfél, ${S.contracts.length} szerződés</p></div><button class="btn primary" data-act="add-client">${svg('plus')}Új ügyfél meghívása</button></div>
+    ${searchBox('gs-page')}
     <div class="ctable"><div class="crow h"><div>Ügyfél</div><div class="hide-s">Szerződések</div><div class="hide-s">Éves díj</div><div class="hide-m">Teendő</div><div></div></div>${rows}</div>${annHTML}${oppHTML}`;
 }
 
@@ -2935,14 +3199,17 @@ async function makePDF(){
 // ---------- események ----------
 const C_ = id => S.contracts.find(c=>c.id===id);
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-lf],[data-sideholder],[data-hchip],[data-gs],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
+  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-lf],[data-sideholder],[data-hchip],[data-gs],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder],[data-cd],[data-dscrim],[data-showholder]');
   if(!t) return;
   if(t.hasAttribute('data-scrim')){ if(e.target===t) closeModal(); return; }
+  if(t.hasAttribute('data-dscrim')){ if(e.target===t){ DETAIL=null; render(); } return; }
   if(t.hasAttribute('data-close')){ closeModal(); return; }
   if(t.closest('.modal') && t.dataset.act!=='tip') return;
   const ds=t.dataset;
-  if(ds.go){ S.page=ds.go; save(); render(); scrollTo(0,0); return; }
-  if(ds.role){ S.role=ds.role; if(S.role==='client'){S.hh='h1'; if(['clients','insurers'].includes(S.page))S.page='contracts';} else S.page='clients'; S.holder='all'; selected.clear(); save(); render(); return; }
+  if(ds.go){ S.page=ds.go; MENU=false; SEARCH=false; DETAIL=null; save(); render(); scrollTo(0,0); return; }
+  if(ds.cd){ DETAIL=ds.cd; render(); return; }
+  if(ds.showholder){ S.holder=ds.showholder; S.page='contracts'; save(); render(); scrollTo(0,0); const g=document.getElementById('c-list-top'); if(g) setTimeout(()=>g.scrollIntoView({block:'start'}),30); return; }
+  if(ds.role){ MENU=false; DETAIL=null; S.role=ds.role; if(S.role==='client'){S.hh='h1'; if(['clients','insurers'].includes(S.page))S.page='contracts';} else S.page='clients'; S.holder='all'; selected.clear(); save(); render(); return; }
   if(ds.view){ S.view=ds.view; save(); render(); return; }
   if(ds.cmode){ CALC.mode=ds.cmode; CALC.monthly=null; CALC.years=null; render(); return; }
   if(ds.kid!=null&&ds.kid!==''){ CALC.kidSel=+ds.kid; CALC.years=null; render(); return; }
@@ -2988,10 +3255,15 @@ document.addEventListener('click',e=>{
   if(ds.inslogoX){ const ins=insOf(ds.inslogoX); ins.logo=''; save(); render(); return; }
   if(ds.exp){ expanded.has(ds.exp)?expanded.delete(ds.exp):expanded.add(ds.exp); render(); return; }
   if(ds.gs){ gsOpen(ds.gs); return; }
-  if(ds.sideholder){ S.holder=ds.sideholder; S.page='contracts'; save(); render(); scrollTo(0,0); return; }
+  if(ds.sideholder){ MENU=false; S.holder=ds.sideholder; S.page='contracts'; save(); render(); scrollTo(0,0); return; }
   if(ds.hchip){ S.holder=ds.hchip; save(); render(); const g=document.getElementById('c-list-top'); if(g) g.scrollIntoView({behavior:'smooth',block:'start'}); return; }
   if(ds.holder){ S.holder=(ds.holder!=='all'&&S.holder===ds.holder)?'all':ds.holder; save(); render(); return; }
   const a=ds.act;
+  if(a==='menu-open'){ MENU=true; SEARCH=false; render(); return; }
+  if(a==='menu-close'){ MENU=false; render(); return; }
+  if(a==='search-open'){ SEARCH=true; MENU=false; DETAIL=null; render(); return; }
+  if(a==='search-close'){ SEARCH=false; render(); return; }
+  if(a==='detail-close'){ DETAIL=null; render(); return; }
   if(a==='add-contract') contractForm();
   else if(a==='add-holder') holderForm();
   else if(a==='add-client') clientForm();
@@ -3021,9 +3293,9 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='z'&&!/INPUT|TEXTAREA|SELECT/.test((e.target.tagName||''))){ e.preventDefault(); e.shiftKey?redo():undo(); return; }
-  if(e.key==='Escape') closeModal();
+  if(e.key==='Escape'){ if(document.querySelector('#modal-root .modal')) closeModal(); else if(SEARCH){ SEARCH=false; render(); } else if(DETAIL){ DETAIL=null; render(); } else if(MENU){ MENU=false; render(); } }
   if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='msg'){ e.preventDefault(); sendMsg(e.target.value); }
-  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&(e.target.classList.contains('prof')||e.target.classList.contains('lrow'))){ e.preventDefault(); e.target.click(); }
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&(e.target.classList.contains('prof')||e.target.classList.contains('lrow')||e.target.classList.contains('cc'))){ e.preventDefault(); e.target.click(); }
 });
 function fmtInput(el){
   const v=el.value, fromEnd=v.length-(el.selectionStart??v.length), neg=/^\s*-/.test(v), d=v.replace(/\D/g,'');
