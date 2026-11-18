@@ -1221,6 +1221,82 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .pkg{margin:0;padding-left:16px;font-size:11.5px;color:var(--ink-2);line-height:1.6}
 @media (max-width:760px){ .cbar{padding:12px} .cbar-acts .btn{flex:1 1 auto;justify-content:center} .cbar-acts .tipbtn{flex:0 0 auto} }
 .pillrow2{margin:6px 0 2px}
+
+/* ===== v21 ===== */
+.nav-btn.hp{font-size:12.5px;padding-top:6px;padding-bottom:6px}
+.nav-btn.hp .av{width:22px !important;height:22px !important;flex:none}
+.hp-ic{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:var(--surface-2);flex:none}
+.hp-ic svg{width:13px !important;height:13px !important}
+.hp-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.hp-n{margin-left:auto;font-size:10.5px;font-weight:700;color:var(--ink-3);background:var(--surface-2);border-radius:8px;padding:1px 7px}
+.nav-btn.hp.active .hp-n{background:var(--surface);color:var(--teal-ink)}
+.hchips{display:none;gap:6px;flex-wrap:wrap;margin:-4px 0 12px}
+.hchips button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:4px 11px 4px 4px;font-size:12px;font-weight:600;color:var(--ink-2)}
+.hchips button:first-child{padding-left:10px}
+.hchips button svg{width:13px;height:13px}
+.hchips button em{font-style:normal;font-size:10.5px;color:var(--ink-3)}
+.hchips button.on{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.hchips button.on em{color:var(--surface);opacity:.7}
+.hchips .av{width:20px !important;height:20px !important}
+.st i.rv,.lrow .st i.rv,.cc-toggle .st i.rv{background:linear-gradient(90deg,var(--teal-soft),#FFF6DC);color:var(--teal-ink);padding:2px 9px 2px 2px !important}
+.st i.rv .av{width:16px !important;height:16px !important;font-size:7px}
+.cbar-hi{border-color:var(--teal) !important;color:var(--teal-ink) !important;background:var(--surface) !important}
+.cbar-hi.done{background:linear-gradient(90deg,var(--teal-soft),#FFF6DC) !important;border-color:#BFE6E8 !important;color:var(--teal-ink) !important}
+.cbar-hi .av{width:20px;height:20px}
+.capbtn{display:inline-flex;align-items:center;gap:10px;border:0;background:transparent;padding:0;text-align:left}
+.cap{position:relative;width:52px;height:52px;border-radius:50%;background:repeating-conic-gradient(#E9406D 0 9deg,#F27B9B 9deg 18deg);display:grid;place-items:center;box-shadow:0 6px 16px -6px rgba(233,64,109,.55);animation:capw 3.2s ease-in-out infinite}
+.cap-in{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#FDE7EE 60%,#F7C6D4);display:grid;place-items:center;font-size:19px;box-shadow:inset 0 -2px 4px rgba(0,0,0,.08)}
+.cap-t b{display:block;font-size:13px;font-weight:700;color:var(--ink)}
+.cap-t em{display:block;font-style:normal;font-size:11px;color:var(--pink);font-weight:600}
+.capbtn:hover .cap{transform:rotate(-14deg) scale(1.05)}
+.capbtn.pop .cap{animation:cappop .7s ease}
+@keyframes capw{0%,80%,100%{transform:rotate(0)}86%{transform:rotate(-12deg)}92%{transform:rotate(10deg)}}
+@keyframes cappop{0%{transform:scale(1)}30%{transform:translateY(-14px) rotate(-200deg) scale(1.08)}100%{transform:translateY(0) rotate(-360deg)}}
+.tipcard{background:linear-gradient(135deg,#FFF6F8,var(--surface) 70%);border:1px solid #F8D3DD;border-radius:14px;padding:16px 18px}
+.tipsig{display:flex;align-items:center;gap:8px;justify-content:flex-end;font-size:12px;color:var(--ink-2);font-weight:600}
+.tipsig .av{width:26px;height:26px}
+:root[data-theme="dark"] .tipcard{background:var(--surface)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tipcard{background:var(--surface);border-color:var(--line)} }
+.gsearch{position:relative;flex:1;max-width:460px;margin:0 14px}
+.gsearch input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 12px 9px 36px;font:inherit;font-size:13px;color:var(--ink);outline:none;box-shadow:var(--shadow)}
+.gsearch input:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.gs-ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-3);display:grid}
+.gs-ic svg{width:16px;height:16px}
+.gs-pop{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 22px 48px -14px rgba(0,0,0,.28);z-index:60;padding:6px;max-height:min(70vh,460px);overflow:auto}
+.gs-row{display:flex;gap:10px;align-items:center;width:100%;border:0;background:transparent;border-radius:10px;padding:8px;text-align:left}
+.gs-row.on,.gs-row:hover{background:var(--teal-soft)}
+.gs-t{min-width:0;flex:1}
+.gs-t b{display:block;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-t em{display:block;font-style:normal;font-size:11px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-t small{display:block;font-size:11px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-pop mark{background:#FFE7A3;color:inherit;border-radius:3px;padding:0 1px}
+.gs-empty{padding:14px;font-size:12.5px;color:var(--ink-2);text-align:center}
+.gs-empty span{font-size:11.5px;color:var(--ink-3)}
+.gs-flash{animation:gsfl 1.8s ease}
+@keyframes gsfl{0%,40%{box-shadow:0 0 0 4px var(--teal)}100%{box-shadow:none}}
+@media (max-width:760px){
+  .topbar{flex-wrap:wrap;gap:8px}
+  .gsearch{order:3;flex-basis:100%;max-width:none;margin:0}
+  .gsearch input{font-size:16px;padding:11px 12px 11px 38px;border-radius:14px}
+  .hchips{display:flex}
+  .page-head{align-items:center}
+  .capbtn{margin-left:auto}
+  .cap{width:46px;height:46px}.cap-in{width:34px;height:34px;font-size:17px}
+  .cap-t{display:none}
+  .cbar-hi.done{font-size:12px}
+}
+@media (max-width:760px){
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px}
+  .toolbar > .btn,.toolbar > button{flex:1 1 auto;justify-content:center;font-size:12.5px;padding:9px 10px}
+  .toolbar > .btn.primary{flex:1 1 100%}
+  .toolbar .viewseg{flex:1 1 auto;justify-content:center}
+}
+@media (max-width:760px){
+  .opp .orow{grid-template-columns:30px 1fr auto !important;row-gap:6px}
+  .opp .orow .of{display:none}
+  .opp .orow .crow-acts{grid-column:2/-1;justify-content:flex-end}
+  .opp .orow .t b{white-space:normal}
+}
 </style>
 </head>
 <body>
@@ -1495,6 +1571,63 @@ const save = () => { const cur=snapOf(); if(lastSnap!==null && cur!==lastSnap){ 
 function undo(){ if(!HIST.length){ toast('↶','Nincs mit visszavonni.'); return; } FUT.push(lastSnap); const prev=HIST.pop(); S=keepUI(JSON.parse(prev)); lastSnap=prev; persist(); closeModal(); render(); toast('↶',HIST.length?`Visszavonva. Még ${HIST.length} lépés vonható vissza.`:'Visszavonva.'); }
 function redo(){ if(!FUT.length){ toast('↷','Nincs mit újra végrehajtani.'); return; } HIST.push(lastSnap); const nxt=FUT.pop(); S=keepUI(JSON.parse(nxt)); lastSnap=nxt; persist(); closeModal(); render(); toast('↷','Újra végrehajtva.'); }
 let selected = new Set(), expanded = new Set();
+const normS = v => String(v==null?'':v).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function searchIndex(){
+  const hhs = S.role==='advisor' ? S.households : [curHH()];
+  const out=[];
+  hhs.forEach(hh=>{
+    hhContracts(hh).forEach(c=>{
+      const t=T(c.type), d=c.details||{}, h=holderOf(hh,c.holder)||{};
+      const f=[['Név',cTitle(c)],['Termék',t.n],['Biztosító',c.insurer],['Kötvényszám',c.policy],['Rendszám',c.plate?fmtPlate(c.plate):''],['Gépjármű',c.vehicle],['Cím',c.address||d.address],['Megnevezés',c.label],['Gyermek',d.childName],['Szerződő',h.name],['Cél',d.goal],['Megjegyzés',c.note],['Bonus-malus',c.bm]];
+      if(S.role==='advisor') f.push(['Ügyfél',hh.name],['E-mail',h.email],['Telefon',h.phone]);
+      out.push({c,hh,t,h,f:f.filter(x=>x[1])});
+    });
+  });
+  return out;
+}
+function searchRun(q){
+  const nq=normS(q).trim(); if(nq.length<2) return [];
+  const toks=nq.split(/\s+/).filter(Boolean), cq=nq.replace(/[^a-z0-9]/g,'');
+  return searchIndex().map(it=>{
+    const hay=it.f.map(([k,v])=>[k,String(v),normS(v)]);
+    const all=hay.map(x=>x[2]).join(' '), allc=all.replace(/[^a-z0-9]/g,'');
+    const okTok=toks.every(tk=>all.includes(tk)), okC=cq.length>=3&&allc.includes(cq);
+    if(!okTok&&!okC) return null;
+    let hit=hay.find(x=>x[2].includes(toks[0])) || hay.find(x=>x[2].replace(/[^a-z0-9]/g,'').includes(cq)) || hay[0];
+    const score=(normS(cTitle(it.c)).startsWith(toks[0])?3:0)+(hit[0]==='Név'?2:0)+(hit[0]==='Rendszám'?2:0);
+    return {...it,hit,score};
+  }).filter(Boolean).sort((a,b)=>b.score-a.score).slice(0,8);
+}
+function hlS(text,q){
+  const t=String(text), n=normS(t), tk=normS(q).trim().split(/\s+/)[0]; if(!tk) return esc(t);
+  const i=n.indexOf(tk); if(i<0) return esc(t);
+  return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+tk.length))+'</mark>'+esc(t.slice(i+tk.length));
+}
+let GS_IDX=-1, GS_RES=[];
+function gsRender(q){
+  const pop=document.getElementById('gs-pop'); if(!pop) return;
+  GS_RES=searchRun(q); GS_IDX=GS_RES.length?0:-1;
+  if(normS(q).trim().length<2){ pop.hidden=true; return; }
+  pop.hidden=false;
+  pop.innerHTML = GS_RES.length ? GS_RES.map((r,i)=>`<button type="button" class="gs-row ${i===GS_IDX?'on':''}" data-gs="${r.c.id}">${picto(r.t,30)}<span class="gs-t"><b>${hlS(cTitle(r.c),q)}</b><em>${esc(r.t.n)}${S.role==='advisor'?` · ${esc(r.hh.name)}`:` · ${esc(r.h.name||'')}`}</em>${r.hit[0]!=='Név'?`<small>${esc(r.hit[0])}: ${hlS(r.hit[1],q)}</small>`:''}</span></button>`).join('')
+    : `<div class="gs-empty">Nincs találat erre: „${esc(q)}”.<br><span>Próbáld rendszámmal, címmel, biztosítóval vagy névvel.</span></div>`;
+}
+function gsOpen(id){
+  const c=S.contracts.find(x=>x.id===id); if(!c) return;
+  if(S.role==='advisor') S.hh=c.hh;
+  S.page='contracts'; S.holder='all'; expanded.add(c.id); save(); render();
+  setTimeout(()=>{ const el=document.getElementById('c-'+c.id); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('gs-flash'); setTimeout(()=>el.classList.remove('gs-flash'),1800); } },60);
+}
+document.addEventListener('input',e=>{ if(e.target.id==='gs') gsRender(e.target.value); });
+document.addEventListener('keydown',e=>{
+  if(e.target.id!=='gs') { if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName||'')){ const g=document.getElementById('gs'); if(g){ e.preventDefault(); g.focus(); } } return; }
+  const pop=document.getElementById('gs-pop');
+  if(e.key==='Escape'){ e.target.value=''; pop.hidden=true; e.target.blur(); return; }
+  if(!GS_RES.length) return;
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); GS_IDX=(GS_IDX+(e.key==='ArrowDown'?1:-1)+GS_RES.length)%GS_RES.length; pop.querySelectorAll('.gs-row').forEach((b,i)=>b.classList.toggle('on',i===GS_IDX)); }
+  if(e.key==='Enter'){ e.preventDefault(); gsOpen(GS_RES[Math.max(0,GS_IDX)].c.id); }
+});
+document.addEventListener('mousedown',e=>{ const pop=document.getElementById('gs-pop'); if(pop&&!pop.hidden&&!e.target.closest('.gsearch')) pop.hidden=true; });
 
 // ---------- segédek ----------
 const esc = s => String(s??'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -1632,7 +1765,11 @@ const TOOLS=[{p:'calc',n:'Kalkulátor',i:'coins',live:true},{p:'pay',n:'Befizet�
 function renderSide(){
   const nav=navItems().map(it=>`<button class="nav-btn ${S.page===it.p?'active':''}" data-go="${it.p}">${svg(it.i)}${esc(it.n)}${it.badge?`<span class="badge">${it.badge}</span>`:''}</button>`).join('');
   const tools=TOOLS.map(it=>`<button class="nav-btn ${S.page===it.p?'active':''}" data-go="${it.p}">${svg(it.i)}${esc(it.n)}${it.live?'':'<span class="soon">hamarosan</span>'}</button>`).join('');
-  document.getElementById('side').innerHTML=`${brandHTML()}${nav}<div class="nav-group">Eszközök</div>${tools}
+  const hhS=curHH(), allS=hhContracts(hhS), onC=S.page==='contracts';
+  const people=(S.role==='client'||onC)?`<div class="nav-group">${S.role==='client'?'Profiljaim':esc(hhS.name)}</div>
+    <button class="nav-btn hp ${onC&&S.holder==='all'?'active':''}" data-sideholder="all"><span class="hp-ic">${svg('grid')}</span>Összes együtt<span class="hp-n">${allS.length}</span></button>
+    ${hhS.holders.map(h=>`<button class="nav-btn hp ${onC&&S.holder===h.id?'active':''}" data-sideholder="${h.id}">${miniAv(h,22)}<span class="hp-nm">${esc(h.name)}</span><span class="hp-n">${allS.filter(c=>c.holder===h.id).length}</span></button>`).join('')}`:'';
+  document.getElementById('side').innerHTML=`${brandHTML()}${nav}${people}<div class="nav-group">Eszközök</div>${tools}
     <div class="side-foot">
       ${S.role==='client'?`<button class="advisor-mini" data-go="advisor">${advisorAv(34)}<div><b>${esc(S.advisor.name)}</b><span>a tanácsadód</span></div></button>`:''}
       <div class="role-box"><p>Prototípus: kinek a szemével nézed?</p><div class="seg"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>
@@ -1645,7 +1782,7 @@ function render(){
   renderSide();
   const v=document.getElementById('view'), p=S.page;
   let html=`<div class="mobile-top">${brandHTML()}<div class="seg" style="width:160px"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>`;
-  html+=`<div class="topbar"><div class="hist"><button data-act="undo" ${HIST.length?'':'disabled'} title="Vissza (Cmd+Z)">${svg('arrL')}<span>Vissza</span>${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'} title="Előre (Cmd+Shift+Z)"><span>Előre</span>${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div><div class="savewrap"><span class="saved">${svg('check','stroke-width="3"')}Automatikusan mentve</span><button class="savebtn" data-act="savenow">Mentés</button></div></div>`;
+  html+=`<div class="topbar"><div class="hist"><button data-act="undo" ${HIST.length?'':'disabled'} title="Vissza (Cmd+Z)">${svg('arrL')}<span>Vissza</span>${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'} title="Előre (Cmd+Shift+Z)"><span>Előre</span>${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div><div class="gsearch"><span class="gs-ic">${svg('search')}</span><input id="gs" type="search" autocomplete="off" placeholder="${S.role==='advisor'?'Keresés: név, rendszám, cím, kötvényszám…':'Keresés: rendszám, cím, név…'}" aria-label="Keresés"><div class="gs-pop" id="gs-pop" hidden></div></div><div class="savewrap"><span class="saved">${svg('check','stroke-width="3"')}Automatikusan mentve</span><button class="savebtn" data-act="savenow">Mentés</button></div></div>`;
   if(p==='chat' && !(S.role==='advisor'&&innerWidth<=760&&CHATLIST)) markSeen();
   if(S.role==='advisor' && p==='contracts') html+=`<div class="advisor-banner">${svg('eye')}<div>Most <b>${esc(curHH().name)}</b> portálját látod, ugyanúgy, ahogy ő. A módosításaid nála is azonnal megjelennek.</div><button class="btn" data-go="clients">Ügyfeleim</button></div>`;
   html += p==='contracts'?pageContracts() : p==='chat'?pageChat() : p==='advisor'?pageAdvisor() : p==='clients'?pageClients() : p==='calc'?pageCalc() : pageTool(p);
@@ -1812,9 +1949,8 @@ function contactBar(hh,all){
   const a=S.advisor, unr=unread('client',hh.id), anyRev=all.some(c=>c.review);
   return `<div class="cbar"><div class="cbar-who">${advisorAv(46)}<div><b>Kérdésed van? Írj nekem!</b><span>${esc(a.name)}, a tanácsadód. Általában pár órán belül válaszolok.</span></div></div>
     <div class="cbar-acts"><button class="btn primary" data-go="chat">${svg('chat')}Üzenet Bencének${unr?`<i class="cbadge">${unr}</i>`:''}</button>
-      <button class="btn cbar-hi" data-act="req-review">${svg('search')}${anyRev?'Felülvizsgálat kérve ✓':'Kérem Bence felülvizsgálatát'}</button>
-      <button class="btn" data-act="req-talk">${svg('calendar')}Évfordulós átbeszélést kérek</button>
-      <button class="btn ghost tipbtn" data-act="tip" title="Napi gondolat">🍀</button></div></div>`;
+      <button class="btn cbar-hi ${anyRev?'done':''}" data-act="req-review">${anyRev?`${advisorAv(20)}Bence átnézi a szerződéseidet ✓`:`${svg('search')}Kérem Bence felülvizsgálatát`}</button>
+      <button class="btn" data-act="req-talk">${svg('calendar')}Évfordulós átbeszélést kérek</button></div></div>`;
 }
 function pageContracts(){
   const hh=curHH(), all=hhContracts(hh);
@@ -1829,12 +1965,13 @@ function pageContracts(){
     : groups.map(([h,cs])=>{ const ids=cs.map(c=>c.id), all=ids.every(id=>selected.has(id)); return `<div class="group-title">${miniAv(h,22)}${esc(h.name)}<span>${cs.length} szerződés</span>${S.view!=='list'?`<label class="gsel">Mind kijelölése<button class="chk ${all?'on':''}" data-selall="${ids.join(',')}" aria-label="Mind kijelölése">${svg('check','stroke-width="3"')}</button></label>`:''}</div>`+renderGroup(cs); }).join('');
   const totals=sumByCur(list);
   return `
-    <div class="page-head"><div><h1>${S.role==='client'?`Szia, ${esc(first)}! <span class="wave">👋</span> <button class="icon-btn nickedit" data-act="edit-nick" title="Hogyan szólítsunk?" aria-label="Megszólítás szerkesztése">${svg('pen')}</button>`:esc(hh.name)}</h1><p class="sub">Minden biztosításod egy helyen.</p></div></div>
+    <div class="page-head"><div><h1>${S.role==='client'?`Szia, ${esc(first)}! <span class="wave">👋</span> <button class="icon-btn nickedit" data-act="edit-nick" title="Hogyan szólítsunk?" aria-label="Megszólítás szerkesztése">${svg('pen')}</button>`:esc(hh.name)}</h1><p class="sub">Minden biztosításod egy helyen.</p></div>${S.role==='client'?`<button class="capbtn" data-act="tip" aria-label="Napi üzeneted"><span class="cap"><span class="cap-in">🍀</span></span><span class="cap-t"><b>Napi üzeneted</b><em>Pattintsd fel!</em></span></button>`:''}</div>
     ${S.role==='client'?contactBar(hh,all):''}
     <div class="profiles">${profiles}</div>
     ${S.holder!=='all'?`<div class="filter-note">Csak <b style="color:var(--ink)">${esc(holderOf(hh,S.holder).name)}</b> szerződései látszanak.<button data-holder="all">Összes mutatása</button></div>`:''}
     ${coverPanel(hh,all)}
-    <div class="sec-title"><h2>Szerződések</h2></div>
+    <div class="sec-title" id="c-list-top"><h2>Szerződések</h2></div>
+    ${hh.holders.length>1?`<div class="hchips"><button class="${S.holder==='all'?'on':''}" data-hchip="all">${svg('grid')}Összes együtt <em>${all.length}</em></button>${hh.holders.map(h=>`<button class="${S.holder===h.id?'on':''}" data-hchip="${h.id}">${miniAv(h,20)}${esc(givenName(h.name)&&h.kind!=='company'?givenName(h.name):h.name)} <em>${all.filter(c=>c.holder===h.id).length}</em></button>`).join('')}</div>`:''}
     <div class="toolbar">
       <button class="btn primary" data-act="add-contract">${svg('plus')}Új szerződés</button>
       <div class="viewseg"><button class="${S.view!=='list'?'on':''}" data-view="cards">${svg('grid')}Kártyák</button><button class="${S.view==='list'?'on':''}" data-view="list">${svg('list')}Lista</button></div>
@@ -1861,7 +1998,7 @@ function statusIcons(c){
   return [c.feeOk?`<i class="ok" title="Díj rendezve">${svg('check','stroke-width="3"')}<span>Díj rendezve</span></i>`:'',
     (!life&&n)?`<i class="bl" title="Évfordulós értesítés">${svg('bell')}<span>Értesítés ${n} nap</span></i>`:'',
     c.reviewAtAnniv?`<i class="bl" title="${life?'Évfordulós átbeszélés':'Évfordulón felülvizsgálat'}">${svg('calendar')}<span>${life?'Évfordulós átbeszélés':'Évfordulón átnézzük'}</span></i>`:'',
-    c.review?`<i class="pk" title="Felülvizsgálatot kért">${svg('search')}<span>Felülvizsgálat kérve</span></i>`:''].join('');
+    c.review?`<i class="rv" title="Bence felülvizsgálja">${advisorAv(16)}<span>Bence átnézi</span></i>`:''].join('');
 }
 function sumRows(c){
   const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextAnn(c), d=c.details||{}, info=c.info||{}, h=holderOf(curHH(),c.holder)||{}, life=isLife(c);
@@ -1944,7 +2081,7 @@ function metaRight(c){
 function card(c){
   const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, sel=selected.has(c.id), open=expanded.has(c.id);
   const sub = subLine(c,t);
-  return `<article class="cc ${sel?'sel':''} ${open?'is-open':''}">
+  return `<article class="cc ${sel?'sel':''} ${open?'is-open':''}" id="c-${c.id}">
     <div class="cc-top">${picto(t,44)}
       <div class="cc-main"><div class="kinds"><span class="kind" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${c.cur==='EUR'?'<span class="kind cur">EUR</span>':''}${S.role==='advisor'&&ownOf(c)!=='me'?`<span class="kind notmine">${ownOf(c)==='direct'?'Közvetlen':ownOf(c)==='other'?'Nem nálam':'Jelöletlen'}</span>`:''}</div><div class="cc-name" title="${esc(cTitle(c))}"><span class="nm">${esc(cTitle(c))}</span>${t.kind==='vehicle'&&c.plate?plateHTML(c.plate):''}</div><div class="cc-sub">${sub||'&nbsp;'}</div></div>
       <div class="cc-tools">${open?`<button class="xclose" data-exp="${c.id}" aria-label="Becsukás" title="Becsukás">${svg('chev')}</button>`:''}<button class="chk ${sel?'on':''}" data-sel="${c.id}" aria-label="Kijelölés PDF-hez" aria-pressed="${sel}">${svg('check','stroke-width="3"')}</button></div></div>
@@ -1960,7 +2097,7 @@ function listTable(cs){
   ${cs.map(c=>{
     const t=T(c.type), f=FREQ[c.freq]||FREQ.eves, a=nextAnn(c), open=expanded.has(c.id), sel=selected.has(c.id), life=isLife(c);
     const sub = subLine(c,t);
-    return `<div class="lrow ${open?'open':''}" data-exp="${c.id}" role="button" tabindex="0" aria-expanded="${open}">
+    return `<div class="lrow ${open?'open':''}" id="c-${c.id}" data-exp="${c.id}" role="button" tabindex="0" aria-expanded="${open}">
       ${picto(t,30)}
       <div class="t"><b>${esc(cTitle(c))}${t.kind==='vehicle'&&c.plate?' '+plateHTML(c.plate):''}</b><span class="sub"><span class="kind sm" style="background:${t.c}14;color:${t.c}">${esc(t.n)}</span>${sub}</span></div>
       <div class="ins hide-s2">${insBadge(c.insurer,22)}<div><b>${esc(c.insurer)}</b><span>${esc(c.policy||'–')}</span></div></div>
@@ -2798,7 +2935,7 @@ async function makePDF(){
 // ---------- események ----------
 const C_ = id => S.contracts.find(c=>c.id===id);
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-lf],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
+  const t=e.target.closest('[data-go],[data-role],[data-act],[data-sel],[data-selall],[data-chatwith],[data-lf],[data-sideholder],[data-hchip],[data-gs],[data-cmode],[data-ccur],[data-kid],[data-kidadd],[data-kiddel],[data-kidg],[data-kidborn],[data-cgoal],[data-ctage],[data-cpay],[data-chold],[data-cscen],[data-gap],[data-hidegap],[data-tg],[data-notify],[data-feenote],[data-fund],[data-det],[data-edit],[data-edit-holder],[data-face],[data-hreq],[data-creview],[data-review-done],[data-seen],[data-open],[data-quick],[data-view],[data-inslogo],[data-inslogo-x],[data-close],[data-scrim],[data-exp],[data-holder]');
   if(!t) return;
   if(t.hasAttribute('data-scrim')){ if(e.target===t) closeModal(); return; }
   if(t.hasAttribute('data-close')){ closeModal(); return; }
@@ -2850,6 +2987,9 @@ document.addEventListener('click',e=>{
   if(ds.inslogo){ const ins=insOf(ds.inslogo); pickImage(240,false,u=>{ins.logo=u; save(); render(); toast('🖼️',`${ins.n} logója feltöltve.`);}); return; }
   if(ds.inslogoX){ const ins=insOf(ds.inslogoX); ins.logo=''; save(); render(); return; }
   if(ds.exp){ expanded.has(ds.exp)?expanded.delete(ds.exp):expanded.add(ds.exp); render(); return; }
+  if(ds.gs){ gsOpen(ds.gs); return; }
+  if(ds.sideholder){ S.holder=ds.sideholder; S.page='contracts'; save(); render(); scrollTo(0,0); return; }
+  if(ds.hchip){ S.holder=ds.hchip; save(); render(); const g=document.getElementById('c-list-top'); if(g) g.scrollIntoView({behavior:'smooth',block:'start'}); return; }
   if(ds.holder){ S.holder=(ds.holder!=='all'&&S.holder===ds.holder)?'all':ds.holder; save(); render(); return; }
   const a=ds.act;
   if(a==='add-contract') contractForm();
@@ -2868,7 +3008,7 @@ document.addEventListener('click',e=>{
   else if(a==='req-review'){ const hh=curHH(), cs=hhContracts(hh); if(!cs.length){ S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value='Szia Bence! Szeretném, ha átnéznéd a biztosításaimat.'; ta.focus(); } return; } requestReview(cs,'az összes'); const b=document.querySelector('[data-act=req-review]'); if(b){ const r=b.getBoundingClientRect(); burst(r.left+r.width/2,r.top+10); } }
   else if(a==='praise'){ for(let i=0;i<5;i++) setTimeout(()=>burst(innerWidth*(.15+.17*i),innerHeight*.3+Math.random()*80),i*120); toast('🏆','Le a kalappal! Ilyen rendezett pénzügyekkel kevesen büszkélkedhetnek.'); }
   else if(a==='req-talk'){ S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value='Szia Bence! Szeretnék egy évfordulós átbeszélést a szerződéseimről. Mikor lenne alkalmas?'; ta.focus(); } }
-  else if(a==='tip'){ const tip=TIPS[Math.floor(Math.random()*TIPS.length)]; const b=document.querySelector('[data-act=tip]'); if(b){ const r=b.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2); } modal('Napi gondolat',`<p class="tiptext">${esc(tip)}</p><div class="hint" style="text-align:right">${esc(S.advisor.name)}</div>`,`<button class="btn" data-act="tip">Még egyet</button><button class="btn primary" data-close>Köszönöm</button>`); }
+  else if(a==='tip'){ const tip=TIPS[Math.floor(Math.random()*TIPS.length)]; const b=document.querySelector('.capbtn')||document.querySelector('[data-act=tip]'); if(b&&b.classList.contains('capbtn')){ b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); } if(b){ const r=b.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2); } modal('🍀 Napi üzeneted',`<div class="tipcard"><p class="tiptext">${esc(tip)}</p><div class="tipsig">${advisorAv(26)}<span>${esc(S.advisor.name)}</span></div></div>`,`<button class="btn" data-act="tip">Még egyet</button><button class="btn primary" data-close>Köszönöm</button>`); }
   else if(a==='chat-back'){ CHATLIST=true; render(); }
   else if(a==='edit-nick'){ const hh=curHH(); modal('Hogyan szólítsunk?',`<div class="field"><label>Megszólítás</label><input id="nk" value="${esc(hh.nick||givenName(hh.holders[0].name))}" placeholder="pl. Bence"></div><div class="hint">Így köszönünk neked a portálon.</div>`,`<button class="btn" data-close>Mégse</button><button class="btn primary" id="nk-ok">${svg('check')}Mentés</button>`,m=>{const i=m.querySelector('#nk'); i.focus(); i.select(); m.querySelector('#nk-ok').onclick=()=>{ hh.nick=i.value.trim(); save(); closeModal(); render(); toast('👋',`Szia, ${hh.nick||givenName(hh.holders[0].name)}!`); };}); }
   else if(a==='undo') undo();
