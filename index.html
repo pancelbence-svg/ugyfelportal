@@ -1340,9 +1340,9 @@ input[type=range]{width:100%;accent-color:#2E9EA3;height:22px}
 .cc-st i.ok{background:var(--ok-soft);color:var(--ok)}
 .cc-st i.bl{background:var(--teal-soft);color:var(--teal-ink)}
 /* "Bence átnézi": tömör türkiz, sötétben is jól látszik */
-.st i.rv,.lrow .st i.rv,.cc-toggle .st i.rv,.cc-st i.rv,.dh-st i.rv{background:var(--teal-ink) !important;color:#fff !important;padding:2px 10px 2px 2px !important}
+.st i.rv,.lrow .st i.rv,.cc-toggle .st i.rv,.cc-st i.rv,.dh-st i.rv{background:#24878C !important;color:#fff !important;padding:2px 10px 2px 2px !important}
 .st i.rv .av{box-shadow:0 0 0 1.5px #fff}
-.cbar-hi.done{background:var(--teal-ink) !important;border-color:var(--teal-ink) !important;color:#fff !important}
+.cbar-hi.done{background:#24878C !important;border-color:#24878C !important;color:#fff !important}
 .cbar-hi.done .av{box-shadow:0 0 0 2px #fff}
 .cbar-hi .okc{width:15px;height:15px}
 .cbar-acts .s{display:none}
@@ -1493,6 +1493,210 @@ body.d-open{overflow:hidden}
   .chat{height:calc(100dvh - 205px - env(safe-area-inset-bottom,0px));min-height:360px}
   body[data-page="chat"] .page-head .sub{display:none}
 }
+/* ===== v23: Tanácsadóm oldal ===== */
+.adv{display:flex;flex-direction:column;gap:14px;max-width:1040px}
+.adv-hero{position:relative;overflow:hidden;border-radius:24px;padding:26px 26px 20px;background:linear-gradient(135deg,var(--teal-soft) 0%,var(--surface) 55%);border:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:18px 24px;align-items:center}
+.adv-hero::after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(80,195,200,.18),transparent 70%);pointer-events:none}
+.ah-main{display:flex;gap:20px;align-items:center;min-width:0}
+.ah-photo{position:relative;flex:none;width:112px;height:112px;border-radius:50%;background:var(--teal-soft);display:grid;place-items:center;font-weight:700;font-size:32px;color:var(--teal-ink);box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--teal),0 14px 30px -14px rgba(30,60,64,.45)}
+.ah-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.ah-dot{position:absolute;right:6px;bottom:6px;width:18px;height:18px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px var(--surface)}
+.ah-id{min-width:0}
+.ah-kicker{display:block;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--teal-ink)}
+.ah-id h2{margin:4px 0 2px;font-size:26px;font-weight:800;letter-spacing:-.5px}
+.ah-ttl{font-size:13px;color:var(--ink-2)}
+.ah-hl{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ah-hl span{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:4px 10px 4px 7px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+.ah-hl svg{width:12px;height:12px;color:var(--teal-ink)}
+.ah-acts{display:grid;grid-template-columns:repeat(4,76px);gap:8px;position:relative;z-index:1}
+.ah-act{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px 4px 10px;font-size:11.5px;font-weight:600;color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}
+.ah-act svg{width:20px;height:20px;color:var(--teal-ink)}
+.ah-act:hover{border-color:var(--teal);transform:translateY(-1px)}
+.ah-act.pri{background:#24878C;border-color:#24878C;color:#fff}
+.ah-act.pri svg{color:#fff}
+.ah-note{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2)}
+.ah-note svg{width:14px;height:14px;color:var(--ok)}
+.ah-thanks{grid-column:1/-1;font-size:13px;line-height:1.55;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.ah-thanks b{color:var(--ink)}
+.adv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.adv-stats div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px}
+.adv-stats b{display:block;font-size:24px;font-weight:800;letter-spacing:-.6px;color:var(--teal-ink);white-space:nowrap}
+.adv-stats span{display:block;font-size:12px;color:var(--ink-2);margin-top:2px;line-height:1.35}
+.adv-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.adv-sec{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px}
+.adv-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.adv-h h3{margin:0;font-size:15px;font-weight:700}
+.adv-h span{font-size:12px;color:var(--ink-3)}
+.adv-bio p{margin:0 0 10px;color:var(--ink-2);line-height:1.6;font-size:13.5px}
+.adv-tag{margin-top:6px;font-size:13px;font-weight:600;font-style:italic;color:var(--pink)}
+.prm{display:flex;flex-direction:column;gap:12px}
+.pr{display:flex;gap:12px;align-items:flex-start}
+.pr > svg{flex:none;width:34px;height:34px;padding:8px;border-radius:11px;background:var(--teal-soft);color:var(--teal-ink)}
+.pr b{display:block;font-size:13.5px}
+.pr span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.45;margin-top:1px}
+.ar-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ar-cols h4{display:flex;align-items:center;gap:7px;margin:0 0 10px;font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.4px}
+.ar-cols h4 svg{width:15px;height:15px}
+.ar-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ar{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--surface-3);border:1px solid var(--line-2);font-size:13px;font-weight:600;min-width:0}
+.ar svg{flex:none;width:20px;height:20px;color:var(--teal-ink)}
+.ar span{min-width:0;line-height:1.3}
+.ar-more{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--teal-soft);color:var(--teal-ink);font-size:13px;font-weight:600}
+.ar-more > svg{width:18px;height:18px;flex:none}
+.ar-more span{flex:1}
+.ar-more .btn{background:var(--surface);flex:none}
+.adv .awards{margin-left:2px}
+.ct-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.ct-grid a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;border:1px solid var(--line-2);background:var(--surface-3);text-decoration:none;color:var(--ink);min-width:0}
+.ct-grid a:hover{border-color:var(--teal)}
+.ct-grid svg{flex:none;width:18px;height:18px;color:var(--teal-ink)}
+.ct-grid div{min-width:0}
+.ct-grid span{display:block;font-size:11px;color:var(--ink-3)}
+.ct-grid b{display:block;font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adv-contact .legal{font-size:11px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .adv-hero{background:linear-gradient(135deg,#1C3436 0%,var(--surface) 60%)} }
+@media (max-width:900px){ .adv-cols,.ar-cols{grid-template-columns:1fr} .adv-hero{grid-template-columns:1fr} .ah-acts{grid-template-columns:repeat(4,1fr)} .adv-stats{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:760px){
+  .adv{gap:12px}
+  .adv-hero{padding:20px 16px 16px;border-radius:22px;gap:14px}
+  .ah-main{flex-direction:column;text-align:center;gap:12px}
+  .ah-photo{width:104px;height:104px}
+  .ah-id h2{font-size:23px}
+  .ah-hl{justify-content:center}
+  .ah-acts{gap:6px}
+  .ah-act{padding:11px 2px 9px;font-size:11px;border-radius:14px}
+  .ah-note{justify-content:center;text-align:center}
+  .adv-stats b{font-size:21px}
+  .adv-stats div{padding:14px;border-radius:16px}
+  .adv-sec{padding:16px;border-radius:18px}
+  .ar-grid{grid-template-columns:1fr}
+  .ar-more{flex-wrap:wrap}
+  .ar-more .btn{width:100%;justify-content:center}
+  .ct-grid{grid-template-columns:1fr}
+}
+
+/* ===== v24: belépés, nyilatkozat, Messenger-chat ===== */
+#auth-root{position:relative;z-index:75}
+body.auth-on{overflow:hidden}
+.auth{position:fixed;inset:0;z-index:75;overflow-y:auto;background:radial-gradient(1200px 600px at 10% -10%,var(--teal-soft),transparent 60%),radial-gradient(900px 500px at 110% 110%,var(--pink-soft),transparent 60%),var(--bg);display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px));animation:fade .2s}
+.auth-card{width:100%;max-width:420px;margin:auto 0 0;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:28px 26px 24px;box-shadow:0 30px 70px -30px rgba(30,60,64,.35);display:flex;flex-direction:column;gap:12px}
+.auth-card.wide{max-width:640px}
+.auth-brand{display:flex;justify-content:center;margin-bottom:4px}
+.auth-brand .brand{align-items:center;margin:0}
+.auth-ic{font-size:40px;text-align:center;line-height:1}
+.auth h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-.5px;text-align:center;line-height:1.2}
+.auth-sub{margin:0;color:var(--ink-2);font-size:14px;line-height:1.55;text-align:center}
+.auth-form{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.auth-form .field{margin:0}
+.auth-form .field input{padding:12px 14px;border-radius:14px;font-size:15px}
+.pwbox{position:relative}
+.pwbox input{padding-right:44px !important}
+.pweye{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;width:34px;height:34px;display:grid;place-items:center;color:var(--ink-3)}
+.pweye svg{width:18px;height:18px}
+.codein{text-align:center;letter-spacing:10px;font-size:22px !important;font-weight:700}
+.auth-chk{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2);cursor:pointer}
+.auth-chk input{width:18px;height:18px;accent-color:#24878C}
+.auth-go{width:100%;justify-content:center;padding:14px !important;font-size:15px !important;border-radius:16px !important;margin-top:4px}
+.auth-go:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.4)}
+.auth-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.linkbtn{border:0;background:transparent;color:var(--teal-ink);font-weight:600;font-size:13px;padding:4px 2px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--teal-ink) 35%,transparent)}
+.auth-first{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;margin-top:6px;padding:14px;border-radius:16px;background:var(--surface-3);border:1px dashed var(--line);font-size:12.5px;color:var(--ink-2)}
+.auth-first b{color:var(--ink);font-size:13px}
+.auth-hint{margin:0;text-align:center;font-size:12px;color:var(--ink-3);line-height:1.5}
+.auth-proto{display:flex;flex-direction:column;align-items:center;gap:8px;margin:2px 0 0;text-align:center;font-size:11px;color:var(--ink-3)}
+.auth-proto .seg{width:200px}
+.auth-foot{max-width:640px;margin:16px 0 auto;text-align:center;font-size:10.5px;color:var(--ink-3);line-height:1.5}
+.pwrules{list-style:none;margin:-4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.pwrules li{font-size:11.5px;padding:3px 9px;border-radius:20px;background:var(--surface-2);color:var(--ink-3)}
+.pwrules li::before{content:"○ "}
+.pwrules li.ok{background:var(--ok-soft);color:var(--ok)}
+.pwrules li.ok::before{content:"✓ "}
+.cons-hero{display:flex;gap:14px;align-items:center}
+.cons-hero h1{text-align:left;font-size:22px}
+.cons-hero .auth-sub{text-align:left;margin-top:4px}
+.cons-what{display:grid;gap:8px;margin-top:4px}
+.cw{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:var(--surface-3);border:1px solid var(--line-2)}
+.cw > svg{flex:none;width:34px;height:34px;padding:8px;border-radius:11px;background:var(--teal-soft);color:var(--teal-ink)}
+.cw b{display:block;font-size:14px}
+.cw span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.5;margin-top:1px}
+.cons-form{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.cchk{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;border:1.5px solid var(--line);cursor:pointer;transition:border-color .15s,background .15s;font-size:13px;line-height:1.5;color:var(--ink-2)}
+.cchk:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
+.cchk input{flex:none;width:20px;height:20px;margin-top:1px;accent-color:#24878C}
+.cchk b{color:var(--ink)}
+.cchk .linkbtn{display:inline;padding:0;font-size:inherit;background:transparent !important;color:var(--teal-ink) !important}
+.cchk em{display:block;font-style:normal;font-size:11.5px;color:var(--ink-3);margin-top:4px}
+.cchk.must em{color:var(--pink);font-weight:600}
+.cons-sep{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3);margin:6px 2px 0}
+.cons-fine{border:1px solid var(--line);border-radius:16px;padding:0 14px}
+.cons-fine > summary{display:flex;align-items:center;gap:8px;padding:13px 0;font-weight:600;font-size:13px;cursor:pointer;list-style:none;color:var(--ink)}
+.cons-fine > summary svg{width:16px;height:16px;color:var(--teal-ink)}
+.fine{display:flex;flex-direction:column;gap:6px;padding-bottom:12px}
+.fine details{border-radius:12px;background:var(--surface-3);padding:0 12px}
+.fine summary{padding:10px 0;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink)}
+.fine p{margin:0 0 12px;font-size:12px;line-height:1.6;color:var(--ink-2)}
+.selfnote{display:block;font-size:11px;color:var(--ink-3);margin-top:3px;font-style:italic}
+.ownnote{display:flex;gap:10px;align-items:flex-start;margin:18px 0 0;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px dashed var(--line);font-size:12px;line-height:1.5;color:var(--ink-2)}
+.ownnote svg{flex:none;width:16px;height:16px;margin-top:1px;color:var(--teal-ink)}
+.ownnote b{color:var(--ink)}
+.priv{display:block;margin-top:14px;padding:16px 18px}
+.priv-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.priv-h > div{display:flex;align-items:center;gap:8px}
+.priv-h svg{width:18px;height:18px;color:var(--teal-ink)}
+.priv-h b{font-size:15px}
+.okpill,.waitpill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px}
+.okpill{background:var(--ok-soft);color:var(--ok)}
+.okpill svg{width:12px;height:12px}
+.waitpill{background:var(--warn-soft);color:var(--warn)}
+.priv .setrow{padding:12px 0;border-top:1px solid var(--line-2)}
+.priv-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.priv-note{font-size:11.5px;color:var(--ink-3);margin-top:10px}
+.mbadge.ok{background:var(--ok-soft) !important;color:var(--ok) !important}
+.mbadge.w{background:var(--warn-soft) !important;color:var(--warn) !important}
+.side-out{color:var(--ink-3)}
+.sysmsg{align-self:center;max-width:88%;text-align:center;font-size:11.5px;line-height:1.45;color:var(--ink-2);background:var(--surface-2);border-radius:14px;padding:8px 12px;margin:6px 0}
+.sysmsg span{display:block;font-size:10px;color:var(--ink-3);margin-top:2px}
+.ch-back,.ch-call{display:none}
+.ch-who{min-width:0;flex:1}
+.sendbtn span{margin-left:2px}
+/* Messenger-szerű buborékok mindenhol */
+.chat-body{gap:2px;padding:16px 14px}
+.mrow{display:flex;gap:8px;align-items:flex-end}
+.mrow.first{margin-top:10px}
+.msg{border-radius:20px;padding:9px 14px;font-size:14px;max-width:min(78%,520px)}
+.msg.them{background:var(--surface-2);border:0;border-bottom-left-radius:20px}
+.mrow.them:not(.first) .msg.them{border-top-left-radius:6px}
+.mrow.them .msg.them{border-bottom-left-radius:6px}
+.msg.me{background:linear-gradient(135deg,#3FB3B8,#24878C);border-bottom-right-radius:6px}
+.mrow.me:not(.first) .msg.me{border-top-right-radius:6px}
+.mtime{font-size:10.5px}
+@media (max-width:760px){
+  body[data-chatfull="1"] .mobile-top,body[data-chatfull="1"] .page-head,body[data-chatfull="1"] .tabbar,body[data-chatfull="1"] .advisor-banner{display:none !important}
+  body[data-chatfull="1"]{overflow:hidden}
+  body[data-chatfull="1"] main{padding:0}
+  body[data-chatfull="1"] .chat,body[data-chatfull="1"] .inbox-thread .chat{position:fixed;left:0;right:0;top:var(--vvt,0px);height:var(--vvh,100dvh);min-height:0;border:0;border-radius:0;z-index:35;background:var(--bg)}
+  body[data-chatfull="1"] .chat-head{padding:calc(8px + env(safe-area-inset-top,0px)) 10px 8px;gap:10px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  body[data-chatfull="1"] .chat-head .btn.ghost{display:none}
+  .ch-back,.ch-call{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:var(--teal-ink);flex:none}
+  .ch-back svg,.ch-call svg{width:20px;height:20px}
+  body[data-chatfull="1"] .chat-body{background:var(--bg);padding:12px 10px}
+  body[data-chatfull="1"] .quick{padding:6px 10px 2px;flex-wrap:nowrap;scrollbar-width:none}
+  body[data-chatfull="1"] .quick::-webkit-scrollbar{display:none}
+  body[data-chatfull="1"] .quick button{font-size:12.5px;padding:6px 12px;background:var(--surface)}
+  body[data-chatfull="1"] .chat-input{padding:6px 8px calc(8px + env(safe-area-inset-bottom,0px));gap:6px;align-items:flex-end;background:var(--bg)}
+  body[data-chatfull="1"] .chat-input textarea{border-radius:22px;padding:10px 16px;min-height:42px;background:var(--surface);line-height:1.35}
+  body[data-chatfull="1"] .sendbtn{width:42px;height:42px !important;padding:0 !important;border-radius:50% !important;justify-content:center;flex:none}
+  body[data-chatfull="1"] .sendbtn span{display:none}
+  body[data-chatfull="1"] .sendbtn svg{width:19px;height:19px;margin:0}
+  .msg{font-size:15px;max-width:80%}
+  .mav .av{width:28px !important;height:28px !important}
+  .auth{padding-top:calc(18px + env(safe-area-inset-top,0px))}
+  .auth-card{padding:22px 18px 20px;border-radius:24px;margin-top:0}
+  .auth h1{font-size:22px}
+  .cons-hero{flex-direction:column;text-align:center}
+  .cons-hero h1,.cons-hero .auth-sub{text-align:center}
+  .priv-acts .btn{flex:1 1 calc(50% - 6px);justify-content:center;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -1503,6 +1707,7 @@ body.d-open{overflow:hidden}
 </div>
 <nav class="tabbar" id="tabbar"></nav>
 <div id="detail-root"></div>
+<div id="auth-root"></div>
 <div id="search-root"></div>
 <div id="modal-root"></div>
 <div class="toasts" id="toasts"></div>
@@ -1740,6 +1945,9 @@ function migrate(){
   const g=S.types.find(t=>t.k==='gyermek'); if(g&&g.kind==='savings') g.kind='child';
   if(!S.types.some(t=>t.k==='megtakaritas')){ const at=S.types.findIndex(t=>t.k==='gyermek'); S.types.splice(at<0?S.types.length:at+1,0,{k:'megtakaritas',n:'Egyéb megtakarítás',i:'coins',c:'#B98A1E',kind:'savings'}); }
   S.contracts.forEach(c=>{ c.cur=c.cur||'HUF'; c.details=c.details||{}; });
+  S.auth ||= {in:false,email:'',lastOut:0,remember:true};
+  if(!S.demo13){ S.demo13=1; if(!S.advisor.legal||/^\[Ide kerül/.test(S.advisor.legal)) S.advisor.legal=LEGAL13; const h2=S.households.find(h=>h.id==='h2'); if(h2&&!h2.consent) h2.consent={v:'2026.11',at:Date.now()-20*864e5,marketing:1}; }
+  if(!S.demo12){ S.demo12=1; const A=S.advisor; if(!A.bio||A.bio===NEW_BIO||/^Abban segítek/.test(A.bio)) A.bio=BIO12; if(!A.stats) A.stats=STATS12; if(!A.areasP) A.areasP=[...AREAS_P12]; if(!A.areasC) A.areasC=[...AREAS_C12]; }
   if(!S.demo11){ S.demo11=1; S.contracts.forEach(c=>{ const i=c.info||{}; ['assistPhone','claimPhone'].forEach(k=>{ if(/^\+36 1 0+\d?$/.test(i[k]||'')||/^\+36 1 000 000\d$/.test(i[k]||'')) delete i[k]; }); }); }
   if(!S.demo10){ S.demo10=1; S.households.forEach(h=>h.holders.forEach(x=>{ if(x.phone) x.phone=fmtPhone(x.phone); })); if(S.advisor.phone) S.advisor.phone=fmtPhone(S.advisor.phone); S.contracts.forEach(c=>{ const i=c.info||{}; if(i.assistPhone) i.assistPhone=fmtPhone(i.assistPhone); if(i.claimPhone) i.claimPhone=fmtPhone(i.claimPhone); }); }
   if(!S.demo9){ S.demo9=1; S.calcCfg={scen:[{n:'Konzervatív',r:6},{n:'Célhozam',r:10},{n:'Optimista',r:15}],taxPct:(S.calcCfg||{}).taxPct||20,taxMax:(S.calcCfg||{}).taxMax||130000}; }
@@ -1764,7 +1972,7 @@ function migrate(){
   }
 }
 let HIST=[], FUT=[], lastSnap=null;
-const UI_KEYS=['seen','role','page','hh','holder','view'];
+const UI_KEYS=['seen','role','page','hh','holder','view','auth'];
 const snapOf = () => { const o={...S}; UI_KEYS.forEach(k=>delete o[k]); return JSON.stringify(o); };
 const keepUI = obj => { UI_KEYS.forEach(k=>obj[k]=S[k]); return obj; };
 const persist = () => { try{ localStorage.setItem(STORE_KEY, JSON.stringify(S)); }catch(e){ toast('⚠️','A kép túl nagy a mentéshez, próbálj kisebbet.'); } };
@@ -1978,6 +2186,7 @@ function renderSide(){
     <div class="side-foot">
       ${S.role==='client'?`<button class="advisor-mini" data-go="advisor">${advisorAv(34)}<div><b>${esc(S.advisor.name)}</b><span>a tanácsadód</span></div></button>`:''}
       <div class="side-hist"><button data-act="undo" ${HIST.length?'':'disabled'}>${svg('arrL')}Vissza${HIST.length?`<em>${HIST.length}</em>`:''}</button><button data-act="redo" ${FUT.length?'':'disabled'}>Előre${FUT.length?`<em>${FUT.length}</em>`:''}${svg('arrR')}</button></div>
+      <button class="nav-btn side-out" data-act="logout">${svg('arrL')}Kijelentkezés</button>
       <div class="role-box"><p>Prototípus: kinek a szemével nézed?</p><div class="seg"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>
       <div style="display:flex;gap:2px;justify-content:center"><button class="linkish" data-act="export">${svg('download')}Mentés</button><button class="linkish" data-act="import">${svg('reset')}Visszatöltés</button></div>
       <button class="linkish" data-act="reset">${svg('reset')}Mintaadatok visszaállítása</button></div>`;
@@ -2003,8 +2212,9 @@ function render(){
   html += p==='contracts'?pageContracts() : p==='profile'?pageProfile() : p==='chat'?pageChat() : p==='advisor'?pageAdvisor() : p==='clients'?pageClients() : p==='calc'?pageCalc() : pageTool(p);
   v.innerHTML=html;
   document.body.dataset.page=p;
+  document.body.dataset.chatfull = (p==='chat'&&(S.role==='client'||!CHATLIST))?'1':'0';
   if(p==='chat'){ const b=v.querySelector('.chat-body'); if(b) b.scrollTop=b.scrollHeight; renderSide(); }
-  renderDetail(); renderSearch();
+  renderDetail(); renderSearch(); renderAuth();
 }
 function renderSearch(){
   const root=document.getElementById('search-root'); if(!root) return;
@@ -2052,7 +2262,8 @@ function pageProfile(){
   const nick=hh.nick||givenName(hh.holders[0].name);
   return `<div class="page-head"><div><h1>${isC?'Profilom':'Ügyfél adatai'}</h1><p class="sub">${isC?'A saját adataid, a társadé és a cégedé, egy helyen.':`${esc(hh.name)} és a hozzá tartozó személyek, cégek.`}</p></div><button class="btn primary hide-mob" data-act="add-holder">${svg('plus')}Új személy vagy cég</button></div>
     ${isC?`<div class="pset"><div><span>Így szólítunk</span><b>${esc(nick)}</b></div><button class="btn ghost" data-act="edit-nick">${svg('pen')}Módosítás</button></div>`:''}
-    <div class="pgrid">${cards}<button class="prof add" data-act="add-holder">${svg('plus')}<span><b>Új személy vagy cég</b><em>Például a társad, a gyermeked vagy a vállalkozásod</em></span></button></div>`;
+    <div class="pgrid">${cards}<button class="prof add" data-act="add-holder">${svg('plus')}<span><b>Új személy vagy cég</b><em>Például a társad, a gyermeked vagy a vállalkozásod</em></span></button></div>
+    ${privacyCard(hh,isC)}`;
 }
 
 // ---------- profilkártya ----------
@@ -2247,6 +2458,7 @@ function pageContracts(){
       ${(()=>{ const all=list.length&&list.every(c=>selected.has(c.id)); return `<button class="btn selall ${all?'on':''}" data-act="${all?'sel-clear':'sel-all'}"><span class="chk ${all?'on':''}">${svg('check','stroke-width="3"')}</span>${all?'Kijelölés törlése':'Összes kijelölése'}</button>`; })()}
     </div>
     ${body}
+    <div class="ownnote">${svg('doc')}<span><b>Ez a te saját nyilvántartásod.</b> A biztosítóktól nem frissül magától: azt látod, amit te rögzítesz, vagy amit kérésedre Bence frissít. A hivatalos adatokat mindig a biztosító dokumentumai tartalmazzák.</span></div>
     ${list.length?`<div class="totals"><span>Szerződések<b>${list.length} db</b></span><span>Éves díj összesen<b>${fmtSums(totals)}</b></span><span>Havi átlag<b>${fmtSums(totals,12)}</b></span></div>`:''}`;
 }
 
@@ -2260,7 +2472,7 @@ function subLine(c,t){
 }
 function statusIcons(c){
   const life=isLife(c), n=(c.notify||[])[0];
-  return [c.feeOk?`<i class="ok" title="Díj rendezve">${svg('check','stroke-width="3"')}<span>Díj rendezve</span></i>`:'',
+  return [c.feeOk?`<i class="ok" title="Saját jelölés: nem a biztosító adata">${svg('check','stroke-width="3"')}<span>${S.role==='client'?'Díj rendezve (saját jelölés)':'Ügyfél szerint rendezve'}</span></i>`:'',
     (!life&&n)?`<i class="bl" title="Évfordulós értesítés">${svg('bell')}<span>Értesítés ${n} nap</span></i>`:'',
     c.reviewAtAnniv?`<i class="bl" title="${life?'Évfordulós átbeszélés':'Évfordulón felülvizsgálat'}">${svg('calendar')}<span>${life?'Évfordulós átbeszélés':'Évfordulón átnézzük'}</span></i>`:'',
     c.review?`<i class="rv" title="Bence felülvizsgálja">${advisorAv(16)}<span>Bence átnézi</span></i>`:''].join('');
@@ -2310,7 +2522,7 @@ function helpBlock(c){
 const sw = (on, attr, dis) => `<button class="sw ${on?'on':''}" role="switch" aria-checked="${!!on}" ${attr} ${dis?'disabled':''}></button>`;
 function settingsBlock(c){
   const n=(c.notify||[])[0], isC=S.role==='client', life=isLife(c);
-  const rows=[`<div class="setrow"><div><b>Díjat rendeztem</b>${c.feeOk?`<span>${c.feeNote?esc(c.feeNote)+' ':''}<button class="addnote" data-feenote="${c.id}">${c.feeNote?'szerkesztés':'+ saját megjegyzés'}</button></span>`:'<span>Kapcsold be, ha befizetted</span>'}</div>${sw(c.feeOk,`data-tg="feeOk:${c.id}"`)}</div>`];
+  const rows=[`<div class="setrow"><div><b>Díjat rendeztem</b>${c.feeOk?`<span>${c.feeNote?esc(c.feeNote)+' ':''}<button class="addnote" data-feenote="${c.id}">${c.feeNote?'szerkesztés':'+ saját megjegyzés'}</button></span>`:'<span>Kapcsold be, ha befizetted</span>'}<span class="selfnote">Ez a te jelölésed, emlékeztetőnek. Nem a biztosító adata, és nem igazolja, hogy a díj valóban rendezve van.</span></div>${sw(c.feeOk,`data-tg="feeOk:${c.id}"`)}</div>`];
   if(life){
     rows.push(`<div class="setrow"><div><b>Évfordulós átbeszélést kérek</b><span>Évente egyszer átnézzük együtt, minden rendben van-e</span></div>${sw(c.reviewAtAnniv,`data-tg="reviewAtAnniv:${c.id}"`)}</div>`);
   } else {
@@ -2394,17 +2606,18 @@ function bubblesHTML(hh,me){
   let lastDay='', prev=null; const myLast=msgs.map(m=>m.from).lastIndexOf(me);
   if(!msgs.length) return `<div class="empty" style="margin:auto;border:0"><b>Még nincs üzenet</b>${me==='client'?'Írj bátran, bármilyen kérdésben.':'Írj elsőként az ügyfélnek.'}</div>`;
   return msgs.map((m,i)=>{ let o=''; const d=huDate(m.ts); if(d!==lastDay){ lastDay=d; prev=null; o+=`<div class="day">${iso(m.ts)===iso(today())?'Ma':d}</div>`; }
+    if(m.sys){ prev=null; return o+`<div class="sysmsg">${esc(m.text)}<span>${timeHM(m.ts)}</span></div>`; }
     const mine=m.from===me, first=prev!==m.from; prev=m.from;
     const av=m.from==='advisor'?advisorAv(30):miniAv(hh.holders[0],30), who=m.from==='advisor'?S.advisor.name:hh.name;
     o+=`<div class="mrow ${mine?'me':'them'} ${first?'first':''}">${mine?'':`<div class="mav">${first?av:''}</div>`}<div class="mcol">${first?`<span class="mwho">${mine?'Te':esc(who)}</span>`:''}<div class="msg ${mine?'me':'them'}">${esc(m.text)}</div><span class="mtime">${timeHM(m.ts)}${mine&&i===myLast?(otherSeen>=m.ts?' <b class="seenok">✓✓ Látta</b>':' ✓ Elküldve'):''}</span></div></div>`;
     return o; }).join('');
 }
 function chatPanel(hh,me){
-  const head=me==='client'?`${advisorAv(40)}<div><b>${esc(S.advisor.name)}</b><span><i class="dot"></i>Általában pár órán belül válaszol</span></div>`
+  const head=me==='client'?`<button class="icon-btn ch-back" data-go="contracts" aria-label="Vissza">${svg('arrL')}</button>${advisorAv(40)}<div class="ch-who"><b>${esc(S.advisor.name)}</b><span><i class="dot"></i>Általában pár órán belül válaszol</span></div><a class="icon-btn ch-call" href="tel:${esc(String(S.advisor.phone||'').replace(/[^+\d]/g,''))}" aria-label="Hívás">${svg('phone')}</a>`
     :`${innerWidth<=760?`<button class="icon-btn" data-act="chat-back" aria-label="Vissza">${svg('arrL')}</button>`:''}${miniAv(hh.holders[0],40)}<div><b>${esc(hh.name)}</b><span style="color:var(--ink-3)">${esc(hh.email||'')}</span></div><button class="btn ghost" style="margin-left:auto" data-open="${hh.id}">${svg('eye')}Portál megnyitása</button>`;
   const quick=me==='client'?['Időpontot szeretnék','Változtak az adataim','Kérdésem van egy szerződésről','Baj történt, segítenél?']:['Frissítettem a szerződéseidet.','Közeleg egy évforduló, nézzük át együtt?','Megkaptam, köszönöm!'];
   return `<div class="chat"><div class="chat-head">${head}</div><div class="chat-body">${bubblesHTML(hh,me)}</div><div class="quick">${quick.map(q=>`<button data-quick="${esc(q)}">${esc(q)}</button>`).join('')}</div>
-    <div class="chat-input"><textarea id="msg" rows="1" placeholder="Írj üzenetet…"></textarea><button class="btn primary" data-act="send">${svg('send')}Küldés</button></div></div>`;
+    <div class="chat-input"><textarea id="msg" rows="1" placeholder="Írj üzenetet…" enterkeyhint="send"></textarea><button class="btn primary sendbtn" data-act="send" aria-label="Küldés">${svg('send')}<span>Küldés</span></button></div></div>`;
 }
 function pageChat(){
   const me=S.role, hh=curHH();
@@ -2419,28 +2632,77 @@ function markSeen(){ (S.seen[S.role] ||= {})[curHH().id]=Date.now(); save(); }
 function sendMsg(text){ text=(text||'').trim(); if(!text) return; postMsg(text); save(); render(); const ta=document.getElementById('msg'); if(ta) ta.focus(); }
 
 // ---------- Tanácsadóm ----------
+const BIO12 = "Több mint 12 éve segítek családoknak és vállalkozásoknak abban, hogy a biztosításaik és a megtakarításaik rendben legyenek. Nem adok el mindent mindenkinek: azt nézzük meg együtt, mi illik hozzád most, és mi ráér később.\n\nHa változik valami az életedben, költözöl, autót veszel, gyermek érkezik vagy vállalkozást indítasz, szólj, és átnézzük. Ha baj történik, akkor is melletted vagyok.";
+const STATS12 = "12+ | év a szakmában\n600+ | ügyfél bízik bennem\n1 000+ | gondozott szerződés\n1–2 Mrd Ft | ügyfélvagyon a szerződésekben";
+const AREAS_P12 = ['Otthon és ingatlan','Autó és utazás','Élet- és egészségvédelem','Megtakarítás','Nyugdíj és adó-visszatérítés','Gyermekek jövője'];
+const AREAS_C12 = ['Céges vagyon és flotta','Szakmai felelősség','Munkavállalói egészség- és életbiztosítás','Céges tőkeépítés'];
+const PROMISE12 = [['calendar','Évente átnézzük','Az évforduló előtt szólok, és megnézzük, kell-e változtatni.'],['shield','Baj esetén is melletted','Segítek a kárbejelentésben, és végigkísérlek a folyamaton.'],['chat','Egy üzenetnyire vagyok','Személyesen, telefonon vagy itt, a portálon, ahogy neked kényelmes.']];
+function areaIcon(n){ const s=normS(n);
+  return /otthon|ingatlan|haz|lakas/.test(s)?'house':/flotta|cegauto/.test(s)?'carPlus':/auto|utaz/.test(s)?'car':/munkavallal|egeszseg/.test(s)&&/ceg|munka/.test(s)?'stetho':/elet|egeszseg/.test(s)?'heart':/nyugdij/.test(s)?'sprout':/gyerm/.test(s)?'balloon':/felelos/.test(s)?'briefcase':/tokeep|ceges toke/.test(s)?'building':/ceg|vagyon/.test(s)?'building':/megtakar|befekt/.test(s)?'coins':'shield'; }
+function statsOf(a){ return String(a.stats||'').split('\n').map(l=>l.split('|').map(x=>x.trim())).filter(x=>x[0]&&x[1]); }
 function awardsHTML(a){
   const rows=String(a.awards||'').split('\n').map(l=>l.split('|').map(x=>x.trim())).filter(x=>x[0]&&x[1]);
   if(!rows.length) return '';
   const by={}; rows.forEach(([y,t])=>{(by[y]=by[y]||[]).push(t);});
   const years=Object.keys(by).sort((x,y)=>y.localeCompare(x));
-  return `<h3 style="margin-top:20px">Elismerések</h3>${(a.highlights||[]).length?`<div class="hlrow">${a.highlights.map(h=>`<span class="hl">🏅 ${esc(h)}</span>`).join('')}</div>`:''}
-    <div class="awards">${years.map(y=>`<div class="aw"><span class="ay">${esc(y)}</span><div>${by[y].map(t=>`<div class="at">${esc(t)}</div>`).join('')}</div></div>`).join('')}</div>`;
+  return `<section class="adv-sec adv-wide"><div class="adv-h"><h3>Elismerések</h3><span>Amit az elmúlt években elértem</span></div>
+    <div class="awards">${years.map(y=>`<div class="aw"><span class="ay">${esc(y)}</span><div>${by[y].map(t=>`<div class="at">${esc(t)}</div>`).join('')}</div></div>`).join('')}</div></section>`;
 }
 function pageAdvisor(){
-  const a=S.advisor, paras=esc(a.bio).split(/\n\s*\n/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
-  return `<div class="page-head"><div><h1>${S.role==='advisor'?'Profilom':'Tanácsadóm'}</h1><p class="sub">${S.role==='advisor'?'Ezt látják rólad az ügyfeleid.':'Akihez bármikor fordulhatsz.'}</p></div>${S.role==='advisor'?`<button class="btn primary" data-act="edit-advisor">${svg('pen')}Profil szerkesztése</button>`:''}</div>
-    <div class="profile"><div class="pcard"><div class="photo">${a.photo?`<img src="${a.photo}" alt="${esc(a.name)}">`:esc(initials(a.name))}</div><h2>${esc(a.name)}</h2><div class="ttl">${esc(a.title)}</div>${a.tagline?`<div class="tag">„${esc(a.tagline)}”</div>`:''}
-      <div class="contact-list"><a href="tel:${esc(a.phone.replace(/\s/g,''))}">${svg('phone')}${esc(fmtPhone(a.phone))}</a><a href="mailto:${esc(a.email)}">${svg('mail')}${esc(a.email)}</a><a href="https://${esc(a.web)}" target="_blank" rel="noopener">${svg('globe')}${esc(a.web)}</a>${a.office?`<div>${svg('pin')}${esc(a.office)}</div>`:''}</div>
-      ${S.role==='client'?`<button class="btn primary" style="margin-top:14px;width:100%;justify-content:center" data-act="ask-meeting">${svg('chat')}Írok neki</button>`:''}</div>
-    <div class="pbody"><h3>Bemutatkozás</h3>${paras}<h3 style="margin-top:18px">Miben segítek</h3><div class="pillrow">${a.areas.map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div>${awardsHTML(a)}<div class="legal">${esc(a.legal)}</div></div></div>`;
+  const a=S.advisor, isA=S.role==='advisor', hh=curHH(), first=hh.nick||givenName(hh.holders[0].name);
+  const paras=esc(a.bio).split(/\n\s*\n/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
+  const tel=String(a.phone||'').replace(/[^+\d]/g,''), st=statsOf(a);
+  const areaGrid=list=>`<div class="ar-grid">${(list||[]).map(x=>`<div class="ar">${svg(areaIcon(x))}<span>${esc(x)}</span></div>`).join('')}</div>`;
+  const nContracts=hhContracts(hh).length;
+  return `<div class="page-head"><div><h1>${isA?'Profilom':'Tanácsadóm'}</h1><p class="sub">${isA?'Így látnak az ügyfeleid. Minden szöveg szerkeszthető.':'Ha bármire szükséged van, itt elérsz.'}</p></div>${isA?`<button class="btn primary" data-act="edit-advisor">${svg('pen')}Profil szerkesztése</button>`:''}</div>
+  <div class="adv">
+    <section class="adv-hero">
+      <div class="ah-main">
+        <div class="ah-photo">${a.photo?`<img src="${a.photo}" alt="${esc(a.name)}">`:esc(initials(a.name))}<i class="ah-dot" title="Elérhető"></i></div>
+        <div class="ah-id">
+          <span class="ah-kicker">${isA?'Az ügyfeleid tanácsadója':'A személyes tanácsadód'}</span>
+          <h2>${esc(a.name)}</h2>
+          <div class="ah-ttl">${esc(a.title)}</div>
+          ${(a.highlights||[]).length?`<div class="ah-hl">${a.highlights.map(h=>`<span>${svg('check','stroke-width="2.6"')}${esc(h)}</span>`).join('')}</div>`:''}
+        </div>
+      </div>
+      <div class="ah-acts">
+        <button class="ah-act pri" data-go="chat">${svg('chat')}<span>Üzenet</span></button>
+        <a class="ah-act" href="tel:${esc(tel)}">${svg('phone')}<span>Hívás</span></a>
+        <a class="ah-act" href="mailto:${esc(a.email)}">${svg('mail')}<span>E-mail</span></a>
+        <button class="ah-act" data-act="ask-meeting">${svg('calendar')}<span>Időpont</span></button>
+      </div>
+      <div class="ah-note">${svg('send')}<span>Munkanapokon általában pár órán belül válaszolok.</span></div>
+      ${!isA?`<div class="ah-thanks"><b>Jó kezekben vagy, ${esc(first)}.</b> Te már azok közé tartozol, akik egy helyen látják ${nContracts?`mind a ${nContracts} szerződésüket`:'a szerződéseiket'}. Köszönöm, hogy ezt a felületet használod. Így én is gyorsabban tudok segíteni.</div>`:''}
+    </section>
+    ${st.length?`<section class="adv-stats">${st.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</section>`:''}
+    <div class="adv-cols">
+      <section class="adv-sec"><div class="adv-h"><h3>Röviden rólam</h3></div><div class="adv-bio">${paras}</div>${a.tagline?`<div class="adv-tag">„${esc(a.tagline)}”</div>`:''}</section>
+      <section class="adv-sec"><div class="adv-h"><h3>Amire mindig számíthatsz</h3></div><div class="prm">${PROMISE12.map(([i,t,d])=>`<div class="pr">${svg(i)}<div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div></section>
+    </div>
+    <section class="adv-sec adv-wide"><div class="adv-h"><h3>Mindenben számíthatsz rám</h3><span>Biztosítás és pénzügy, magánszemélyeknek és cégeknek egyaránt</span></div>
+      <div class="ar-cols"><div><h4>${svg('user')}Neked és a családodnak</h4>${areaGrid(a.areasP)}</div><div><h4>${svg('briefcase')}A vállalkozásodnak</h4>${areaGrid(a.areasC)}</div></div>
+      <div class="ar-more">${svg('chat')}<span>Nem látod, amit keresel? Kérdezz bátran, ${isA?'mindennel foglalkozol.':'mindennel foglalkozom.'}</span><button class="btn ghost" data-go="chat">Írok Bencének</button></div>
+    </section>
+    ${awardsHTML(a)}
+    <section class="adv-sec adv-wide adv-contact"><div class="adv-h"><h3>Elérhetőségek</h3></div>
+      <div class="ct-grid">
+        <a href="tel:${esc(tel)}">${svg('phone')}<div><span>Telefon</span><b>${esc(fmtPhone(a.phone))}</b></div></a>
+        <a href="mailto:${esc(a.email)}">${svg('mail')}<div><span>E-mail</span><b>${esc(a.email)}</b></div></a>
+        ${a.office?`<a href="https://maps.google.com/?q=${encodeURIComponent(a.office)}" target="_blank" rel="noopener">${svg('pin')}<div><span>Iroda</span><b>${esc(a.office)}</b></div></a>`:''}
+        <a href="https://${esc(a.web)}" target="_blank" rel="noopener">${svg('globe')}<div><span>Weboldal</span><b>${esc(a.web)}</b></div></a>
+      </div>
+      <div class="legal">${esc(a.legal)}</div>
+    </section>
+  </div>`;
 }
 
 // ---------- Ügyfeleim ----------
 function pageClients(){
   const rows=S.households.map(h=>{
     const cs=hhContracts(h), sum=sumByCur(cs), un=unread('advisor',h.id), rv=openReviews(h.id), ch=openChanges(h.id);
-    const badges=[un?`<span class="mbadge">${svg('chat')}${un} új üzenet</span>`:'',rv?`<span class="mbadge t">${svg('search')}${rv} felülvizsgálat</span>`:'',ch?`<span class="mbadge t">${svg('pen')}${ch} módosítás</span>`:''].join('')||`<span style="font-size:11.5px;color:var(--ok);font-weight:600">Nincs teendő</span>`;
+    const cons=h.consent?`<span class="mbadge ok" title="Nyilatkozat elfogadva">${svg('check')}Nyilatkozat ${huShort(h.consent.at)}</span>`:`<span class="mbadge w" title="Még nem fogadta el a nyilatkozatot">Nyilatkozat függőben</span>`;
+    const badges=cons+[un?`<span class="mbadge">${svg('chat')}${un} új üzenet</span>`:'',rv?`<span class="mbadge t">${svg('search')}${rv} felülvizsgálat</span>`:'',ch?`<span class="mbadge t">${svg('pen')}${ch} módosítás</span>`:''].join('')||`<span style="font-size:11.5px;color:var(--ok);font-weight:600">Nincs teendő</span>`;
     return `<div class="crow"><div class="who">${miniAv(h.holders[0],34)}<div style="min-width:0"><b>${esc(h.name)}</b><span>${h.holders.map(x=>esc(x.name)).join(', ')}</span></div></div>
       <div class="num hide-s">${cs.length}<small>szerződés</small></div><div class="num hide-s">${fmtSums(sum)}<small>éves díj</small></div>
       <div class="stbadges hide-m">${badges}</div><div class="crow-acts"><button class="btn ghost chatbtn" data-chatwith="${h.id}" title="Üzenetek">${svg('chat')}${un?`<i>${un}</i>`:''}</button><button class="btn" data-open="${h.id}">${svg('eye')}Megnyitás</button></div></div>`;
@@ -2956,14 +3218,16 @@ function advisorForm(){
     <div class="field"><label>Szlogen</label><input id="a-tagline" value="${esc(a.tagline||'')}"></div>
     <div class="row2"><div class="field"><label>Telefon</label><input id="a-phone" value="${esc(a.phone)}"></div><div class="field"><label>E-mail</label><input id="a-email" value="${esc(a.email)}"></div></div>
     <div class="row2"><div class="field"><label>Weboldal</label><input id="a-web" value="${esc(a.web)}"></div><div class="field"><label>Iroda címe</label><input id="a-office" value="${esc(a.office||'')}"></div></div>
-    <div class="field"><label>Bemutatkozás</label><textarea id="a-bio" style="min-height:130px">${esc(a.bio)}</textarea></div>
-    <div class="field"><label>Miben segítek (vesszővel elválasztva)</label><input id="a-areas" value="${esc(a.areas.join(', '))}"></div>
+    <div class="field"><label>Röviden rólam</label><textarea id="a-bio" style="min-height:130px">${esc(a.bio)}</textarea></div>
+    <div class="field"><label>Számokban (soronként: érték | felirat)</label><textarea id="a-stats" style="min-height:90px">${esc(a.stats||'')}</textarea></div>
+    <div class="field"><label>Magánszemélyeknek (vesszővel elválasztva)</label><input id="a-areasP" value="${esc((a.areasP||[]).join(', '))}"></div>
+    <div class="field"><label>Vállalkozásoknak (vesszővel elválasztva)</label><input id="a-areasC" value="${esc((a.areasC||[]).join(', '))}"></div>
     <div class="field"><label>Elismerések (soronként: év | megnevezés)</label><textarea id="a-awards" style="min-height:140px">${esc(a.awards||'')}</textarea></div>
     <div class="field"><label>Kiemelések (vesszővel)</label><input id="a-hl" value="${esc((a.highlights||[]).join(', '))}"></div>
     <div class="field"><label>Jogi lábléc</label><textarea id="a-legal">${esc(a.legal)}</textarea></div>`,
     `<button class="btn" data-close>Mégse</button><button class="btn primary" id="a-save">${svg('check')}Mentés</button>`,m=>{
       m.querySelector('#a-ph').onclick=()=>pickImage(420,true,u=>{photo=u; m.querySelector('#a-face').innerHTML=`<img src="${u}" alt="">`;});
-      m.querySelector('#a-save').onclick=()=>{const g=k=>m.querySelector('#a-'+k).value; Object.assign(S.advisor,{photo,name:g('name').trim()||a.name,title:g('title').trim(),tagline:g('tagline').trim(),phone:fmtPhone(g('phone')),email:g('email').trim(),web:g('web').trim(),office:g('office').trim(),bio:g('bio'),areas:g('areas').split(',').map(s=>s.trim()).filter(Boolean),awards:g('awards'),highlights:g('hl').split(',').map(s=>s.trim()).filter(Boolean),legal:g('legal')}); save(); closeModal(); render(); toast('💾','Profil mentve.');};
+      m.querySelector('#a-save').onclick=()=>{const g=k=>m.querySelector('#a-'+k).value; Object.assign(S.advisor,{photo,name:g('name').trim()||a.name,title:g('title').trim(),tagline:g('tagline').trim(),phone:fmtPhone(g('phone')),email:g('email').trim(),web:g('web').trim(),office:g('office').trim(),bio:g('bio'),stats:g('stats'),areasP:g('areasP').split(',').map(s=>s.trim()).filter(Boolean),areasC:g('areasC').split(',').map(s=>s.trim()).filter(Boolean),awards:g('awards'),highlights:g('hl').split(',').map(s=>s.trim()).filter(Boolean),legal:g('legal')}); save(); closeModal(); render(); toast('💾','Profil mentve.');};
     });
 }
 
@@ -3259,6 +3523,10 @@ document.addEventListener('click',e=>{
   if(ds.hchip){ S.holder=ds.hchip; save(); render(); const g=document.getElementById('c-list-top'); if(g) g.scrollIntoView({behavior:'smooth',block:'start'}); return; }
   if(ds.holder){ S.holder=(ds.holder!=='all'&&S.holder===ds.holder)?'all':ds.holder; save(); render(); return; }
   const a=ds.act;
+  if(a==='logout'){ S.auth.in=false; S.auth.lastOut=Date.now(); AUTHV='login'; MENU=false; DETAIL=null; SEARCH=false; save(); render(); return; }
+  if(a==='mkt-toggle'){ const hh=curHH(); setMarketing(!(hh.consent&&hh.consent.marketing)); return; }
+  if(a==='read-fine'){ modal('Nyilatkozat és apróbetű',`<p style="margin:0 0 12px;color:var(--ink-2)">Röviden és érthetően arról, mi ez a felület, és hogyan kezeljük az adataidat.</p>${fineHTML(true)}`,`<button class="btn primary" data-close>Rendben</button>`); return; }
+  if(a==='del-req'){ S.page='chat'; save(); render(); const ta=document.getElementById('msg'); if(ta){ ta.value='Szia Bence! Szeretném kérni a portálfiókom és az itt tárolt adataim törlését.'; ta.focus(); } return; }
   if(a==='menu-open'){ MENU=true; SEARCH=false; render(); return; }
   if(a==='menu-close'){ MENU=false; render(); return; }
   if(a==='search-open'){ SEARCH=true; MENU=false; DETAIL=null; render(); return; }
@@ -3322,6 +3590,130 @@ function importData(){
     }; r.readAsText(f); };
   inp.click();
 }
+
+// ---------- belépés és nyilatkozat (v24, előkészített felület) ----------
+const CONSENT_V='2026.11';
+const LEGAL13='Páncél Bence György függő biztosításközvetítő, MNB nyilvántartási szám: 114061808346. Prosoul Kft., MNB nyilvántartási szám: 221031700095. Felügyeleti szerv: Magyar Nemzeti Bank.';
+let AUTHV='login', AUTHMAIL='', CONSENT_OPEN=false;
+const maskMail = m => { const [u,d]=String(m||'').split('@'); return u&&d ? u.slice(0,1)+'•••'+(u.length>2?u.slice(-1):'')+'@'+d : m; };
+const FINE=[
+  ['Mi ez a portál, és mi nem?','Ez a te saját pénzügyi nyilvántartásod: ide gyűjtheted a biztosításaidat és megtakarításaidat, bármelyik biztosítónál vagy banknál vannak. A portál nem kapcsolódik a biztosítókhoz és bankokhoz, magától nem frissül. Azt látod, amit te rögzítesz, vagy amit a kérésedre én rögzítek és frissítek. A szerződéseid hivatalos adatait mindig a biztosító dokumentumai (kötvény, feltételek, éves értesítő) tartalmazzák; eltérés esetén azok az irányadók.'],
+  ['A „Díj rendezve” jelölés','Ezt a jelölést te magad kapcsolod be, emlékeztetőnek. Nem a biztosító adata, és nem jelenti azt, hogy a szerződésed díja valóban rendezve van. A tényleges díjrendezettséget a biztosító tudja igazolni.'],
+  ['Kalkulátor, hozamok, számítások','A kalkulátor és a portálon látható hozam- és értékadatok tájékoztató jellegű illusztrációk, nem minősülnek ajánlatnak vagy ígéretnek. A befektetési egységekhez kötött (unit-linked) biztosításoknál nincs garantált hozam, az eszközalapok értéke csökkenhet is, egyes években a hozam negatív lehet. A múltbeli hozam nem jelzi előre a jövőbeli eredményt. A számítások feltételezett hozamokkal és egyszerűsítésekkel készülnek; a pontos költségeket (TKM), adózási szabályokat és feltételeket a biztosító hivatalos dokumentumai tartalmazzák. Konkrét ajánlatot csak a biztosító ajánlati dokumentációja alapján teszek.'],
+  ['Kivel állsz kapcsolatban?','Páncél Bence György függő biztosításközvetítő (MNB nyilvántartási szám: 114061808346), valamint a Prosoul Kft. (MNB nyilvántartási szám: 221031700095). Felügyeleti szervünk a Magyar Nemzeti Bank. Más biztosítóknál lévő szerződéseidet ezen a felületen csak nyilvántartjuk a kérésedre; ez nem jelenti azt, hogy azokat én közvetítettem vagy kezelem.'],
+  ['Az adataid és a jogaid','Az adataidat bizalmasan kezelem, a biztosítási titokra vonatkozó szabályok szerint, és harmadik félnek nem adom át. Bármikor kérheted az adataid másolatát, helyesbítését vagy törlését, és visszavonhatod a hozzájárulásaidat a Profilom → Adatvédelem résznél. A visszavonás nem érinti a korábbi adatkezelés jogszerűségét. Panasszal a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH) fordulhatsz. A részleteket az Adatkezelési tájékoztató tartalmazza.']
+];
+function authShell(inner){ return `<div class="auth"><div class="auth-card">${LOGO?`<div class="auth-brand">${brandHTML()}</div>`:''}${inner}</div><div class="auth-foot">${esc(S.advisor.legal||'')}</div></div>`; }
+function authHTML(){
+  const hh=HH('h1'), em=AUTHMAIL||S.auth.email||'';
+  if(AUTHV==='code') return authShell(`<div class="auth-ic">🔐</div><h1>Egy gyors ellenőrzés</h1><p class="auth-sub">Küldtünk egy 6 jegyű kódot ide: <b>${esc(maskMail(em))}</b>. A kód 10 percig érvényes.</p>
+    <form class="auth-form" data-authform="code"><div class="field"><label>Biztonsági kód</label><input id="au-code" class="codein" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required></div>
+    <button class="btn primary auth-go" type="submit">Belépés</button></form>
+    <div class="auth-links"><button class="linkbtn" data-auth="resend">Új kódot kérek</button><button class="linkbtn" data-auth="login">Vissza</button></div>
+    <p class="auth-hint">Ha az elmúlt 10 percben léptél ki ezen az eszközön, nem kérünk kódot.</p><p class="auth-proto">Prototípus: bármilyen 6 számjegy jó.</p>`);
+  if(AUTHV==='forgot') return authShell(`<div class="auth-ic">🗝️</div><h1>Elfelejtett jelszó</h1><p class="auth-sub">Semmi gond, ez mindenkivel megesik. Add meg az e-mail címed, és küldünk egy linket, amellyel új jelszót állíthatsz be.</p>
+    <form class="auth-form" data-authform="forgot"><div class="field"><label>E-mail cím</label><input id="au-mail" type="email" autocomplete="username" value="${esc(em)}" placeholder="pelda@email.hu" required></div>
+    <button class="btn primary auth-go" type="submit">Link küldése</button></form><div class="auth-links"><button class="linkbtn" data-auth="login">Vissza a belépéshez</button></div>`);
+  if(AUTHV==='sent') return authShell(`<div class="auth-ic">📬</div><h1>Nézd meg a postafiókod</h1><p class="auth-sub">Ha a(z) <b>${esc(em)}</b> címmel van fiókod, pár percen belül megérkezik a jelszó-visszaállító link. A link 1 óráig érvényes.</p>
+    <button class="btn primary auth-go" data-auth="login">Vissza a belépéshez</button><p class="auth-hint">Nem jött meg? Nézd meg a Spam vagy Promóciók mappát is, vagy írj Bencének.</p>`);
+  if(AUTHV==='setpw') return authShell(`<div class="auth-ic">🎉</div><h1>Üdv a portálon!</h1><p class="auth-sub">${esc(S.advisor.name)} meghívott az ügyfélportáljára. Állítsd be a jelszavad, és már bent is vagy.</p>
+    <form class="auth-form" data-authform="setpw"><div class="field"><label>E-mail cím</label><input id="au-mail" type="email" autocomplete="username" value="${esc(hh?hh.email:'')}" required></div>
+    <div class="field"><label>Új jelszó</label><div class="pwbox"><input id="au-pw" type="password" autocomplete="new-password" required><button type="button" class="pweye" data-auth="eye" aria-label="Jelszó mutatása">${svg('eye')}</button></div></div>
+    <ul class="pwrules" id="au-rules"><li data-r="len">Legalább 8 karakter</li><li data-r="num">Legalább egy szám</li><li data-r="up">Legalább egy nagybetű</li></ul>
+    <div class="field"><label>Jelszó még egyszer</label><input id="au-pw2" type="password" autocomplete="new-password" required></div>
+    <button class="btn primary auth-go" type="submit">Jelszó mentése és tovább</button></form><div class="auth-links"><button class="linkbtn" data-auth="login">Már van jelszavam</button></div>`);
+  return authShell(`<h1>Szia! Jó újra látni 👋</h1><p class="auth-sub">Lépj be, és minden szerződésed egy helyen vár.</p>
+    <form class="auth-form" data-authform="login"><div class="field"><label>E-mail cím</label><input id="au-mail" type="email" autocomplete="username" value="${esc(em)}" placeholder="pelda@email.hu" required></div>
+    <div class="field"><label>Jelszó</label><div class="pwbox"><input id="au-pw" type="password" autocomplete="current-password" required><button type="button" class="pweye" data-auth="eye" aria-label="Jelszó mutatása">${svg('eye')}</button></div></div>
+    <label class="auth-chk"><input type="checkbox" id="au-rem" ${S.auth.remember!==false?'checked':''}><span>Maradjak bejelentkezve ezen az eszközön</span></label>
+    <button class="btn primary auth-go" type="submit">Belépés</button></form>
+    <div class="auth-links"><button class="linkbtn" data-auth="forgot">Elfelejtetted a jelszavad?</button></div>
+    <div class="auth-first"><b>Első alkalommal jársz itt?</b><span>A belépéshez szükséges meghívót Bencétől kapod e-mailben.</span><button class="linkbtn" data-auth="setpw">Meghívó megnyitása (minta)</button></div>
+    <div class="auth-proto">Prototípus: bármilyen e-mail címmel és jelszóval beléphetsz.<div class="seg"><button class="${S.role==='client'?'on':''}" data-role="client">Ügyfél</button><button class="${S.role==='advisor'?'on':''}" data-role="advisor">Tanácsadó</button></div></div>`);
+}
+function fineHTML(open){ return `<div class="fine">${FINE.map(([t,d],i)=>`<details ${open&&i===0?'open':''}><summary>${esc(t)}</summary><p>${esc(d)}</p></details>`).join('')}</div>`; }
+function consentHTML(){
+  const hh=curHH(), first=hh.nick||givenName(hh.holders[0].name);
+  return `<div class="auth cons"><div class="auth-card wide">
+    <div class="auth-brand">${brandHTML()}</div>
+    <div class="cons-hero">${advisorAv(56)}<div><h1>Még egy perc, ${esc(first)}, és kész vagy ☕</h1><p class="auth-sub">Mielőtt belevágunk, nézzük át röviden, mi ez a felület, és mire adsz engedélyt.</p></div></div>
+    <div class="cons-what"><div class="cw">${svg('wallet')}<div><b>A te saját pénzügyi tárcád</b><span>Minden biztosításod és megtakarításod egy helyen, bármelyik biztosítónál vagy banknál vannak. Nem kell tíz helyre belépned.</span></div></div>
+      <div class="cw">${svg('pen')}<div><b>Te töltöd fel, én segítek</b><span>A portál magától nem frissül a biztosítóktól. Azt látod, amit te rögzítesz, vagy amit kérésedre én viszek fel és frissítek.</span></div></div>
+      <div class="cw">${svg('shield')}<div><b>Bizalmasan kezelem</b><span>Az adataidat rajtad és rajtam kívül senki nem látja, és nem adom tovább. Bármikor letöltheted vagy töröltetheted őket.</span></div></div></div>
+    <form class="cons-form" data-authform="consent">
+      <label class="cchk must"><input type="checkbox" id="cs-terms"><span><b>Elolvastam és elfogadom</b> a Felhasználási feltételeket és az Adatkezelési tájékoztatót. <button type="button" class="linkbtn" data-auth="fine">Elolvasom</button><em>Kötelező</em></span></label>
+      <label class="cchk must"><input type="checkbox" id="cs-data"><span><b>Hozzájárulok</b>, hogy Páncél Bence a portálon általam megadott adataimat (személyes adatok, szerződések, dokumentumok) lássa és bizalmasan kezelje, továbbá kérésemre, illetve a nála lévő szerződéseim alapján ide feltöltse és frissítse. <em>Kötelező, enélkül a portál nem tud működni</em></span></label>
+      <div class="cons-sep">Nem kötelező, de nekem sokat segít</div>
+      <label class="cchk"><input type="checkbox" id="cs-mkt"><span><b>Megkereshetsz</b> telefonon, e-mailben vagy itt a portálon, és küldhetsz nekem személyre szabott ajánlatot. <em>Ha nem jelölöd be, a portált ugyanúgy használhatod. Bármikor visszavonhatod a Profilom → Adatvédelem résznél.</em></span></label>
+      <details class="cons-fine" ${CONSENT_OPEN?'open':''}><summary>${svg('doc')}Apróbetű, röviden és érthetően</summary>${fineHTML(true)}</details>
+      <button class="btn primary auth-go" type="submit" id="cs-ok" disabled>Elfogadom, kezdjük! 🎉</button>
+      <div class="auth-links"><button type="button" class="linkbtn" data-act="logout">Most inkább kilépek</button></div>
+      <p class="auth-hint">Nyilatkozat verziója: ${CONSENT_V}. Az elfogadás időpontját rögzítjük, és Bence értesítést kap róla.</p>
+    </form></div><div class="auth-foot">${esc(S.advisor.legal||'')}</div></div>`;
+}
+function renderAuth(){
+  const root=document.getElementById('auth-root'); if(!root) return;
+  const needLogin=!S.auth.in, needConsent=!needLogin&&S.role==='client'&&!curHH().consent;
+  document.body.classList.toggle('auth-on',needLogin||needConsent);
+  if(!needLogin&&!needConsent){ root.innerHTML=''; return; }
+  const key=(needLogin?'a:'+AUTHV:'consent')+':'+S.role;
+  if(root.dataset.k===key&&root.firstChild) return;
+  root.dataset.k=key; root.innerHTML=needLogin?authHTML():consentHTML();
+  const f=root.querySelector('input:not([type=checkbox])'); if(f&&innerWidth>760) setTimeout(()=>f.focus(),30);
+  root.scrollTop=0;
+}
+function authDone(){ S.auth.in=true; AUTHV='login'; save(); document.getElementById('auth-root').dataset.k=''; render(); scrollTo(0,0); const hh=curHH(); if(S.role!=='client'||hh.consent) toast('👋',`Szia, ${hh.nick||givenName(hh.holders[0].name)}!`); }
+function acceptConsent(mkt){
+  const hh=curHH(), now=Date.now();
+  hh.consent={v:CONSENT_V,at:now,marketing:mkt?1:0};
+  (S.messages[hh.id] ||= []).push({from:'client',sys:1,ts:now,text:`✅ ${hh.name} elfogadta a nyilatkozatot (v${CONSENT_V}), ${huDate(now)} ${timeHM(now)}. Megkeresés és ajánlat: ${mkt?'hozzájárult':'nem járult hozzá'}.`});
+  save(); document.getElementById('auth-root').dataset.k=''; render(); scrollTo(0,0);
+  for(let i=0;i<4;i++) setTimeout(()=>burst(innerWidth*(.2+.2*i),innerHeight*.35),i*120);
+  toast('🎉','Kész is vagy! Üdv a portálon.');
+}
+function setMarketing(on){
+  const hh=curHH(), now=Date.now(); if(!hh.consent) return;
+  hh.consent.marketing=on?1:0; hh.consent.mktAt=now;
+  (S.messages[hh.id] ||= []).push({from:'client',sys:1,ts:now,text:on?`✅ ${hh.name} hozzájárult a megkereséshez és az ajánlatküldéshez (${huDate(now)} ${timeHM(now)}).`:`🔕 ${hh.name} visszavonta a megkereséshez és az ajánlatküldéshez adott hozzájárulását (${huDate(now)} ${timeHM(now)}).`});
+  save(); render(); toast(on?'✅':'🔕',on?'Köszönöm! Ha van valami jó lehetőség, szólok.':'Rendben, visszavonva. Ajánlattal nem kereslek meg.');
+}
+function privacyCard(hh,isC){
+  const c=hh.consent;
+  return `<section class="pset priv"><div class="priv-h"><div>${svg('shield')}<b>Adatvédelem és hozzájárulások</b></div>${c?`<span class="okpill">${svg('check','stroke-width="3"')}Elfogadva ${esc(huDate(c.at))}</span>`:`<span class="waitpill">Még nincs elfogadva</span>`}</div>
+    ${c?`<div class="setrow"><div><b>Megkeresés és személyre szabott ajánlat</b><span>${c.marketing?'Hozzájárultál, bármikor visszavonhatod.':'Nem járultál hozzá. Ha szeretnéd, itt bekapcsolhatod.'}</span></div>${isC?sw(c.marketing,`data-act="mkt-toggle"`):`<span class="${c.marketing?'okpill':'waitpill'}">${c.marketing?'Igen':'Nem'}</span>`}</div>`:''}
+    <div class="priv-acts"><button class="btn ghost" data-act="read-fine">${svg('doc')}Nyilatkozat és apróbetű</button>${isC?`<button class="btn ghost" data-act="export">${svg('download')}Adataim letöltése</button><button class="btn ghost" data-act="del-req">${svg('trash')}Fiókom törlését kérem</button><button class="btn ghost" data-act="logout">${svg('arrL')}Kijelentkezés</button>`:''}</div>
+    <div class="priv-note">Verzió: ${c?esc(c.v):CONSENT_V}. ${isC?'A visszavonás ugyanolyan egyszerű, mint a megadás: egy kattintás.':'Az ügyfél elfogadását és minden változtatását a rendszer naplózza, és üzenetben jelzi neked.'}</div></section>`;
+}
+document.addEventListener('submit',e=>{
+  const f=e.target.closest('[data-authform]'); if(!f) return; e.preventDefault();
+  const k=f.dataset.authform, v=id=>{const x=document.getElementById(id); return x?x.value.trim():'';};
+  if(k==='login'){ const m=v('au-mail'); if(!/@/.test(m)||!v('au-pw')){ toast('✍️','Add meg az e-mail címed és a jelszavad.'); return; }
+    AUTHMAIL=m; S.auth.email=m; S.auth.remember=document.getElementById('au-rem').checked;
+    const need=!S.auth.lastOut||Date.now()-S.auth.lastOut>10*60e3;
+    if(need){ AUTHV='code'; renderAuth(); toast('📩','Elküldtük a kódot e-mailben.'); } else authDone(); return; }
+  if(k==='code'){ if(!/^\d{6}$/.test(v('au-code'))){ toast('🔢','A kód 6 számjegyből áll.'); return; } authDone(); return; }
+  if(k==='forgot'){ const m=v('au-mail'); if(!/@/.test(m)){ toast('✍️','Add meg az e-mail címed.'); return; } AUTHMAIL=m; AUTHV='sent'; renderAuth(); return; }
+  if(k==='setpw'){ const p=v('au-pw'); if(p.length<8||!/\d/.test(p)||!/[A-ZÁÉÍÓÖŐÚÜŰ]/.test(p)){ toast('🔐','A jelszó legyen legalább 8 karakter, benne szám és nagybetű.'); return; } if(p!==v('au-pw2')){ toast('🙃','A két jelszó nem egyezik.'); return; } S.auth.email=v('au-mail'); S.auth.lastOut=Date.now(); toast('✅','Jelszó elmentve.'); authDone(); return; }
+  if(k==='consent'){ if(!document.getElementById('cs-terms').checked||!document.getElementById('cs-data').checked) return; acceptConsent(document.getElementById('cs-mkt').checked); }
+});
+document.addEventListener('change',e=>{
+  if(e.target.closest&&e.target.closest('.cons-form')){ const ok=document.getElementById('cs-terms').checked&&document.getElementById('cs-data').checked; const b=document.getElementById('cs-ok'); if(b) b.disabled=!ok; }
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='au-pw'){ const r=document.getElementById('au-rules'); if(!r) return; const p=e.target.value; const t={len:p.length>=8,num:/\d/.test(p),up:/[A-ZÁÉÍÓÖŐÚÜŰ]/.test(p)}; r.querySelectorAll('li').forEach(li=>li.classList.toggle('ok',t[li.dataset.r])); }
+  if(e.target.id==='au-code') e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-auth]'); if(!b) return; e.preventDefault();
+  const a=b.dataset.auth;
+  if(a==='eye'){ const i=b.parentElement.querySelector('input'); i.type=i.type==='password'?'text':'password'; return; }
+  if(a==='fine'){ const d=document.querySelector('.cons-fine'); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'start'}); } return; }
+  if(a==='resend'){ toast('📩','Új kódot küldtünk.'); return; }
+  const m=document.getElementById('au-mail'); if(m&&m.value) AUTHMAIL=m.value.trim();
+  AUTHV=a; renderAuth();
+});
+// mobil billentyűzet: a látható terület méretét követjük (Messenger-szerű chat)
+(function(){ const vv=window.visualViewport; if(!vv) return; const set=()=>{ document.documentElement.style.setProperty('--vvh',vv.height+'px'); document.documentElement.style.setProperty('--vvt',vv.offsetTop+'px'); const b=document.querySelector('body[data-chatfull="1"] .chat-body'); if(b&&document.activeElement&&document.activeElement.id==='msg') b.scrollTop=b.scrollHeight; }; vv.addEventListener('resize',set); vv.addEventListener('scroll',set); set(); })();
 
 migrate(); save();
 render();
