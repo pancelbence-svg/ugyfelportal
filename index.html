@@ -1697,6 +1697,23 @@ body.auth-on{overflow:hidden}
   .cons-hero h1,.cons-hero .auth-sub{text-align:center}
   .priv-acts .btn{flex:1 1 calc(50% - 6px);justify-content:center;font-size:12px}
 }
+
+/* v25: mobil kereső */
+.sov{padding:calc(10px + env(safe-area-inset-top,0px)) 0 0;gap:0}
+.sov-head{display:flex;align-items:center;gap:10px;padding:0 14px}
+.sov .gsearch.sov-box{position:relative;order:0;flex:1;margin:0;max-width:none}
+.sov .gsearch.sov-box .gs-ic{left:14px;top:50%;transform:translateY(-50%);position:absolute}
+.sov .gsearch.sov-box input{width:100%;font-size:16px;padding:12px 14px 12px 42px;border-radius:14px;box-shadow:none;background:var(--surface)}
+.sov-x{flex:none;border:0;background:transparent;color:var(--teal-ink);font-weight:600;font-size:15px;padding:8px 2px}
+.sov-tip{padding:8px 16px 6px;font-size:12px;color:var(--ink-3)}
+.sov .gs-pop.sov-res{position:static;flex:1;max-height:none;overflow-y:auto;border:0;border-top:1px solid var(--line-2);border-radius:0;box-shadow:none;background:transparent;padding:4px 8px calc(16px + env(safe-area-inset-bottom,0px));inset:auto}
+.sov-sec{display:flex;align-items:center;gap:6px;padding:12px 8px 6px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3)}
+.sov-sec em{font-style:normal;background:var(--surface-2);border-radius:8px;padding:0 6px}
+.sov .gs-row{padding:10px 8px;border-radius:14px}
+.sov .gs-row .gs-t{flex:1;min-width:0}
+.sov .gs-row .gs-t b{font-size:15px}
+.sov .gs-row .gs-t em{font-size:12px}
+.sov .gs-row .plate2{flex:none;font-size:10px}
 </style>
 </head>
 <body>
@@ -1865,7 +1882,7 @@ const FUNDS=[
 const FUND = code => FUNDS.find(f=>f.c===code);
 const fundShort = n => n.replace(/^Allianz\s+/,'').replace(/\s+Alap$/,'');
 const GOALS = ['Lakásvásárlás','Autóvásárlás','Felújítás','Tartalék','Utazás','Tanulmányok','Vállalkozás','Nyugdíj kiegészítés'];
-const INSURER_NAMES = ['Allianz','Alfa','CIG Pannónia','Colonnade','D.A.S. Jogvédelmi','Generali','Genertel','Grawe','Groupama','K&H Biztosító','Magyar Posta Biztosító','Magyar Posta Életbiztosító','MBH Biztosító','MetLife','NN Biztosító','Signal Iduna','Union','UNIQA','Wáberer Hungária','Allianz Trade','Atradius','Cardif'];
+const INSURER_NAMES = ['Allianz','Alfa','CIG Pannónia','Colonnade','D.A.S. Jogvédelmi','Generali','Genertel','Grawe','Groupama','K&H Biztosító','Magyar Posta Biztosító','MBH Biztosító','MetLife','NN Biztosító','Signal Iduna','Union','UNIQA','Wáberer Hungária'];
 const FREQ = {havi:{n:'Havi',p:12,adv:'havonta'}, negyedeves:{n:'Negyedéves',p:4,adv:'negyedévente'}, feleves:{n:'Féléves',p:2,adv:'félévente'}, eves:{n:'Éves',p:1,adv:'évente'}};
 const PAY = ['Csoportos beszedés','Banki átutalás','Bankkártya','Csekk'];
 const CHEERS = [['🎉','Szép munka!'],['✨','Pipa a helyén!'],['💚','Egy gonddal kevesebb.'],['🧹','Rend a lelke mindennek!'],['🙌','Haladunk!'],['🌱','Szépen rendeződik minden.'],['⭐','Csillagos ötös!'],['☕','Ezt már nem kell fejben tartani.']];
@@ -1946,6 +1963,7 @@ function migrate(){
   if(!S.types.some(t=>t.k==='megtakaritas')){ const at=S.types.findIndex(t=>t.k==='gyermek'); S.types.splice(at<0?S.types.length:at+1,0,{k:'megtakaritas',n:'Egyéb megtakarítás',i:'coins',c:'#B98A1E',kind:'savings'}); }
   S.contracts.forEach(c=>{ c.cur=c.cur||'HUF'; c.details=c.details||{}; });
   S.auth ||= {in:false,email:'',lastOut:0,remember:true};
+  if(!S.demo14){ S.demo14=1; const drop=['Allianz Trade','Atradius','Cardif','Magyar Posta Életbiztosító']; S.insurers=S.insurers.filter(i=>!drop.includes(i.n)||S.contracts.some(c=>c.insurer===i.n)); }
   if(!S.demo13){ S.demo13=1; if(!S.advisor.legal||/^\[Ide kerül/.test(S.advisor.legal)) S.advisor.legal=LEGAL13; const h2=S.households.find(h=>h.id==='h2'); if(h2&&!h2.consent) h2.consent={v:'2026.11',at:Date.now()-20*864e5,marketing:1}; }
   if(!S.demo12){ S.demo12=1; const A=S.advisor; if(!A.bio||A.bio===NEW_BIO||/^Abban segítek/.test(A.bio)) A.bio=BIO12; if(!A.stats) A.stats=STATS12; if(!A.areasP) A.areasP=[...AREAS_P12]; if(!A.areasC) A.areasC=[...AREAS_C12]; }
   if(!S.demo11){ S.demo11=1; S.contracts.forEach(c=>{ const i=c.info||{}; ['assistPhone','claimPhone'].forEach(k=>{ if(/^\+36 1 0+\d?$/.test(i[k]||'')||/^\+36 1 000 000\d$/.test(i[k]||'')) delete i[k]; }); }); }
@@ -1995,8 +2013,8 @@ function searchIndex(){
   });
   return out;
 }
-function searchRun(q){
-  const nq=normS(q).trim(); if(nq.length<2) return [];
+function searchRun(q,minLen=2,lim=8){
+  const nq=normS(q).trim(); if(nq.length<minLen) return [];
   const toks=nq.split(/\s+/).filter(Boolean), cq=nq.replace(/[^a-z0-9]/g,'');
   return searchIndex().map(it=>{
     const hay=it.f.map(([k,v])=>[k,String(v),normS(v)]);
@@ -2006,7 +2024,7 @@ function searchRun(q){
     let hit=hay.find(x=>x[2].includes(toks[0])) || hay.find(x=>x[2].replace(/[^a-z0-9]/g,'').includes(cq)) || hay[0];
     const score=(normS(cTitle(it.c)).startsWith(toks[0])?3:0)+(hit[0]==='Név'?2:0)+(hit[0]==='Rendszám'?2:0);
     return {...it,hit,score};
-  }).filter(Boolean).sort((a,b)=>b.score-a.score).slice(0,8);
+  }).filter(Boolean).sort((a,b)=>b.score-a.score).slice(0,lim);
 }
 function hlS(text,q){
   const t=String(text), n=normS(t), tk=normS(q).trim().split(/\s+/)[0]; if(!tk) return esc(t);
@@ -2014,8 +2032,21 @@ function hlS(text,q){
   return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+tk.length))+'</mark>'+esc(t.slice(i+tk.length));
 }
 let GS_IDX=-1, GS_RES=[];
+function gsRow(r,i,q){ return `<button type="button" class="gs-row ${i===GS_IDX?'on':''}" data-gs="${r.c.id}">${picto(r.t,34)}<span class="gs-t"><b>${q?hlS(cTitle(r.c),q):esc(cTitle(r.c))}</b><em>${esc(r.t.n)}${r.c.insurer?` · ${esc(r.c.insurer)}`:''}${S.role==='advisor'?` · ${esc(r.hh.name)}`:''}</em>${q&&r.hit&&r.hit[0]!=='Név'?`<small>${esc(r.hit[0])}: ${hlS(r.hit[1],q)}</small>`:''}</span>${r.c.plate?plateHTML(r.c.plate):''}</button>`; }
+function sovDefault(){
+  const items=searchIndex().filter(it=>S.role==='client'||it.hh.id===curHH().id).slice(0,40);
+  GS_RES=items; GS_IDX=-1;
+  return `<div class="sov-sec">${S.role==='advisor'?`${esc(curHH().name)} szerződései`:'A szerződéseid'} <em>${items.length}</em></div>${items.map((r,i)=>gsRow(r,i,'')).join('')}`;
+}
 function gsRender(q,pop){
   if(!pop) return;
+  if(pop.dataset.mode==='sov'){
+    const nq=normS(q).trim();
+    if(!nq){ pop.innerHTML=sovDefault(); return; }
+    GS_RES=searchRun(q,1,40); GS_IDX=GS_RES.length?0:-1;
+    pop.innerHTML = GS_RES.length ? `<div class="sov-sec">Találatok <em>${GS_RES.length}</em></div>`+GS_RES.map((r,i)=>gsRow(r,i,q)).join('') : `<div class="gs-empty">Nincs találat erre: „${esc(q)}”.<br><span>Próbáld rendszámmal, címmel, biztosítóval vagy névvel.</span></div>`;
+    return;
+  }
   GS_RES=searchRun(q); GS_IDX=GS_RES.length?0:-1;
   if(normS(q).trim().length<2){ pop.hidden=true; return; }
   pop.hidden=false;
@@ -2028,12 +2059,12 @@ function gsOpen(id){
   S.page='contracts'; S.holder='all'; SEARCH=false; MENU=false; DETAIL=c.id; save(); render();
   setTimeout(()=>{ const el=document.getElementById('c-'+c.id); if(el){ el.scrollIntoView({block:'center'}); el.classList.add('gs-flash'); setTimeout(()=>el.classList.remove('gs-flash'),1800); } },60);
 }
-const popOf = el => el.closest('.gsearch').querySelector('.gs-pop');
+const popOf = el => { const sv=el.closest('.sov'); return sv ? sv.querySelector('.gs-pop') : el.closest('.gsearch').querySelector('.gs-pop'); };
 document.addEventListener('input',e=>{ if(e.target.classList&&e.target.classList.contains('gs-in')) gsRender(e.target.value,popOf(e.target)); });
 document.addEventListener('keydown',e=>{
   if(!(e.target.classList&&e.target.classList.contains('gs-in'))) { if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName||'')){ const g=[...document.querySelectorAll('.gs-in')].find(x=>x.offsetParent); if(g){ e.preventDefault(); g.focus(); } } return; }
   const pop=popOf(e.target);
-  if(e.key==='Escape'){ e.stopPropagation(); if(e.target.value){ e.target.value=''; pop.hidden=true; } else if(SEARCH){ SEARCH=false; render(); } else e.target.blur(); return; }
+  if(e.key==='Escape'){ e.stopPropagation(); if(e.target.value){ e.target.value=''; if(pop.dataset.mode==='sov') gsRender('',pop); else pop.hidden=true; } else if(SEARCH){ SEARCH=false; render(); } else e.target.blur(); return; }
   if(!GS_RES.length) return;
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); GS_IDX=(GS_IDX+(e.key==='ArrowDown'?1:-1)+GS_RES.length)%GS_RES.length; pop.querySelectorAll('.gs-row').forEach((b,i)=>b.classList.toggle('on',i===GS_IDX)); }
   if(e.key==='Enter'){ e.preventDefault(); gsOpen(GS_RES[Math.max(0,GS_IDX)].c.id); }
@@ -2220,8 +2251,9 @@ function renderSearch(){
   const root=document.getElementById('search-root'); if(!root) return;
   if(!SEARCH){ root.innerHTML=''; return; }
   if(root.querySelector('.sov')) return;
-  root.innerHTML=`<div class="sov" role="dialog" aria-label="Keresés"><div class="sov-head">${searchBox('sov-box')}<button class="btn ghost" data-act="search-close">Mégse</button></div>
-    <div class="sov-hint">${svg('search')}<b>Mit keresel?</b><span>${S.role==='advisor'?'Ügyfél nevét, e-mailt, telefont, rendszámot, címet, kötvényszámot vagy biztosítót.':'Rendszámot, címet, nevet, kötvényszámot, biztosítót vagy autótípust. Az ékezet nem számít.'}</span></div></div>`;
+  root.innerHTML=`<div class="sov" role="dialog" aria-label="Keresés"><div class="sov-head"><div class="gsearch sov-box"><span class="gs-ic">${svg('search')}</span><input class="gs-in" type="search" autocomplete="off" enterkeyhint="search" placeholder="Keresés…" aria-label="Keresés"></div><button class="sov-x" data-act="search-close">Mégse</button></div>
+    <div class="sov-tip">${S.role==='advisor'?'Név, e-mail, telefon, rendszám, cím, kötvényszám vagy biztosító':'Rendszám, cím, név, kötvényszám, biztosító vagy autótípus'}. Az ékezet nem számít.</div>
+    <div class="gs-pop sov-res" data-mode="sov">${sovDefault()}</div></div>`;
   setTimeout(()=>{ const i=root.querySelector('.gs-in'); if(i) i.focus(); },30);
 }
 function renderDetail(){
